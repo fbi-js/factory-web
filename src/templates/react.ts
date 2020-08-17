@@ -3,14 +3,14 @@ import { Template } from 'fbi'
 import * as ejs from 'ejs'
 import Factory from '..'
 import { formatName, capitalizeEveryWord, isValidObject } from 'fbi/lib/utils'
-import SubTemplateReact from './react'
+import SubTemplateTemplate from './react/template'
 
 export default class TemplateFactory extends Template {
-  id = 'factory-web'
-  description = 'template for factory-web'
+  id = 'react-web'
+  description = 'react template for factory-web'
   path = 'templates'
   renderer = ejs.render
-  templates = [new SubTemplateReact(this.factory)]
+  templates = [new SubTemplateTemplate(this.factory)]
 
   constructor(public factory: Factory) {
     super()
@@ -23,7 +23,7 @@ export default class TemplateFactory extends Template {
         name: 'name',
         message: 'Input the factory name',
         initial({ enquirer }: any) {
-          return 'factory-demo'
+          return 'react-web-demo'
         },
         validate(value: any) {
           const name = formatName(value)
@@ -119,13 +119,6 @@ export default class TemplateFactory extends Template {
         '.fbi.config.js',
         'README.md',
         project.features.typescript ? 'src/index.ts' : 'lib/index.js',
-        ...project.commands.map((data: any) => ({
-          from: project.features.typescript ? 'src/command.ts' : 'lib/command.js',
-          to: project.features.typescript
-            ? `src/commands/${data.id}.ts`
-            : `lib/commands/${data.id}.js`,
-          data
-        })),
         ...project.templates.map((data: any) => ({
           from: project.features.typescript ? 'src/template.ts' : 'lib/template.js',
           to: project.features.typescript
