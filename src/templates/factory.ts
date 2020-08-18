@@ -3,14 +3,14 @@ import { Template } from 'fbi'
 import * as ejs from 'ejs'
 import Factory from '..'
 import { formatName, capitalizeEveryWord, isValidObject } from 'fbi/lib/utils'
-import SubTemplateTemplate from './react/template'
+import SubTemplateReact from './react'
 
 export default class TemplateFactory extends Template {
-  id = 'react-web'
-  description = 'react template for factory-web'
+  id = 'factory-web'
+  description = 'web template for factory-web'
   path = 'templates'
   renderer = ejs.render
-  templates = [new SubTemplateTemplate(this.factory)]
+  templates = [new SubTemplateReact(this.factory)]
 
   constructor(public factory: Factory) {
     super()
