@@ -6,13 +6,12 @@ import { formatName, capitalizeEveryWord, isValidObject } from 'fbi/lib/utils'
 import SubTemplateReact from './react'
 import SubTemplateVue from './vue'
 
-
 export default class TemplateFactory extends Template {
   id = 'vue'
   description = 'template for factory-web'
   path = 'templates/vue'
   renderer = ejs.render
-  templates = [new SubTemplateReact(this.factory),new SubTemplateVue(this.factory)]
+  templates = [new SubTemplateReact(this.factory), new SubTemplateVue(this.factory)]
 
   constructor(public factory: Factory) {
     super()
@@ -41,10 +40,10 @@ export default class TemplateFactory extends Template {
         }
       },
       {
-        type: 'MultiSelect',
+        type: 'Select',
         name: 'features',
         message: `Pick features for your project:`,
-        hint: '(Use <space> to select, <return> to submit)',
+        hint: '(Use <arrow> to select, <return> to submit)',
         choices: [
           { name: 'vue', value: true },
           { name: 'react', value: true }
@@ -66,10 +65,20 @@ export default class TemplateFactory extends Template {
 
   protected async writing() {
     const { project } = this.data
-    if(project.features.vue){
+    if (project.features.vue) {
       this.files = {
-        copy: ['.editorconfig', '.prettierrc', '.gitignore', 'tsconfig.json',
-        'vue.config.json','.browserslistrc','babel.config.js','screenshots/*','src/assets/*','src/assets/**/*'],
+        copy: [
+          '.editorconfig',
+          '.prettierrc',
+          '.gitignore',
+          'tsconfig.json',
+          'vue.config.json',
+          '.browserslistrc',
+          'babel.config.js',
+          'screenshots/*',
+          'src/assets/*',
+          'src/assets/**/*'
+        ],
         render: [
           'package.json',
           '.fbi.config.js',
