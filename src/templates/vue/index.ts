@@ -5,8 +5,8 @@ import Factory from '../..'
 import { formatName, isValidObject } from 'fbi/lib/utils'
 
 export default class TemplateGraphql extends Template {
-  id = 'react-web'
-  description = 'react template for web template'
+  id = 'vue'
+  description = 'vue template for web template'
   path = 'templates/react'
   renderer = ejs.render
 
