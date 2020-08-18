@@ -1,15 +1,21 @@
+import { join } from 'path'
 import { Factory } from 'fbi'
-// import CommandBuild from './commands/build'
-// import CommandWatch from './commands/watch'
+import CommandBuild from './commands/build'
+import CommandServe from './commands/serve'
 import TemplateFactory from './templates/factory'
 
-export default class FactoryFactory extends Factory {
-  id = 'factory-factory'
-  description = 'factorty for fbi factory development'
-  // commands = [new CommandBuild(this), new CommandWatch(this)]
+export default class FactoryWeb extends Factory {
+  id = 'factory-web'
+  description = 'factorty for web factory development'
+  commands = [
+    new CommandBuild(this),
+    new CommandServe(this)
+  ]
   templates = [new TemplateFactory(this)]
 
-  factoryMethod1() {
-    this.log(`Factory: (${this.id})`, 'from factoryMethod1')
+  execOpts: any = {
+    cwd: process.cwd(),
+    localDir: join(__dirname, '../'),
+    preferLocal: true
   }
 }
