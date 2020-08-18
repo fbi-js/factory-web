@@ -2,11 +2,11 @@ import { join } from 'path'
 import { Template } from 'fbi'
 import * as ejs from 'ejs'
 import Factory from '../..'
-import { formatName, isValidObject } from 'fbi/lib/utils'
+import { capitalizeEveryWord } from 'fbi/lib/utils'
 
-export default class TemplateGraphql extends Template {
-  id = 'react-web'
-  description = 'react template for web template'
+export default class TemplateTemplate extends Template {
+  id = 'template'
+  description = 'template for react-web'
   path = 'templates/react'
   renderer = ejs.render
 
@@ -15,92 +15,112 @@ export default class TemplateGraphql extends Template {
   }
 
   protected async gathering() {
+    const { template } = await this.prompt({
+      type: 'Form',
+      name: 'template',
+      message: 'Please provide the following information:',
+      choices: [
+        { name: 'id', message: 'ID', initial: 'my-template' },
+        { name: 'description', message: 'Description', initial: '' }
+      ]
+    } as any)
+    this.data.template = template || {}
+    this.data.template.capitalizedId = capitalizeEveryWord(template.id)
+
     const factory = this.context.get('config.factory')
-    console.log(this.store.get(factory.id))
     this.features = factory?.features || {}
-    this.data.project = {}
+  }
 
-    let folder = 'react'
-    if (this.features.react || (await this.fs.pathExists(join(this.targetDir, folder)))) {
-      const ret: Record<string, any> = await this.prompt([
-        {
-          type: 'input',
-          name: 'folder',
-          message: 'Already have react in the project, please input another name for react folder:',
-          validate: async (value: any, state: any) => {
-            const name = formatName(value) as string
-            if (await this.fs.pathExists(join(this.targetDir, name))) {
-              return state.styles.danger(`path "${name}" already exist`)
-            }
-            return (name && true) || state.styles.danger('please input a valid folder name')
-          }
-        }
-      ] as any)
-
-      folder = ret.folder
+  protected async checking() {
+    const { factory, template } = this.data
+    this.targetDir = process.cwd()
+    const dirExist = await this.fs.pathExists(join(this.targetDir, 'templates', template.id))
+    const fileExist = await this.fs.pathExists(
+      join(
+        this.targetDir,
+        this.features.typescript ? 'src' : 'lib',
+        template.id + this.features.typescript ? 'ts' : 'js'
+      )
+    )
+    if (dirExist) {
+      this.error(`template directory "${template.id}" already exist`).exit()
+    }
+    if (fileExist) {
+      this.error(`template file "${template.id}" already exist`).exit()
     }
 
-    this.data.project.folder = folder
-
-    this.spinner = this.createSpinner(`Creating reactw web...`).start(
-      `Creating ${this.style.bold.green('react web')} via ${this.id} from ${factory.template}...`
+    this.spinner = this.createSpinner(`Creating template...`).start(
+      `Creating template ${this.style.bold.green(template.id)} via ${this.id} from ${
+        factory.template
+      }...`
     )
   }
 
   protected async writing() {
-    this.targetDir = process.cwd()
-    const { project } = this.data
+    const { template } = this.data
+    const from = this.features.typescript ? 'src/template.ts' : 'lib/template.js'
+    const to = this.features.typescript
+      ? `src/templates/${template.id}.ts`
+      : `lib/templates/${template.id}.js`
+
     this.files = {
       render: [
         {
-          from: 'react/**/*',
-          to: project.folder
+          from,
+          to,
+          data: template
         }
       ],
-      renderOptions: {
-        async: true
-      }
+      copy: [
+        {
+          from: 'templates/default',
+          to: `templates/${template.id}`
+        }
+      ]
     }
-  }
-
-  protected async installing(flags: Record<string, any>) {
-    const { project } = this.data
-    this.spinner.succeed(`Created react in folder ${this.style.cyan.bold(project.folder)}`)
-
-    const installSpinner = this.createSpinner(`Installing dependencies...`).start()
-    try {
-      const packageManager = flags.packageManager || this.context.get('config').packageManager
-      const cmds = packageManager === 'yarn' ? packageManager : `${packageManager} install`
-      this.debug(`\nrunning \`${cmds}\` in ${this.targetDir}`)
-      await this.exec.command(cmds, {
-        cwd: this.targetDir
-      })
-      installSpinner.succeed(`Installed dependencies`)
-    } catch (err) {
-      installSpinner.fail('Failed to install dependencies. You can install them manually.')
-      this.error(err)
-    }
+    this.spinner.succeed(`Created template ${this.style.cyan.bold(this.data.template.id)}`)
   }
 
   protected async ending() {
-    const { project } = this.data
-    const projectName = this.style.cyan.bold(project.folder)
+    const { template } = this.data
+    const templateFullId = `Template${template.capitalizedId}`
     if (this.errors) {
-      this.spinner.fail(`Failed to created react in folder ${projectName}.`)
+      this.spinner.fail(`Failed to created template ${this.style.cyan.bold(template.id)}.`)
       this.error(this.errors)
     }
 
-    console.log(`
-Next steps:`)
+    let extraInfo = ''
+    try {
+      const { name } = require(join(this.targetDir, 'package.json'))
+      if (name) {
+        extraInfo = `
+  ${this.style.bold('$')} ${this.style.cyan(`fbi list ${name}`)} to check template registration`
+      }
+    } catch (err) {}
 
-    console.log(`  modify "./prisma/schema.prisma" and "./prisma/seed.ts"`)
-    console.log(`  ${this.style.bold('$')} ${this.style.cyan('fbi d -u')}`)
-    console.log(`  ${this.style.bold('$')} ${this.style.cyan('fbi g')}`)
-    console.log(`  ${this.style.bold('$')} ${this.style.cyan('fbi s')}`)
+    if (this.features.typescript) {
+      this.log(`
+Next steps:
+  add${this.style.cyan(`
+    import ${templateFullId} from './templates/${template.id}'`)}
+  and${this.style.cyan(`
+    new ${templateFullId}(this)`)}
+  to "src/index.ts".
 
-    console.log(`
-  $ ${this.style.cyan('fbi list')} ${this.style.dim('show available commands and sub templates')}`)
+  ${this.style.bold('$')} ${this.style.cyan('fbi build')}
+  ${this.style.bold('$')} ${this.style.cyan('fbi link')}${extraInfo}
+    `)
+    } else {
+      this.log(`
+Next steps:
+  add${this.style.cyan(`
+    const ${templateFullId} = require('./templates/${template.id}')`)}
+  and${this.style.cyan(`
+    new ${templateFullId}(this)`)}
+  to "lib/index.js".
 
-    // TODO: update paroject config's features
+  ${this.style.bold('$')} ${this.style.cyan('fbi link')}${extraInfo}
+    `)
+    }
   }
 }
