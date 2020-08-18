@@ -66,17 +66,17 @@ export default class TemplateFactory extends Template {
 
   protected async writing() {
     const { project } = this.data
-    if(project.vue){
+    if(project.features.vue){
       this.files = {
         copy: ['.editorconfig', '.prettierrc', '.gitignore', 'tsconfig.json',
-        'vue.config.json','.browserslistrc','babel.config.js'],
+        'vue.config.json','.browserslistrc','babel.config.js','screenshots/*','src/assets/*','src/assets/**/*'],
         render: [
           'package.json',
           '.fbi.config.js',
           'README.md',
           'public/*',
-          'screenshots/*',
-          'src/**/*/'
+          'src/**/*/!(*.png|*.jpg)',
+          'src/*'
         ],
         renderOptions: {
           async: true
