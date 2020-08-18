@@ -72,6 +72,7 @@ export default class TemplateFactory extends Template {
         'vue.config.json','.browserslistrc','babel.config.js'],
         render: [
           'package.json',
+          '.fbi.config.js',
           'README.md',
           'public/*',
           'screenshots/*',
