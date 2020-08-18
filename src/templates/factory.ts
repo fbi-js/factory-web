@@ -10,7 +10,7 @@ import SubTemplateVue from './vue'
 export default class TemplateFactory extends Template {
   id = 'vue'
   description = 'template for factory-web'
-  path = 'templates'
+  path = 'templates/vue'
   renderer = ejs.render
   templates = [new SubTemplateReact(this.factory),new SubTemplateVue(this.factory)]
 
