@@ -65,11 +65,6 @@ export default class CommandBuild extends Command {
       await this.fs.writeFile(join(distDir, 'package.json'), JSON.stringify(pkg, null, 2))
       this.logItem('copy .fbi.config.js...')
       await this.fs.copy(join(_cwd, '.fbi.config.js'), join(distDir, '.fbi.config.js'))
-
-      if (features?.prisma) {
-        this.logItem('copy prisma folder...')
-        await this.fs.copy(join(_cwd, 'prisma'), join(distDir, 'prisma'))
-      }
     }
     this.logEnd('Build successfully')
   }

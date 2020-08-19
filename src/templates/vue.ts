@@ -49,34 +49,34 @@ export default class TemplateFactory extends Template {
   }
 
   protected async writing() {
-    const { project } = this.data
-    if (project.features.vue) {
-      this.files = {
-        copy: [
-          '.editorconfig',
-          '.prettierrc',
-          '.gitignore',
-          'tsconfig.json',
-          'vue.config.json',
-          '.browserslistrc',
-          'babel.config.js',
-          'screenshots/*',
-          'src/assets/*',
-          'src/assets/**/*'
-        ],
-        render: [
-          'package.json',
-          '.fbi.config.js',
-          'README.md',
-          'public/*',
-          'src/**/*/!(*.png|*.jpg)',
-          'src/*'
-        ],
-        renderOptions: {
-          async: true
-        }
+    // const { project } = this.data
+    // if (project.features.vue) {
+    this.files = {
+      copy: [
+        '.editorconfig',
+        '.prettierrc',
+        '.gitignore',
+        'tsconfig.json',
+        'vue.config.json',
+        '.browserslistrc',
+        'babel.config.js',
+        'screenshots/*',
+        'src/assets/*',
+        'src/assets/**/*'
+      ],
+      render: [
+        'package.json',
+        '.fbi.config.js',
+        'README.md',
+        'public/*',
+        'src/**/*/!(*.png|*.jpg)',
+        'src/*'
+      ],
+      renderOptions: {
+        async: true
       }
     }
+    // }
   }
 
   protected async installing(flags: Record<string, any>) {
@@ -113,12 +113,6 @@ export default class TemplateFactory extends Template {
 Next steps:
   $ ${this.style.cyan('cd ' + project.name)}
   `)
-
-    if (project.features.prisma) {
-      console.log(`  modify "./prisma/schema.prisma" and "./prisma/seed.ts"`)
-      console.log(`  ${this.style.bold('$')} ${this.style.cyan('fbi d -u')}`)
-      console.log(`  ${this.style.bold('$')} ${this.style.cyan('fbi g')}`)
-    }
     console.log(`  ${this.style.bold('$')} ${this.style.cyan('fbi s')}`)
 
     console.log(`
