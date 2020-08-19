@@ -36,35 +36,23 @@ export default class TemplateFactory extends Template {
         initial({ state }: any) {
           return `${state.answers.name} description`
         }
-      },
-      {
-        type: 'Select',
-        name: 'subtemplate',
-        message: `Pick subtemplate for your project:`,
-        hint: '(Use <arrow> to select, <return> to submit)',
-        choices: [
-          { name: 'vue', value: true },
-          { name: 'react', value: true }
-        ],
-        result(names: string[]) {
-          return this.map(names)
-        }
       }
+      // {
+      //   type: 'Select',
+      //   name: 'subtemplate',
+      //   message: `Pick subtemplate for your project:`,
+      //   hint: '(Use <arrow> to select, <return> to submit)',
+      //   choices: [
+      //     { name: 'vue', value: true },
+      //     { name: 'react', value: true }
+      //   ],
+      //   result(names: string[]) {
+      //     return this.map(names)
+      //   }
+      // }
     ] as any)
 
     this.data.project.nameCapitalized = capitalizeEveryWord(this.data.project.name)
-    // const factoryInfo = this.store.get(this.factory.id)
-    // this.templates[0].run(
-    //   {
-    //     factory: {
-    //       id: factoryInfo.id,
-    //       path: factoryInfo.version?.latest?.dir || factoryInfo.path,
-    //       version: factoryInfo.version?.latest?.short,
-    //       template: 'react-web'
-    //     }
-    //   },
-    //   []
-    // )
 
     const { factory, project } = this.data
     this.spinner = this.createSpinner(`Creating project...`).start(
@@ -123,14 +111,8 @@ export default class TemplateFactory extends Template {
 Next steps:
   $ ${this.style.cyan('cd ' + project.name)}
   `)
-
-    if (project.features.prisma) {
-      console.log(`  modify "./prisma/schema.prisma" and "./prisma/seed.ts"`)
-      console.log(`  ${this.style.bold('$')} ${this.style.cyan('fbi d -u')}`)
-      console.log(`  ${this.style.bold('$')} ${this.style.cyan('fbi g')}`)
-    }
     console.log(`  ${this.style.bold('$')} ${this.style.cyan('fbi s')}`)
-
+    console.log(`  ${this.style.bold('$')} ${this.style.cyan('fbi b')}`)
     console.log(`
   $ ${this.style.cyan('fbi list')} ${this.style.dim('show available commands and sub templates')}`)
   }
