@@ -30,11 +30,7 @@ export default class CommandBuild extends Command {
     )
 
     const _cwd = process.cwd()
-
-    const tsconfigPath = join(_cwd, 'tsconfig.json')
-    const hasTsconfigFile = await this.fs.pathExists(tsconfigPath)
-    const tsconifg = hasTsconfigFile ? require(tsconfigPath) : null
-    const distDirName = tsconifg?.compilerOptions?.outDir || 'dist'
+    const distDirName = 'dist'
     const distDir = join(_cwd, distDirName)
     // const srcDir = join(_cwd, tsconifg.compilerOptions.rootDir||'src')
 
@@ -47,24 +43,8 @@ export default class CommandBuild extends Command {
       stdio: flags.debug ? 'inherit' : 'pipe'
     }
 
-    this.logItem('generate prisma client files...')
     await this.exec.command('npm run build', execOpts)
-    this.logItem('compile ts files...')
-    await this.exec.command('tsc', execOpts)
 
-    if (flags.devDependencies) {
-      const pkg = require(join(_cwd, 'package.json'))
-      const ver = this.factory.version ? `#${this.factory.version}` : ''
-      pkg['devDependencies'] = utils.merge(pkg['devDependencies'], {
-        [this.factory.id]: `github:fbi-js/${this.factory.id}${ver}`,
-        fbi: '^4.0.0-alpha.1'
-      })
-
-      this.logItem('generate package.json...')
-      await this.fs.writeFile(join(distDir, 'package.json'), JSON.stringify(pkg, null, 2))
-      this.logItem('copy .fbi.config.js...')
-      await this.fs.copy(join(_cwd, '.fbi.config.js'), join(distDir, '.fbi.config.js'))
-    }
     this.logEnd('Build successfully')
   }
 }

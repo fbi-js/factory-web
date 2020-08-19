@@ -40,7 +40,7 @@ export default class TemplateFactory extends Template {
     ] as any)
 
     const { factory, project } = this.data
-
+    project.features=[]
     this.spinner = this.createSpinner(`Creating project...`).start(
       `Creating ${this.style.bold.green(project.name)} via ${factory.id} from ${
         factory.template
@@ -113,9 +113,13 @@ export default class TemplateFactory extends Template {
 Next steps:
   $ ${this.style.cyan('cd ' + project.name)}
   `)
-    console.log(`  ${this.style.bold('$')} ${this.style.cyan('fbi s')}`)
+  console.log(`
+  $ ${this.style.cyan('fbi s')} ${this.style.dim('launch the serve')}`)
 
-    console.log(`
+  console.log(`
+  $ ${this.style.cyan('fbi b')} ${this.style.dim('build project')}`)
+
+  console.log(`
   $ ${this.style.cyan('fbi list')} ${this.style.dim('show available commands and sub templates')}`)
   }
 }
