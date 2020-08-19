@@ -46,7 +46,7 @@ export default class CommandBuild extends Command {
       await this.exec.command('npm run build', execOpts)
       this.logEnd('Build successfully')
     } catch (err) {
-      this.error('Failed to starting server')
+      this.error('Failed to build project')
       this.error(err).exit()
     }
   }
