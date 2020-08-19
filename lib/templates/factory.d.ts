@@ -15,5 +15,4 @@ export default class TemplateFactory extends Template {
     protected writing(): Promise<void>;
     protected installing(flags: Record<string, any>): Promise<void>;
     protected ending(): Promise<void>;
-    private _promptDB;
 }

@@ -35,10 +35,7 @@ export default class CommandServe extends Command {
 
     try {
       this.clear()
-      await this.exec.command(
-        `npm run serve`,
-        execOpts
-      )
+      await this.exec.command(`npm run serve`, execOpts)
     } catch (err) {
       this.error('Failed to starting server')
       this.error(err).exit()

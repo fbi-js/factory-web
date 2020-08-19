@@ -5,7 +5,7 @@ import Factory from '../..'
 import { capitalizeEveryWord } from 'fbi/lib/utils'
 
 export default class TemplateTemplate extends Template {
-  id = 'template'
+  id = 'react-web'
   description = 'template for react-web'
   path = 'templates/react'
   renderer = ejs.render
