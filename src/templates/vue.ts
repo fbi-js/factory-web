@@ -40,7 +40,7 @@ export default class TemplateFactory extends Template {
     ] as any)
 
     const { factory, project } = this.data
-
+    project.features=[]
     this.spinner = this.createSpinner(`Creating project...`).start(
       `Creating ${this.style.bold.green(project.name)} via ${factory.id} from ${
         factory.template
