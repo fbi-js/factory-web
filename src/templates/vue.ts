@@ -4,10 +4,11 @@ import * as ejs from 'ejs'
 import Factory from '..'
 import { formatName, capitalizeEveryWord, isValidObject } from 'fbi/lib/utils'
 
+
 export default class TemplateFactory extends Template {
-  id = 'react'
+  id = 'vue'
   description = 'template for factory-web'
-  path = 'templates/react'
+  path = 'templates/vue'
   renderer = ejs.render
   templates = []
 
@@ -38,10 +39,10 @@ export default class TemplateFactory extends Template {
         }
       },
       {
-        type: 'Select',
-        name: 'subtemplate',
-        message: `Pick subtemplate for your project:`,
-        hint: '(Use <arrow> to select, <return> to submit)',
+        type: 'MultiSelect',
+        name: 'features',
+        message: `Pick features for your project:`,
+        hint: '(Use <space> to select, <return> to submit)',
         choices: [
           { name: 'vue', value: true },
           { name: 'react', value: true }
@@ -52,8 +53,8 @@ export default class TemplateFactory extends Template {
       }
     ] as any)
 
-    this.data.project.nameCapitalized = capitalizeEveryWord(this.data.project.name)
     const { factory, project } = this.data
+
     this.spinner = this.createSpinner(`Creating project...`).start(
       `Creating ${this.style.bold.green(project.name)} via ${factory.id} from ${
         factory.template
@@ -63,11 +64,21 @@ export default class TemplateFactory extends Template {
 
   protected async writing() {
     const { project } = this.data
-    this.files = {
-      copy: ['.gitignore', 'vite.config.js', 'index.html', 'src/*', 'tsconfig.json'],
-      render: ['package.json', '.fbi.config.js', 'README.md', 'src/*'],
-      renderOptions: {
-        async: true
+    if(project.features.vue){
+      this.files = {
+        copy: ['.editorconfig', '.prettierrc', '.gitignore', 'tsconfig.json',
+        'vue.config.json','.browserslistrc','babel.config.js','screenshots/*','src/assets/*','src/assets/**/*'],
+        render: [
+          'package.json',
+          '.fbi.config.js',
+          'README.md',
+          'public/*',
+          'src/**/*/!(*.png|*.jpg)',
+          'src/*'
+        ],
+        renderOptions: {
+          async: true
+        }
       }
     }
   }
@@ -101,10 +112,6 @@ export default class TemplateFactory extends Template {
       this.spinner.fail(`Failed to created project ${projectName}.`)
       this.error(this.errors)
     }
-    if (this.errors) {
-      this.spinner.fail(`Failed to created project ${projectName}.`)
-      this.error(this.errors)
-    }
 
     console.log(`
 Next steps:
@@ -120,5 +127,98 @@ Next steps:
 
     console.log(`
   $ ${this.style.cyan('fbi list')} ${this.style.dim('show available commands and sub templates')}`)
+  }
+
+  private async _promptDB() {
+    // db type
+    const { provider } = await this.prompt([
+      {
+        type: 'select',
+        name: 'provider',
+        message: 'Pick a database type',
+        hint: 'Use arrow-keys, <return> to submit',
+        choices: [
+          {
+            name: 'PostgreSQL',
+            value: 'postgresql'
+          },
+          {
+            name: 'MySQL',
+            value: 'mysql'
+          },
+          {
+            name: 'SQLite',
+            value: 'sqlite'
+          }
+        ],
+        result(name: string) {
+          return this.focused.value
+        }
+      }
+    ])
+
+    // db info
+    let dbUrlChoices: any = []
+    if (provider === 'postgresql' || provider === 'mysql') {
+      dbUrlChoices = dbUrlChoices.concat([
+        { name: 'host', message: 'host', initial: 'localhost' },
+        {
+          name: 'port',
+          message: 'port',
+          initial: provider === 'postgresql' ? '5432' : '3306'
+        },
+        { name: 'user', message: 'user', initial: '' },
+        { name: 'password', message: 'password', initial: '' },
+        { name: 'database', message: 'database', initial: '' }
+      ])
+    } else {
+      dbUrlChoices.push({ name: 'file', message: 'file', initial: 'dev' })
+      dbUrlChoices.push({
+        name: 'url',
+        message: 'database url',
+        disabled: true,
+        onChoice(state: any, choice: any, i: any) {
+          const { file } = this.values
+          choice.initial = `file:./${file}.db`
+        }
+      })
+    }
+
+    if (provider === 'postgresql') {
+      dbUrlChoices.push({ name: 'schema', message: 'schema', initial: 'public' })
+      dbUrlChoices.push({
+        name: 'url',
+        message: 'database url',
+        disabled: true,
+        onChoice(state: any, choice: any, i: any) {
+          const { host, port, user, password, database, schema } = this.values
+          choice.initial = `postgresql://${user}:${password}@${host}:${port}/${database}?schema=${schema}`
+        }
+      })
+    }
+
+    if (provider === 'mysql') {
+      dbUrlChoices.push({
+        name: 'url',
+        message: 'database url',
+        disabled: true,
+        onChoice(state: any, choice: any, i: any) {
+          const { host, port, user, password, database } = this.values
+          choice.initial = `mysql://${user}:${password}@${host}:${port}/${database}`
+        }
+      })
+    }
+
+    const { dbInfo } = await this.prompt({
+      type: 'form',
+      name: 'dbInfo',
+      message: 'Please provide the database connection information:',
+      choices: dbUrlChoices
+    })
+
+    return {
+      ...dbInfo,
+      provider
+    }
   }
 }
