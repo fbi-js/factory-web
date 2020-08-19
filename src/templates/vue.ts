@@ -3,15 +3,13 @@ import { Template } from 'fbi'
 import * as ejs from 'ejs'
 import Factory from '..'
 import { formatName, capitalizeEveryWord, isValidObject } from 'fbi/lib/utils'
-import SubTemplateReact from './react'
-import SubTemplateVue from './vue'
 
 export default class TemplateFactory extends Template {
   id = 'react'
   description = 'template for factory-web'
   path = 'templates/react'
   renderer = ejs.render
-  templates = [new SubTemplateReact(this.factory), new SubTemplateVue(this.factory)]
+  templates = []
 
   constructor(public factory: Factory) {
     super()
@@ -55,19 +53,6 @@ export default class TemplateFactory extends Template {
     ] as any)
 
     this.data.project.nameCapitalized = capitalizeEveryWord(this.data.project.name)
-    const factoryInfo = this.store.get(this.factory.id)
-    this.templates[0].run(
-      {
-        factory: {
-          id: factoryInfo.id,
-          path: factoryInfo.version?.latest?.dir || factoryInfo.path,
-          version: factoryInfo.version?.latest?.short,
-          template: 'react-web'
-        }
-      },
-      []
-    )
-
     const { factory, project } = this.data
     this.spinner = this.createSpinner(`Creating project...`).start(
       `Creating ${this.style.bold.green(project.name)} via ${factory.id} from ${
