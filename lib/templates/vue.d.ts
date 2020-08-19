@@ -1,15 +1,13 @@
 import { Template } from 'fbi';
 import * as ejs from 'ejs';
 import Factory from '..';
-import SubTemplateReact from './react';
-import SubTemplateVue from './vue';
 export default class TemplateFactory extends Template {
     factory: Factory;
     id: string;
     description: string;
     path: string;
     renderer: typeof ejs.render;
-    templates: (SubTemplateReact | SubTemplateVue)[];
+    templates: never[];
     constructor(factory: Factory);
     protected gathering(): Promise<void>;
     protected writing(): Promise<void>;
