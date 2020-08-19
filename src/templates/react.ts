@@ -65,8 +65,8 @@ export default class TemplateFactory extends Template {
   protected async writing() {
     // const { project } = this.data
     this.files = {
-      copy: ['.gitignore', 'vite.config.js', 'index.html', 'src/*', 'tsconfig.json'],
-      render: ['package.json', '.fbi.config.js', 'README.md', 'src/*'],
+      copy: ['.gitignore', 'index.html', 'src/*', 'tsconfig.json'],
+      render: ['package.json', '.fbi.config.js', 'vite.config.ts', 'README.md', 'src/*'],
       renderOptions: {
         async: true
       }

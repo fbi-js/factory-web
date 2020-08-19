@@ -30,7 +30,6 @@ export default class CommandBuild extends Command {
     )
 
     const _cwd = process.cwd()
-    const features = this.context.get('config.factory.features')
 
     const tsconfigPath = join(_cwd, 'tsconfig.json')
     const hasTsconfigFile = await this.fs.pathExists(tsconfigPath)
@@ -49,7 +48,7 @@ export default class CommandBuild extends Command {
     }
 
     this.logItem('generate prisma client files...')
-    await this.exec.command('prisma2 generate', execOpts)
+    await this.exec.command('npm run build', execOpts)
     this.logItem('compile ts files...')
     await this.exec.command('tsc', execOpts)
 
