@@ -111,9 +111,11 @@ export default class TemplateFactory extends Template {
 Next steps:
   $ ${this.style.cyan('cd ' + project.name)}
   `)
-    console.log(`  ${this.style.bold('$')} ${this.style.cyan('fbi s')}`)
-    console.log(`  ${this.style.bold('$')} ${this.style.cyan('fbi b')}`)
+    console.log(`  ${this.style.bold('$')} ${this.style.cyan('fbi-next s')}`)
+    console.log(`  ${this.style.bold('$')} ${this.style.cyan('fbi-next b')}`)
     console.log(`
-  $ ${this.style.cyan('fbi list')} ${this.style.dim('show available commands and sub templates')}`)
+  $ ${this.style.cyan('fbi-next list')} ${this.style.dim(
+      'show available commands and sub templates'
+    )}`)
   }
 }
