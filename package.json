@@ -17,7 +17,9 @@
     "ts-node": "^8.10.2",
     "ts-node-dev": "1.0.0-pre.56",
     "tslib": "^2.0.1",
-    "typescript": "^3.9.7"
+    "typescript": "^3.9.7",
+    "vite": "^1.0.0-rc.1",
+    "vite-plugin-react": "^3.0.0"
   },
   "devDependencies": {
     "@types/fs-extra": "^9.0.1",
