@@ -6,7 +6,7 @@ import TemplateReact from './templates/react';
 export default class FactoryWeb extends Factory {
     id: string;
     description: string;
-    commands: (CommandBuild | CommandServe)[];
+    commands: (CommandServe | CommandBuild)[];
     templates: (TemplateVue | TemplateReact)[];
     execOpts: any;
 }

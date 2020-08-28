@@ -43,7 +43,7 @@ export default class CommandBuild extends Command {
       stdio: flags.debug ? 'inherit' : 'pipe'
     }
     try {
-      await this.exec.command('npm run build', execOpts)
+      await this.exec.command('vite build', execOpts)
       this.logEnd('Build successfully')
     } catch (err) {
       this.error('Failed to build project')
