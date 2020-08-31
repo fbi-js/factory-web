@@ -1,0 +1,50 @@
+@import './const.scss';
+@import './mixin.scss';
+
+
+/* 浮动 */
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+}
+
+.clearfix::after {
+  clear: both;
+  content: '';
+  display: block;
+  height: 0;
+  visibility: hidden;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+// 适配vw单位
+$vw_base: 1920;
+
+@function vw($px) {
+  @return ($px / $vw_base) * 100vw;
+}
+
+//适配vh单位
+$vh_base: 1080;
+
+@function vh($px) {
+  @return ($px / $vh_base) * 100vh;
+}
+
+/* 水平对齐 */
+// 右对齐
+.tr {
+  text-align: right;
+}
+
+// 居中对齐
+.tc {
+  text-align: center;
+}
+

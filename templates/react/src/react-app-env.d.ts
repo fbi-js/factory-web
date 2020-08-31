@@ -72,3 +72,18 @@ declare module '*.module.sass' {
   const classes: { readonly [key: string]: string }
   export default classes
 }
+
+declare module 'dva-core' {
+  function create(options: any): any
+}
+
+type Dispatch = <P = any, C = (payload: P) => void>(action: {
+  type: string
+  payload?: P
+  callback?: C
+  [key: string]: any
+}) => any
+
+interface IDispatch {
+  dispatch: Dispatch
+}

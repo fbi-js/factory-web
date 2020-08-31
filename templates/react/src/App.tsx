@@ -1,34 +1,33 @@
-import React, { useState } from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import React from 'react'
+import { BrowserRouter as Router } from 'react-router-dom'
+import Routes from './routes'
+import {
+  connectRouter,
+  routerMiddleware,
+  ConnectedRouter,
+} from 'connected-react-router'
+import dva from './utils/dva'
+import { createBrowserHistory as createHistory } from 'history'
+import models from './models'
+import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0);
+export const history = createHistory()
+export const routerReducer = connectRouter(history)
+export const routerMiddlewareForDispatch = routerMiddleware(history)
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.tsx</code> and save to test HMR updates.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+export const app = dva({
+  models,
+  initState: {},
+  extraReducers: { router: routerReducer },
+  onAction: [routerMiddlewareForDispatch],
+})
 
-export default App;
+const App: React.FC = app.start(
+  <ConnectedRouter history={history}>
+      <Router>
+        <Routes />
+      </Router>
+  </ConnectedRouter>,
+)
+
+export default App
