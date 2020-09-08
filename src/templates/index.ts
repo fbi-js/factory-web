@@ -17,7 +17,6 @@ export default class TemplateWeb extends Template {
     super()
   }
 
-  // @ts-ignore
   protected async gathering(flags: Record<string, any>) {
     const {language} = await this.prompt(
       {

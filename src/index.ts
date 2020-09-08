@@ -8,7 +8,6 @@ export default class FactoryWeb extends Factory {
   id = 'factory-web'
   description = 'factory for web factory development'
   commands = [new CommandBuild(this), new CommandServe(this)]
-  // @ts-ignore
   templates = [new TemplateWeb(this)]
 
   execOpts: any = {

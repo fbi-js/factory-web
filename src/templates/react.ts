@@ -21,7 +21,7 @@ export default class TemplateFactory extends Template {
 
     const { factory, project } = this.data
     this.spinner = this.createSpinner(`Creating project...`).start(
-      `Creating ${this.style.bold.green(project.name)} via ${factory.id} from ${
+      `Creating ${this.style.bold.green(project.name)} via ${this.id} from ${
         factory.template
       }...`
     )
@@ -82,5 +82,8 @@ Next steps:
   $ ${this.style.cyan('fbi-next list')} ${this.style.dim(
       'show available commands and sub templates'
     )}`)
+
+    // 清除暂存的项目数据
+    this.configStore.del('projectInfo')
   }
 }
