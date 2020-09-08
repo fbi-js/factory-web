@@ -16,29 +16,8 @@ export default class TemplateFactory extends Template {
   }
 
   protected async gathering() {
-    this.data.project = await this.prompt([
-      {
-        type: 'input',
-        name: 'name',
-        message: 'Input the project name',
-        initial({ enquirer }: any) {
-          return 'project-demo'
-        },
-        validate(value: any) {
-          const name = formatName(value)
-          return (name && true) || 'please input a valid project name'
-        }
-      },
-      {
-        type: 'input',
-        name: 'description',
-        message: 'Input project description',
-        initial({ state }: any) {
-          return `${state.answers.name} description`
-        }
-      }
-    ] as any)
-
+    // 获取暂存的项目参数
+    this.data.project = this.configStore.get('projectInfo')
     const { factory, project } = this.data
     project.features = []
     this.spinner = this.createSpinner(`Creating project...`).start(
