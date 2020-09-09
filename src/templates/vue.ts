@@ -90,17 +90,14 @@ Next steps:
   $ ${this.style.cyan('cd ' + project.name)}
   `)
     console.log(`
-  $ ${this.style.cyan('fbi-next s')} ${this.style.dim('launch the serve')}`)
+  $ ${this.style.cyan('npm run serve')} ${this.style.dim('launch the serve')}`)
 
     console.log(`
-  $ ${this.style.cyan('fbi-next b')} ${this.style.dim('build project')}`)
+  $ ${this.style.cyan('vue-cli-service build')} ${this.style.dim('build project')}`)
 
     console.log(`
   $ ${this.style.cyan('fbi-next list')} ${this.style.dim(
       'show available commands and sub templates'
     )}`)
-
-    // 清除暂存的项目数据
-    this.configStore.del('projectInfo')
   }
 }

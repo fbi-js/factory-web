@@ -1,6 +1,7 @@
 {
-  "name": "vue3",
+  "name": "<%= project.name %>",
   "version": "0.0.0",
+  "description": "<%= project.description %>",
   "scripts": {
     "postinstall": "fbi-next add fbi-js/factory-web",
     "dev": "fbi-next s",

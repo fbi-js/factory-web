@@ -82,8 +82,5 @@ Next steps:
   $ ${this.style.cyan('fbi-next list')} ${this.style.dim(
       'show available commands and sub templates'
     )}`)
-
-    // 清除暂存的项目数据
-    // this.configStore.del('projectInfo')
   }
 }

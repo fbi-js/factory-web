@@ -1,6 +1,7 @@
 {
-  "name": "my-react-project",
+  "name": "<%= project.name %>",
   "version": "0.0.0",
+  "description": "<%= project.description %>",
   "scripts": {
     "dev": "fbi-next s",
     "build": "fbi-next b"

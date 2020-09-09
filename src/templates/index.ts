@@ -76,7 +76,12 @@ export default class TemplateWeb extends Template {
 
     this.projectInfo.nameCapitalized = capitalizeEveryWord(this.projectInfo.name)
     const project = this.projectInfo
-    this.configStore.set("projectInfo", project)
+    try {
+      this.configStore.set("projectInfo", project)
+    } catch {
+      // 若写入项目信息数据失败，终止后续流程
+      return
+    }
 
     const temps = utils.flatten(this.factory.templates.map((f: any) => f.templates))
     const choiseId = language === 'react' ? 'react' : project.vueVersion.vue2 ? 'vue' : 'vue3'
@@ -101,6 +106,8 @@ export default class TemplateWeb extends Template {
         return
       }
 
+      // 清除暂存的项目数据
+      this.configStore.del('projectInfo')
       // update store
       this.debug(`Save info into project store`)
       if (info.path) {

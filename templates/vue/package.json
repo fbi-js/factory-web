@@ -1,6 +1,7 @@
 {
-  "name": "vue-manage-system",
-  "version": "4.2.0",
+  "name": "<%= project.name %>",
+  "version": "0.0.0",
+  "description": "<%= project.description %>",
   "private": true,
   "scripts": {
     "dev": "npm run serve",
