@@ -10,7 +10,8 @@ export default class TemplateWeb extends Template {
     description: string;
     path: string;
     renderer: typeof ejs.render;
-    templates: (SubTemplateReact | SubTemplateVue | SubTemplateVue3)[];
+    templates: (SubTemplateVue | SubTemplateReact | SubTemplateVue3)[];
+    projectInfo: Record<string | number, any>;
     constructor(factory: Factory);
     protected gathering(flags: Record<string, any>): Promise<void>;
 }

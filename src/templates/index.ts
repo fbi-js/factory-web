@@ -13,6 +13,8 @@ export default class TemplateWeb extends Template {
   renderer = ejs.render
   templates = [new SubTemplateVue(this.factory), new SubTemplateReact(this.factory), new SubTemplateVue3(this.factory)]
 
+  public projectInfo:Record<string | number, any> = {}
+
   constructor(public factory: Factory) {
     super()
   }
@@ -33,7 +35,7 @@ export default class TemplateWeb extends Template {
         }
       } as any
     )
-    this.data.project = await this.prompt([
+    this.projectInfo = await this.prompt([
       {
         type: 'Select',
         name: 'vueVersion',
@@ -72,9 +74,9 @@ export default class TemplateWeb extends Template {
       }
     ] as any)
 
-    this.data.project.nameCapitalized = capitalizeEveryWord(this.data.project.name)
-    const { project } = this.data
-    this.configStore.merge('projectInfo', project)
+    this.projectInfo.nameCapitalized = capitalizeEveryWord(this.projectInfo.name)
+    const project = this.projectInfo
+    this.configStore.set("projectInfo", project)
 
     const temps = utils.flatten(this.factory.templates.map((f: any) => f.templates))
     const choiseId = language === 'react' ? 'react' : project.vueVersion.vue2 ? 'vue' : 'vue3'

@@ -1,7 +1,7 @@
 import { Template } from 'fbi';
 import * as ejs from 'ejs';
 import Factory from '..';
-export default class TemplateFactory extends Template {
+export default class TemplateVue3 extends Template {
     factory: Factory;
     id: string;
     description: string;

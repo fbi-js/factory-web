@@ -2,9 +2,9 @@ import { join } from 'path'
 import { Template } from 'fbi'
 import * as ejs from 'ejs'
 import Factory from '..'
-import { formatName, capitalizeEveryWord, isValidObject } from 'fbi/lib/utils'
+import { isValidObject } from 'fbi/lib/utils'
 
-export default class TemplateFactory extends Template {
+export default class TemplateReact extends Template {
   id = 'react'
   description = 'template for factory-web'
   path = 'templates/react'
@@ -84,6 +84,6 @@ Next steps:
     )}`)
 
     // 清除暂存的项目数据
-    this.configStore.del('projectInfo')
+    // this.configStore.del('projectInfo')
   }
 }

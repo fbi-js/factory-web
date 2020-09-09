@@ -1,13 +1,11 @@
 import { Command } from 'fbi'
-import path from 'path'
-import os from 'os'
 import Factory from '..'
-import { createServer } from 'vite'
+// import { createServer } from 'vite'
 
-const argv = require('minimist')(process.argv.slice(2))
-const command = argv._[0]
-const defaultMode = command === 'build' ? 'production' : 'development'
-const { help, h, version, v } = argv
+// const argv = require('minimist')(process.argv.slice(2))
+// const command = argv._[0]
+// const defaultMode = command === 'build' ? 'production' : 'development'
+// const { help, h, version, v } = argv
 
 export default class CommandServe extends Command {
   id = 'serve'

@@ -2,9 +2,9 @@ import { join } from 'path'
 import { Template } from 'fbi'
 import * as ejs from 'ejs'
 import Factory from '..'
-import { formatName, capitalizeEveryWord, isValidObject } from 'fbi/lib/utils'
+import { isValidObject } from 'fbi/lib/utils'
 
-export default class TemplateFactory extends Template {
+export default class TemplateVue extends Template {
   id = 'vue'
   description = 'template for factory-web'
   path = 'templates/vue'
@@ -19,7 +19,6 @@ export default class TemplateFactory extends Template {
     // 获取暂存的项目参数
     this.data.project = this.configStore.get('projectInfo')
     const { factory, project } = this.data
-    project.features = []
     this.spinner = this.createSpinner(`Creating project...`).start(
       `Creating ${this.style.bold.green(project.name)} via ${this.id} from ${
         factory.template
@@ -28,8 +27,6 @@ export default class TemplateFactory extends Template {
   }
 
   protected async writing() {
-    // const { project } = this.data
-    // if (project.features.vue) {
     this.files = {
       copy: [
         '.editorconfig',
