@@ -1,5 +1,5 @@
 import { join } from 'path'
-import { Template } from 'fbi'
+import { Template, utils } from 'fbi'
 import * as ejs from 'ejs'
 import Factory from '..'
 import { formatName, capitalizeEveryWord, isValidObject } from 'fbi/lib/utils'
@@ -16,13 +16,13 @@ export default class TemplateFactory extends Template {
   }
 
   protected async gathering() {
-    this.data.project = await this.prompt([
+    const res = await this.prompt([
       {
         type: 'input',
         name: 'name',
         message: 'Input the project name',
         initial({ enquirer }: any) {
-          return 'project-demo'
+          return this.data.project.name || 'project-demo'
         },
         validate(value: any) {
           const name = formatName(value)
@@ -37,21 +37,9 @@ export default class TemplateFactory extends Template {
           return `${state.answers.name} description`
         }
       }
-      // {
-      //   type: 'Select',
-      //   name: 'subtemplate',
-      //   message: `Pick subtemplate for your project:`,
-      //   hint: '(Use <arrow> to select, <return> to submit)',
-      //   choices: [
-      //     { name: 'vue', value: true },
-      //     { name: 'react', value: true }
-      //   ],
-      //   result(names: string[]) {
-      //     return this.map(names)
-      //   }
-      // }
     ] as any)
 
+    this.data.project = res
     this.data.project.nameCapitalized = capitalizeEveryWord(this.data.project.name)
 
     const { factory, project } = this.data
