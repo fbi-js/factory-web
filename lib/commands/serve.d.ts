@@ -6,7 +6,7 @@ export default class CommandServe extends Command {
     alias: string;
     description: string;
     args: string;
-    flags: string[][];
+    flags: {};
     constructor(factory: Factory);
-    run(flags: any, unknown: any): Promise<void>;
+    run(flags: any, unknown: any): any;
 }
