@@ -20,6 +20,7 @@ export default class TemplateWeb extends Template {
   }
 
   protected async gathering(flags: Record<string, any>) {
+    const defaultName = this.data.project && this.data.project.name || 'project-demo'
     const {language} = await this.prompt(
       {
         type: 'select',
@@ -57,7 +58,7 @@ export default class TemplateWeb extends Template {
         name: 'name',
         message: 'Input the project name',
         initial({ enquirer }: any) {
-          return 'project-demo'
+          return defaultName
         },
         validate(value: any) {
           const name = formatName(value)

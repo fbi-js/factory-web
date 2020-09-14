@@ -84,13 +84,13 @@ Next steps:
   $ ${this.style.cyan('cd ' + project.name)}
   `)
     console.log(`
-  $ ${this.style.cyan('fbi-next s')} ${this.style.dim('launch the serve')}`)
+  $ ${this.style.cyan('fbi s')} ${this.style.dim('launch the serve')}`)
 
     console.log(`
-  $ ${this.style.cyan('fbi-next b')} ${this.style.dim('build project')}`)
+  $ ${this.style.cyan('fbi b')} ${this.style.dim('build project')}`)
 
     console.log(`
-  $ ${this.style.cyan('fbi-next list')} ${this.style.dim(
+  $ ${this.style.cyan('fbi list')} ${this.style.dim(
       'show available commands and sub templates'
     )}`)
   }

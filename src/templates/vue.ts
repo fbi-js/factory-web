@@ -96,7 +96,7 @@ Next steps:
   $ ${this.style.cyan('vue-cli-service build')} ${this.style.dim('build project')}`)
 
     console.log(`
-  $ ${this.style.cyan('fbi-next list')} ${this.style.dim(
+  $ ${this.style.cyan('fbi list')} ${this.style.dim(
       'show available commands and sub templates'
     )}`)
   }

@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "description": "<%= project.description %>",
   "scripts": {
-    "postinstall": "fbi-next add fbi-js/factory-web",
-    "dev": "fbi-next s",
-    "build": "fbi-next b",
+    "postinstall": "fbi add fbi-js/factory-web",
+    "dev": "fbi s",
+    "build": "fbi b",
     "lint": "tsc --noEmit && eslint . --fix",
     "prettier": "prettier -c --write \"**/*.{js,ts,tsx,jsx,vue}\""
   },

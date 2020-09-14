@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "description": "<%= project.description %>",
   "scripts": {
-    "dev": "fbi-next s",
-    "build": "fbi-next b"
+    "dev": "fbi s",
+    "build": "fbi b"
   },
   "dependencies": {
     "@pika/react": "^16.13.1",
