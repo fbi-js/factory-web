@@ -1,5 +1,5 @@
 import { join } from 'path'
-import { Template } from 'fbi'
+import { Template, utils } from 'fbi'
 import * as ejs from 'ejs'
 import Factory from '..'
 import { isValidObject } from 'fbi/lib/utils'
