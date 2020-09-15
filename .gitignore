@@ -6,6 +6,6 @@
 /tmp
 /.nyc_output
 
-package-lock.json
+# package-lock.json
 pnpm-lock.yaml
-yarn.lock
+# yarn.lock

@@ -1,5 +1,8 @@
+import { timeStamp } from 'console'
 import { Command } from 'fbi'
 import Factory from '..'
+import { REACT_GRAPHQL_TEMPLATE_ID } from '../const'
+const run = require('./react/scripts/start.js')
 // import { createServer } from 'vite'
 
 // const argv = require('minimist')(process.argv.slice(2))
@@ -38,7 +41,12 @@ export default class CommandServe extends Command {
       stdio: 'inherit'
     }
     this.clear()
-    await this.exec.command('vite', execOpts)
+
+    if (this.factory.id === REACT_GRAPHQL_TEMPLATE_ID) {
+      await run()
+    } else {
+      await this.exec.command('vite', execOpts)
+    }
     // const options = await this.resolveOptions('development')
     // this.log(options, 12121882)
     // const server = createServer(options)

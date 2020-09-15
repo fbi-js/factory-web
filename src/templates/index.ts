@@ -5,54 +5,38 @@ import { formatName, capitalizeEveryWord } from 'fbi/lib/utils'
 import SubTemplateReact from './react'
 import SubTemplateVue from './vue'
 import SubTemplateVue3 from './vue3'
+import SubTemplateReactGraphql from './react/graphql'
+import {
+  REACT_GRAPHQL_TEMPLATE_ID,
+  REACT_OPENAPI_TEMPLATE_ID,
+  VUE2_TEMPLATE_ID,
+  VUE3_TEMPLATE_ID
+} from '../const'
+
+const VUE_STR = 'vue'
+const REACT_STR = 'react'
 
 export default class TemplateWeb extends Template {
   id = 'web'
   description = 'template for factory-web'
   path = 'templates/index'
   renderer = ejs.render
-  templates = [new SubTemplateVue(this.factory), new SubTemplateReact(this.factory), new SubTemplateVue3(this.factory)]
+  templates = [
+    new SubTemplateVue(this.factory),
+    new SubTemplateReact(this.factory),
+    new SubTemplateVue3(this.factory),
+    new SubTemplateReactGraphql(this.factory)
+  ]
 
-  public projectInfo:Record<string | number, any> = {}
+  public projectInfo: Record<string | number, any> = {}
 
   constructor(public factory: Factory) {
     super()
   }
 
   protected async gathering(flags: Record<string, any>) {
-    const defaultName = this.data.project && this.data.project.name || 'project-demo'
-    const {language} = await this.prompt(
-      {
-        type: 'select',
-        name: 'language',
-        message: `Which language do you want to use?`,
-        hint: '(Use <arrow> to select, <return> to submit)',
-        choices: [
-          { name: 'vue', value: true },
-          { name: 'react', value: true }
-        ],
-        result(name: string) {
-          return name
-        }
-      } as any
-    )
-    this.projectInfo = await this.prompt([
-      {
-        type: 'Select',
-        name: 'vueVersion',
-        message: `Which version of vue do you want to choice?`,
-        hint: '(Use <arrow> to select, <return> to submit)',
-        skip({state}: any) {
-          return language === 'react' ? true : false
-        },
-        choices: [
-          { name: 'vue2', value: true },
-          { name: 'vue3', value: true }
-        ],
-        result(names: string[]) {
-          return this.map(names)
-        }
-      },
+    const defaultName = (this.data.project && this.data.project.name) || 'project-demo'
+    const nameAndDescriptionConfig = [
       {
         type: 'input',
         name: 'name',
@@ -73,31 +57,69 @@ export default class TemplateWeb extends Template {
           return `${state.answers.name} description`
         }
       }
-    ] as any)
-
+    ]
+    this.projectInfo = await this.prompt([
+      {
+        type: 'select',
+        name: 'language',
+        message: `Which language do you want to use?`,
+        hint: '(Use <arrow> to select, <return> to submit)',
+        choices: [
+          { name: VUE_STR, value: true },
+          { name: REACT_STR, value: true }
+        ]
+      } as any,
+      {
+        type: 'select',
+        name: 'templateId',
+        message: `Which version of vue do you want to choice?`,
+        hint: '(Use <arrow> to select, <return> to submit)',
+        skip(state: any) {
+          const { answers } = this.state
+          return answers.language === REACT_STR
+        },
+        choices: [
+          { name: VUE2_TEMPLATE_ID, value: true },
+          { name: VUE3_TEMPLATE_ID, value: true }
+        ]
+      } as any,
+      {
+        type: 'select',
+        name: 'templateId',
+        message: `Which version of vue do you want to choice?`,
+        hint: '(Use <arrow> to select, <return> to submit)',
+        skip(): boolean {
+          const { answers } = this.state
+          return answers.language === VUE_STR
+        },
+        choices: [
+          { name: REACT_GRAPHQL_TEMPLATE_ID, value: true },
+          { name: REACT_OPENAPI_TEMPLATE_ID, value: true }
+        ]
+      },
+      ...nameAndDescriptionConfig
+    ])
     this.projectInfo.nameCapitalized = capitalizeEveryWord(this.projectInfo.name)
     const project = this.projectInfo
     try {
-      this.configStore.set("projectInfo", project)
+      this.configStore.set('projectInfo', project)
     } catch {
       // 若写入项目信息数据失败，终止后续流程
       return
     }
-
     const temps = utils.flatten(this.factory.templates.map((f: any) => f.templates))
-    const choiseId = language === 'react' ? 'react' : project.vueVersion.vue2 ? 'vue' : 'vue3'
-    const choiseTemp = temps.filter((it:any) => it.id === choiseId)[0]
-
-    if (choiseTemp) {
+    const templateId = this.projectInfo.templateId
+    const selectedTemplate = temps.find((it: any) => it.id === templateId)
+    if (selectedTemplate) {
       // set init data
-      const factoryInfo = this.store.get(choiseTemp.factory.id)
-      const info: Record<string, any> = await choiseTemp.run(
+      const factoryInfo = this.store.get(selectedTemplate.factory.id)
+      const info: Record<string, any> = await selectedTemplate.run(
         {
           factory: {
             id: factoryInfo.id,
             path: factoryInfo.version?.latest?.dir || factoryInfo.path,
             version: factoryInfo.version?.latest?.short,
-            template: choiseTemp.factory.id
+            template: selectedTemplate.factory.id
           }
         },
         flags
@@ -119,7 +141,4 @@ export default class TemplateWeb extends Template {
       }
     }
   }
-
-
 }
-
