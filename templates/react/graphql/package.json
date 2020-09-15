@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "postinstall": "fbi add https://github.com/yzStrive/factory-web.git",
+    "postinstall": "fbi add https://github.com/fbi-js/factory-web.git",
     "start": "fbi s",
     "build": "fbi b",
     "gql-codegen": "graphql-codegen --config codegen.yml --watch",
