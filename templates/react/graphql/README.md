@@ -7,6 +7,10 @@
 - eslint+prettier+husky+lint-staged 完善开发体验 保证代码风格和质量
 - 已经集成[graphql-codegen](https://github.com/dotansimha/graphql-code-generator)，根据 graphql 自动生成对应 apollo-client+react-hooks+typescript 代码
 
+## 依赖
+
+- [fbi](https://github.com/fbi-js/fbi)
+
 ## 开始
 
 ```shell

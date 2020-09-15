@@ -119,7 +119,7 @@ export default class TemplateWeb extends Template {
             id: factoryInfo.id,
             path: factoryInfo.version?.latest?.dir || factoryInfo.path,
             version: factoryInfo.version?.latest?.short,
-            template: selectedTemplate.factory.id
+            template: selectedTemplate.id
           }
         },
         flags

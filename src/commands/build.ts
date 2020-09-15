@@ -1,6 +1,7 @@
 import { join } from 'path'
 import { Command, utils } from 'fbi'
 import Factory from '..'
+const runReactBuildScript = require('./react/scripts/build.js')
 
 export default class CommandBuild extends Command {
   id = 'build'
@@ -42,12 +43,13 @@ export default class CommandBuild extends Command {
       ...this.factory.execOpts,
       stdio: flags.debug ? 'inherit' : 'pipe'
     }
-    try {
-      await this.exec.command('vite build', execOpts)
-      this.logEnd('Build successfully')
-    } catch (err) {
-      this.error('Failed to build project')
-      this.error(err).exit()
-    }
+    await runReactBuildScript()
+    // try {
+    //   await this.exec.command('vite build', execOpts)
+    //   this.logEnd('Build successfully')
+    // } catch (err) {
+    //   this.error('Failed to build project')
+    //   this.error(err).exit()
+    // }
   }
 }

@@ -7,9 +7,9 @@ const baseConfig = {
 const envKeys = [
   { key: 'development', env: dev },
   { key: 'production', env: prod },
-  { key: 'test-build', env: testBuild },
+  { key: 'testing', env: testBuild },
 ]
-const env = envKeys.find((it) => it.key === process.env.NODE_ENV) || {
+const env = envKeys.find(it => it.key === process.env.NODE_ENV) || {
   env: baseConfig,
 }
 export default Object.assign({}, baseConfig, env.env)

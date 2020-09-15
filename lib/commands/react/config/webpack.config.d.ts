@@ -68,14 +68,14 @@ declare function _exports(webpackEnv: any): {
                 options: {
                     limit: number;
                     name: string;
+                    babelrc?: undefined;
                     customize?: undefined;
+                    presets?: undefined;
                     plugins?: undefined;
                     cacheDirectory?: undefined;
                     cacheCompression?: undefined;
                     compact?: undefined;
-                    babelrc?: undefined;
                     configFile?: undefined;
-                    presets?: undefined;
                     sourceMaps?: undefined;
                     inputSourceMap?: undefined;
                 };
@@ -88,7 +88,12 @@ declare function _exports(webpackEnv: any): {
                 include: string;
                 loader: string;
                 options: {
+                    babelrc: boolean;
                     customize: string;
+                    presets: (string | {
+                        flow: boolean;
+                        typescript: boolean;
+                    })[][];
                     plugins: (string | {
                         loaderMap: {
                             svg: {
@@ -101,9 +106,7 @@ declare function _exports(webpackEnv: any): {
                     compact: boolean;
                     limit?: undefined;
                     name?: undefined;
-                    babelrc?: undefined;
                     configFile?: undefined;
-                    presets?: undefined;
                     sourceMaps?: undefined;
                     inputSourceMap?: undefined;
                 };
@@ -175,14 +178,14 @@ declare function _exports(webpackEnv: any): {
                 options: {
                     name: string;
                     limit?: undefined;
+                    babelrc?: undefined;
                     customize?: undefined;
+                    presets?: undefined;
                     plugins?: undefined;
                     cacheDirectory?: undefined;
                     cacheCompression?: undefined;
                     compact?: undefined;
-                    babelrc?: undefined;
                     configFile?: undefined;
-                    presets?: undefined;
                     sourceMaps?: undefined;
                     inputSourceMap?: undefined;
                 };
