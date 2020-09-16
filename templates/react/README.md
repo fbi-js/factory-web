@@ -1,15 +1,17 @@
 # fbi-template-react react+graphql 模版说明
 
-## 特性
-
-- 使用[CRA-CLI](https://create-react-app.dev/) eject 作为基础模版
-- typescript+react+react-router-dom+graphql 基础库
-- eslint+prettier+husky+lint-staged 完善开发体验 保证代码风格和质量
-- 已经集成[graphql-codegen](https://github.com/dotansimha/graphql-code-generator)，根据 graphql 自动生成对应 apollo-client+react-hooks+typescript 代码
-
 ## 依赖
 
 - [fbi](https://github.com/fbi-js/fbi)
+- [fbi/factory-web](https://github.com/fbi-js/fbi)
+
+## 特性
+
+- 使用[CRA-CLI](https://create-react-app.dev/) eject 作为基础模版
+- 将 typescript+react+react-router-dom+graphql 作为基础库
+- 已经集成[graphql-codegen](https://github.com/dotansimha/graphql-code-generator)，根据 graphql 自动生成对应 apollo-client+react-hooks+typescript 代码
+- 将 react-scripts 的开发和构建集成到 fbi 的 factory-web 中，隔离起来，统一管理与维护
+- eslint+prettier+husky+lint-staged 完善开发体验 保证代码风格和质量
 
 ## 开始
 

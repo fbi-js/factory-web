@@ -1,7 +1,7 @@
 import { timeStamp } from 'console'
 import { Command } from 'fbi'
 import Factory from '..'
-import { REACT_GRAPHQL_TEMPLATE_ID } from '../const'
+import { REACT_GRAPHQL_FEATURE_ID } from '../const'
 const runReactStartScript = require('./react/scripts/start.js')
 
 export default class CommandServe extends Command {
@@ -35,13 +35,12 @@ export default class CommandServe extends Command {
       stdio: 'inherit'
     }
     this.clear()
-    await runReactStartScript()
-    // const templateInfo = this.context.get('config.factory.template')
-    // console.log(this.factory.commands)
-    // if (templateInfo.id !== REACT_GRAPHQL_TEMPLATE_ID) {
-    //   await run()
-    // } else {
-    //   await this.exec.command('vite', execOpts)
-    // }
+    const templateInfo = this.context.get('config.factory.template')
+    console.log(templateInfo, '-----templateInfo-----')
+    if (templateInfo.id !== REACT_GRAPHQL_FEATURE_ID) {
+      // await run()
+    } else {
+      await this.exec.command('vite', execOpts)
+    }
   }
 }

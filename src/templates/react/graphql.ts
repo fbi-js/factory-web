@@ -3,9 +3,9 @@ import { Template } from 'fbi'
 import * as ejs from 'ejs'
 import Factory from '../../index'
 import { isValidObject } from 'fbi/lib/utils'
-import { REACT_GRAPHQL_TEMPLATE_ID } from '../../const'
+import { REACT_GRAPHQL_FEATURE_ID, REACT_TEMPLATE_ID } from '../../const'
 export default class TemplateReactGraphql extends Template {
-  id = REACT_GRAPHQL_TEMPLATE_ID
+  id = REACT_TEMPLATE_ID
   description = 'template for react-graphql'
   path = 'templates/react/graphql'
   renderer = ejs.render

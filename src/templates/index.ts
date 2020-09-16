@@ -2,19 +2,18 @@ import { Template, utils } from 'fbi'
 import * as ejs from 'ejs'
 import Factory from '..'
 import { formatName, capitalizeEveryWord } from 'fbi/lib/utils'
-import SubTemplateReact from './react'
 import SubTemplateVue from './vue'
 import SubTemplateVue3 from './vue3'
-import SubTemplateReactGraphql from './react/graphql'
+import SubTemplateReact from './react'
 import {
-  REACT_GRAPHQL_TEMPLATE_ID,
-  REACT_OPENAPI_TEMPLATE_ID,
+  REACT_GRAPHQL_FEATURE_ID,
+  REACT_OPENAPI_FEATURE_ID,
+  REACT_STR,
+  REACT_TEMPLATE_ID,
   VUE2_TEMPLATE_ID,
-  VUE3_TEMPLATE_ID
+  VUE3_TEMPLATE_ID,
+  VUE_STR
 } from '../const'
-
-const VUE_STR = 'vue'
-const REACT_STR = 'react'
 
 export default class TemplateWeb extends Template {
   id = 'web'
@@ -23,9 +22,8 @@ export default class TemplateWeb extends Template {
   renderer = ejs.render
   templates = [
     new SubTemplateVue(this.factory),
-    new SubTemplateReact(this.factory),
     new SubTemplateVue3(this.factory),
-    new SubTemplateReactGraphql(this.factory)
+    new SubTemplateReact(this.factory)
   ]
 
   public projectInfo: Record<string | number, any> = {}
@@ -85,24 +83,34 @@ export default class TemplateWeb extends Template {
       } as any,
       {
         type: 'select',
-        name: 'templateId',
-        message: `Which version of vue do you want to choice?`,
+        name: 'features',
+        message: `Which feature of react do you want to choice?`,
         hint: '(Use <arrow> to select, <return> to submit)',
         skip(): boolean {
           const { answers } = this.state
           return answers.language === VUE_STR
         },
         choices: [
-          { name: REACT_GRAPHQL_TEMPLATE_ID, value: true },
-          { name: REACT_OPENAPI_TEMPLATE_ID, value: true }
-        ]
+          { name: REACT_GRAPHQL_FEATURE_ID, value: true },
+          { name: REACT_OPENAPI_FEATURE_ID, value: true }
+        ],
+        result(name) {
+          return {
+            templateFeature: name
+          }
+        }
       },
       ...nameAndDescriptionConfig
     ])
     this.projectInfo.nameCapitalized = capitalizeEveryWord(this.projectInfo.name)
-    const project = this.projectInfo
+    if (this.projectInfo.language === REACT_STR) {
+      this.projectInfo = {
+        ...this.projectInfo,
+        templateId: REACT_TEMPLATE_ID
+      }
+    }
     try {
-      this.configStore.set('projectInfo', project)
+      this.configStore.set('projectInfo', this.projectInfo)
     } catch {
       // 若写入项目信息数据失败，终止后续流程
       return
@@ -112,6 +120,7 @@ export default class TemplateWeb extends Template {
     const selectedTemplate = temps.find((it: any) => it.id === templateId)
     if (selectedTemplate) {
       // set init data
+      // TODO: factoryInfo的version有问题
       const factoryInfo = this.store.get(selectedTemplate.factory.id)
       const info: Record<string, any> = await selectedTemplate.run(
         {
@@ -124,7 +133,6 @@ export default class TemplateWeb extends Template {
         },
         flags
       )
-
       if (!info) {
         return
       }
@@ -135,8 +143,13 @@ export default class TemplateWeb extends Template {
       this.debug(`Save info into project store`)
       if (info.path) {
         this.projectStore.merge(info.path, {
+          name: info.name,
+          path: info.path,
+          factory: factoryInfo.id,
+          version: factoryInfo.version?.latest?.short,
+          template: selectedTemplate.templateId,
           features: info.features,
-          updatedAt: Date.now()
+          createdAt: Date.now()
         })
       }
     }
