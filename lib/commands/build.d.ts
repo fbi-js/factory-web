@@ -6,7 +6,7 @@ export default class CommandBuild extends Command {
     alias: string;
     description: string;
     args: string;
-    flags: (string | boolean)[][];
+    flags: {};
     constructor(factory: Factory);
-    run(flags: any, unknown: any): Promise<void>;
+    run(flags: any, unknown: any): any;
 }
