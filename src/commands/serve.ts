@@ -37,10 +37,11 @@ export default class CommandServe extends Command {
     this.clear()
     const templateInfo = this.context.get('config.factory.template')
     console.log(templateInfo, '-----templateInfo-----')
-    if (templateInfo.id !== REACT_GRAPHQL_FEATURE_ID) {
-      // await run()
-    } else {
-      await this.exec.command('vite', execOpts)
-    }
+    await runReactStartScript()
+    // if (templateInfo.id !== REACT_GRAPHQL_FEATURE_ID) {
+    //   // await run()
+    // } else {
+    //   await this.exec.command('vite', execOpts)
+    // }
   }
 }
