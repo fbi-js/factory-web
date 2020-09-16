@@ -38,13 +38,13 @@ export default class TemplateReactGraphql extends Template {
         '.prettierrc.js',
         'codegen.yml',
         'graphql.schema.json',
-        'package.json',
+
         'package-lock.json',
         'yarn.lock',
         'README.md',
         'tsconfig.json'
       ],
-      render: ['.fbi.config.js'],
+      render: ['.fbi.config.js', 'package.json'],
       renderOptions: {
         async: true
       }
@@ -55,7 +55,6 @@ export default class TemplateReactGraphql extends Template {
   protected async installing(flags: Record<string, any>) {
     const { project } = this.data
     this.spinner.succeed(`Created project ${this.style.cyan.bold(project.name)}`)
-
     const { dependencies, devDependencies } = require(join(this.targetDir, 'package.json'))
     if (isValidObject(dependencies) || isValidObject(devDependencies)) {
       const installSpinner = this.createSpinner(`Installing dependencies...`).start()

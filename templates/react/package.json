@@ -1,21 +1,29 @@
 {
-  "name": "fbi-template-react",
+  "name": "<%= project.name %>",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "postinstall": "fbi add https://github.com/fbi-js/factory-web.git",
+    "postinstall": "fbi add https://github.com/yzStrive/factory-web.git",
     "start": "fbi s",
     "build": "fbi b",
-    "gql-codegen": "graphql-codegen --config codegen.yml --watch",
     "prettier": "prettier -c --write \"**/*.{js,jsx,ts,tsx,md,html,css,scss}\"",
     "lint": "tsc --noEmit && eslint . --fix"
+    <%_ if (project.features.graphql) { _%>
+    ,"gql-codegen": "graphql-codegen --config codegen.yml --watch"
+    <%_ } _%>
   },
   "dependencies": {
-    "@apollo/client": "^3.1.4",
-    "graphql": "^15.3.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0"
+    <%_ if (project.features.graphql) { _%>
+     ,"@apollo/client": "^3.1.4",
+     "graphql": "^15.3.0"
+    <%_ } _%>
+    <%_ if (project.features.openapi) { _%>
+    ,"axios": "^0.20.0",
+    "swr": "^0.3.2"
+    <%_ } _%>
   },
   "devDependencies": {
     "fbi": "next",
@@ -29,12 +37,14 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
-    "@types/react-router-dom": "^5.1.5",
-    "@graphql-codegen/cli": "1.17.8",
+    "@types/react-router-dom": "^5.1.5"
+    <%_ if (project.features.graphql) { _%>
+    ,"@graphql-codegen/cli": "1.17.8",
     "@graphql-codegen/introspection": "1.17.8",
     "@graphql-codegen/typescript": "1.17.8",
     "@graphql-codegen/typescript-operations": "1.17.8",
     "@graphql-codegen/typescript-react-apollo": "2.0.6"
+    <%_ } _%>
   },
   "husky": {
     "hooks": {

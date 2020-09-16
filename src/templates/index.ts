@@ -96,7 +96,7 @@ export default class TemplateWeb extends Template {
         ],
         result(name) {
           return {
-            templateFeature: name
+            [name]: true
           }
         }
       },
