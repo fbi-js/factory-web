@@ -45,6 +45,9 @@
     "@graphql-codegen/typescript-operations": "1.17.8",
     "@graphql-codegen/typescript-react-apollo": "2.0.6"
     <%_ } _%>
+    <%_ if (project.features.openapi) { _%>
+    ,"http-proxy-middleware": "^1.0.5"
+    <%_ } _%>
   },
   "husky": {
     "hooks": {

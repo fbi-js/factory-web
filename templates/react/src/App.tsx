@@ -1,17 +1,31 @@
 import React from 'react'
-import logo from './logo.svg'
-import './App.css'
-import ExchangeRates from './ExchangeRates'
-import Router from './router'
-import styles from './app.module.less'
+<%_ if (project.features.graphql) { _%>
+import Demo from './GraphqlDemo'
+import { ApolloProvider } from '@apollo/client'
+import { client } from './Apollo'
+<%_ } _%>
+
+<%_ if (project.features.openapi) { _%>
+import { PontCore } from '@/services/pontCore'
+import { request } from '@/request'
+import Demo from './OpenapiDemo'
+
+// eslint-disable-next-line react-hooks/rules-of-hooks
+PontCore.useFetch(request)
+<%_ } _%>
+
 function App() {
-  return (
-    <div className={`App ${styles.container}`}>
-      <img src={logo} className="App-logo" alt="logo" />
-      <Router />
-      <ExchangeRates />
-    </div>
-  )
+  <%_ if (project.features.graphql) { _%>
+    return (
+      <ApolloProvider client={client}>
+        <Demo />
+      </ApolloProvider>
+    )
+  <%_ } _%>
+
+  <%_ if (project.features.openapi) { _%>
+    return <Demo />
+  <%_ } _%>
 }
 
 export default App

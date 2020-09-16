@@ -3,20 +3,11 @@ import ReactDOM from 'react-dom'
 import './index.css'
 import App from '@/App'
 import * as serviceWorker from './serviceWorker'
-import { ApolloProvider } from '@apollo/client'
-import { client } from './Apollo'
 
-function ApolloApp() {
-  return (
-    <ApolloProvider client={client}>
-      <App />
-    </ApolloProvider>
-  )
-}
 
 ReactDOM.render(
   <React.StrictMode>
-    <ApolloApp />
+    <App />
   </React.StrictMode>,
   document.getElementById('root'),
 )

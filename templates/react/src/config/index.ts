@@ -2,7 +2,11 @@ import dev from './dev.config'
 import prod from './prod.config'
 import testBuild from './test-build.config'
 const baseConfig = {
-  host: '',
+  host: ''
+<%_ if (project.features.openapi) { _%>
+  ,baseUrl: '',
+  authKey: 'Authorization'
+<%_ } _%>
 }
 const envKeys = [
   { key: 'development', env: dev },
