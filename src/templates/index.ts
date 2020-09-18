@@ -10,6 +10,7 @@ import {
   REACT_OPENAPI_FEATURE_ID,
   REACT_STR,
   REACT_TEMPLATE_ID,
+  UMI_QIANKUN_STR,
   VUE2_TEMPLATE_ID,
   VUE3_TEMPLATE_ID,
   VUE_STR
@@ -60,11 +61,12 @@ export default class TemplateWeb extends Template {
       {
         type: 'select',
         name: 'language',
-        message: `Which language do you want to use?`,
+        message: `Which base frame work do you want to use?`,
         hint: '(Use <arrow> to select, <return> to submit)',
         choices: [
-          { name: VUE_STR, value: true },
-          { name: REACT_STR, value: true }
+          // { name: VUE_STR, value: true },
+          { name: REACT_STR, value: true },
+          { name: UMI_QIANKUN_STR, value: true }
         ]
       } as any,
       {
@@ -74,7 +76,7 @@ export default class TemplateWeb extends Template {
         hint: '(Use <arrow> to select, <return> to submit)',
         skip(state: any) {
           const { answers } = this.state
-          return answers.language === REACT_STR
+          return answers.language !== VUE_STR
         },
         choices: [
           { name: VUE2_TEMPLATE_ID, value: true },
@@ -88,7 +90,7 @@ export default class TemplateWeb extends Template {
         hint: '(Use <arrow> to select, <return> to submit)',
         skip(): boolean {
           const { answers } = this.state
-          return answers.language === VUE_STR
+          return answers.language !== REACT_STR
         },
         choices: [
           { name: REACT_GRAPHQL_FEATURE_ID, value: true },
