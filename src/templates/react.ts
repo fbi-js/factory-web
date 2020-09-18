@@ -39,13 +39,18 @@ export default class TemplateReactGraphql extends Template {
         ]
       : []
     const openapiFiles = openapi
-      ? ['src/request/*', 'src/services/*', 'src/OpenapiDemo.tsx', 'src/setupProxy.js']
+      ? [
+          'src/request/*',
+          'src/services/*',
+          'src/OpenapiDemo.tsx',
+          'src/setupProxy.js',
+          'pont-config/*'
+        ]
       : []
     this.files = {
       copy: [
         '.vscode/*',
         'public/*',
-
         'src/router/*',
         'src/App.css',
         'src/app.module.less',
@@ -62,12 +67,11 @@ export default class TemplateReactGraphql extends Template {
         '.prettierrc.js',
         'package-lock.json',
         'yarn.lock',
-        'README.md',
         'tsconfig.json',
         ...graphqlFiles,
         ...openapiFiles
       ],
-      render: ['.fbi.config.js', 'package.json', 'src/App.tsx', 'src/config/*'],
+      render: ['.fbi.config.js', 'package.json', 'src/App.tsx', 'src/config/*', 'README.md'],
       renderOptions: {
         async: true
       }
@@ -85,10 +89,21 @@ export default class TemplateReactGraphql extends Template {
         const packageManager = flags.packageManager || this.context.get('config').packageManager
         const cmds = packageManager === 'yarn' ? [packageManager] : [packageManager, 'install']
         this.debug(`\nrunning \`${cmds.join(' ')}\` in ${this.targetDir}`)
+        await this.exec('git', ['init'], {
+          cwd: this.targetDir
+        })
+        await this.exec(cmds[0], cmds.slice(1), {
+          cwd: this.targetDir
+        })
         await this.exec(cmds[0], cmds.slice(1), {
           cwd: this.targetDir
         })
         installSpinner.succeed(`Installed dependencies`)
+        const commintSpinner = this.createSpinner(`Git commit...`).start()
+        await this.exec('git', ['commit', '-m', 'init'], {
+          cwd: this.targetDir
+        })
+        commintSpinner.succeed()
       } catch (err) {
         installSpinner.fail('Failed to install dependencies. You can install them manually.')
         this.error(err)

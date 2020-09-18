@@ -6,10 +6,13 @@
     "postinstall": "fbi add https://github.com/yzStrive/factory-web.git",
     "start": "fbi s",
     "build": "fbi b",
-    "prettier": "prettier -c --write \"**/*.{js,jsx,ts,tsx,md,html,css,scss}\"",
+    "prettier": "prettier -c --write \"**/*.{js,jsx,ts,tsx,md,html,css,scss,json}\"",
     "lint": "tsc --noEmit && eslint . --fix"
     <%_ if (project.features.graphql) { _%>
     ,"gql-codegen": "graphql-codegen --config codegen.yml --watch"
+    <%_ } _%>
+    <%_ if (project.features.graphql) { _%>
+    ,"openapi-codegen": "pont generate"
     <%_ } _%>
   },
   "dependencies": {
@@ -56,7 +59,7 @@
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": "npm run lint",
-    "*.{js,jsx,ts,tsx,md,html,css,scss}": "npm run prettier",
+    "*.{js,jsx,ts,tsx,md,html,css,scss,json}": "npm run prettier",
     "*": "git add "
   },
   "browserslist": {
