@@ -10,6 +10,7 @@ import {
   REACT_OPENAPI_FEATURE_ID,
   REACT_STR,
   REACT_TEMPLATE_ID,
+  UMI_QIANKUN_MAIN_FEATURE_ID,
   UMI_QIANKUN_STR,
   VUE2_TEMPLATE_ID,
   VUE3_TEMPLATE_ID,
@@ -102,6 +103,25 @@ export default class TemplateWeb extends Template {
           }
         }
       },
+      {
+        type: 'select',
+        name: 'features',
+        message: `Which feature of umi-qiankun do you want to choice?`,
+        hint: '(Use <arrow> to select, <return> to submit)',
+        skip(): boolean {
+          const { answers } = this.state
+          return answers.language !== REACT_STR
+        },
+        choices: [
+          { name: UMI_QIANKUN_MAIN_FEATURE_ID, value: true },
+          { name: UMI_QIANKUN_MAIN_FEATURE_ID, value: true }
+        ],
+        result(name) {
+          return {
+            [name]: true
+          }
+        }
+      }
       ...nameAndDescriptionConfig
     ])
     this.projectInfo.nameCapitalized = capitalizeEveryWord(this.projectInfo.name)

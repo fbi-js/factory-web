@@ -3,3 +3,4 @@ dist
 build
 scripts
 config
+src/react-app-env.d.ts

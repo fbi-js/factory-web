@@ -1,0 +1,4 @@
+{
+  /** 需要使用eslint+prettier来自动格式化文件和command保持开发体验一致 **/
+  "editor.formatOnSave": true
+}
