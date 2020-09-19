@@ -1,7 +1,7 @@
 import { Template } from 'fbi';
 import * as ejs from 'ejs';
 import Factory from '../index';
-export default class TemplateReactGraphql extends Template {
+export default class TemplateUmiQiankun extends Template {
     factory: Factory;
     id: string;
     description: string;

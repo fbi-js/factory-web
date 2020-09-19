@@ -99,11 +99,14 @@ export default class TemplateReactGraphql extends Template {
           cwd: this.targetDir
         })
         installSpinner.succeed(`Installed dependencies`)
-        const commintSpinner = this.createSpinner(`Git commit...`).start()
+        const commitSpinner = this.createSpinner(`Git commit...`).start()
+        await this.exec('git', ['add', '.'], {
+          cwd: this.targetDir
+        })
         await this.exec('git', ['commit', '-m', 'init'], {
           cwd: this.targetDir
         })
-        commintSpinner.succeed()
+        commitSpinner.succeed()
       } catch (err) {
         installSpinner.fail('Failed to install dependencies. You can install them manually.')
         this.error(err)

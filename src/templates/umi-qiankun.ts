@@ -4,10 +4,10 @@ import * as ejs from 'ejs'
 import Factory from '../index'
 import { isValidObject } from 'fbi/lib/utils'
 import { REACT_GRAPHQL_FEATURE_ID, REACT_TEMPLATE_ID, UMI_QIANKUN_TEMPLATE_ID } from '../const'
-export default class TemplateReactGraphql extends Template {
+export default class TemplateUmiQiankun extends Template {
   id = UMI_QIANKUN_TEMPLATE_ID
   description = 'template for umi-qiankun'
-  path = 'templates/react'
+  path = 'templates/umi-qiankun'
   renderer = ejs.render
   templates = []
 
@@ -34,7 +34,7 @@ export default class TemplateReactGraphql extends Template {
         '.vscode/*',
         'mock/*',
         'src/components/*',
-        'src/config.ts',
+        'src/config/*',
         'src/generated/*',
         'src/graphql/*',
         'src/pages/*',
@@ -81,10 +81,19 @@ export default class TemplateReactGraphql extends Template {
         })
         installSpinner.succeed(`Installed dependencies`)
         const commintSpinner = this.createSpinner(`Git commit...`).start()
-        await this.exec('git', ['commit', '-m', 'init'], {
-          cwd: this.targetDir
-        })
-        commintSpinner.succeed()
+        try {
+          await this.exec('git', ['add', '.'], {
+            cwd: this.targetDir
+          })
+          await this.exec('git', ['commit', '-m', 'init'], {
+            cwd: this.targetDir
+          })
+          commintSpinner.succeed()
+        } catch (err) {
+          commintSpinner.fail(
+            'Failed to git commit. You can check them, and then commit them manually.'
+          )
+        }
       } catch (err) {
         installSpinner.fail('Failed to install dependencies. You can install them manually.')
         this.error(err)

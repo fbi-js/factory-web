@@ -31,7 +31,7 @@ export async function qiankun() {
     apps: [
       {
         name: 'sub-app',
-        entry: 'http://localhost:8090/',
+        entry: 'http://localhost:8081/',
       },
     ],
     // 完整生命周期钩子请看 https://qiankun.umijs.org/zh/api/#registermicroapps-apps-lifecycles

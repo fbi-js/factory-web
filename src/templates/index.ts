@@ -5,6 +5,7 @@ import { formatName, capitalizeEveryWord } from 'fbi/lib/utils'
 import SubTemplateVue from './vue'
 import SubTemplateVue3 from './vue3'
 import SubTemplateReact from './react'
+import SubTemplateUmiQiankun from './umi-qiankun'
 import {
   REACT_GRAPHQL_FEATURE_ID,
   REACT_OPENAPI_FEATURE_ID,
@@ -12,6 +13,8 @@ import {
   REACT_TEMPLATE_ID,
   UMI_QIANKUN_MAIN_FEATURE_ID,
   UMI_QIANKUN_STR,
+  UMI_QIANKUN_SUB_FEATURE_ID,
+  UMI_QIANKUN_TEMPLATE_ID,
   VUE2_TEMPLATE_ID,
   VUE3_TEMPLATE_ID,
   VUE_STR
@@ -23,9 +26,10 @@ export default class TemplateWeb extends Template {
   path = 'templates/index'
   renderer = ejs.render
   templates = [
-    new SubTemplateVue(this.factory),
-    new SubTemplateVue3(this.factory),
-    new SubTemplateReact(this.factory)
+    // new SubTemplateVue(this.factory),
+    // new SubTemplateVue3(this.factory),
+    new SubTemplateReact(this.factory),
+    new SubTemplateUmiQiankun(this.factory)
   ]
 
   public projectInfo: Record<string | number, any> = {}
@@ -65,9 +69,9 @@ export default class TemplateWeb extends Template {
         message: `Which base frame work do you want to use?`,
         hint: '(Use <arrow> to select, <return> to submit)',
         choices: [
+          { name: UMI_QIANKUN_STR, value: true },
           // { name: VUE_STR, value: true },
-          { name: REACT_STR, value: true },
-          { name: UMI_QIANKUN_STR, value: true }
+          { name: REACT_STR, value: true }
         ]
       } as any,
       {
@@ -110,26 +114,30 @@ export default class TemplateWeb extends Template {
         hint: '(Use <arrow> to select, <return> to submit)',
         skip(): boolean {
           const { answers } = this.state
-          return answers.language !== REACT_STR
+          return answers.language !== UMI_QIANKUN_STR
         },
         choices: [
           { name: UMI_QIANKUN_MAIN_FEATURE_ID, value: true },
-          { name: UMI_QIANKUN_MAIN_FEATURE_ID, value: true }
+          { name: UMI_QIANKUN_SUB_FEATURE_ID, value: true }
         ],
         result(name) {
           return {
             [name]: true
           }
         }
-      }
+      },
       ...nameAndDescriptionConfig
     ])
     this.projectInfo.nameCapitalized = capitalizeEveryWord(this.projectInfo.name)
+    let templateId: any
     if (this.projectInfo.language === REACT_STR) {
-      this.projectInfo = {
-        ...this.projectInfo,
-        templateId: REACT_TEMPLATE_ID
-      }
+      templateId = REACT_TEMPLATE_ID
+    } else if (this.projectInfo.language === UMI_QIANKUN_STR) {
+      templateId = UMI_QIANKUN_TEMPLATE_ID
+    }
+    this.projectInfo = {
+      ...this.projectInfo,
+      templateId
     }
     try {
       this.configStore.set('projectInfo', this.projectInfo)
@@ -138,7 +146,6 @@ export default class TemplateWeb extends Template {
       return
     }
     const temps = utils.flatten(this.factory.templates.map((f: any) => f.templates))
-    const templateId = this.projectInfo.templateId
     const selectedTemplate = temps.find((it: any) => it.id === templateId)
     if (selectedTemplate) {
       // set init data

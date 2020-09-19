@@ -1,5 +1,5 @@
 import { defineConfig } from 'umi'
-<%_ if (project.features.graphql) { _%>
+<%_ if (project.features.main) { _%>
 import { routes } from './config/route'
 
 export default defineConfig({
@@ -32,7 +32,7 @@ export default defineConfig({
 })
 
 <%_ } _%>
-<%_ if (project.features.graphql) { _%>
+<%_ if (project.features.sub) { _%>
 export default defineConfig({
   qiankun: {
     slave: {},
