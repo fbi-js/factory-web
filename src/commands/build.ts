@@ -1,7 +1,7 @@
 import { join } from 'path'
 import { Command, utils } from 'fbi'
 import Factory from '..'
-import { REACT_TEMPLATE_ID, UMI_QIANKUN_TEMPLATE_ID } from '../const'
+import { REACT_TEMPLATE_ID, MICRO_TEMPLATE_ID } from '../const'
 const runReactBuildScript = require('./react/scripts/build.js')
 
 export default class CommandBuild extends Command {
@@ -49,7 +49,7 @@ export default class CommandBuild extends Command {
       const buildSpinner = this.createSpinner(`building...`).start()
       if (templateId === REACT_TEMPLATE_ID) {
         await runReactBuildScript()
-      } else if (templateId === UMI_QIANKUN_TEMPLATE_ID) {
+      } else if (templateId === MICRO_TEMPLATE_ID) {
         await this.exec.command('umi build', execOpts)
         buildSpinner.succeed()
       }

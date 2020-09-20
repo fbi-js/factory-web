@@ -5,20 +5,22 @@ import { formatName, capitalizeEveryWord } from 'fbi/lib/utils'
 import SubTemplateVue from './vue'
 import SubTemplateVue3 from './vue3'
 import SubTemplateReact from './react'
-import SubTemplateUmiQiankun from './umi-qiankun'
+// import SubTemplateUmiQiankun from './micro'
 import {
   REACT_GRAPHQL_FEATURE_ID,
   REACT_OPENAPI_FEATURE_ID,
   REACT_STR,
   REACT_TEMPLATE_ID,
-  UMI_QIANKUN_MAIN_FEATURE_ID,
+  MICRO_MAIN_FEATURE_ID,
   UMI_QIANKUN_STR,
-  UMI_QIANKUN_SUB_FEATURE_ID,
-  UMI_QIANKUN_TEMPLATE_ID,
+  MICRO_SUB_FEATURE_ID,
+  MICRO_TEMPLATE_ID,
   VUE2_TEMPLATE_ID,
   VUE3_TEMPLATE_ID,
   VUE_STR
 } from '../const'
+
+//TODO: 该模版暂时没有任何左右
 
 export default class TemplateWeb extends Template {
   id = 'web'
@@ -28,8 +30,8 @@ export default class TemplateWeb extends Template {
   templates = [
     // new SubTemplateVue(this.factory),
     // new SubTemplateVue3(this.factory),
-    new SubTemplateReact(this.factory),
-    new SubTemplateUmiQiankun(this.factory)
+    // new SubTemplateReact(this.factory),
+    // new SubTemplateUmiQiankun(this.factory)
   ]
 
   public projectInfo: Record<string | number, any> = {}
@@ -117,8 +119,8 @@ export default class TemplateWeb extends Template {
           return answers.language !== UMI_QIANKUN_STR
         },
         choices: [
-          { name: UMI_QIANKUN_MAIN_FEATURE_ID, value: true },
-          { name: UMI_QIANKUN_SUB_FEATURE_ID, value: true }
+          { name: MICRO_MAIN_FEATURE_ID, value: true },
+          { name: MICRO_SUB_FEATURE_ID, value: true }
         ],
         result(name) {
           return {
@@ -133,7 +135,7 @@ export default class TemplateWeb extends Template {
     if (this.projectInfo.language === REACT_STR) {
       templateId = REACT_TEMPLATE_ID
     } else if (this.projectInfo.language === UMI_QIANKUN_STR) {
-      templateId = UMI_QIANKUN_TEMPLATE_ID
+      templateId = MICRO_TEMPLATE_ID
     }
     this.projectInfo = {
       ...this.projectInfo,

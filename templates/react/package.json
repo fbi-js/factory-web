@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "postinstall": "fbi add https://github.com/yzStrive/factory-web.git",
+    "postinstall": "fbi add fbi/factory-web",
     "start": "fbi s",
     "build": "fbi b",
     "prettier": "prettier -c --write \"**/*.{js,jsx,ts,tsx,md,html,css,scss,json}\"",

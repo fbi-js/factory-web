@@ -1,12 +1,7 @@
 import { timeStamp } from 'console'
 import { Command } from 'fbi'
 import Factory from '..'
-import {
-  REACT_GRAPHQL_FEATURE_ID,
-  REACT_STR,
-  REACT_TEMPLATE_ID,
-  UMI_QIANKUN_TEMPLATE_ID
-} from '../const'
+import { REACT_GRAPHQL_FEATURE_ID, REACT_STR, REACT_TEMPLATE_ID, MICRO_TEMPLATE_ID } from '../const'
 const runReactStartScript = require('./react/scripts/start.js')
 
 export default class CommandServe extends Command {
@@ -43,7 +38,7 @@ export default class CommandServe extends Command {
     try {
       if (templateId === REACT_TEMPLATE_ID) {
         await runReactStartScript()
-      } else if (templateId === UMI_QIANKUN_TEMPLATE_ID) {
+      } else if (templateId === MICRO_TEMPLATE_ID) {
         await this.exec.command('umi dev', execOpts)
       }
     } catch (err) {

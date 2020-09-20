@@ -2,11 +2,12 @@ import { join } from 'path'
 import { Template } from 'fbi'
 import * as ejs from 'ejs'
 import Factory from '../index'
-import { isValidObject } from 'fbi/lib/utils'
-import { REACT_GRAPHQL_FEATURE_ID, REACT_TEMPLATE_ID } from '../const'
-export default class TemplateReactGraphql extends Template {
+import { capitalizeEveryWord, isValidObject } from 'fbi/lib/utils'
+import { REACT_GRAPHQL_FEATURE_ID, REACT_OPENAPI_FEATURE_ID, REACT_TEMPLATE_ID } from '../const'
+import { getNameAndDescriptionConfig } from './common'
+export default class TemplateReact extends Template {
   id = REACT_TEMPLATE_ID
-  description = 'template for react-graphql'
+  description = 'template for react-graphql/openapi'
   path = 'templates/react'
   renderer = ejs.render
   templates = []
@@ -15,13 +16,39 @@ export default class TemplateReactGraphql extends Template {
     super()
   }
 
-  protected async gathering() {
+  protected async gathering(flags: Record<string, any>) {
     // 获取暂存的项目参数
-    this.data.project = this.configStore.get('projectInfo')
-    const { factory, project } = this.data
+    const defaultName = (this.data.project && this.data.project.name) || 'project-demo'
+    const nameAndDescriptionConfig = getNameAndDescriptionConfig(defaultName)
+    this.data.project = await this.prompt([
+      {
+        type: 'select',
+        name: 'features',
+        message: `Which feature of react do you want to choice?`,
+        hint: '(Use <arrow> to select, <return> to submit)',
+        choices: [
+          { name: REACT_GRAPHQL_FEATURE_ID, value: true },
+          { name: REACT_OPENAPI_FEATURE_ID, value: true }
+        ],
+        result(name: string) {
+          return {
+            [name]: true
+          }
+        }
+      } as any,
+      ...nameAndDescriptionConfig
+    ])
+    let { factory, project } = this.data
     this.spinner = this.createSpinner(`Creating project...`).start(
-      `Creating ${this.style.bold.green(project.name)} via ${this.id} from ${factory.template}...`
+      `Creating ${this.style.bold.green(project.name)} via ${factory.id} from ${
+        factory.template
+      }...`
     )
+    project.nameCapitalized = capitalizeEveryWord(project.name)
+    project = {
+      ...project,
+      templateId: REACT_TEMPLATE_ID
+    }
   }
 
   protected async writing() {
@@ -89,24 +116,10 @@ export default class TemplateReactGraphql extends Template {
         const packageManager = flags.packageManager || this.context.get('config').packageManager
         const cmds = packageManager === 'yarn' ? [packageManager] : [packageManager, 'install']
         this.debug(`\nrunning \`${cmds.join(' ')}\` in ${this.targetDir}`)
-        await this.exec('git', ['init'], {
-          cwd: this.targetDir
-        })
-        await this.exec(cmds[0], cmds.slice(1), {
-          cwd: this.targetDir
-        })
         await this.exec(cmds[0], cmds.slice(1), {
           cwd: this.targetDir
         })
         installSpinner.succeed(`Installed dependencies`)
-        const commitSpinner = this.createSpinner(`Git commit...`).start()
-        await this.exec('git', ['add', '.'], {
-          cwd: this.targetDir
-        })
-        await this.exec('git', ['commit', '-m', 'init'], {
-          cwd: this.targetDir
-        })
-        commitSpinner.succeed()
       } catch (err) {
         installSpinner.fail('Failed to install dependencies. You can install them manually.')
         this.error(err)

@@ -1,13 +1,14 @@
 import { join } from 'path'
-import { Template } from 'fbi'
+import { Template, utils } from 'fbi'
 import * as ejs from 'ejs'
 import Factory from '../index'
-import { isValidObject } from 'fbi/lib/utils'
-import { REACT_GRAPHQL_FEATURE_ID, REACT_TEMPLATE_ID, UMI_QIANKUN_TEMPLATE_ID } from '../const'
+import { capitalizeEveryWord, isValidObject } from 'fbi/lib/utils'
+import { MICRO_MAIN_FEATURE_ID, MICRO_TEMPLATE_ID, MICRO_SUB_FEATURE_ID } from '../const'
+import { getNameAndDescriptionConfig } from './common'
 export default class TemplateUmiQiankun extends Template {
-  id = UMI_QIANKUN_TEMPLATE_ID
-  description = 'template for umi-qiankun'
-  path = 'templates/umi-qiankun'
+  id = MICRO_TEMPLATE_ID
+  description = 'template for micro'
+  path = 'templates/micro'
   renderer = ejs.render
   templates = []
 
@@ -15,17 +16,42 @@ export default class TemplateUmiQiankun extends Template {
     super()
   }
 
-  protected async gathering() {
+  protected async gathering(flags: Record<string, any>) {
     // 获取暂存的项目参数
-    this.data.project = this.configStore.get('projectInfo')
-    const { factory, project } = this.data
+    const defaultName = (this.data.project && this.data.project.name) || 'project-demo'
+    const nameAndDescriptionConfig = getNameAndDescriptionConfig(defaultName)
+    this.data.project = await this.prompt([
+      {
+        type: 'select',
+        name: 'features',
+        message: `Which feature of micro do you want to choice?`,
+        hint: '(Use <arrow> to select, <return> to submit)',
+        choices: [
+          { name: MICRO_MAIN_FEATURE_ID, value: true },
+          { name: MICRO_SUB_FEATURE_ID, value: true }
+        ],
+        result(name: string) {
+          return {
+            [name]: true
+          }
+        }
+      } as any,
+      ...nameAndDescriptionConfig
+    ])
+    let { factory, project } = this.data
     this.spinner = this.createSpinner(`Creating project...`).start(
-      `Creating ${this.style.bold.green(project.name)} via ${this.id} from ${factory.template}...`
+      `Creating ${this.style.bold.green(project.name)} via ${factory.id} from ${
+        factory.template
+      }...`
     )
+    project.nameCapitalized = capitalizeEveryWord(project.name)
+    project = {
+      ...project,
+      templateId: MICRO_TEMPLATE_ID
+    }
   }
 
   protected async writing() {
-    // console.log(this.data)
     const { main, sub } = this.data.project.features
     const mainFiles = main ? ['config/*', 'src/models/*', 'access.ts'] : []
     const subFiles = sub ? [] : []
@@ -42,6 +68,7 @@ export default class TemplateUmiQiankun extends Template {
         '.eslintignore',
         '.eslintrc.js',
         '.gitignore',
+        '.npmrc',
         '.prettierignore',
         '.prettierrc.js',
         'codegen.yml',
@@ -57,7 +84,6 @@ export default class TemplateUmiQiankun extends Template {
         async: true
       }
     }
-    // }
   }
 
   protected async installing(flags: Record<string, any>) {
@@ -70,30 +96,10 @@ export default class TemplateUmiQiankun extends Template {
         const packageManager = flags.packageManager || this.context.get('config').packageManager
         const cmds = packageManager === 'yarn' ? [packageManager] : [packageManager, 'install']
         this.debug(`\nrunning \`${cmds.join(' ')}\` in ${this.targetDir}`)
-        await this.exec('git', ['init'], {
-          cwd: this.targetDir
-        })
-        await this.exec(cmds[0], cmds.slice(1), {
-          cwd: this.targetDir
-        })
         await this.exec(cmds[0], cmds.slice(1), {
           cwd: this.targetDir
         })
         installSpinner.succeed(`Installed dependencies`)
-        const commintSpinner = this.createSpinner(`Git commit...`).start()
-        try {
-          await this.exec('git', ['add', '.'], {
-            cwd: this.targetDir
-          })
-          await this.exec('git', ['commit', '-m', 'init'], {
-            cwd: this.targetDir
-          })
-          commintSpinner.succeed()
-        } catch (err) {
-          commintSpinner.fail(
-            'Failed to git commit. You can check them, and then commit them manually.'
-          )
-        }
       } catch (err) {
         installSpinner.fail('Failed to install dependencies. You can install them manually.')
         this.error(err)

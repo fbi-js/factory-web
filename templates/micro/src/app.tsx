@@ -74,7 +74,5 @@ export function useQiankunStateForSlave() {
 <%_ } _%>
 
 export const rootContainer = (container: React.ReactNode) => (
-  <React.StrictMode>
-    <ApolloProvider client={client}>{container} </ApolloProvider>
-  </React.StrictMode>
+  <ApolloProvider client={client}>{container} </ApolloProvider>
 )

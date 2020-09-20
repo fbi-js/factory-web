@@ -13,7 +13,6 @@
   "author": "fbi",
   "license": "MIT",
   "dependencies": {
-    "umi": "^3.2.20",
     "@babel/core": "7.9.0",
     "@svgr/webpack": "4.3.3",
     "babel-eslint": "10.1.0",
@@ -45,7 +44,6 @@
     "lint-staged": "^10.3.0",
     "mini-css-extract-plugin": "0.9.0",
     "minimist": "^1.2.5",
-    "node-sass": "^4.14.1",
     "optimize-css-assets-webpack-plugin": "5.0.3",
     "pnp-webpack-plugin": "1.6.4",
     "postcss-flexbugs-fixes": "4.1.0",
@@ -63,6 +61,7 @@
     "style-loader": "0.23.1",
     "terser-webpack-plugin": "2.3.8",
     "ts-pnp": "1.1.6",
+    "umi": "^3.2.20",
     "url-loader": "2.3.0",
     "vite": "^1.0.0-rc.1",
     "vite-plugin-react": "^3.0.0",
