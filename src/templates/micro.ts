@@ -1,13 +1,16 @@
 import { join } from 'path'
-import { Template, utils } from 'fbi'
 import * as ejs from 'ejs'
+import { Template, utils } from 'fbi'
+
 import Factory from '../index'
-import { capitalizeEveryWord, isValidObject } from 'fbi/lib/utils'
-import { MICRO_MAIN_FEATURE_ID, MICRO_TEMPLATE_ID, MICRO_SUB_FEATURE_ID } from '../const'
 import { getNameAndDescriptionConfig } from './common'
+import { MICRO_MAIN_FEATURE_ID, MICRO_TEMPLATE_ID, MICRO_SUB_FEATURE_ID } from '../const'
+
+const { capitalizeEveryWord, isValidObject } = utils
+
 export default class TemplateUmiQiankun extends Template {
   id = MICRO_TEMPLATE_ID
-  description = 'template for micro'
+  description = 'template for micro front-end application'
   path = 'templates/micro'
   renderer = ejs.render
   templates = []

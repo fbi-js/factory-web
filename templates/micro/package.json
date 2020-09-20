@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "postinstall": "fbi add fbi/factory-web",
     "start": "fbi s",
     "build": "fbi b",
     "gql-codegen": "graphql-codegen --config codegen.yml --watch",

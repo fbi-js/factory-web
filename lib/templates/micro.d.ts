@@ -1,5 +1,5 @@
-import { Template } from 'fbi';
 import * as ejs from 'ejs';
+import { Template } from 'fbi';
 import Factory from '../index';
 export default class TemplateUmiQiankun extends Template {
     factory: Factory;

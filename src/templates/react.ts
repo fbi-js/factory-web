@@ -7,7 +7,7 @@ import { REACT_GRAPHQL_FEATURE_ID, REACT_OPENAPI_FEATURE_ID, REACT_TEMPLATE_ID }
 import { getNameAndDescriptionConfig } from './common'
 export default class TemplateReact extends Template {
   id = REACT_TEMPLATE_ID
-  description = 'template for react-graphql/openapi'
+  description = 'template for react application'
   path = 'templates/react'
   renderer = ejs.render
   templates = []
