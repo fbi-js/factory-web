@@ -1,33 +1,31 @@
 import React from 'react'
-import { BrowserRouter as Router } from 'react-router-dom'
-import Routes from './routes'
-import {
-  connectRouter,
-  routerMiddleware,
-  ConnectedRouter,
-} from 'connected-react-router'
-import dva from './utils/dva'
-import { createBrowserHistory as createHistory } from 'history'
-import models from './models'
-import './App.css'
+<%_ if (project.features.graphql) { _%>
+import Demo from './GraphqlDemo'
+import { ApolloProvider } from '@apollo/client'
+import { client } from './Apollo'
+<%_ } _%>
 
-export const history = createHistory()
-export const routerReducer = connectRouter(history)
-export const routerMiddlewareForDispatch = routerMiddleware(history)
+<%_ if (project.features.openapi) { _%>
+import { PontCore } from '@/services/pontCore'
+import { request } from '@/request'
+import Demo from './OpenapiDemo'
 
-export const app = dva({
-  models,
-  initState: {},
-  extraReducers: { router: routerReducer },
-  onAction: [routerMiddlewareForDispatch],
-})
+// eslint-disable-next-line react-hooks/rules-of-hooks
+PontCore.useFetch(request)
+<%_ } _%>
 
-const App: React.FC = app.start(
-  <ConnectedRouter history={history}>
-      <Router>
-        <Routes />
-      </Router>
-  </ConnectedRouter>,
-)
+function App() {
+  <%_ if (project.features.graphql) { _%>
+    return (
+      <ApolloProvider client={client}>
+        <Demo />
+      </ApolloProvider>
+    )
+  <%_ } _%>
+
+  <%_ if (project.features.openapi) { _%>
+    return <Demo />
+  <%_ } _%>
+}
 
 export default App

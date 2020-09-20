@@ -1,29 +1,127 @@
 {
   "name": "<%= project.name %>",
-  "version": "0.0.0",
-  "description": "<%= project.description %>",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "dev": "fbi s",
-    "build": "fbi b"
+    "postinstall": "fbi add https://github.com/yzStrive/factory-web.git",
+    "start": "fbi s",
+    "build": "fbi b",
+    "prettier": "prettier -c --write \"**/*.{js,jsx,ts,tsx,md,html,css,scss,json}\"",
+    "lint": "tsc --noEmit && eslint . --fix"
+    <%_ if (project.features.graphql) { _%>
+    ,"gql-codegen": "graphql-codegen --config codegen.yml --watch"
+    <%_ } _%>
+    <%_ if (project.features.graphql) { _%>
+    ,"openapi-codegen": "pont generate"
+    <%_ } _%>
   },
   "dependencies": {
-    "@pika/react": "^16.13.1",
-    "@pika/react-dom": "^16.13.1",
-    "antd": "^4.6.1",
-    "axios": "^0.20.0",
-    "connected-react-router": "^6.8.0",
-    "dva-core": "^2.0.2",
-    "kiwi-intl": "^1.2.4",
-    "react-redux": "^7.2.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0"
+    <%_ if (project.features.graphql) { _%>
+     ,"@apollo/client": "^3.1.4",
+     "graphql": "^15.3.0"
+    <%_ } _%>
+    <%_ if (project.features.openapi) { _%>
+    ,"axios": "^0.20.0",
+    "swr": "^0.3.2"
+    <%_ } _%>
   },
   "devDependencies": {
-    "@types/node": "^14.6.2",
-    "@types/react": "^16.9.35",
-    "@types/react-dom": "^16.9.8",
-    "@types/react-redux": "^7.1.9",
-    "@types/react-router-dom": "^5.1.5",
-    "node-sass": "^4.14.1",
-    "sass": "^1.26.10"
+    "fbi": "next",
+    "husky": "^4.3.0",
+    "lint-staged": "^10.3.0",
+    "fbi-lint": "^0.0.2",
+    "eslint": "^7.8.1",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "prettier": "^2.1.1",
+    "typescript": "~3.7.2",
+    "@types/node": "^12.0.0",
+    "@types/react": "^16.9.0",
+    "@types/react-dom": "^16.9.0",
+    "@types/react-router-dom": "^5.1.5"
+    <%_ if (project.features.graphql) { _%>
+    ,"@graphql-codegen/cli": "1.17.8",
+    "@graphql-codegen/introspection": "1.17.8",
+    "@graphql-codegen/typescript": "1.17.8",
+    "@graphql-codegen/typescript-operations": "1.17.8",
+    "@graphql-codegen/typescript-react-apollo": "2.0.6"
+    <%_ } _%>
+    <%_ if (project.features.openapi) { _%>
+    ,"http-proxy-middleware": "^1.0.5"
+    <%_ } _%>
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx}": "npm run lint",
+    "*.{js,jsx,ts,tsx,md,html,css,scss,json}": "npm run prettier",
+    "*": "git add "
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "jest": {
+    "roots": [
+      "<rootDir>/src"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "!src/**/*.d.ts"
+    ],
+    "setupFiles": [
+      "react-app-polyfill/jsdom"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/src/setupTests.ts"
+    ],
+    "testMatch": [
+      "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
+      "<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}"
+    ],
+    "testEnvironment": "jest-environment-jsdom-fourteen",
+    "transform": {
+      "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
+      "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
+      "^(?!.*\\.(js|jsx|ts|tsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
+    },
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$",
+      "^.+\\.module\\.(css|sass|scss)$"
+    ],
+    "modulePaths": [],
+    "moduleNameMapper": {
+      "^react-native$": "react-native-web",
+      "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy"
+    },
+    "moduleFileExtensions": [
+      "web.js",
+      "js",
+      "web.ts",
+      "ts",
+      "web.tsx",
+      "tsx",
+      "json",
+      "web.jsx",
+      "jsx",
+      "node"
+    ],
+    "watchPlugins": [
+      "jest-watch-typeahead/filename",
+      "jest-watch-typeahead/testname"
+    ]
   }
 }

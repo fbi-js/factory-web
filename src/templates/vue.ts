@@ -3,9 +3,10 @@ import { Template } from 'fbi'
 import * as ejs from 'ejs'
 import Factory from '..'
 import { isValidObject } from 'fbi/lib/utils'
+import { VUE2_TEMPLATE_ID } from '../const'
 
 export default class TemplateVue extends Template {
-  id = 'vue'
+  id = VUE2_TEMPLATE_ID
   description = 'template for factory-web'
   path = 'templates/vue'
   renderer = ejs.render
@@ -20,9 +21,7 @@ export default class TemplateVue extends Template {
     this.data.project = this.configStore.get('projectInfo')
     const { factory, project } = this.data
     this.spinner = this.createSpinner(`Creating project...`).start(
-      `Creating ${this.style.bold.green(project.name)} via ${this.id} from ${
-        factory.template
-      }...`
+      `Creating ${this.style.bold.green(project.name)} via ${this.id} from ${factory.template}...`
     )
   }
 
@@ -96,8 +95,6 @@ Next steps:
   $ ${this.style.cyan('vue-cli-service build')} ${this.style.dim('build project')}`)
 
     console.log(`
-  $ ${this.style.cyan('fbi list')} ${this.style.dim(
-      'show available commands and sub templates'
-    )}`)
+  $ ${this.style.cyan('fbi list')} ${this.style.dim('show available commands and sub templates')}`)
   }
 }

@@ -1,0 +1,16 @@
+export const publicUrlOrPath: any;
+export const moduleFileExtensions: string[];
+export declare const dotenv: string;
+export declare const appPath: string;
+export declare const appBuild: string;
+export declare const appPublic: string;
+export declare const appHtml: string;
+export declare const appIndexJs: any;
+export declare const appPackageJson: string;
+export declare const appSrc: string;
+export declare const appTsConfig: string;
+export declare const appJsConfig: string;
+export declare const yarnLockFile: string;
+export declare const testsSetup: any;
+export declare const proxySetup: string;
+export declare const appNodeModules: string;

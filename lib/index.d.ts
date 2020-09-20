@@ -5,7 +5,7 @@ import TemplateWeb from './templates';
 export default class FactoryWeb extends Factory {
     id: string;
     description: string;
-    commands: (CommandServe | CommandBuild)[];
+    commands: (CommandBuild | CommandServe)[];
     templates: TemplateWeb[];
     execOpts: any;
 }
