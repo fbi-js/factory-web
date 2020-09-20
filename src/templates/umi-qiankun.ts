@@ -25,7 +25,7 @@ export default class TemplateUmiQiankun extends Template {
   }
 
   protected async writing() {
-    console.log(this.data, 'data')
+    // console.log(this.data)
     const { main, sub } = this.data.project.features
     const mainFiles = main ? ['config/*', 'src/models/*', 'access.ts'] : []
     const subFiles = sub ? [] : []

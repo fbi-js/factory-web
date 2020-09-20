@@ -1,6 +1,7 @@
 import { join } from 'path'
 import { Command, utils } from 'fbi'
 import Factory from '..'
+import { REACT_TEMPLATE_ID, UMI_QIANKUN_TEMPLATE_ID } from '../const'
 const runReactBuildScript = require('./react/scripts/build.js')
 
 export default class CommandBuild extends Command {
@@ -43,13 +44,18 @@ export default class CommandBuild extends Command {
       ...this.factory.execOpts,
       stdio: flags.debug ? 'inherit' : 'pipe'
     }
-    await runReactBuildScript()
-    // try {
-    //   await this.exec.command('vite build', execOpts)
-    //   this.logEnd('Build successfully')
-    // } catch (err) {
-    //   this.error('Failed to build project')
-    //   this.error(err).exit()
-    // }
+    const templateId = this.context.get('config.factory.template')
+    try {
+      const buildSpinner = this.createSpinner(`building...`).start()
+      if (templateId === REACT_TEMPLATE_ID) {
+        await runReactBuildScript()
+      } else if (templateId === UMI_QIANKUN_TEMPLATE_ID) {
+        await this.exec.command('umi build', execOpts)
+        buildSpinner.succeed()
+      }
+    } catch (err) {
+      this.error('Failed to build project')
+      this.error(err).exit()
+    }
   }
 }

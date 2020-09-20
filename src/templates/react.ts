@@ -25,7 +25,7 @@ export default class TemplateReactGraphql extends Template {
   }
 
   protected async writing() {
-    console.log(this.data, 'data')
+    // console.log(this.data,)
     const { graphql, openapi } = this.data.project.features
     const graphqlFiles = graphql
       ? [

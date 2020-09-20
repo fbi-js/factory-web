@@ -13,6 +13,7 @@
   "author": "fbi",
   "license": "MIT",
   "dependencies": {
+    "umi": "^3.2.20",
     "@babel/core": "7.9.0",
     "@svgr/webpack": "4.3.3",
     "babel-eslint": "10.1.0",
@@ -29,7 +30,7 @@
     "ejs": "^3.1.5",
     "eslint": "^7.8.1",
     "eslint-loader": "3.0.3",
-    "fbi": "next",
+    "fbi": "v4.0.2",
     "file-loader": "4.3.0",
     "fs-extra": "^8.1.0",
     "html-webpack-plugin": "4.0.0-beta.11",

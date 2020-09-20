@@ -3,8 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "umi dev",
-    "build": "umi build",
+    "postinstall": "fbi add fbi/factory-web",
+    "start": "fbi s",
+    "build": "fbi b",
     "gql-codegen": "graphql-codegen --config codegen.yml --watch",
     "prettier": "prettier -c --write \"**/*.{js,jsx,ts,tsx,md,html,css,scss,svg}\"",
     "lint": "tsc --noEmit && eslint . --fix",
