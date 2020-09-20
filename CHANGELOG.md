@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.1](https://github.com/fbi-js/factory-web/compare/v0.2.0...v0.2.1) (2020-09-20)
+
+
+### Bug Fixes
+
+* move tslib to dependencies ([3fd0d4e](https://github.com/fbi-js/factory-web/commit/3fd0d4e2ad1d0d12a8a68caaa4f706165e40826f))
+
 ## [0.2.0](https://github.com/fbi-js/factory-web/compare/v0.1.0...v0.2.0) (2020-09-20)
 
 
