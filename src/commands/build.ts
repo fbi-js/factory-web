@@ -42,7 +42,10 @@ export default class CommandBuild extends Command {
 
     const execOpts: any = {
       ...this.factory.execOpts,
-      stdio: flags.debug ? 'inherit' : 'pipe'
+      stdio: flags.debug ? 'inherit' : 'pipe',
+      env: {
+        BUILD_ENV: flags.mode ?? 'development'
+      }
     }
     const templateId = this.context.get('config.factory.template')
     try {

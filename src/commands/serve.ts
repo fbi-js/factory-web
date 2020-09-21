@@ -33,14 +33,15 @@ export default class CommandServe extends Command {
     const execOpts: any = {
       ...this.factory.execOpts,
       stdio: 'inherit',
-      env: process.env
+      env: {
+        BUILD_ENV: flags.mode ?? 'development'
+      }
     }
     const templateId = this.context.get('config.factory.template')
     try {
       if (templateId === REACT_TEMPLATE_ID) {
         await runReactStartScript()
       } else if (templateId === MICRO_TEMPLATE_ID) {
-        console.log(process.env.NODE_ENV, execOpts)
         await this.exec.command(`umi dev`, execOpts)
       }
     } catch (err) {
