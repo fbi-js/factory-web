@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.3](https://github.com/fbi-js/factory-web/compare/v0.2.2...v0.2.3) (2020-09-21)
+
+
+### Bug Fixes
+
+* reslove micro templates problems ([c819d20](https://github.com/fbi-js/factory-web/commit/c819d2004cbb880ea777e474fc2f61f728e06c24))
+
 ### [0.2.2](https://github.com/fbi-js/factory-web/compare/v0.2.1...v0.2.2) (2020-09-20)
 
 ### [0.2.1](https://github.com/fbi-js/factory-web/compare/v0.2.0...v0.2.1) (2020-09-20)
