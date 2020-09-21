@@ -1,9 +1,9 @@
 import React from 'react'
 import ExchangeRates from './ExchangeRates'
-
-export default () => {
+import styles from './index.less'
+export default function Index(){
   return (
-    <div>
+    <div className={styles.normal}>
       <ExchangeRates />
     </div>
   )

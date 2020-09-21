@@ -56,7 +56,7 @@ export default class TemplateUmiQiankun extends Template {
 
   protected async writing() {
     const { main, sub } = this.data.project.features
-    const mainFiles = main ? ['config/*', 'src/models/*', 'access.ts'] : []
+    const mainFiles = main ? ['config/*', 'src/models/*', 'src/access.ts'] : []
     const subFiles = sub ? [] : []
     this.files = {
       copy: [
@@ -79,6 +79,8 @@ export default class TemplateUmiQiankun extends Template {
         'package-lock.json',
         'yarn.lock',
         'tsconfig.json',
+        '.editorconfig',
+        'typings.d.ts',
         ...mainFiles,
         ...subFiles
       ],
