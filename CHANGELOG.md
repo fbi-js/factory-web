@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.4](https://github.com/fbi-js/factory-web/compare/v0.2.3...v0.2.4) (2020-09-23)
+
+
+### Bug Fixes
+
+* add .stylelintrc.js file ([548cd06](https://github.com/fbi-js/factory-web/commit/548cd064243e076366250243dce80a9de1cf1365))
+
 ### [0.2.3](https://github.com/fbi-js/factory-web/compare/v0.2.2...v0.2.3) (2020-09-21)
 
 
