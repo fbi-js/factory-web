@@ -28,7 +28,7 @@
 ```shell
 $ npm i -g fbi
 
-$ fbi add fbi/factory-web
+$ fbi add factory-web
 
 $ fbi s
 
