@@ -74,6 +74,7 @@ export default class TemplateUmiQiankun extends Template {
         '.npmrc',
         '.prettierignore',
         '.prettierrc.js',
+        '.stylelintrc.js',
         'codegen.yml',
         'graphql.schema.json',
         'package-lock.json',
