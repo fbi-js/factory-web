@@ -1,6 +1,6 @@
 {
   "name": "factory-web",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "factory for web application development",
   "private": true,
   "main": "lib/index.js",
