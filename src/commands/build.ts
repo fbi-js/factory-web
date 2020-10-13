@@ -1,7 +1,9 @@
 import { join } from 'path'
-import { Command, utils } from 'fbi'
+import { Command } from 'fbi'
+
 import Factory from '..'
 import { REACT_TEMPLATE_ID, MICRO_TEMPLATE_ID } from '../const'
+
 const runReactBuildScript = require('./react/scripts/build.js')
 
 export default class CommandBuild extends Command {
