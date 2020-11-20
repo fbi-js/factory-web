@@ -56,36 +56,14 @@ export default class TemplateUmiQiankun extends Template {
 
   protected async writing() {
     const { main, sub } = this.data.project.features
-    const mainFiles = main ? ['config/*', 'src/models/*', 'src/access.ts'] : []
-    const subFiles = sub ? [] : []
+    const folderPath  = main?'./main/':'./sub/'
+    const files = await this.fs.readdirSync(join((this as any).rootPath,folderPath))
     this.files = {
-      copy: [
-        '.vscode/*',
-        'mock/*',
-        'src/components/*',
-        'src/config/*',
-        'src/generated/*',
-        'src/graphql/*',
-        'src/pages/*',
-        'src/Apollo.ts',
-        '.eslintignore',
-        '.eslintrc.js',
-        '.gitignore',
-        '.npmrc',
-        '.prettierignore',
-        '.prettierrc.js',
-        '.stylelintrc.js',
-        'codegen.yml',
-        'graphql.schema.json',
-        'package-lock.json',
-        'yarn.lock',
-        'tsconfig.json',
-        '.editorconfig',
-        'typings.d.ts',
-        ...mainFiles,
-        ...subFiles
-      ],
-      render: ['.fbi.config.js', 'package.json', 'src/app.tsx', '.umirc.ts', 'README.md', '.env'],
+      copy: files.map((it:any)=>({
+        from:folderPath+it,
+        to:'./'+it
+      })),
+      render: ['.fbi.config.js'],
       renderOptions: {
         async: true
       }

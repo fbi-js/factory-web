@@ -1,0 +1,19 @@
+{
+  "extends": "ts-config-single-spa",
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "jsx": "react",
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "baseUrl": "./",
+    "strict": false,
+    "paths": {
+      "@/*": ["src/*"],
+    },
+    "allowSyntheticDefaultImports": true
+  },
+  "include": ["mock/**/*", "src/**/*", "config/**/*", "typings.d.ts"]
+}

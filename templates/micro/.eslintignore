@@ -1,7 +1,0 @@
-node_modules
-dist
-build
-scripts
-config
-src/react-app-env.d.ts
-src/generated/graphql.tsx

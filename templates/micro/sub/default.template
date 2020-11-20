@@ -1,0 +1,32 @@
+
+server {
+	listen                              80;
+	server_name                         _;
+	client_max_body_size                1G;
+	root                                /var/www;
+	index                               index.html;
+
+	#                                   web pages:
+	location ^~ / {
+		add_header Cache-Control 'no-cache, must-revalidate, proxy-revalidate, max-age=0';
+		gzip on;
+    gzip_http_version 1.1;
+    gzip_comp_level 2;
+    gzip_types text/plain application/javascript application/x-javascript text/css application/xml text/javascript application/x-httpd-php image/jpeg image/gif image/png;
+		alias                              /var/www/;
+		index                              index.html;
+		try_files                          $uri $uri/ index.html =404;
+	}
+
+
+	#                                   cache static files
+	location ~ .*\.(?:js|css|jpg|jpeg|gif|png|ico|cur|gz|svg|svgz|mp4|ogg|ogv|webm|map)$ {
+		expires                            1000d;
+	}
+	location ~ \.html$ {
+		etag off;
+   	add_header Cache-Control "private, no-cache, no-store, must-revalidate";
+    add_header Expires -1;
+    add_header Pragma no-cache;
+  }
+}
