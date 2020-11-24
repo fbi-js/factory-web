@@ -2,9 +2,6 @@ import { join } from 'path'
 import { Command } from 'fbi'
 
 import Factory from '..'
-import { REACT_TEMPLATE_ID, MICRO_TEMPLATE_ID } from '../const'
-
-const runReactBuildScript = require('./react/scripts/build.js')
 
 export default class CommandBuild extends Command {
   id = 'build'
@@ -42,22 +39,7 @@ export default class CommandBuild extends Command {
     this.logItem(`remove '${distDirName}'...`)
     await this.fs.remove(distDir)
 
-    const execOpts: any = {
-      ...this.factory.execOpts,
-      stdio: flags.debug ? 'inherit' : 'pipe',
-      env: {
-        BUILD_ENV: flags.mode ?? 'development'
-      }
-    }
-    const templateId = this.context.get('config.factory.template')
     try {
-      const buildSpinner = this.createSpinner(`building...`).start()
-      if (templateId === REACT_TEMPLATE_ID) {
-        await runReactBuildScript()
-      } else if (templateId === MICRO_TEMPLATE_ID) {
-        await this.exec.command('umi build', execOpts)
-        buildSpinner.succeed()
-      }
     } catch (err) {
       this.error('Failed to build project')
       this.error(err).exit()

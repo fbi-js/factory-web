@@ -1,8 +1,9 @@
-import { timeStamp } from 'console'
-import { Command } from 'fbi'
 import Factory from '..'
-import { REACT_TEMPLATE_ID, MICRO_TEMPLATE_ID } from '../const'
-const runReactStartScript = require('./react/scripts/start.js')
+import { Command } from 'fbi'
+
+import DevServer from 'webpack-dev-server'
+import webpack from 'webpack'
+import webpackConfig from '../config'
 
 export default class CommandServe extends Command {
   id = 'serve'
@@ -17,7 +18,6 @@ export default class CommandServe extends Command {
 
   public async run(flags: any, unknown: any) {
     process.env.NODE_ENV = flags.mode ?? 'development'
-    const start = Date.now()
 
     this.debug(
       `Factory: (${this.factory.id})`,
@@ -28,24 +28,25 @@ export default class CommandServe extends Command {
       'unknown:',
       unknown
     )
+    const template = this.context.get('config.factory.template')
 
     this.logStart(`Starting development server:`)
-    const execOpts: any = {
-      ...this.factory.execOpts,
-      stdio: 'inherit',
-      env: {
-        BUILD_ENV: flags.mode ?? 'development'
-      }
-    }
-    const templateId = this.context.get('config.factory.template')
     try {
-      if (templateId === REACT_TEMPLATE_ID) {
-        await runReactStartScript()
-      } else if (templateId === MICRO_TEMPLATE_ID) {
-        await this.exec.command(`umi dev`, execOpts)
-      }
+      const config = webpackConfig(template, {
+        env: process.env.NODE_ENV
+      })
+      console.log(config?.module?.rules)
+      console.log(config?.plugins)
+      const compiler = webpack(config)
+      const server = new DevServer(compiler, {})
+
+      server.listen(8080, 'localhost', (err) => {
+        if (err) {
+          throw err
+        }
+      })
     } catch (err) {
-      this.error('Failed to build project')
+      this.error('Failed to start development server')
       this.error(err).exit()
     }
   }
