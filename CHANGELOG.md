@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.7-alpha.0](https://github.com/fbi-js/factory-web/compare/v0.2.5...v0.2.7-alpha.0) (2020-11-24)
+
+
+### Bug Fixes
+
+* use global 'installDeps' in template ([cf5b59d](https://github.com/fbi-js/factory-web/commit/cf5b59dea23d75b03dfbdd1d802019da820b46c3))
+
 ### [0.2.6](https://github.com/fbi-js/factory-web/compare/v0.2.2...v0.2.6) (2020-10-13)
 
 
