@@ -8,5 +8,10 @@ export const paths = {
   dist: resolve(process.cwd(), 'dist'),
 
   // Static files that get copied to build folder
-  public: resolve(process.cwd(), 'public')
+  public: resolve(process.cwd(), 'public'),
+
+  js: 'js',
+  css: 'css',
+  img: 'img',
+  assets: 'assets'
 }

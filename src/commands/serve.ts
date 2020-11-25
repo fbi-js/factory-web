@@ -1,9 +1,9 @@
 import Factory from '..'
 import { Command } from 'fbi'
 
-import DevServer from 'webpack-dev-server'
 import webpack from 'webpack'
 import webpackConfig from '../config'
+import DevServer from 'webpack-dev-server'
 
 export default class CommandServe extends Command {
   id = 'serve'
@@ -35,8 +35,6 @@ export default class CommandServe extends Command {
       const config = webpackConfig(template, {
         env: process.env.NODE_ENV
       })
-      console.log(config?.module?.rules)
-      console.log(config?.plugins)
       const compiler = webpack(config)
       const server = new DevServer(compiler, {})
 

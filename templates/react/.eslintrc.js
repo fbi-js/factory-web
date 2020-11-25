@@ -1,5 +1,9 @@
-const { reactEslint } = require('fbi-lint')
+const { eslint } = require('fbi-lint')
 
 module.exports = {
-  ...reactEslint
+  ...eslint,
+  env: {
+    browser: true,
+    node: true,
+  },
 }

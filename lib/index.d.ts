@@ -4,10 +4,11 @@ import CommandServe from './commands/serve';
 import CommandInstall from './commands/install';
 import TemplateVue from './templates/vue';
 import TemplateReact from './templates/react';
+import TemplateMicroMain from './templates/micro-main';
 export default class FactoryWeb extends Factory {
     id: string;
     description: string;
     commands: (CommandServe | CommandInstall | CommandBuild)[];
-    templates: (TemplateVue | TemplateReact)[];
+    templates: (TemplateVue | TemplateReact | TemplateMicroMain)[];
     execOpts: any;
 }

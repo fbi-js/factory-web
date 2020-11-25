@@ -29,7 +29,17 @@ declare const _default: (data: Record<string, any>) => {
             test: RegExp;
             use: string[];
             exclude: RegExp;
-            type?: undefined;
+            loader?: undefined;
+            options?: undefined;
+        } | {
+            test: RegExp;
+            loader: string;
+            options: {
+                limit: number;
+                name: string;
+            };
+            use?: undefined;
+            exclude?: undefined;
         } | {
             test: RegExp;
             use: (string | {
@@ -56,39 +66,56 @@ declare const _default: (data: Record<string, any>) => {
             })[] | (string | {
                 loader: string;
                 options: {
+                    publicPath: string;
+                    importLoaders?: undefined;
+                    sourceMap?: undefined;
+                    implementation?: undefined;
+                };
+            } | {
+                loader: string;
+                options: {
                     importLoaders: number;
                     sourceMap: boolean;
+                    publicPath?: undefined;
                     implementation?: undefined;
                 };
             } | {
                 loader: string;
                 options: {
                     implementation: any;
+                    publicPath?: undefined;
                     importLoaders?: undefined;
                     sourceMap?: undefined;
                 };
             })[];
             exclude?: undefined;
-            type?: undefined;
-        } | {
-            test: RegExp;
-            type: string;
-            use?: undefined;
-            exclude?: undefined;
+            loader?: undefined;
+            options?: undefined;
         })[];
     };
-    plugins: (HtmlWebpackPlugin | MiniCssExtractPlugin | webpack.DefinePlugin | CleanWebpackPlugin)[];
+    plugins: (HtmlWebpackPlugin | MiniCssExtractPlugin | webpack.ProgressPlugin | webpack.DefinePlugin | CleanWebpackPlugin)[];
     resolve: {
-        extensions: string[];
-        symlinks: boolean;
+        alias: {
+            '@': string;
+        };
     };
-    resolveLoader: {
-        modules: string[];
+    performance: {
+        hints: boolean;
+        maxEntrypointSize?: undefined;
+        maxAssetSize?: undefined;
+    };
+    node: {
+        setImmediate: boolean;
+        dgram: string;
+        fs: string;
+        net: string;
+        tls: string;
+        child_process: string;
     };
 } | {
     optimization: {
         minimize: boolean;
-        minimizer: (string | CssMinimizerPlugin)[];
+        minimizer: CssMinimizerPlugin[];
         runtimeChunk: {
             name: string;
         };
@@ -113,7 +140,17 @@ declare const _default: (data: Record<string, any>) => {
             test: RegExp;
             use: string[];
             exclude: RegExp;
-            type?: undefined;
+            loader?: undefined;
+            options?: undefined;
+        } | {
+            test: RegExp;
+            loader: string;
+            options: {
+                limit: number;
+                name: string;
+            };
+            use?: undefined;
+            exclude?: undefined;
         } | {
             test: RegExp;
             use: (string | {
@@ -140,34 +177,46 @@ declare const _default: (data: Record<string, any>) => {
             })[] | (string | {
                 loader: string;
                 options: {
+                    publicPath: string;
+                    importLoaders?: undefined;
+                    sourceMap?: undefined;
+                    implementation?: undefined;
+                };
+            } | {
+                loader: string;
+                options: {
                     importLoaders: number;
                     sourceMap: boolean;
+                    publicPath?: undefined;
                     implementation?: undefined;
                 };
             } | {
                 loader: string;
                 options: {
                     implementation: any;
+                    publicPath?: undefined;
                     importLoaders?: undefined;
                     sourceMap?: undefined;
                 };
             })[];
             exclude?: undefined;
-            type?: undefined;
-        } | {
-            test: RegExp;
-            type: string;
-            use?: undefined;
-            exclude?: undefined;
+            loader?: undefined;
+            options?: undefined;
         })[];
     };
-    plugins: (HtmlWebpackPlugin | MiniCssExtractPlugin | webpack.DefinePlugin | CleanWebpackPlugin)[];
+    plugins: (HtmlWebpackPlugin | MiniCssExtractPlugin | webpack.ProgressPlugin | webpack.DefinePlugin | CleanWebpackPlugin)[];
     resolve: {
-        extensions: string[];
-        symlinks: boolean;
+        alias: {
+            '@': string;
+        };
     };
-    resolveLoader: {
-        modules: string[];
+    node: {
+        setImmediate: boolean;
+        dgram: string;
+        fs: string;
+        net: string;
+        tls: string;
+        child_process: string;
     };
 };
 export default _default;

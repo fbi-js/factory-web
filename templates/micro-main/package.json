@@ -1,0 +1,25 @@
+{
+  "name": "<%= project.name %>",
+  "version": "0.0.0",
+  "description": "<%= project.description %>",
+  "private": true,
+  "scripts": {
+    "dev": "fbi serve",
+    "build": "fbi build",
+    "lint": "npx eslint --ext .vue,.js --fix"
+  },
+  "dependencies": {
+    "single-spa": "5.8.2"
+  },
+  "devDependencies": {
+    "@fbi-js/factory-web": "*"
+  },
+  "fbi": {
+    "factory": {
+      "id": "<%= factory.id %>",
+      "version": "<%= factory.version %>",
+      "template": "<%= factory.template %>",
+      "features": <%- JSON.stringify(project.features) %>
+    }
+  }
+}

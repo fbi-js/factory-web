@@ -1,10 +1,11 @@
 import Factory from '..'
 import BaseClass from './base'
-import { Template, utils } from 'fbi'
 
 export default class TemplateVue extends BaseClass {
   id = 'vue'
   path = 'templates/vue'
+  description = 'template for Vue.js application'
+  templates = []
 
   constructor(public factory: Factory) {
     super(factory)

@@ -1,10 +1,11 @@
 import Factory from '..'
 import BaseClass from './base'
-import { Template, utils } from 'fbi'
 
-export default class TemplateVue extends BaseClass {
+export default class TemplateReact extends BaseClass {
   id = 'react'
   path = 'templates/react'
+  description = 'template for React.js application'
+  templates = []
 
   constructor(public factory: Factory) {
     super(factory)

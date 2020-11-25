@@ -1,6 +1,6 @@
 import webpack from 'webpack'
-import { join } from 'path'
 import { paths } from './paths'
+import { join, resolve } from 'path'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
 import { CleanWebpackPlugin } from 'clean-webpack-plugin'
@@ -23,7 +23,7 @@ export default (data: Record<string, any>) => {
     output: {
       path: paths.dist,
       publicPath: '/',
-      filename: isDev ? '[name].js?v=[contenthash]' : 'js/[name].[contenthash].js'
+      filename: isDev ? '[name].js?v=[hash]' : `${paths.js}/[name].[hash].js`
     },
     module: {
       rules: [
@@ -32,6 +32,30 @@ export default (data: Record<string, any>) => {
           test: /\.(js|jsx)$/,
           use: ['babel-loader'],
           exclude: /node_modules/
+        },
+        {
+          test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+          loader: 'url-loader',
+          options: {
+            limit: 5000,
+            name: isDev ? '[name].[ext]?[hash:8]' : `${paths.img}/[name].[hash:8].[ext]`
+          }
+        },
+        {
+          test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
+          loader: 'url-loader',
+          options: {
+            limit: 5000,
+            name: isDev ? '[name].[ext]?[hash:8]' : `${paths.assets}/[name].[hash:8].[ext]`
+          }
+        },
+        {
+          test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+          loader: 'url-loader',
+          options: {
+            limit: 5000,
+            name: isDev ? '[name].[ext]?[hash:8]' : `${paths.assets}/[name].[hash:8].[ext]`
+          }
         },
         // Styles: Inject CSS into the head with source maps
         {
@@ -51,7 +75,13 @@ export default (data: Record<string, any>) => {
                 }
               ]
             : [
-                MiniCssExtractPlugin.loader,
+                {
+                  loader: MiniCssExtractPlugin.loader,
+                  options: {
+                    publicPath: paths.css
+                  }
+                },
+
                 {
                   loader: 'css-loader',
                   options: {
@@ -68,20 +98,11 @@ export default (data: Record<string, any>) => {
                   }
                 }
               ]
-        },
-        // images
-        {
-          test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
-          type: 'asset/resource'
-        },
-        // fonts and SVGs
-        {
-          test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
-          type: 'asset/inline'
         }
       ]
     },
     plugins: [
+      new webpack.ProgressPlugin(),
       // Make appName & appVersion available as a constant
       new webpack.DefinePlugin({ appName: JSON.stringify(appName) }),
       new webpack.DefinePlugin({ appVersion: JSON.stringify(appVersion) }),
@@ -94,7 +115,7 @@ export default (data: Record<string, any>) => {
             from: paths.public,
             to: 'assets',
             globOptions: {
-              ignore: ['*.DS_Store']
+              ignore: ['*.DS_Store', 'index.html']
             }
           }
         ]
@@ -109,16 +130,29 @@ export default (data: Record<string, any>) => {
         : // Extracts CSS into separate files
           // Note: style-loader is for development, MiniCssExtractPlugin is for production
           new MiniCssExtractPlugin({
-            filename: 'styles/[name].[contenthash].css',
-            chunkFilename: '[id].css'
+            filename: `${paths.css}/[name].[contenthash].css`,
+            chunkFilename: `${paths.css}/[name]-[id].css`
           })
     ],
     resolve: {
-      extensions: ['*', '.js', '.vue'],
-      symlinks: false
+      alias: {
+        '@': resolve('src/')
+      }
     },
-    resolveLoader: {
-      modules: ['node_modules', 'factory-web/node_modules']
+    performance: {
+      hints: false
+    },
+    node: {
+      // prevent webpack from injecting useless setImmediate polyfill because Vue
+      // source contains it (although only uses it if it's native).
+      setImmediate: false,
+      // prevent webpack from injecting mocks to Node native modules
+      // that does not make sense for the client
+      dgram: 'empty',
+      fs: 'empty',
+      net: 'empty',
+      tls: 'empty',
+      child_process: 'empty'
     },
     ...(isDev
       ? {
@@ -136,7 +170,7 @@ export default (data: Record<string, any>) => {
       : {
           optimization: {
             minimize: true,
-            minimizer: [new CssMinimizerPlugin(), '...'],
+            minimizer: [new CssMinimizerPlugin()],
             // Once your build outputs multiple chunks, this option will ensure they share the webpack runtime
             // instead of having their own. This also helps with long-term caching, since the chunks will only
             // change when actual code changes, not the webpack runtime.

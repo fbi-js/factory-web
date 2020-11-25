@@ -7,23 +7,39 @@ function installDeps() {
   fbi.loadConfig()
 
   const template = fbi.context.get('config.factory.template')
-  const { deps } = require(`./config/${template}`)
+
+  if (!template) {
+    return
+  }
+
+  let deps
+
+  try {
+    const config = require(`./config/${template}`)
+    deps = config.deps
+  } catch (err) {}
+
+  if (!deps) {
+    return
+  }
+
   const depsArr = Object.entries(deps).map(([name, version]) => `${name}@${version}`)
 
   if (isValidObject(deps)) {
     const pm = fbi.context.get('config').packageManager
 
-    let cmds = [pm, 'install', '--no-save']
+    const cmds = [pm, pm === 'yarn' ? 'add' : 'install', ...depsArr]
 
     // pnpm: Headless installation requires a pnpm-lock.yaml file
-    cmds.push(pm === 'npm' ? '--no-package-lock' : pm === 'yarn' ? '--no-lockfile' : '')
+    cmds.push(pm === 'yarn' ? '--no-lockfile' : '--no-save --no-package-lock')
 
-    cmds = cmds.concat(depsArr)
+    fbi.logStart(`${cmds.join(' ')}...`)
     try {
       fbi.exec.sync(cmds[0], cmds.slice(1).filter(Boolean), {
-        stdout: 'inherit',
+        stdout: 'ignore',
         cwd: process.cwd()
       })
+      fbi.logEnd(`Installed successfully`)
     } catch (error) {
       fbi.error(error).exit()
     }
