@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.7-alpha.2](https://github.com/fbi-js/factory-web/compare/v0.2.7-alpha.1...v0.2.7-alpha.2) (2020-11-25)
+
+
+### Bug Fixes
+
+* **webpack:** change webpack from v5 to v4 ([b6999ac](https://github.com/fbi-js/factory-web/commit/b6999ac63b104d00407b0a4d365a98893578446a))
+
 ### [0.2.7-alpha.1](https://github.com/fbi-js/factory-web/compare/v0.2.7-alpha.0...v0.2.7-alpha.1) (2020-11-25)
 
 
