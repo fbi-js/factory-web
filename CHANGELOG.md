@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.7-alpha.1](https://github.com/fbi-js/factory-web/compare/v0.2.7-alpha.0...v0.2.7-alpha.1) (2020-11-25)
+
+
+### Bug Fixes
+
+* add micro-main ([04e531e](https://github.com/fbi-js/factory-web/commit/04e531ebafe0265719391a05eb058e468eb1bd3b))
+* remove npmrc ([e620c2f](https://github.com/fbi-js/factory-web/commit/e620c2f2532b7d8dfa1a110dac2cc41d8ea930f0))
+
 ### [0.2.7-alpha.0](https://github.com/fbi-js/factory-web/compare/v0.2.5...v0.2.7-alpha.0) (2020-11-24)
 
 
