@@ -6,8 +6,8 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/home',
-      component: () => import(/* webpackChunkName: "dashboard" */ '../pages/Home.vue'),
+      path: '/',
+      component: () => import(/* webpackChunkName: "home" */ '../pages/Home.vue'),
       meta: { title: 'Home' }
     }
   ]

@@ -2,6 +2,7 @@
 *-debug.log
 *-error.log
 
+examples
 /node_modules
 /tmp
 /.nyc_output

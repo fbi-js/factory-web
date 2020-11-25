@@ -43,6 +43,6 @@ export default class TemplateVue extends BaseClass {
   protected async writing() {
     await super.writing()
 
-    this.files.copy = this.files.copy?.concat(['public/*', 'src/*', 'tsconfg.json'])
+    this.files.copy = this.files.copy?.concat(['public/*', 'src/*', 'tsconfig.json'])
   }
 }

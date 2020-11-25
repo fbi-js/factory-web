@@ -51,7 +51,8 @@ export default class TemplateWebBase extends Template {
         '.editorconfig',
         '.eslintrc.js',
         '.prettierrc.js',
-        '.stylelintrc.js'
+        '.stylelintrc.js',
+        'postcss.config.js'
       ],
       render: ['package.json'],
       renderOptions: {

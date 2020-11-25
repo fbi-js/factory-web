@@ -1,3 +1,5 @@
+import type { Configuration } from 'webpack'
+
 import webpack from 'webpack'
 import { paths } from './paths'
 import { join, resolve } from 'path'
@@ -7,22 +9,24 @@ import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin'
 
-export default (data: Record<string, any>) => {
-  const buildMode = process.env.NODE_ENV
+type WebpackMode = 'development' | 'production' | 'none'
+
+export default (data: Record<string, any>): Configuration => {
+  const buildMode = process.env.NODE_ENV || 'development'
   const isDev = buildMode === 'development'
   const appName = process.env.npm_package_name
   const appVersion = process.env.npm_package_version
   const distDir = join(process.cwd(), 'dist')
 
   return {
-    mode: buildMode,
+    mode: buildMode as WebpackMode,
     devtool: isDev ? 'inline-source-map' : false,
     entry: {
       main: join(paths.src, 'main.js')
     },
     output: {
       path: paths.dist,
-      publicPath: '/',
+      publicPath: isDev ? '/' : '/',
       filename: isDev ? '[name].js?v=[hash]' : `${paths.js}/[name].[hash].js`
     },
     module: {
@@ -38,7 +42,8 @@ export default (data: Record<string, any>) => {
           loader: 'url-loader',
           options: {
             limit: 5000,
-            name: isDev ? '[name].[ext]?[hash:8]' : `${paths.img}/[name].[hash:8].[ext]`
+            name: isDev ? '[name].[ext]?[hash:8]' : `${paths.img}/[name].[hash:8].[ext]`,
+            esModule: false
           }
         },
         {
@@ -46,7 +51,8 @@ export default (data: Record<string, any>) => {
           loader: 'url-loader',
           options: {
             limit: 5000,
-            name: isDev ? '[name].[ext]?[hash:8]' : `${paths.assets}/[name].[hash:8].[ext]`
+            name: isDev ? '[name].[ext]?[hash:8]' : `${paths.assets}/[name].[hash:8].[ext]`,
+            esModule: false
           }
         },
         {
@@ -54,7 +60,8 @@ export default (data: Record<string, any>) => {
           loader: 'url-loader',
           options: {
             limit: 5000,
-            name: isDev ? '[name].[ext]?[hash:8]' : `${paths.assets}/[name].[hash:8].[ext]`
+            name: isDev ? '[name].[ext]?[hash:8]' : `${paths.assets}/[name].[hash:8].[ext]`,
+            esModule: false
           }
         },
         // Styles: Inject CSS into the head with source maps
@@ -81,7 +88,6 @@ export default (data: Record<string, any>) => {
                     publicPath: paths.css
                   }
                 },
-
                 {
                   loader: 'css-loader',
                   options: {
@@ -153,6 +159,24 @@ export default (data: Record<string, any>) => {
       net: 'empty',
       tls: 'empty',
       child_process: 'empty'
+    },
+    stats: {
+      assets: true,
+      // `webpack --colors` equivalent
+      colors: true,
+      children: false,
+      chunks: false,
+      chunkModules: false,
+      chunkOrigins: false,
+      // Add errors
+      errors: true,
+      // Add details to errors (like resolving log)
+      errorDetails: true,
+      hash: false,
+      modules: false,
+      timings: true,
+      // Add webpack version information
+      version: true
     },
     ...(isDev
       ? {
