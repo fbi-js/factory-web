@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "fbi serve",
     "build": "fbi build",
-    "lint": "npx eslint --ext .vue,.js --fix"
+    "lint": "npx eslint --ext .vue,.js --fix",
+    "postinstall": "fbi install"
   },
   "dependencies": {
     "vue": "^2.6.12",

@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "fbi serve",
     "build": "fbi build",
-    "lint": "npx eslint --ext .jsx,.js --fix"
+    "lint": "npx eslint --ext .jsx,.js --fix",
+    "postinstall": "fbi install"
   },
   "dependencies": {
     "react": "^17.0.1",

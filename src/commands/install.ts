@@ -16,25 +16,40 @@ export default class CommandInstall extends Command {
 
   public async run(flags: any, unknown: any) {
     const template = this.context.get('config.factory.template')
-    const { deps } = require(`../config/${template}`)
+    if (!template) {
+      return
+    }
+
+    let deps
+
+    try {
+      const config = require(`../config/${template}`)
+      deps = config.deps
+    } catch (err) {}
+
+    if (!deps) {
+      return
+    }
+
     const depsArr = Object.entries(deps).map(([name, version]) => `${name}@${version}`)
 
-    if (isValidObject(deps)) {
-      const pm = this.context.get('config').packageManager
+    if (!isValidObject(deps)) {
+      return
+    }
 
-      let cmds = [pm, 'install', '--no-save']
+    const pm = this.context.get('config').packageManager
+    const cmds = [pm, pm === 'yarn' ? 'add' : 'install', '-D', ...depsArr]
 
-      // pnpm: Headless installation requires a pnpm-lock.yaml file
-      cmds.push(pm === 'npm' ? '--no-package-lock' : pm === 'yarn' ? '--no-lockfile' : '')
+    this.logStart(`${cmds.join(' ')}...`)
 
-      cmds = cmds.concat(depsArr)
-
-      console.log(cmds)
-
+    try {
       await this.exec(cmds[0], cmds.slice(1).filter(Boolean), {
         stdout: 'inherit',
         cwd: process.cwd()
       })
+      this.logEnd(`Installed successfully`)
+    } catch (error) {
+      this.error(error).exit()
     }
   }
 }

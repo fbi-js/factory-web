@@ -9,8 +9,7 @@
   ],
   "scripts": {
     "build": "fbi b",
-    "watch": "fbi w",
-    "postinstall": "node lib/check-deps.js"
+    "watch": "fbi w"
   },
   "keywords": [],
   "author": "fbi",
