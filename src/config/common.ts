@@ -65,45 +65,46 @@ export default (data: Record<string, any>): Configuration => {
           }
         },
         // Styles: Inject CSS into the head with source maps
+        // TODO:这个公共loader处理css文件时好像会报错 先注释掉
         {
-          test: /\.(scss|css)$/,
-          use: isDev
-            ? [
-                'style-loader',
-                { loader: 'css-loader', options: { sourceMap: true, importLoaders: 1 } },
-                { loader: 'postcss-loader', options: { sourceMap: true } },
-                {
-                  loader: 'sass-loader',
-                  options: {
-                    sourceMap: true,
-                    // Prefer `dart-sass`
-                    implementation: require('sass')
-                  }
-                }
-              ]
-            : [
-                {
-                  loader: MiniCssExtractPlugin.loader,
-                  options: {
-                    publicPath: paths.css
-                  }
-                },
-                {
-                  loader: 'css-loader',
-                  options: {
-                    importLoaders: 2,
-                    sourceMap: false
-                  }
-                },
-                'postcss-loader',
-                {
-                  loader: 'sass-loader',
-                  options: {
-                    // Prefer `dart-sass`
-                    implementation: require('sass')
-                  }
-                }
-              ]
+          // test: /\.(scss|css)$/,
+          // use: isDev
+          //   ? [
+          //       'style-loader',
+          //       { loader: 'css-loader', options: { sourceMap: true, importLoaders: 1 } },
+          //       { loader: 'postcss-loader', options: { sourceMap: true } },
+          //       {
+          //         loader: 'sass-loader',
+          //         options: {
+          //           sourceMap: true,
+          //           // Prefer `dart-sass`
+          //           implementation: require('sass')
+          //         }
+          //       }
+          //     ]
+          //   : [
+          //       {
+          //         loader: MiniCssExtractPlugin.loader,
+          //         options: {
+          //           publicPath: paths.css
+          //         }
+          //       },
+          //       {
+          //         loader: 'css-loader',
+          //         options: {
+          //           importLoaders: 2,
+          //           sourceMap: false
+          //         }
+          //       },
+          //       'postcss-loader',
+          //       {
+          //         loader: 'sass-loader',
+          //         options: {
+          //           // Prefer `dart-sass`
+          //           implementation: require('sass')
+          //         }
+          //       }
+          //     ]
         }
       ]
     },
