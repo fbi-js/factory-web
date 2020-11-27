@@ -1,7 +1,7 @@
 /* eslint-disable no-restricted-properties */
 import { registerApplication, start } from 'single-spa'
 import { renderBeforeHooks } from './init'
-import { appendScriptAndRender } from './queryEnteryFile'
+import { appendScriptAndRender } from './query-entery-file'
 import { fullScreenLoadingHandle } from './loading'
 
 declare const APPS
