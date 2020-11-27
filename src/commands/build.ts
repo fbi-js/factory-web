@@ -55,7 +55,6 @@ export default class CommandBuild extends Command {
     return new Promise((resolve, reject) => {
       compiler.run((err, stats) => {
         if (err) {
-          console.log('---')
           console.error(err.stack || err)
           if ((err as any).details) {
             console.error((err as any).details)
@@ -63,25 +62,14 @@ export default class CommandBuild extends Command {
           reject()
         }
 
-        console.log(
-          stats?.toString({
-            chunks: false, // Makes the build much quieter
-            colors: true // Shows colors in the console
-          })
-        )
+        const formatStats = stats?.toString({
+          chunks: false, // Makes the build much quieter
+          colors: true // Shows colors in the console
+        })
 
-        // const info = stats?.toJson()
+        console.log(formatStats)
 
-        // if (stats?.hasErrors()) {
-        //   console.error(info.errors)
-        //   reject()
-        // }
-
-        // if (stats?.hasWarnings()) {
-        //   console.warn(info.warnings)
-        // }
-
-        resolve()
+        resolve(formatStats)
       })
     })
   }

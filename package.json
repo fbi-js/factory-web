@@ -45,6 +45,7 @@
     "webpack-merge": "^5.4.0"
   },
   "devDependencies": {
+    "@fbi-js/factory-factory": "^1.0.1",
     "@types/copy-webpack-plugin": "^6.3.0",
     "@types/css-minimizer-webpack-plugin": "^1.1.1",
     "@types/ejs": "^3.0.5",
@@ -55,5 +56,15 @@
     "vue-loader": "^15.9.5",
     "vue-template-compiler": "^2.6.12",
     "webpack-config-single-spa-ts": "^1.17.4"
+  },
+  "fbi": {
+    "factory": {
+      "id": "@fbi-js/factory-factory",
+      "version": "1.0",
+      "template": "factory",
+      "features": {
+        "typescript": true
+      }
+    }
   }
 }

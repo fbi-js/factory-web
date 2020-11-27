@@ -3,9 +3,9 @@
 *-error.log
 
 examples
-/node_modules
-/tmp
-/.nyc_output
+node_modules
+tmp
+.nyc_output
 
 package-lock.json
 pnpm-lock.yaml
