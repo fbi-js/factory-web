@@ -20,6 +20,7 @@ export default class CommandBuild extends Command {
   }
 
   public async run(flags: any, unknown: any) {
+    console.log(this.context.get('env'))
     process.env.NODE_ENV = flags.mode ?? 'production'
 
     this.debug(
