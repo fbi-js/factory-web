@@ -111,8 +111,8 @@ export default (data: Record<string, any>): Configuration => {
     plugins: [
       new webpack.ProgressPlugin(),
       // Make appName & appVersion available as a constant
-      new webpack.DefinePlugin({ appName: JSON.stringify(appName) }),
-      new webpack.DefinePlugin({ appVersion: JSON.stringify(appVersion) }),
+      // new webpack.DefinePlugin({ appName: JSON.stringify(appName) }),
+      // new webpack.DefinePlugin({ appVersion: JSON.stringify(appVersion) }),
       // Removes/cleans build folders and unused assets when rebuilding
       new CleanWebpackPlugin(),
       // Copies files from target to destination folder

@@ -1,6 +1,6 @@
 import Factory from '..';
 import BaseClass from './base';
-export default class TemplateMicroMain extends BaseClass {
+export default class TemplateMicroVue extends BaseClass {
     factory: Factory;
     id: string;
     path: string;

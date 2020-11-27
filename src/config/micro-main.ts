@@ -1,4 +1,5 @@
- 
+ import path from 'path'
+import { paths } from './paths'
 export const getConfig = (env: string) => {
   //TODO: 需要支持参数从fbi命令行带过来
   const opts ={
@@ -12,7 +13,6 @@ export const getConfig = (env: string) => {
   const webpackMerge = require('webpack-merge')
   const singleSpaDefaults = require('webpack-config-single-spa-ts')
   const HtmlWebpackPlugin = require('html-webpack-plugin')
-  const path = require('path')
   const webpack = require('webpack')
   const CopyWebpackPlugin = require('copy-webpack-plugin')
   const MiniCssExtractPlugin = require('mini-css-extract-plugin')
@@ -61,18 +61,31 @@ export const getConfig = (env: string) => {
   ) {
     const href = publicPath
     return [
-      new HtmlWebpackPlugin({
-        inject: false,
-        template: 'src/index.html',
-        templateParameters: {
-          isLocal: webpackConfigEnv && webpackConfigEnv.isLocal === 'true',
-          orgName,
-          href,
-        },
-      }),
       new webpack.DefinePlugin({
         COS_ENV: JSON.stringify(webpackConfigEnv.COS_ENV),
         APPS: JSON.stringify(apps),
+      }),
+      new HtmlWebpackPlugin({
+        inject: false,
+        template: path.join(paths.public,'index.html'),
+        /** 重写html-plugin配置 */
+        // https://github.com/jantimon/html-webpack-plugin/blob/657bc605a5dbdbbdb4f8154bd5360492c5687fc9/examples/template-parameters/webpack.config.js#L20
+        templateParameters:(compilation: { options: any }, assets: any, assetTags: any, options: any)=>{
+          return {
+            compilation,
+            webpackConfig: compilation.options,
+            htmlWebpackPlugin: {
+              tags: assetTags,
+              files: assets,
+              options
+            },
+            /** 下面为自定义参数 */
+            isLocal: webpackConfigEnv && webpackConfigEnv.isLocal === 'true',
+            orgName,
+            href,
+            title:'@project-name/root-config'
+          }
+        }
       }),
       new CopyWebpackPlugin({
         patterns: [

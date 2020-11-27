@@ -45,7 +45,9 @@
     "url-loader": "^4.1.1",
     "webpack": "^4.44.2",
     "webpack-dev-server": "3.11.0",
-    "webpack-merge": "^5.4.0"
+    "webpack-merge": "^5.4.0",
+    "vue-loader": "^15.9.5",
+    "vue-template-compiler": "^2.6.12"
   },
   "devDependencies": {
     "@types/copy-webpack-plugin": "^6.3.0",
@@ -55,8 +57,6 @@
     "@types/node": "*",
     "@types/npm-install-webpack-plugin": "^4.0.0",
     "@types/webpack-dev-server": "^3.11.1",
-    "vue-loader": "^15.9.5",
-    "vue-template-compiler": "^2.6.12",
     "webpack-config-single-spa-ts": "^1.17.4"
   }
 }
