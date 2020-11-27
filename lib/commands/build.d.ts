@@ -1,4 +1,3 @@
-/// <reference types="webpack-dev-server" />
 import type { Configuration } from 'webpack';
 import Factory from '..';
 import { Command } from 'fbi';

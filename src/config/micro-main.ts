@@ -162,16 +162,8 @@ export const getConfig = (env: string) => {
 }
 
 export const deps = {
-  'webpack-config-single-spa-ts': '^1.17.4 ',
   'ts-config-single-spa': '^1.9.0',
   'webpack-merge':'^4.2.2',
-  'html-webpack-plugin':'^4.0.4',
-  "copy-webpack-plugin": "^6.2.1",
-  "mini-css-extract-plugin": "^1.3.1",
-  "@babel/plugin-transform-runtime": "^7.8.3",
-  "@babel/preset-env": "^7.7.4",
-  "@babel/preset-typescript": "^7.9.0",
-  "@babel/runtime": "^7.8.7",
   "@types/systemjs": "^6.1.0",
   "axios": "*"
 }

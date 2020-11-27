@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.7-alpha.4](https://github.com/fbi-js/factory-web/compare/v0.2.7-alpha.3...v0.2.7-alpha.4) (2020-11-27)
+
+
+### Bug Fixes
+
+* add '@fbi-js/factory-factory' devDependency ([1cf1d91](https://github.com/fbi-js/factory-web/commit/1cf1d9176c404bbf02352f765bede350c6a31869))
+* change factory name ([884a4ac](https://github.com/fbi-js/factory-web/commit/884a4acff567c1637b5cb4421e2b6a039cd37bd3))
+
 ### [0.2.7-alpha.3](https://github.com/fbi-js/factory-web/compare/v0.2.7-alpha.2...v0.2.7-alpha.3) (2020-11-25)
 
 

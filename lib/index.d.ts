@@ -7,7 +7,7 @@ import TemplateReact from './templates/react';
 import TemplateMicroMain from './templates/micro-main';
 import TemplateMicroVue from './templates/micro-vue';
 export default class FactoryWeb extends Factory {
-    id: string;
+    id: any;
     description: string;
     commands: (CommandServe | CommandInstall | CommandBuild)[];
     templates: (TemplateVue | TemplateReact | TemplateMicroMain | TemplateMicroVue)[];
