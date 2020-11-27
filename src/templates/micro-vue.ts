@@ -1,10 +1,10 @@
 import Factory from '..'
 import BaseClass from './base'
 
-export default class TemplateMicroMain extends BaseClass {
-  id = 'micro-main'
-  path = 'templates/micro-main'
-  description = 'template for Micro-fontends base application'
+export default class TemplateMicroVue extends BaseClass {
+  id = 'micro-vue'
+  path = 'templates/micro-vue'
+  description = 'template for Micro-fontends vue application'
   templates = []
 
   constructor(public factory: Factory) {
@@ -43,6 +43,6 @@ export default class TemplateMicroMain extends BaseClass {
   protected async writing() {
     await super.writing()
 
-    this.files.copy = this.files.copy?.concat(['public/*', 'src/*', 'tsconfig.json'])
+    this.files.copy = this.files.copy?.concat(['public/*', 'src/*','app.config.json'])
   }
 }

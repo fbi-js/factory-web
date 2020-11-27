@@ -1,8 +1,10 @@
 /* eslint-disable no-restricted-properties */
 import { registerApplication, start } from 'single-spa'
 import { renderBeforeHooks } from './init'
-import { appendScriptAndRender } from './queryEnteryFile'
+import { appendScriptAndRender } from './query-entery-file'
 import { fullScreenLoadingHandle } from './loading'
+
+declare const APPS
 
 function importAllDeps() {
   return Promise.all([System.import('single-spa')])
@@ -18,7 +20,10 @@ function registerApp(appName: string, activeWhen: any) {
 }
 
 function startApps() {
-  registerApp('@project-name/app-react', ['/'])
+  /**
+   * 自动注册app config
+   */
+  APPS.forEach((app) => registerApp(app.name, app.activeWhen || ['/']))
   start({
     urlRerouteOnly: true,
   })

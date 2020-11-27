@@ -36,9 +36,19 @@ export default class CommandServe extends Command {
         env: process.env.NODE_ENV
       })
       const compiler = webpack(config)
-      const server = new DevServer(compiler, {})
-
-      server.listen(8080, 'localhost', (err) => {
+      const server = new DevServer(compiler, {
+        historyApiFallback: true,
+        compress: true,
+        noInfo: true,
+        open: true,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Headers': '*',
+          'Access-Control-Allow-Methods': '*',
+        },
+        disableHostCheck: true
+      })
+      server.listen(9003,'localhost', (err) => {
         if (err) {
           throw err
         }

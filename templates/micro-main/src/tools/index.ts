@@ -1,3 +1,3 @@
-export * from './eventBus'
-export * from './globalState'
+export * from './event-bus'
+export * from './global-state'
 export * from './history'

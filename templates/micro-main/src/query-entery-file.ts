@@ -2,16 +2,20 @@ import axios from 'axios'
 import { envKeyEnum } from '@/config'
 
 declare const COS_ENV
+declare const APPS
 const ifLocal = COS_ENV === envKeyEnum.development
 
-const urls = [
-  {
-    name: '@project-name/app-react',
-    /** 根据环境变量 配置具体子应用入口index.html */
-    url: `//localhost:8021/index.html`,
-    localUrl: '//localhost:8021/index.html',
-  },
-]
+const urls = [].concat(
+  /**
+   * 自动注册app config
+   */
+  APPS.map((app) => {
+    return {
+      name: app.name,
+      localUrl: `//localhost:${app.port}/index.html`,
+    }
+  }),
+)
 
 /** 查询入口文件html 根据从html文件里面获取带有hash的js entry文件
  * - 服务端html不缓存 每次获取到最新的hash js entry地址，从而达到版本管理的作用

@@ -49,7 +49,9 @@ export default class TemplateWebBase extends Template {
         '.babelrc',
         '.gitignore',
         '.editorconfig',
+        '.eslintignore',
         '.eslintrc.js',
+        '.prettierignore',
         '.prettierrc.js',
         '.stylelintrc.js',
         'postcss.config.js'
