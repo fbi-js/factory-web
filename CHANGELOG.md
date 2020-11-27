@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.7-alpha.5](https://github.com/fbi-js/factory-web/compare/v0.2.7-alpha.4...v0.2.7-alpha.5) (2020-11-27)
+
+
+### Features
+
+* add micro-main webpack config to command ([9c59563](https://github.com/fbi-js/factory-web/commit/9c5956326dd3d45f1c20554af7ded6502cebefa8))
+* add micro-vue templates webpack config ([60f6115](https://github.com/fbi-js/factory-web/commit/60f611526a4ab8b82b73d005ba51c0c71a5761c1))
+
+
+### Bug Fixes
+
+* bump version ([48483af](https://github.com/fbi-js/factory-web/commit/48483afa11ef4400cfc882e4e2718837804f9218))
+* rename file ([45a8a27](https://github.com/fbi-js/factory-web/commit/45a8a27a3f31ed7b0a61173ff20f267a99f0c663))
+
 ### [0.2.7-alpha.4](https://github.com/fbi-js/factory-web/compare/v0.2.7-alpha.3...v0.2.7-alpha.4) (2020-11-27)
 
 
