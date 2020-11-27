@@ -16,8 +16,8 @@
   "license": "MIT",
   "dependencies": {
     "@babel/core": "^7.12.9",
-    "@babel/preset-env": "^7.12.7",
     "@babel/plugin-transform-runtime": "^7.8.3",
+    "@babel/preset-env": "^7.12.7",
     "@babel/preset-typescript": "^7.9.0",
     "@babel/runtime": "^7.8.7",
     "babel-loader": "^8.2.1",
@@ -43,12 +43,12 @@
     "stylelint": "^13.8.0",
     "stylelint-webpack-plugin": "^2.1.1",
     "url-loader": "^4.1.1",
-    "webpack": "^4.44.2",
-    "webpack-dev-server": "3.11.0",
-    "webpack-merge": "^5.4.0",
     "vue-loader": "^15.9.5",
     "vue-template-compiler": "^2.6.12",
-    "webpack-config-single-spa-ts": "^1.17.4"
+    "webpack": "^4.44.2",
+    "webpack-config-single-spa-ts": "^1.17.4",
+    "webpack-dev-server": "3.11.0",
+    "webpack-merge": "^5.4.0"
   },
   "devDependencies": {
     "@fbi-js/factory-factory": "^1.0.1",
