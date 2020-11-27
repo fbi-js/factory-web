@@ -2,6 +2,35 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.7-alpha.3](https://github.com/fbi-js/factory-web/compare/v0.2.7-alpha.2...v0.2.7-alpha.3) (2020-11-25)
+
+
+### Bug Fixes
+
+* change postinstall to use 'fbi install' ([d50db21](https://github.com/fbi-js/factory-web/commit/d50db2146c5b9955644bdf110df9f587f86fca1c))
+
+### [0.2.7-alpha.2](https://github.com/fbi-js/factory-web/compare/v0.2.7-alpha.1...v0.2.7-alpha.2) (2020-11-25)
+
+
+### Bug Fixes
+
+* **webpack:** change webpack from v5 to v4 ([b6999ac](https://github.com/fbi-js/factory-web/commit/b6999ac63b104d00407b0a4d365a98893578446a))
+
+### [0.2.7-alpha.1](https://github.com/fbi-js/factory-web/compare/v0.2.7-alpha.0...v0.2.7-alpha.1) (2020-11-25)
+
+
+### Bug Fixes
+
+* add micro-main ([04e531e](https://github.com/fbi-js/factory-web/commit/04e531ebafe0265719391a05eb058e468eb1bd3b))
+* remove npmrc ([e620c2f](https://github.com/fbi-js/factory-web/commit/e620c2f2532b7d8dfa1a110dac2cc41d8ea930f0))
+
+### [0.2.7-alpha.0](https://github.com/fbi-js/factory-web/compare/v0.2.5...v0.2.7-alpha.0) (2020-11-24)
+
+
+### Bug Fixes
+
+* use global 'installDeps' in template ([cf5b59d](https://github.com/fbi-js/factory-web/commit/cf5b59dea23d75b03dfbdd1d802019da820b46c3))
+
 ### [0.2.6](https://github.com/fbi-js/factory-web/compare/v0.2.2...v0.2.6) (2020-10-13)
 
 

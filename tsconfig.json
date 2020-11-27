@@ -1,13 +1,12 @@
 {
   "compilerOptions": {
     "declaration": true,
-    "importHelpers": true,
     "module": "commonjs",
     "rootDir": "src",
     "outDir": "lib",
     "strict": true,
     "pretty": true,
-    "target": "es2019",
+    "target": "es2017",
     "noImplicitThis": false,
     "skipLibCheck": true,
     "esModuleInterop": true,

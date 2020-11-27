@@ -1,95 +1,48 @@
-import { join } from 'path'
-import { Template } from 'fbi'
-import * as ejs from 'ejs'
 import Factory from '..'
-import { isValidObject } from 'fbi/lib/utils'
-import { VUE2_TEMPLATE_ID } from '../const'
+import BaseClass from './base'
 
-export default class TemplateVue extends Template {
-  id = VUE2_TEMPLATE_ID
-  description = 'template for factory-web'
+export default class TemplateVue extends BaseClass {
+  id = 'vue'
   path = 'templates/vue'
-  renderer = ejs.render
+  description = 'template for Vue.js application'
   templates = []
 
   constructor(public factory: Factory) {
-    super()
+    super(factory)
   }
 
-  protected async gathering() {
-    // 获取暂存的项目参数
-    this.data.project = this.configStore.get('projectInfo')
+  protected async gathering(flags: Record<string, any>) {
+    await super.gathering(flags)
+
+    const extraData = await this.prompt([
+      {
+        type: 'MultiSelect',
+        name: 'features',
+        message: `Choose features for your project:`,
+        hint: '(Use <space> to select, <return> to submit)',
+        choices: [{ name: 'typescript', value: true }],
+        result(names: string[]) {
+          return this.map(names)
+        }
+      }
+    ] as any)
+
+    this.data.project = {
+      ...this.data.project,
+      ...extraData
+    }
+
     const { factory, project } = this.data
     this.spinner = this.createSpinner(`Creating project...`).start(
-      `Creating ${this.style.bold.green(project.name)} via ${this.id} from ${factory.template}...`
+      `Creating ${this.style.bold.green(project.name)} via ${factory.id} from ${
+        factory.template
+      }...`
     )
   }
 
   protected async writing() {
-    this.files = {
-      copy: [
-        '.editorconfig',
-        '.prettierrc',
-        '.gitignore',
-        'tsconfig.json',
-        'vue.config.json',
-        '.browserslistrc',
-        'babel.config.js',
-        'screenshots/*',
-        'src/assets/*',
-        'src/assets/**/*'
-      ],
-      render: [
-        'package.json',
-        '.fbi.config.js',
-        'README.md',
-        'public/*',
-        'src/**/*/!(*.png|*.jpg)',
-        'src/*'
-      ],
-      renderOptions: {
-        async: true
-      }
-    }
-    // }
-  }
+    await super.writing()
 
-  protected async installing(flags: Record<string, any>) {
-    const { project } = this.data
-    this.spinner.succeed(`Created project ${this.style.cyan.bold(project.name)}`)
-
-    const { dependencies, devDependencies } = require(join(this.targetDir, 'package.json'))
-    if (isValidObject(dependencies) || isValidObject(devDependencies)) {
-      const installSpinner = this.createSpinner(`Installing dependencies...`).start()
-      try {
-        await this.installDeps(this.targetDir, flags.packageManager, false)
-        installSpinner.succeed(`Installed dependencies`)
-      } catch (err) {
-        installSpinner.fail('Failed to install dependencies. You can install them manually.')
-        this.error(err)
-      }
-    }
-  }
-
-  protected async ending() {
-    const { project } = this.data
-    const projectName = this.style.cyan.bold(project.name)
-    if (this.errors) {
-      this.spinner.fail(`Failed to created project ${projectName}.`)
-      this.error(this.errors)
-    }
-
-    console.log(`
-Next steps:
-  $ ${this.style.cyan('cd ' + project.name)}
-  `)
-    console.log(`
-  $ ${this.style.cyan('npm run serve')} ${this.style.dim('launch the serve')}`)
-
-    console.log(`
-  $ ${this.style.cyan('vue-cli-service build')} ${this.style.dim('build project')}`)
-
-    console.log(`
-  $ ${this.style.cyan('fbi list')} ${this.style.dim('show available commands and sub templates')}`)
+    this.files.copy = this.files.copy?.concat(['public/*', 'src/*'])
   }
 }

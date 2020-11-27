@@ -2,12 +2,13 @@
 *-debug.log
 *-error.log
 
+examples
 /node_modules
 /tmp
 /.nyc_output
 
-# package-lock.json
+package-lock.json
 pnpm-lock.yaml
-# yarn.lock
+yarn.lock
 
 .mocks/

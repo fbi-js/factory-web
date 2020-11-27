@@ -1,5 +1,5 @@
-import { Command } from 'fbi';
 import Factory from '..';
+import { Command } from 'fbi';
 export default class CommandServe extends Command {
     factory: Factory;
     id: string;
