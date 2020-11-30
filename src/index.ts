@@ -14,7 +14,12 @@ export default class FactoryWeb extends Factory {
   id = require('../package.json').name
   description = 'factory for web application development'
   commands = [new CommandBuild(this), new CommandServe(this), new CommandInstall(this)]
-  templates = [new TemplateVue(this), new TemplateReact(this), new TemplateMicroMain(this),new TemplateMicroVue(this)]
+  templates = [
+    new TemplateVue(this),
+    new TemplateReact(this),
+    new TemplateMicroMain(this),
+    new TemplateMicroVue(this)
+  ]
 
   execOpts: any = {
     cwd: process.cwd(),

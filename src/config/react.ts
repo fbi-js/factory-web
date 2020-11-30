@@ -13,12 +13,11 @@ export const getConfig = (env: string) => {
 
       new StyleLintPlugin({
         files: 'src/**/*.{css,scss,jsx}'
-      }),
-
+      })
     ],
     resolve: {
-      extensions: ['*', '.js', '.jsx'],
-    },
+      extensions: ['*', '.js', '.jsx']
+    }
   }
 
   return config
@@ -27,5 +26,5 @@ export const getConfig = (env: string) => {
 export const deps = {
   '@babel/preset-react': '^7.12.7',
   '@babel/plugin-proposal-class-properties': '^7.12.1',
-  "react-hot-loader": "^4.13.0",
+  'react-hot-loader': '^4.13.0'
 }

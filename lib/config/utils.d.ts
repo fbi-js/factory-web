@@ -1,7 +1,7 @@
-declare function getAppConfig(path: any): {
-    base: any;
-    otherApps: any;
-    selfApp: any;
-};
-declare function getRunPwd(): string;
-declare function guid(): string;
+export interface IConfigOption {
+    title: string;
+    port?: number;
+    mode?: string;
+    cosEnv: string;
+    startEntry: string;
+}
