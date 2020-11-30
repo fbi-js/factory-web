@@ -2,7 +2,6 @@ import type { Configuration } from 'webpack'
 
 import common from './common'
 import { merge } from 'webpack-merge'
-import { IConfigOption } from './utils'
 
 export default (type: string, data: Record<string, any>): Configuration => {
   const commonConfigs = common(data)
@@ -13,7 +12,7 @@ export default (type: string, data: Record<string, any>): Configuration => {
     mode: data.mode,
     startEntry: data.startEntry,
     cosEnv: data.cosEnv
-  } as IConfigOption)
+  })
 
   return merge(commonConfigs, typeConfigs)
 }

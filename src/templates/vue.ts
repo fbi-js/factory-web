@@ -44,5 +44,6 @@ export default class TemplateVue extends BaseClass {
     await super.writing()
 
     this.files.copy = this.files.copy?.concat(['public/*', 'src/*'])
+    this.files.render = this.files.render?.concat('src/main.js')
   }
 }

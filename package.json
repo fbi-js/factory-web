@@ -17,11 +17,11 @@
   "license": "MIT",
   "dependencies": {
     "@babel/core": "^7.12.9",
-    "@babel/plugin-transform-runtime": "^7.8.3",
+    "@babel/plugin-transform-runtime": "^7.12.1",
     "@babel/preset-env": "^7.12.7",
-    "@babel/preset-typescript": "^7.9.0",
-    "@babel/runtime": "^7.8.7",
-    "babel-loader": "^8.2.1",
+    "@babel/preset-typescript": "^7.12.7",
+    "@babel/runtime": "^7.12.5",
+    "babel-loader": "^8.2.2",
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^6.3.2",
     "css-loader": "^5.0.1",
@@ -44,10 +44,7 @@
     "stylelint": "^13.8.0",
     "stylelint-webpack-plugin": "^2.1.1",
     "url-loader": "^4.1.1",
-    "vue-loader": "^15.9.5",
-    "vue-template-compiler": "^2.6.12",
     "webpack": "^4.44.2",
-    "webpack-config-single-spa-ts": "^1.17.4",
     "webpack-dev-server": "3.11.0",
     "webpack-merge": "^5.4.0"
   },
@@ -60,7 +57,12 @@
     "@types/node": "*",
     "@types/npm-install-webpack-plugin": "^4.0.0",
     "@types/webpack-dev-server": "^3.11.1",
-    "prettier": "^2.2.1"
+    "prettier": "^2.2.1",
+    "ts-config-single-spa": "^1.17.6",
+    "ts-loader": "^8.0.11",
+    "vue-loader": "^15.9.5",
+    "vue-template-compiler": "^2.6.12",
+    "webpack-config-single-spa-ts": "^1.17.6"
   },
   "fbi": {
     "factory": {

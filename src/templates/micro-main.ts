@@ -43,6 +43,11 @@ export default class TemplateMicroMain extends BaseClass {
   protected async writing() {
     await super.writing()
 
-    this.files.copy = this.files.copy?.concat(['public/*', 'src/*', 'tsconfig.json'])
+    this.files.copy = this.files.copy?.concat([
+      'public/*',
+      'src/*',
+      'tsconfig.json',
+      'apps.config.json'
+    ])
   }
 }

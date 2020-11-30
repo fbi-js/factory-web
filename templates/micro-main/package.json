@@ -4,14 +4,15 @@
   "description": "<%= project.description %>",
   "private": true,
   "scripts": {
-    "dev": "fbi serve -p 9003",
+    "dev": "fbi serve",
     "build": "fbi build",
     "lint": "npx eslint --ext .vue,.js --fix",
     "format": "npx prettier -c --write \"**/*.{js,md,html,css,less}\"",
     "postinstall": "fbi install"
   },
   "dependencies": {
-    "single-spa": "5.5.5"
+    "single-spa": "^5.8.2",
+    "axios": "^0.21.0"
   },
   "devDependencies": {
     "@fbi-js/factory-web": "*"
