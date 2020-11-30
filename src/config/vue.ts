@@ -7,8 +7,8 @@ import { IConfigOption } from './utils'
 import { join } from 'path'
 import { paths } from './paths'
 
-export const getConfig = (options:IConfigOption) => {
-  const {title} = options
+export const getConfig = (options: IConfigOption) => {
+  const { title } = options
   const VueLoaderPlugin = require('vue-loader').VueLoaderPlugin
 
   const config: Configuration = {
@@ -40,7 +40,7 @@ export const getConfig = (options:IConfigOption) => {
         title: title || 'My App',
         template: join(paths.public, 'index.html'),
         filename: 'index.html' // output file
-      }),
+      })
     ],
     resolve: {
       extensions: ['*', '.js', '.vue'],

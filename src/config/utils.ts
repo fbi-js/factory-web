@@ -1,5 +1,5 @@
-function getAppConfig(path:any) {
-  let appConfig:any = {}
+function getAppConfig(path: any) {
+  let appConfig: any = {}
   try {
     appConfig = require(path)
     // eslint-disable-next-line no-empty
@@ -10,10 +10,10 @@ function getAppConfig(path:any) {
   return {
     base,
     otherApps,
-    selfApp,
+    selfApp
   }
 }
-function getRunPwd(){
+function getRunPwd() {
   return process.cwd()
 }
 
@@ -30,10 +30,10 @@ module.exports = {
   guid
 }
 
-export interface IConfigOption{
-  title:string
-  port?:number
-  mode?:string
-  cosEnv:string
-  startEntry:string
+export interface IConfigOption {
+  title: string
+  port?: number
+  mode?: string
+  cosEnv: string
+  startEntry: string
 }

@@ -1,17 +1,16 @@
- import path from 'path'
+import path from 'path'
 import { paths } from './paths'
 import { IConfigOption } from './utils'
 
-
-export const getConfig = (options:IConfigOption) => {
-  const {mode,port,startEntry,title,cosEnv} = options
-  const opts ={
+export const getConfig = (options: IConfigOption) => {
+  const { mode, port, startEntry, title, cosEnv } = options
+  const opts = {
     mode,
     port
   }
   const webpackConfigEnv = {
-    isLocal:mode === 'development',
-    COS_ENV:cosEnv
+    isLocal: mode === 'development',
+    COS_ENV: cosEnv
   }
   const webpackMerge = require('webpack-merge')
   const singleSpaDefaults = require('webpack-config-single-spa-ts')
@@ -21,20 +20,20 @@ export const getConfig = (options:IConfigOption) => {
   const MiniCssExtractPlugin = require('mini-css-extract-plugin')
   const { getAppConfig } = require('./utils')
   const runPwd = process.cwd()
-  function baseConfigDefault(op:any) {
+  function baseConfigDefault(op: any) {
     const {
       orgName = 'project-name',
       projectName = 'root-config',
       opts,
       webpackConfigEnv,
-      publicPath = '',
+      publicPath = ''
     } = op
     const excludePath = path.resolve(runPwd, '../node_modules')
     const apps = getDevAppConfig(opts.mode) || []
     const defaultConfig = singleSpaDefaults({
       orgName,
       projectName,
-      webpackConfigEnv,
+      webpackConfigEnv
     })
     defaultConfig.module.rules[1].exclude = excludePath
     const defaultPlugin = getPlugins(webpackConfigEnv, orgName, apps, publicPath)
@@ -43,32 +42,32 @@ export const getConfig = (options:IConfigOption) => {
       plugins: defaultPlugin,
       resolve: {
         alias: {
-          '@': path.resolve(runPwd,'src/'),
-        },
+          '@': path.resolve(runPwd, 'src/')
+        }
       },
-      externals:['axios','single-spa']
+      externals: ['axios', 'single-spa']
     })
     return config
   }
-  
-  function getPlugins(
-    webpackConfigEnv:any,
-    orgName = '',
-    apps:any[] = [],
-    publicPath:string,
-  ) {
+
+  function getPlugins(webpackConfigEnv: any, orgName = '', apps: any[] = [], publicPath: string) {
     const href = publicPath
     return [
       new webpack.DefinePlugin({
         COS_ENV: JSON.stringify(webpackConfigEnv.COS_ENV),
-        APPS: JSON.stringify(apps),
+        APPS: JSON.stringify(apps)
       }),
       new HtmlWebpackPlugin({
         inject: false,
-        template: path.join(paths.public,'index.html'),
+        template: path.join(paths.public, 'index.html'),
         /** 重写html-plugin配置 */
         // https://github.com/jantimon/html-webpack-plugin/blob/657bc605a5dbdbbdb4f8154bd5360492c5687fc9/examples/template-parameters/webpack.config.js#L20
-        templateParameters:(compilation: { options: any }, assets: any, assetTags: any, options: any)=>{
+        templateParameters: (
+          compilation: { options: any },
+          assets: any,
+          assetTags: any,
+          options: any
+        ) => {
           return {
             compilation,
             webpackConfig: compilation.options,
@@ -89,16 +88,16 @@ export const getConfig = (options:IConfigOption) => {
         patterns: [
           {
             from: 'src/common-deps',
-            to: 'common-deps/',
-          },
-        ],
+            to: 'common-deps/'
+          }
+        ]
       }),
-      new MiniCssExtractPlugin(),
+      new MiniCssExtractPlugin()
     ]
   }
-  
-  function getDevAppConfig(mode:string|undefined) {
-    function getPortsByPath(basePath:string) {
+
+  function getDevAppConfig(mode: string | undefined) {
+    function getPortsByPath(basePath: string) {
       try {
         const packageJson = require(path.resolve(`${basePath}/package.json`))
         if (packageJson.scripts.start.includes('--port')) {
@@ -123,10 +122,8 @@ export const getConfig = (options:IConfigOption) => {
       }
     }
     const apps = []
-    const entryPath = startEntry==='self' ? runPwd:'../../../'
-    const { selfApp, otherApps } = getAppConfig(
-      path.resolve(entryPath,'apps.config'),
-    )
+    const entryPath = startEntry === 'self' ? runPwd : '../../../'
+    const { selfApp, otherApps } = getAppConfig(path.resolve(entryPath, 'apps.config'))
     if (Object.keys(selfApp).length) {
       apps.push(selfApp)
     }
@@ -135,13 +132,13 @@ export const getConfig = (options:IConfigOption) => {
     }
     return apps.filter((app) => app.name && app.port)
   }
-  
+
   const baseConfig = baseConfigDefault({
     orgName: 'project-name',
     projectName: 'root-config',
     opts,
     webpackConfigEnv,
-    publicPath: `http://localhost:${opts.port}`,
+    publicPath: `http://localhost:${opts.port}`
   })
   return webpackMerge.merge(baseConfig, {
     // modify the webpack config however you'd like to by adding to this object
@@ -150,7 +147,7 @@ export const getConfig = (options:IConfigOption) => {
 
 export const deps = {
   'ts-config-single-spa': '^1.9.0',
-  'webpack-merge':'^4.2.2',
-  "@types/systemjs": "^6.1.0",
-  "axios": "*"
+  'webpack-merge': '^4.2.2',
+  '@types/systemjs': '^6.1.0',
+  axios: '*'
 }

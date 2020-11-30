@@ -11,10 +11,12 @@ export default class CommandServe extends Command {
   alias = 's'
   description = 'start development server'
   args = ''
-  flags = [['-m, --mode <mode>', 'specify env mode(development|production|testing)', 'development'],
-  ['-e, --env <env>', 'customer env mode(development|production)', 'development'],
-  ['-p, --port <port>', 'webapck dev-serve port', 8080],
-  ['-entry, --entry <entry>', 'entry type(self|app-entry)', 'self']]
+  flags = [
+    ['-m, --mode <mode>', 'specify env mode(development|production|testing)', 'development'],
+    ['-e, --env <env>', 'customer env mode(development|production)', 'development'],
+    ['-p, --port <port>', 'webapck dev-serve port', 8080],
+    ['-entry, --entry <entry>', 'entry type(self|app-entry)', 'self']
+  ]
 
   constructor(public factory: Factory) {
     super()
@@ -37,10 +39,10 @@ export default class CommandServe extends Command {
     this.logStart(`Starting development server:`)
     try {
       const config = webpackConfig(template, {
-        port:flags.port,
-        mode:flags.mode,
-        startEntry:flags.entry,
-        cosEnv:flags.env,
+        port: flags.port,
+        mode: flags.mode,
+        startEntry: flags.entry,
+        cosEnv: flags.env
       } as IConfigOption)
       const compiler = webpack(config)
       const server = new DevServer(compiler, {
@@ -51,11 +53,11 @@ export default class CommandServe extends Command {
         headers: {
           'Access-Control-Allow-Origin': '*',
           'Access-Control-Allow-Headers': '*',
-          'Access-Control-Allow-Methods': '*',
+          'Access-Control-Allow-Methods': '*'
         },
         disableHostCheck: true
       })
-      server.listen(flags.port,'localhost', (err) => {
+      server.listen(flags.port, 'localhost', (err) => {
         if (err) {
           throw err
         }

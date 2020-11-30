@@ -1,12 +1,12 @@
 import type { Configuration } from 'webpack'
 
-import {merge} from 'webpack-merge'
+import { merge } from 'webpack-merge'
 import StyleLintPlugin from 'stylelint-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import { paths } from './paths'
 import { IConfigOption } from './utils'
-export const getConfig = (options:IConfigOption) => {
-  const {port} = options
+export const getConfig = (options: IConfigOption) => {
+  const { port } = options
   const buildMode = process.env.NODE_ENV || 'development'
   const isDev = buildMode === 'development'
   const VueLoaderPlugin = require('vue-loader').VueLoaderPlugin
@@ -28,7 +28,7 @@ export const getConfig = (options:IConfigOption) => {
             ? [
                 'style-loader',
                 { loader: 'css-loader', options: { sourceMap: true, importLoaders: 1 } },
-                { loader: 'postcss-loader', options: { sourceMap: true } },
+                { loader: 'postcss-loader', options: { sourceMap: true } }
               ]
             : [
                 {
@@ -44,7 +44,7 @@ export const getConfig = (options:IConfigOption) => {
                     sourceMap: false
                   }
                 },
-                'postcss-loader',
+                'postcss-loader'
               ]
         }
       ]
@@ -63,15 +63,15 @@ export const getConfig = (options:IConfigOption) => {
     }
   }
 
-  const path = require("path")
-  const HtmlWebpackPlugin = require("html-webpack-plugin")
-  const { guid,getRunPwd } = require("./utils")
+  const path = require('path')
+  const HtmlWebpackPlugin = require('html-webpack-plugin')
+  const { guid, getRunPwd } = require('./utils')
 
   function subVue2ConfigDefault({
-    orgName = "project-name",
-    projectName = "app-vue2",
+    orgName = 'project-name',
+    projectName = 'app-vue2',
     opts = {} as any,
-    publicPath = "/",
+    publicPath = '/'
   }) {
     const hashStr = getHash(opts)
     const defaultPlugins = getPlugins({
@@ -79,68 +79,71 @@ export const getConfig = (options:IConfigOption) => {
       orgName,
       projectName,
       hashStr,
-      publicPath,
+      publicPath
     })
     return {
       output: {
         filename: `${orgName}-${projectName}${hashStr}.js`,
-        libraryTarget: 'umd',
+        libraryTarget: 'umd'
       },
-      entry: path.resolve(getRunPwd(),"src/main.js"),
+      entry: path.resolve(getRunPwd(), 'src/main.js'),
       plugins: defaultPlugins,
       resolve: {
         alias: {
-          "@": path.resolve(getRunPwd(),"src/"),
-        },
-      },
+          '@': path.resolve(getRunPwd(), 'src/')
+        }
+      }
     }
   }
 
-  function getMode(opts:any) {
+  function getMode(opts: any) {
     return opts.mode || process.env.NODE_ENV
   }
 
-  function getHash(opts:any) {
+  function getHash(opts: any) {
     const hash = guid()
-    const isProd = getMode(opts) === "production"
-    const hashStr = isProd ? `-${hash}` : ""
+    const isProd = getMode(opts) === 'production'
+    const hashStr = isProd ? `-${hash}` : ''
     return hashStr
   }
 
-  function getPlugins({ opts, publicPath, orgName, projectName, hashStr }:{
-    opts:any
-    publicPath:any
-    orgName:any
-    projectName:any
-    hashStr:any
+  function getPlugins({
+    opts,
+    publicPath,
+    orgName,
+    projectName,
+    hashStr
+  }: {
+    opts: any
+    publicPath: any
+    orgName: any
+    projectName: any
+    hashStr: any
   }) {
-    const isProd = opts.mode === "production"
+    const isProd = opts.mode === 'production'
     const href = publicPath
     return [
       new HtmlWebpackPlugin({
-        template: path.resolve("./public/index.html"),
-        title: `${href}${
-          isProd ? `/${projectName}` : ""
-        }/${orgName}-${projectName}${hashStr}.js`,
-      }),
+        template: path.resolve('./public/index.html'),
+        title: `${href}${isProd ? `/${projectName}` : ''}/${orgName}-${projectName}${hashStr}.js`
+      })
     ]
   }
-  const opts={
+  const opts = {
     port
   }
   const subVue2WebpackConfig = subVue2ConfigDefault({
-    orgName: "project-name",
-    projectName: "app-vue2",
+    orgName: 'project-name',
+    projectName: 'app-vue2',
     opts,
-    publicPath: `http://localhost:${opts.port}`,
+    publicPath: `http://localhost:${opts.port}`
   })
 
-
-  return merge(config,subVue2WebpackConfig as any)
+  return merge(config, subVue2WebpackConfig as any)
 }
 
 export const deps = {
   'vue-loader': '^15.9.5',
   '@babel/plugin-proposal-class-properties': '^7.12.1',
-  'fbi-lint':"*"
+  'fbi-lint': '*'
 }
