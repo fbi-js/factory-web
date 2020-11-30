@@ -24,7 +24,8 @@ Vue.config.productionTip = false;
 const vueLifecycles = singleSpaVue({
   Vue,
   appOptions: {
-    name:'@project-name/app-vue',
+    el:'#app-container',
+    name:'@project-name/app-vue2',
     router,
     render(h) {
       return h(App, {
