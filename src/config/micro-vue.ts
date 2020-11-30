@@ -143,5 +143,5 @@ export const getConfig = (options: IConfigOption) => {
 }
 
 export const deps = {
-  '@babel/plugin-proposal-class-properties': '^7.12.1',
+  '@babel/plugin-proposal-class-properties': '^7.12.1'
 }
