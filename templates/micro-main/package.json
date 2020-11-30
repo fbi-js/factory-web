@@ -4,7 +4,7 @@
   "description": "<%= project.description %>",
   "private": true,
   "scripts": {
-    "dev": "fbi serve",
+    "dev": "fbi serve -p 9003",
     "build": "fbi build",
     "lint": "npx eslint --ext .vue,.js --fix",
     "format": "npx prettier -c --write \"**/*.{js,md,html,css,less}\"",

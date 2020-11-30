@@ -2,8 +2,13 @@ import type { Configuration } from 'webpack'
 
 import ESLintPlugin from 'eslint-webpack-plugin'
 import StyleLintPlugin from 'stylelint-webpack-plugin'
+import HtmlWebpackPlugin from 'html-webpack-plugin'
+import { IConfigOption } from './utils'
+import { join } from 'path'
+import { paths } from './paths'
 
-export const getConfig = (env: string) => {
+export const getConfig = (options:IConfigOption) => {
+  const {title} = options
   const VueLoaderPlugin = require('vue-loader').VueLoaderPlugin
 
   const config: Configuration = {
@@ -30,7 +35,12 @@ export const getConfig = (env: string) => {
         files: 'src/**/*.{css,scss,vue}'
       }),
 
-      new VueLoaderPlugin()
+      new VueLoaderPlugin(),
+      new HtmlWebpackPlugin({
+        title: title || 'My App',
+        template: join(paths.public, 'index.html'),
+        filename: 'index.html' // output file
+      }),
     ],
     resolve: {
       extensions: ['*', '.js', '.vue'],

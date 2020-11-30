@@ -1,14 +1,17 @@
  import path from 'path'
 import { paths } from './paths'
-export const getConfig = (env: string) => {
-  //TODO: 需要支持参数从fbi命令行带过来
+import { IConfigOption } from './utils'
+
+
+export const getConfig = (options:IConfigOption) => {
+  const {mode,port,startEntry,title,cosEnv} = options
   const opts ={
-    mode:env,
-    port:9003
+    mode,
+    port
   }
   const webpackConfigEnv = {
-    isLocal:'true',
-    COS_ENV:''
+    isLocal:mode === 'development',
+    COS_ENV:cosEnv
   }
   const webpackMerge = require('webpack-merge')
   const singleSpaDefaults = require('webpack-config-single-spa-ts')
@@ -18,16 +21,14 @@ export const getConfig = (env: string) => {
   const MiniCssExtractPlugin = require('mini-css-extract-plugin')
   const { getAppConfig } = require('./utils')
   const runPwd = process.cwd()
-  function baseConfigDefault({
-    orgName = 'project-name',
-    projectName = 'root-config',
-    opts:any = opts,
-    webpackConfigEnv = {
-      isLocal:"true",
-      COS_ENV:'development'
-    },
-    publicPath = '',
-  }) {
+  function baseConfigDefault(op:any) {
+    const {
+      orgName = 'project-name',
+      projectName = 'root-config',
+      opts,
+      webpackConfigEnv,
+      publicPath = '',
+    } = op
     const excludePath = path.resolve(runPwd, '../node_modules')
     const apps = getDevAppConfig(opts.mode) || []
     const defaultConfig = singleSpaDefaults({
@@ -51,10 +52,7 @@ export const getConfig = (env: string) => {
   }
   
   function getPlugins(
-    webpackConfigEnv = {
-      COS_ENV:'development',
-      isLocal:'true'
-    },
+    webpackConfigEnv:any,
     orgName = '',
     apps:any[] = [],
     publicPath:string,
@@ -83,7 +81,7 @@ export const getConfig = (env: string) => {
             isLocal: webpackConfigEnv && webpackConfigEnv.isLocal === 'true',
             orgName,
             href,
-            title:'@project-name/root-config'
+            title
           }
         }
       }),
@@ -125,26 +123,15 @@ export const getConfig = (env: string) => {
       }
     }
     const apps = []
-    // TODO: 开发子应用时，自动启动，主应用在子应用的node_modules里面，然后自动注册子应用的模块
-    // TODO: 修改读取子应用的端口的方式
-    if (mode === 'runByChildApp') {
-      const { selfApp, otherApps } = getAppConfig(
-        path.resolve('../../../apps.config'),
-      )
-      if (Object.keys(selfApp).length) {
-        if (!selfApp.port) {
-          selfApp.port = getPortsByPath('../../../')
-        }
-        apps.push(selfApp)
-      }
-      if (otherApps) {
-        otherApps.forEach((app:any) => {
-          if (!app.port) {
-            app.port = getPortsByPath(`../../${app.name}`)
-          }
-        })
-        apps.push(...otherApps)
-      }
+    const entryPath = startEntry==='self' ? runPwd:'../../../'
+    const { selfApp, otherApps } = getAppConfig(
+      path.resolve(entryPath,'apps.config'),
+    )
+    if (Object.keys(selfApp).length) {
+      apps.push(selfApp)
+    }
+    if (Object.keys(otherApps).length) {
+      apps.push(...otherApps)
     }
     return apps.filter((app) => app.name && app.port)
   }

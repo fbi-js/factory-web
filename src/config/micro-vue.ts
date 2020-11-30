@@ -4,7 +4,9 @@ import {merge} from 'webpack-merge'
 import StyleLintPlugin from 'stylelint-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import { paths } from './paths'
-export const getConfig = (env: string) => {
+import { IConfigOption } from './utils'
+export const getConfig = (options:IConfigOption) => {
+  const {port} = options
   const buildMode = process.env.NODE_ENV || 'development'
   const isDev = buildMode === 'development'
   const VueLoaderPlugin = require('vue-loader').VueLoaderPlugin
@@ -82,6 +84,7 @@ export const getConfig = (env: string) => {
     return {
       output: {
         filename: `${orgName}-${projectName}${hashStr}.js`,
+        libraryTarget: 'umd',
       },
       entry: path.resolve(getRunPwd(),"src/main.js"),
       plugins: defaultPlugins,
@@ -123,7 +126,7 @@ export const getConfig = (env: string) => {
     ]
   }
   const opts={
-    port:9003
+    port
   }
   const subVue2WebpackConfig = subVue2ConfigDefault({
     orgName: "project-name",
@@ -133,12 +136,11 @@ export const getConfig = (env: string) => {
   })
 
 
-  return merge(config,subVue2WebpackConfig)
+  return merge(config,subVue2WebpackConfig as any)
 }
 
 export const deps = {
   'vue-loader': '^15.9.5',
   '@babel/plugin-proposal-class-properties': '^7.12.1',
-  'fbi-lint':"*",
-  'html-webpack-plugin':'^4.0.4',
+  'fbi-lint':"*"
 }

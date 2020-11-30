@@ -4,13 +4,17 @@ import { Command } from 'fbi'
 import webpack from 'webpack'
 import webpackConfig from '../config'
 import DevServer from 'webpack-dev-server'
+import { IConfigOption } from '../config/utils'
 
 export default class CommandServe extends Command {
   id = 'serve'
   alias = 's'
   description = 'start development server'
   args = ''
-  flags = [['-m, --mode <mode>', 'specify env mode(development|production|testing)', 'development']]
+  flags = [['-m, --mode <mode>', 'specify env mode(development|production|testing)', 'development'],
+  ['-e, --env <env>', 'customer env mode(development|production)', 'development'],
+  ['-p, --port <port>', 'webapck dev-serve port', 8080],
+  ['-entry, --entry <entry>', 'entry type(self|app-entry)', 'self']]
 
   constructor(public factory: Factory) {
     super()
@@ -33,8 +37,11 @@ export default class CommandServe extends Command {
     this.logStart(`Starting development server:`)
     try {
       const config = webpackConfig(template, {
-        env: process.env.NODE_ENV
-      })
+        port:flags.port,
+        mode:flags.mode,
+        startEntry:flags.entry,
+        cosEnv:flags.env,
+      } as IConfigOption)
       const compiler = webpack(config)
       const server = new DevServer(compiler, {
         historyApiFallback: true,
@@ -48,7 +55,7 @@ export default class CommandServe extends Command {
         },
         disableHostCheck: true
       })
-      server.listen(9003,'localhost', (err) => {
+      server.listen(flags.port,'localhost', (err) => {
         if (err) {
           throw err
         }

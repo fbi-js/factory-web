@@ -1,0 +1,11 @@
+{
+  "base": "@project-name/root-config",
+  "selfApp": {},
+  "apps": [
+    {
+      "name": "@project-name/app-vue2",
+      "activeWhen": ["/"],
+      "port": 8021
+    }
+  ]
+}

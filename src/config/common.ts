@@ -3,7 +3,6 @@ import type { Configuration } from 'webpack'
 import webpack from 'webpack'
 import { paths } from './paths'
 import { join, resolve } from 'path'
-import HtmlWebpackPlugin from 'html-webpack-plugin'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
 import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
@@ -127,11 +126,11 @@ export default (data: Record<string, any>): Configuration => {
           }
         ]
       }),
-      new HtmlWebpackPlugin({
-        title: data.title || 'My App',
-        template: join(paths.public, 'index.html'),
-        filename: 'index.html' // output file
-      }),
+      // new HtmlWebpackPlugin({
+      //   title: data.title || 'My App',
+      //   template: join(paths.public, 'index.html'),
+      //   filename: 'index.html' // output file
+      // }),
       isDev
         ? new webpack.HotModuleReplacementPlugin()
         : // Extracts CSS into separate files

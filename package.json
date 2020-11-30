@@ -9,7 +9,8 @@
   ],
   "scripts": {
     "build": "fbi b",
-    "watch": "fbi w"
+    "watch": "fbi w",
+    "format": "npx prettier -c --write \"**/*.{ts}\""
   },
   "keywords": [],
   "author": "fbi",
