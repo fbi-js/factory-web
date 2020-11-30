@@ -147,7 +147,6 @@ export const getConfig = (options: IConfigOption) => {
 
 export const deps = {
   'ts-config-single-spa': '^1.9.0',
-  'webpack-merge': '^4.2.2',
   '@types/systemjs': '^6.1.0',
   axios: '*'
 }

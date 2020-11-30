@@ -54,6 +54,5 @@ export const getConfig = (options: IConfigOption) => {
 }
 
 export const deps = {
-  'vue-loader': '^15.9.5',
   '@babel/plugin-proposal-class-properties': '^7.12.1'
 }
