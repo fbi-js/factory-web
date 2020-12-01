@@ -35,7 +35,7 @@ export const getConfig = (options: IConfigOption) => {
         files: 'src/**/*.{css,scss,vue}'
       }),
 
-      new VueLoaderPlugin(),
+      new VueLoaderPlugin()
     ],
     resolve: {
       extensions: ['*', '.js', '.vue'],

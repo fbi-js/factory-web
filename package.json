@@ -59,7 +59,6 @@
     "@types/webpack-dev-server": "^3.11.1",
     "prettier": "^2.2.1",
     "ts-config-single-spa": "^1.17.6",
-    "ts-loader": "^8.0.11",
     "vue-loader": "^15.9.5",
     "vue-template-compiler": "^2.6.12",
     "webpack-config-single-spa-ts": "^1.17.6"

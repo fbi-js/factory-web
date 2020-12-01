@@ -4,15 +4,16 @@ import { envKeyEnum } from '@/config'
 declare const COS_ENV
 declare const APPS
 const ifLocal = COS_ENV === envKeyEnum.development
-
 const urls = [].concat(
   /**
    * 自动注册app config
    */
   APPS.map((app) => {
+    const host = `http://localhost:${app.port}`
     return {
       name: app.name,
-      localUrl: `//localhost:${app.port}/index.html`,
+      host,
+      localUrl: `${host}/assets.json`,
     }
   }),
 )
@@ -33,16 +34,15 @@ export function queryEnteryFile() {
               },
         )
         .then((r) => {
-          const url = r.data.match(/<title>(\S*)<\/title>/)[1]
+          const url =`${item.host}/${r.data[0]}`
           resolve({
             name: item.name,
             url,
           })
         })
-        .catch(() => {
+        .catch((e) => {
           resolve({
             name: item.name,
-            url: item.localUrl,
           })
         })
     })

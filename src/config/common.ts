@@ -14,7 +14,6 @@ type WebpackMode = 'development' | 'production' | 'none'
 export default (data: Record<string, any>): Configuration => {
   const buildMode = process.env.NODE_ENV || 'development'
   const isDev = buildMode === 'development'
-
   return {
     mode: buildMode as WebpackMode,
     devtool: isDev ? 'inline-source-map' : false,
@@ -30,7 +29,7 @@ export default (data: Record<string, any>): Configuration => {
       rules: [
         // JavaScript: Use Babel to transpile JavaScript files
         {
-          test: /\.(js|jsx)$/,
+          test: /\.(js|ts)x$/,
           use: ['babel-loader'],
           exclude: /node_modules/
         },

@@ -10,7 +10,7 @@ import './assets/css/main.css'
 Vue.config.productionTip = false
 
 <%_ if (project.isMicro) { _%>
-const appName = '@project-name/app-vue'
+const appName = '@mf/app-vue'
 setPublicPath(appName)
 
 const vueLifecycles = singleSpaVue({

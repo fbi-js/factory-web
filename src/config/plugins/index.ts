@@ -1,6 +1,6 @@
 import type { Compiler } from 'webpack'
 
-import fs from 'fs/promises'
+import fs from 'fs'
 import { join, basename, extname } from 'path'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 
@@ -48,13 +48,13 @@ export class AssetJsonPlugin {
       )
     })
 
-    compiler.hooks.done.tapAsync('AssetJsonPlugin output', async (
+    compiler.hooks.done.tap('AssetJsonPlugin output', async (
       stats /* stats is passed as argument when done hook is tapped.  */
     ) => {
       if (result && compiler.options.output?.path) {
         const targetFile = join(compiler.options.output.path, 'assets.json')
         try {
-          await fs.writeFile(targetFile, result)
+          await fs.writeFile(targetFile, result, () => {})
         } catch (err) {
           console.error(err)
         }

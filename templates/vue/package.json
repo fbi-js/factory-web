@@ -4,7 +4,7 @@
   "description": "<%= project.description %>",
   "private": true,
   "scripts": {
-    "dev": "fbi serve <%_ if (project.isMicro) { _%> -p 9001 <%_ } _%>",
+    "dev": "fbi serve  <%_ if (project.isMicro) { _%> <%=  %> -p 9001 <%_ } _%>",
     "build": "fbi build",
     "lint": "npx eslint --ext .vue,.js --fix",
     "postinstall": "fbi install"

@@ -6,6 +6,7 @@ import webpackConfig from '../config'
 import DevServer from 'webpack-dev-server'
 import { IConfigOption } from '../types'
 import { PORT } from '../config/defaults'
+import path from 'path'
 
 export default class CommandServe extends Command {
   id = 'serve'
@@ -47,6 +48,8 @@ export default class CommandServe extends Command {
       } as IConfigOption)
       const compiler = webpack(config)
       const server = new DevServer(compiler, {
+        contentBase: path.join(process.cwd(), 'dist'),
+        writeToDisk: true,
         historyApiFallback: true,
         compress: true,
         noInfo: true,

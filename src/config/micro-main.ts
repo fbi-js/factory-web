@@ -23,8 +23,8 @@ export const getConfig = (options: IConfigOption) => {
   }
 
   const CopyWebpackPlugin = require('copy-webpack-plugin')
-  const HtmlWebpackPlugin = require('html-webpack-plugin')
-  const StandaloneSingleSpaPlugin = require('standalone-single-spa-webpack-plugin')
+  // const HtmlWebpackPlugin = require('html-webpack-plugin')
+  // const StandaloneSingleSpaPlugin = require('standalone-single-spa-webpack-plugin')
   const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 
   let apps = []
@@ -32,7 +32,6 @@ export const getConfig = (options: IConfigOption) => {
     const userConfig = require(join(paths.cwd, 'apps.config'))
     apps = userConfig.apps
   } catch {}
-
   const config: Configuration = {
     entry: join(paths.src, 'index.ts'),
     output: {
@@ -52,8 +51,8 @@ export const getConfig = (options: IConfigOption) => {
           }
         },
         {
-          test: /\.tsx?$/,
-          use: 'ts-loader',
+          test: /\.(js|ts)x?$/,
+          use: 'babel-loader',
           exclude: /node_modules/
         }
       ]
@@ -74,14 +73,14 @@ export const getConfig = (options: IConfigOption) => {
             to: 'common-deps/'
           }
         ]
-      }),
-      isDev &&
-        new StandaloneSingleSpaPlugin({
-          appOrParcelName: `@${opts.orgName}/${opts.projectName}`,
-          disabled: !webpackConfigEnv.standalone,
-          HtmlWebpackPlugin,
-          ...opts.standaloneOptions
-        })
+      })
+      // isDev &&
+      //   new StandaloneSingleSpaPlugin({
+      //     appOrParcelName: `@${opts.orgName}/${opts.projectName}`,
+      //     disabled: !webpackConfigEnv.standalone,
+      //     HtmlWebpackPlugin,
+      //     ...opts.standaloneOptions
+      //   })
     ].filter(Boolean),
     resolve: {
       extensions: ['.ts', '.js', '.mjs', '.jsx', '.wasm', '.json']
@@ -92,8 +91,7 @@ export const getConfig = (options: IConfigOption) => {
 }
 
 export const deps = {
-  'standalone-single-spa-webpack-plugin': '^1.1.0',
+  // 'standalone-single-spa-webpack-plugin': '^1.1.0',
   'fork-ts-checker-webpack-plugin': '^6.0.4',
-  '@types/systemjs': '^6.1.0',
-  'ts-loader': '^8.0.11'
+  '@types/systemjs': '^6.1.0'
 }
