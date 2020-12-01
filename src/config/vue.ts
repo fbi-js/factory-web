@@ -1,11 +1,11 @@
 import type { Configuration } from 'webpack'
 
+import { join } from 'path'
+import { paths } from './helpers/paths'
+import { IConfigOption } from '../types'
 import ESLintPlugin from 'eslint-webpack-plugin'
 import StyleLintPlugin from 'stylelint-webpack-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
-import { IConfigOption } from './utils'
-import { join } from 'path'
-import { paths } from './paths'
 
 export const getConfig = (options: IConfigOption) => {
   const { title } = options
@@ -35,12 +35,7 @@ export const getConfig = (options: IConfigOption) => {
         files: 'src/**/*.{css,scss,vue}'
       }),
 
-      new VueLoaderPlugin(),
-      new HtmlWebpackPlugin({
-        title: title || 'My App',
-        template: join(paths.public, 'index.html'),
-        filename: 'index.html' // output file
-      })
+      new VueLoaderPlugin()
     ],
     resolve: {
       extensions: ['*', '.js', '.vue'],
@@ -54,5 +49,7 @@ export const getConfig = (options: IConfigOption) => {
 }
 
 export const deps = {
+  'vue-loader': '^15.9.5',
+  'vue-template-compiler': '^2.6.12',
   '@babel/plugin-proposal-class-properties': '^7.12.1'
 }

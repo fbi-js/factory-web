@@ -1,7 +1,7 @@
-import { IConfigOption } from './utils';
-export declare const getConfig: (options: IConfigOption) => any;
+import type { Configuration } from 'webpack';
+import { IConfigOption } from '../types';
+export declare const getConfig: (options: IConfigOption) => Configuration;
 export declare const deps: {
-    'ts-config-single-spa': string;
+    'fork-ts-checker-webpack-plugin': string;
     '@types/systemjs': string;
-    axios: string;
 };

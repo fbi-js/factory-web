@@ -1,9 +1,10 @@
 import type { Configuration } from 'webpack'
 
 import webpack from 'webpack'
-import { paths } from './paths'
 import { join, resolve } from 'path'
+import { paths } from './helpers/paths'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
+import HtmlWebpackPlugin from 'html-webpack-plugin'
 import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin'
@@ -13,10 +14,6 @@ type WebpackMode = 'development' | 'production' | 'none'
 export default (data: Record<string, any>): Configuration => {
   const buildMode = process.env.NODE_ENV || 'development'
   const isDev = buildMode === 'development'
-  const appName = process.env.npm_package_name
-  const appVersion = process.env.npm_package_version
-  const distDir = join(process.cwd(), 'dist')
-
   return {
     mode: buildMode as WebpackMode,
     devtool: isDev ? 'inline-source-map' : false,
@@ -32,7 +29,7 @@ export default (data: Record<string, any>): Configuration => {
       rules: [
         // JavaScript: Use Babel to transpile JavaScript files
         {
-          test: /\.(js|jsx)$/,
+          test: /\.(js|ts)x$/,
           use: ['babel-loader'],
           exclude: /node_modules/
         },
@@ -64,54 +61,52 @@ export default (data: Record<string, any>): Configuration => {
           }
         },
         // Styles: Inject CSS into the head with source maps
-        // TODO:这个公共loader处理css文件时好像会报错 先注释掉
         {
-          // test: /\.(scss|css)$/,
-          // use: isDev
-          //   ? [
-          //       'style-loader',
-          //       { loader: 'css-loader', options: { sourceMap: true, importLoaders: 1 } },
-          //       { loader: 'postcss-loader', options: { sourceMap: true } },
-          //       {
-          //         loader: 'sass-loader',
-          //         options: {
-          //           sourceMap: true,
-          //           // Prefer `dart-sass`
-          //           implementation: require('sass')
-          //         }
-          //       }
-          //     ]
-          //   : [
-          //       {
-          //         loader: MiniCssExtractPlugin.loader,
-          //         options: {
-          //           publicPath: paths.css
-          //         }
-          //       },
-          //       {
-          //         loader: 'css-loader',
-          //         options: {
-          //           importLoaders: 2,
-          //           sourceMap: false
-          //         }
-          //       },
-          //       'postcss-loader',
-          //       {
-          //         loader: 'sass-loader',
-          //         options: {
-          //           // Prefer `dart-sass`
-          //           implementation: require('sass')
-          //         }
-          //       }
-          //     ]
+          test: /\.(scss|css)$/,
+          use: isDev
+            ? [
+                'style-loader',
+                { loader: 'css-loader', options: { sourceMap: true, importLoaders: 1 } },
+                { loader: 'postcss-loader', options: { sourceMap: true } },
+                {
+                  loader: 'sass-loader',
+                  options: {
+                    sourceMap: true,
+                    // Prefer `dart-sass`
+                    implementation: require('sass')
+                  }
+                }
+              ]
+            : [
+                {
+                  loader: MiniCssExtractPlugin.loader,
+                  options: {
+                    publicPath: paths.css
+                  }
+                },
+                {
+                  loader: 'css-loader',
+                  options: {
+                    importLoaders: 2,
+                    sourceMap: false
+                  }
+                },
+                'postcss-loader',
+                {
+                  loader: 'sass-loader',
+                  options: {
+                    // Prefer `dart-sass`
+                    implementation: require('sass')
+                  }
+                }
+              ]
         }
       ]
     },
     plugins: [
       new webpack.ProgressPlugin(),
       // Make appName & appVersion available as a constant
-      // new webpack.DefinePlugin({ appName: JSON.stringify(appName) }),
-      // new webpack.DefinePlugin({ appVersion: JSON.stringify(appVersion) }),
+      new webpack.DefinePlugin(data.DefinePluginData || {}),
       // Removes/cleans build folders and unused assets when rebuilding
       new CleanWebpackPlugin(),
       // Copies files from target to destination folder
@@ -126,11 +121,30 @@ export default (data: Record<string, any>): Configuration => {
           }
         ]
       }),
-      // new HtmlWebpackPlugin({
-      //   title: data.title || 'My App',
-      //   template: join(paths.public, 'index.html'),
-      //   filename: 'index.html' // output file
-      // }),
+      new HtmlWebpackPlugin({
+        title: data.title || 'My App',
+        template: join(paths.public, 'index.html'),
+        filename: 'index.html', // output file
+        // https://github.com/jantimon/html-webpack-plugin/blob/657bc605a5dbdbbdb4f8154bd5360492c5687fc9/examples/template-parameters/webpack.config.js#L20
+        templateParameters: (
+          compilation: { options: any },
+          assets: any,
+          assetTags: any,
+          options: any
+        ) => {
+          return {
+            compilation,
+            webpackConfig: compilation.options,
+            htmlWebpackPlugin: {
+              tags: assetTags,
+              files: assets,
+              options
+            },
+            isLocal: isDev,
+            serverUrl: `http://localhost:${data.port}`
+          }
+        }
+      }),
       isDev
         ? new webpack.HotModuleReplacementPlugin()
         : // Extracts CSS into separate files
@@ -182,13 +196,17 @@ export default (data: Record<string, any>): Configuration => {
       ? {
           devServer: {
             historyApiFallback: true,
-            contentBase: distDir,
+            contentBase: paths.dist,
             open: true,
             compress: true,
             hot: true,
-            port: 8080,
+            port: data.port,
             overlay: true,
-            stats: 'errors-only'
+            stats: 'errors-only',
+            headers: {
+              'Access-Control-Allow-Origin': '*'
+            },
+            disableHostCheck: true
           }
         }
       : {

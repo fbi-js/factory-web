@@ -20,7 +20,6 @@ export default class CommandBuild extends Command {
   }
 
   public async run(flags: any, unknown: any) {
-    console.log(this.context.get('env'))
     process.env.NODE_ENV = flags.mode ?? 'production'
 
     this.debug(
@@ -35,10 +34,9 @@ export default class CommandBuild extends Command {
 
     this.logStart(`Start building:`)
     const template = this.context.get('config.factory.template')
-    const config = webpackConfig(template, {
+    const config = await webpackConfig(template, {
       env: process.env.NODE_ENV
     })
-
     try {
       await this.build(config)
     } catch (err) {

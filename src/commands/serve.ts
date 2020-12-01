@@ -4,7 +4,9 @@ import { Command } from 'fbi'
 import webpack from 'webpack'
 import webpackConfig from '../config'
 import DevServer from 'webpack-dev-server'
-import { IConfigOption } from '../config/utils'
+import { IConfigOption } from '../types'
+import { PORT } from '../config/defaults'
+import path from 'path'
 
 export default class CommandServe extends Command {
   id = 'serve'
@@ -14,7 +16,7 @@ export default class CommandServe extends Command {
   flags = [
     ['-m, --mode <mode>', 'specify env mode(development|production|testing)', 'development'],
     ['-e, --env <env>', 'customer env mode(development|production)', 'development'],
-    ['-p, --port <port>', 'webapck dev-serve port', 8080],
+    ['-p, --port <port>', 'webapck dev-serve port', PORT],
     ['-entry, --entry <entry>', 'entry type(self|app-entry)', 'self']
   ]
 
@@ -38,7 +40,7 @@ export default class CommandServe extends Command {
 
     this.logStart(`Starting development server:`)
     try {
-      const config = webpackConfig(template, {
+      const config = await webpackConfig(template, {
         port: flags.port,
         mode: flags.mode,
         startEntry: flags.entry,
@@ -46,6 +48,8 @@ export default class CommandServe extends Command {
       } as IConfigOption)
       const compiler = webpack(config)
       const server = new DevServer(compiler, {
+        contentBase: path.join(process.cwd(), 'dist'),
+        writeToDisk: true,
         historyApiFallback: true,
         compress: true,
         noInfo: true,

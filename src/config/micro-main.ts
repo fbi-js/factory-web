@@ -1,89 +1,71 @@
-import path from 'path'
-import { paths } from './paths'
-import { IConfigOption } from './utils'
+import type { Configuration } from 'webpack'
+
+import { join } from 'path'
+import webpack from 'webpack'
+import { paths } from './helpers/paths'
+import { IConfigOption } from '../types'
 
 export const getConfig = (options: IConfigOption) => {
   const { mode, port, startEntry, title, cosEnv } = options
+  const isDev = mode === 'development'
   const opts = {
-    mode,
-    port
+    orgName: 'mf',
+    projectName: 'base',
+    orgPackagesAsExternal: true,
+    webpackConfigEnv: null,
+    standalone: false,
+    standaloneOptions: {}
   }
-  const webpackConfigEnv = {
-    isLocal: mode === 'development',
-    COS_ENV: cosEnv
-  }
-  const webpackMerge = require('webpack-merge')
-  const singleSpaDefaults = require('webpack-config-single-spa-ts')
-  const HtmlWebpackPlugin = require('html-webpack-plugin')
-  const webpack = require('webpack')
-  const CopyWebpackPlugin = require('copy-webpack-plugin')
-  const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-  const { getAppConfig } = require('./utils')
-  const runPwd = process.cwd()
-  function baseConfigDefault(op: any) {
-    const {
-      orgName = 'project-name',
-      projectName = 'root-config',
-      opts,
-      webpackConfigEnv,
-      publicPath = ''
-    } = op
-    const excludePath = path.resolve(runPwd, '../node_modules')
-    const apps = getDevAppConfig(opts.mode) || []
-    const defaultConfig = singleSpaDefaults({
-      orgName,
-      projectName,
-      webpackConfigEnv
-    })
-    defaultConfig.module.rules[1].exclude = excludePath
-    const defaultPlugin = getPlugins(webpackConfigEnv, orgName, apps, publicPath)
-    const config = webpackMerge.merge(defaultConfig, {
-      entry: path.resolve(runPwd, 'src/index.ts'),
-      plugins: defaultPlugin,
-      resolve: {
-        alias: {
-          '@': path.resolve(runPwd, 'src/')
-        }
-      },
-      externals: ['axios', 'single-spa']
-    })
-    return config
+  const webpackConfigEnv = opts.webpackConfigEnv || {
+    isLocal: isDev,
+    COS_ENV: cosEnv,
+    standalone: false
   }
 
-  function getPlugins(webpackConfigEnv: any, orgName = '', apps: any[] = [], publicPath: string) {
-    const href = publicPath
-    return [
+  const CopyWebpackPlugin = require('copy-webpack-plugin')
+  // const HtmlWebpackPlugin = require('html-webpack-plugin')
+  // const StandaloneSingleSpaPlugin = require('standalone-single-spa-webpack-plugin')
+  const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
+
+  let apps = []
+  try {
+    const userConfig = require(join(paths.cwd, 'apps.config'))
+    apps = userConfig.apps
+  } catch {}
+  const config: Configuration = {
+    entry: join(paths.src, 'index.ts'),
+    output: {
+      filename: isDev
+        ? `${opts.orgName}-${opts.projectName}.js?v=[hash]`
+        : `${opts.orgName}-${opts.projectName}.[hash].js`,
+      libraryTarget: 'system',
+      path: paths.dist,
+      jsonpFunction: `webpackJsonp_${opts.projectName}`,
+      devtoolNamespace: `${opts.projectName}`
+    },
+    module: {
+      rules: [
+        {
+          parser: {
+            system: false
+          }
+        },
+        {
+          test: /\.(js|ts)x?$/,
+          use: 'babel-loader',
+          exclude: /node_modules/
+        }
+      ]
+    },
+    externals: opts.orgPackagesAsExternal
+      ? ['single-spa', new RegExp(`^@${opts.orgName}/`)]
+      : ['single-spa'],
+    plugins: [
       new webpack.DefinePlugin({
         COS_ENV: JSON.stringify(webpackConfigEnv.COS_ENV),
         APPS: JSON.stringify(apps)
       }),
-      new HtmlWebpackPlugin({
-        inject: false,
-        template: path.join(paths.public, 'index.html'),
-        /** 重写html-plugin配置 */
-        // https://github.com/jantimon/html-webpack-plugin/blob/657bc605a5dbdbbdb4f8154bd5360492c5687fc9/examples/template-parameters/webpack.config.js#L20
-        templateParameters: (
-          compilation: { options: any },
-          assets: any,
-          assetTags: any,
-          options: any
-        ) => {
-          return {
-            compilation,
-            webpackConfig: compilation.options,
-            htmlWebpackPlugin: {
-              tags: assetTags,
-              files: assets,
-              options
-            },
-            /** 下面为自定义参数 */
-            isLocal: webpackConfigEnv && webpackConfigEnv.isLocal === 'true',
-            orgName,
-            href,
-            title
-          }
-        }
-      }),
+      new ForkTsCheckerWebpackPlugin({ typescript: require.resolve('typescript') }),
       new CopyWebpackPlugin({
         patterns: [
           {
@@ -91,62 +73,25 @@ export const getConfig = (options: IConfigOption) => {
             to: 'common-deps/'
           }
         ]
-      }),
-      new MiniCssExtractPlugin()
-    ]
+      })
+      // isDev &&
+      //   new StandaloneSingleSpaPlugin({
+      //     appOrParcelName: `@${opts.orgName}/${opts.projectName}`,
+      //     disabled: !webpackConfigEnv.standalone,
+      //     HtmlWebpackPlugin,
+      //     ...opts.standaloneOptions
+      //   })
+    ].filter(Boolean),
+    resolve: {
+      extensions: ['.ts', '.js', '.mjs', '.jsx', '.wasm', '.json']
+    }
   }
 
-  function getDevAppConfig(mode: string | undefined) {
-    function getPortsByPath(basePath: string) {
-      try {
-        const packageJson = require(path.resolve(`${basePath}/package.json`))
-        if (packageJson.scripts.start.includes('--port')) {
-          /**
-           * 获取package.json中的dev端口
-           */
-          return packageJson.scripts.start
-            .match(/--port -?[1-9]\d*/)
-            .pop()
-            .match(/[1-9]\d*/)
-            .pop()
-        } else {
-          /**
-           * 获取项目根目录中，webpack.config.js中的devServer.port
-           */
-          const webpackFn = require(path.resolve(`${basePath}/webpack.config.js`))
-          const webpackConfig = webpackFn({}, {})
-          return webpackConfig.devServer.port
-        }
-      } catch {
-        return 0
-      }
-    }
-    const apps = []
-    const entryPath = startEntry === 'self' ? runPwd : '../../../'
-    const { selfApp, otherApps } = getAppConfig(path.resolve(entryPath, 'apps.config'))
-    if (Object.keys(selfApp).length) {
-      apps.push(selfApp)
-    }
-    if (Object.keys(otherApps).length) {
-      apps.push(...otherApps)
-    }
-    return apps.filter((app) => app.name && app.port)
-  }
-
-  const baseConfig = baseConfigDefault({
-    orgName: 'project-name',
-    projectName: 'root-config',
-    opts,
-    webpackConfigEnv,
-    publicPath: `http://localhost:${opts.port}`
-  })
-  return webpackMerge.merge(baseConfig, {
-    // modify the webpack config however you'd like to by adding to this object
-  })
+  return config
 }
 
 export const deps = {
-  'ts-config-single-spa': '^1.9.0',
-  '@types/systemjs': '^6.1.0',
-  axios: '*'
+  // 'standalone-single-spa-webpack-plugin': '^1.1.0',
+  'fork-ts-checker-webpack-plugin': '^6.0.4',
+  '@types/systemjs': '^6.1.0'
 }

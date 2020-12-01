@@ -3,7 +3,7 @@ import BaseClass from './base'
 
 export default class TemplateMicroVue extends BaseClass {
   id = 'micro-vue'
-  path = 'templates/micro-vue'
+  path = 'templates/vue'
   description = 'template for Micro-fontends vue application'
   templates = []
 
@@ -29,7 +29,8 @@ export default class TemplateMicroVue extends BaseClass {
 
     this.data.project = {
       ...this.data.project,
-      ...extraData
+      ...extraData,
+      isMicro: true
     }
 
     const { factory, project } = this.data
@@ -43,6 +44,7 @@ export default class TemplateMicroVue extends BaseClass {
   protected async writing() {
     await super.writing()
 
-    this.files.copy = this.files.copy?.concat(['public/*', 'src/*', 'app.config.json'])
+    this.files.copy = this.files.copy?.concat(['public/*', 'src/*', 'micro-app.json'])
+    this.files.render = this.files.render?.concat('src/main.js')
   }
 }
