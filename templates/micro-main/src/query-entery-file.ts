@@ -76,7 +76,7 @@ export function appendScriptAndRender() {
         head.appendChild(script)
       })
       .finally(() => {
-        resolve()
+        resolve('')
       })
   })
 }

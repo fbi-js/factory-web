@@ -34,10 +34,9 @@ export default class CommandBuild extends Command {
 
     this.logStart(`Start building:`)
     const template = this.context.get('config.factory.template')
-    const config = webpackConfig(template, {
+    const config = await webpackConfig(template, {
       env: process.env.NODE_ENV
     })
-    console.log(config)
     try {
       await this.build(config)
     } catch (err) {

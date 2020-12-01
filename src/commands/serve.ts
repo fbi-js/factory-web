@@ -39,7 +39,7 @@ export default class CommandServe extends Command {
 
     this.logStart(`Starting development server:`)
     try {
-      const config = webpackConfig(template, {
+      const config = await webpackConfig(template, {
         port: flags.port,
         mode: flags.mode,
         startEntry: flags.entry,

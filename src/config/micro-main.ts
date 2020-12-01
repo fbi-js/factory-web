@@ -9,8 +9,8 @@ export const getConfig = (options: IConfigOption) => {
   const { mode, port, startEntry, title, cosEnv } = options
   const isDev = mode === 'development'
   const opts = {
-    orgName: 'vue-mf',
-    projectName: 'root-config',
+    orgName: 'mf',
+    projectName: 'base',
     orgPackagesAsExternal: true,
     webpackConfigEnv: null,
     standalone: false,
@@ -36,7 +36,9 @@ export const getConfig = (options: IConfigOption) => {
   const config: Configuration = {
     entry: join(paths.src, 'index.ts'),
     output: {
-      filename: `main.js`,
+      filename: isDev
+        ? `${opts.orgName}-${opts.projectName}.js?v=[hash]`
+        : `${opts.orgName}-${opts.projectName}.[hash].js`,
       libraryTarget: 'system',
       path: paths.dist,
       jsonpFunction: `webpackJsonp_${opts.projectName}`,
@@ -90,8 +92,8 @@ export const getConfig = (options: IConfigOption) => {
 }
 
 export const deps = {
-  'webpack-config-single-spa-ts': '^1.17.6',
-  'ts-config-single-spa': '^1.9.0',
+  'standalone-single-spa-webpack-plugin': '^1.1.0',
+  'fork-ts-checker-webpack-plugin': '^6.0.4',
   '@types/systemjs': '^6.1.0',
   'ts-loader': '^8.0.11'
 }

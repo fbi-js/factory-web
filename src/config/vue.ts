@@ -36,11 +36,6 @@ export const getConfig = (options: IConfigOption) => {
       }),
 
       new VueLoaderPlugin(),
-      new HtmlWebpackPlugin({
-        title: title || 'My App',
-        template: join(paths.public, 'index.html'),
-        filename: 'index.html' // output file
-      })
     ],
     resolve: {
       extensions: ['*', '.js', '.vue'],

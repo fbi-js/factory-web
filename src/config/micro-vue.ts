@@ -1,5 +1,6 @@
 import { merge } from 'webpack-merge'
 import { IConfigOption } from '../types'
+import { AssetJsonPlugin } from './plugins'
 import { deps as baseDeps, getConfig as getBaseConfig } from './vue'
 
 export const getConfig = (options: IConfigOption) => {
@@ -8,7 +9,12 @@ export const getConfig = (options: IConfigOption) => {
   return merge(baseConfig, {
     output: {
       libraryTarget: 'umd'
-    }
+    },
+    plugins: [
+      new AssetJsonPlugin({
+        onlyEntryFile: true
+      })
+    ]
   })
 }
 
