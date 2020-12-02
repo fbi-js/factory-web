@@ -8,17 +8,18 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin'
-
-type WebpackMode = 'development' | 'production' | 'none'
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
 
 export default (data: Record<string, any>): Configuration => {
   const buildMode = process.env.NODE_ENV || 'development'
   const isDev = buildMode === 'development'
-  return {
-    mode: buildMode as WebpackMode,
+  const isTs = data.factory?.features?.typescript
+
+  const config = {
+    mode: buildMode,
     devtool: isDev ? 'inline-source-map' : false,
     entry: {
-      main: join(paths.src, 'main.js')
+      main: join(paths.src, `main.${isTs ? 'ts' : 'js'}`)
     },
     output: {
       path: paths.dist,
@@ -29,7 +30,7 @@ export default (data: Record<string, any>): Configuration => {
       rules: [
         // JavaScript: Use Babel to transpile JavaScript files
         {
-          test: /\.(js|ts)x$/,
+          test: /\.(js|ts)x?$/,
           use: ['babel-loader'],
           exclude: /node_modules/
         },
@@ -153,26 +154,15 @@ export default (data: Record<string, any>): Configuration => {
             filename: `${paths.css}/[name].[contenthash].css`,
             chunkFilename: `${paths.css}/[name]-[id].css`
           })
-    ],
+    ].filter(Boolean),
     resolve: {
+      extensions: ['.js', '.ts', '.jsx', '.tsx', '.mjs', '.wasm', '.json'],
       alias: {
         '@': resolve('src/')
       }
     },
     performance: {
       hints: false
-    },
-    node: {
-      // prevent webpack from injecting useless setImmediate polyfill because Vue
-      // source contains it (although only uses it if it's native).
-      setImmediate: false,
-      // prevent webpack from injecting mocks to Node native modules
-      // that does not make sense for the client
-      dgram: 'empty',
-      fs: 'empty',
-      net: 'empty',
-      tls: 'empty',
-      child_process: 'empty'
     },
     stats: {
       assets: true,
@@ -227,4 +217,10 @@ export default (data: Record<string, any>): Configuration => {
           }
         })
   }
+
+  if (isTs) {
+    config.plugins.push(new ForkTsCheckerWebpackPlugin())
+  }
+
+  return config as Configuration
 }

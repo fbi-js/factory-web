@@ -7,17 +7,14 @@ export const getConfig = (env: string) => {
   const config: Configuration = {
     plugins: [
       new ESLintPlugin({
-        extensions: ['js', 'jsx'],
+        extensions: ['js', 'ts', 'jsx', 'tsx'],
         files: 'src'
       }),
 
       new StyleLintPlugin({
         files: 'src/**/*.{css,scss,jsx}'
       })
-    ],
-    resolve: {
-      extensions: ['*', '.js', '.jsx']
-    }
+    ]
   }
 
   return config

@@ -41,7 +41,7 @@ function getIpAddress() {
   return ipAddress
 }
 
-export default {
+export {
   getAppConfig,
   getRunPwd,
   guid,

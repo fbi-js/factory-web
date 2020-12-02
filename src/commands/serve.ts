@@ -1,13 +1,13 @@
+import type { Stats } from 'webpack'
+
 import Factory from '..'
 import { Command } from 'fbi'
 
 import webpack from 'webpack'
 import webpackConfig from '../config'
-import { IConfigOption } from '../types'
-import { WEBPACK_DEV_CONFIG, HOST, PORT } from '../config/defaults'
-import utils from '../config/helpers/utils'
-import chalk from 'chalk'
 import WebpackDevServer from 'webpack-dev-server'
+import { getIpAddress } from '../config/helpers/utils'
+import { WEBPACK_DEV_CONFIG, HOST, PORT } from '../config/defaults'
 
 export default class CommandServe extends Command {
   id = 'serve'
@@ -38,17 +38,19 @@ export default class CommandServe extends Command {
       unknown
     )
 
-    const template = this.context.get('config.factory.template')
+    const factory = this.context.get('config.factory')
     const isProduction = process.env.NODE_ENV === 'production'
 
     this.logStart(`Starting development server:`)
     try {
-      const config = await webpackConfig(template, {
+      const config = await webpackConfig(factory.template, {
         port: flags.port,
         mode: flags.mode,
         startEntry: flags.entry,
-        cosEnv: flags.env
-      } as IConfigOption)
+        cosEnv: flags.env,
+        factory
+      })
+
       const compiler = webpack(config)
       // TODO: merge user config
       const server = new WebpackDevServer(compiler, {
@@ -57,21 +59,24 @@ export default class CommandServe extends Command {
 
       return new Promise((resolve, reject) => {
         const localUrl = `http://localhost:${flags.port}`
-        const networkUrl = `http://${utils.getIpAddress()}:${flags.port}`
+        const networkUrl = `http://${getIpAddress()}:${flags.port}`
 
-        compiler.hooks.done.tap('fbi-serve-compiler', async (stats) => {
+        compiler.hooks.done.tap('fbi-serve-compiler', async (stats: Stats) => {
+          console.log(stats?.toString(config.stats))
+
           if (stats.hasErrors()) {
             return
           }
+
           console.log()
           console.log(`  App running at:`)
-          console.log(`  - Local:   ${chalk.cyan(localUrl)}`)
-          console.log(`  - Network: ${chalk.cyan(networkUrl)}`)
+          console.log(`  - Local:   ${this.style.cyan(localUrl)}`)
+          console.log(`  - Network: ${this.style.cyan(networkUrl)}`)
           console.log()
           if (!isProduction) {
             const buildCommand = `npm run build`
             console.log(`  Note that the development build is not optimized.`)
-            console.log(`  To create a production build, run ${chalk.cyan(buildCommand)}.`)
+            console.log(`  To create a production build, run ${this.style.cyan(buildCommand)}.`)
           }
         })
 

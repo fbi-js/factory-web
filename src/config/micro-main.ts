@@ -25,7 +25,6 @@ export const getConfig = (options: IConfigOption) => {
   const CopyWebpackPlugin = require('copy-webpack-plugin')
   // const HtmlWebpackPlugin = require('html-webpack-plugin')
   // const StandaloneSingleSpaPlugin = require('standalone-single-spa-webpack-plugin')
-  const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 
   let apps = []
   try {
@@ -49,11 +48,6 @@ export const getConfig = (options: IConfigOption) => {
           parser: {
             system: false
           }
-        },
-        {
-          test: /\.(js|ts)x?$/,
-          use: 'babel-loader',
-          exclude: /node_modules/
         }
       ]
     },
@@ -65,7 +59,6 @@ export const getConfig = (options: IConfigOption) => {
         COS_ENV: JSON.stringify(webpackConfigEnv.COS_ENV),
         APPS: JSON.stringify(apps)
       }),
-      new ForkTsCheckerWebpackPlugin({ typescript: require.resolve('typescript') }),
       new CopyWebpackPlugin({
         patterns: [
           {
@@ -81,10 +74,7 @@ export const getConfig = (options: IConfigOption) => {
       //     HtmlWebpackPlugin,
       //     ...opts.standaloneOptions
       //   })
-    ].filter(Boolean),
-    resolve: {
-      extensions: ['.ts', '.js', '.mjs', '.jsx', '.wasm', '.json']
-    }
+    ].filter(Boolean)
   }
 
   return config
@@ -92,6 +82,5 @@ export const getConfig = (options: IConfigOption) => {
 
 export const deps = {
   // 'standalone-single-spa-webpack-plugin': '^1.1.0',
-  'fork-ts-checker-webpack-plugin': '^6.0.4',
   '@types/systemjs': '^6.1.0'
 }
