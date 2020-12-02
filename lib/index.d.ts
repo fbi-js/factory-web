@@ -10,6 +10,6 @@ export default class FactoryWeb extends Factory {
     id: any;
     description: string;
     commands: (CommandServe | CommandInstall | CommandBuild)[];
-    templates: (TemplateVue | TemplateReact | TemplateMicroMain | TemplateMicroVue)[];
+    templates: (TemplateMicroMain | TemplateMicroVue | TemplateVue | TemplateReact)[];
     execOpts: any;
 }

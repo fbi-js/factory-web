@@ -10,7 +10,9 @@ import './assets/css/main.css'
 Vue.config.productionTip = false
 
 <%_ if (project.isMicro) { _%>
-const appName = '@mf/app-vue'
+// eslint-disable-next-line no-undef
+const microApp = require('../micro-app.js')
+const appName = `@${microApp.orgName}/${microApp.projectName}`
 setPublicPath(appName)
 
 const vueLifecycles = singleSpaVue({

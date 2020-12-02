@@ -47,7 +47,7 @@ export default class TemplateMicroMain extends BaseClass {
       'public/*',
       'src/*',
       'tsconfig.json',
-      'apps.config.json'
+      'micro-app.js'
     ])
   }
 }

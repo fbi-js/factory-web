@@ -34,7 +34,7 @@ export function queryEnteryFile() {
               },
         )
         .then((r) => {
-          const url =`${item.host}/${r.data[0]}`
+          const url =`${item.host}${r.data.entry}`
           resolve({
             name: item.name,
             url,

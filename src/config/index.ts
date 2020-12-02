@@ -2,10 +2,7 @@ import type { Configuration } from 'webpack'
 
 import common from './common'
 import { merge } from 'webpack-merge'
-import { utils } from 'fbi'
 import { join } from 'path'
-
-const { fs } = utils
 
 export default async (type: string, data: Record<string, any>): Promise<Configuration> => {
   const commonConfigs = common(data)
@@ -21,12 +18,10 @@ export default async (type: string, data: Record<string, any>): Promise<Configur
   // user config
   let userConfig = {}
   const userConfigPath = join(process.cwd(), 'webpack.config')
-  if (await fs.pathExists(userConfigPath)) {
-    try {
-      const tmp = require(userConfigPath)
-      userConfig = tmp.default || tmp || {}
-    } catch {}
-  }
+  try {
+    const tmp = require(userConfigPath)
+    userConfig = tmp.default || tmp || {}
+  } catch {}
 
   return merge(commonConfigs, typeConfigs, userConfig)
 }

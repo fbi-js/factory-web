@@ -6,11 +6,12 @@ import { paths } from './helpers/paths'
 import { IConfigOption } from '../types'
 
 export const getConfig = (options: IConfigOption) => {
+  const userConfig = require(join(paths.cwd, 'micro-app'))
   const { mode, port, startEntry, title, cosEnv } = options
   const isDev = mode === 'development'
   const opts = {
-    orgName: 'mf',
-    projectName: 'base',
+    orgName: userConfig.orgName,
+    projectName: userConfig.projectName,
     orgPackagesAsExternal: true,
     webpackConfigEnv: null,
     standalone: false,
@@ -29,7 +30,6 @@ export const getConfig = (options: IConfigOption) => {
 
   let apps = []
   try {
-    const userConfig = require(join(paths.cwd, 'apps.config'))
     apps = userConfig.apps
   } catch {}
   const config: Configuration = {

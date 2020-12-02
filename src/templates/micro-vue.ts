@@ -44,7 +44,7 @@ export default class TemplateMicroVue extends BaseClass {
   protected async writing() {
     await super.writing()
 
-    this.files.copy = this.files.copy?.concat(['public/*', 'src/*', 'micro-app.json'])
+    this.files.copy = this.files.copy?.concat(['public/*', 'src/*', 'micro-app.js'])
     this.files.render = this.files.render?.concat('src/main.js')
   }
 }
