@@ -8,7 +8,7 @@
     "templates"
   ],
   "scripts": {
-    "build": "fbi b",
+    "build": "rm -rf ./lib && fbi b",
     "watch": "fbi w",
     "format": "prettier -c --write \"src/**/*.ts\" "
   },
