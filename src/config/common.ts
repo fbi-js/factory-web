@@ -18,9 +18,7 @@ export default (data: Record<string, any>): Configuration => {
   const config = {
     mode: buildMode,
     devtool: isDev ? 'inline-source-map' : false,
-    entry: {
-      main: join(paths.src, `main.${isTs ? 'ts' : 'js'}`)
-    },
+    entry: [join(paths.src, `main.${isTs ? 'ts' : 'js'}`)],
     output: {
       path: paths.dist,
       publicPath: isDev ? '/' : '/',

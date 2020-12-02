@@ -8,5 +8,6 @@ export default class CommandServe extends Command {
     args: string;
     flags: (string | number)[][];
     constructor(factory: Factory);
+    private injectHotReload;
     run(flags: any, unknown: any): Promise<unknown>;
 }

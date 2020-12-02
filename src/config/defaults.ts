@@ -11,8 +11,8 @@ export const WEBPACK_DEV_CONFIG = {
   writeToDisk: true,
   historyApiFallback: true,
   compress: true,
-  // hot: true,
-  // noInfo: true,
+  hot: true,
+  host: 'localhost',
   open: false,
   headers: {
     'Access-Control-Allow-Origin': '*',

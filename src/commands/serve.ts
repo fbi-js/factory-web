@@ -8,6 +8,7 @@ import webpackConfig from '../config'
 import WebpackDevServer from 'webpack-dev-server'
 import { getIpAddress } from '../config/helpers/utils'
 import { WEBPACK_DEV_CONFIG, HOST, PORT } from '../config/defaults'
+import path from 'path'
 
 export default class CommandServe extends Command {
   id = 'serve'
@@ -25,6 +26,24 @@ export default class CommandServe extends Command {
     super()
   }
 
+  private injectHotReload(config: any, networkUrl: string) {
+    const { entry } = config
+    const rootPath = path.resolve(__dirname, '../../node_modules/')
+    const sockPath = `${rootPath}/webpack-dev-server/client/index.js?${networkUrl}&sockPath=/sockjs-node`
+    const hotPath = `${rootPath}/webpack/hot/dev-server.js`
+    const devClients = [sockPath, hotPath]
+
+    if (typeof entry === 'object' && !Array.isArray(entry)) {
+      Object.keys(entry).forEach((key) => {
+        entry[key] = devClients.concat(entry[key])
+      })
+    } else if (typeof entry === 'function') {
+      config.entry = entry(devClients)
+    } else {
+      config.entry = devClients.concat(entry)
+    }
+  }
+
   public async run(flags: any, unknown: any) {
     process.env.NODE_ENV = flags.mode ?? 'development'
 
@@ -40,6 +59,8 @@ export default class CommandServe extends Command {
 
     const factory = this.context.get('config.factory')
     const isProduction = process.env.NODE_ENV === 'production'
+    const localUrl = `http://localhost:${flags.port}`
+    const networkUrl = `http://${getIpAddress()}:${flags.port}`
 
     this.logStart(`Starting development server:`)
     try {
@@ -51,6 +72,11 @@ export default class CommandServe extends Command {
         factory
       })
 
+      // inject dev & hot-reload middleware entries
+      if (!isProduction) {
+        this.injectHotReload(config, networkUrl)
+      }
+
       const compiler = webpack(config)
       // TODO: merge user config
       const server = new WebpackDevServer(compiler, {
@@ -58,13 +84,10 @@ export default class CommandServe extends Command {
       })
 
       return new Promise((resolve, reject) => {
-        const localUrl = `http://localhost:${flags.port}`
-        const networkUrl = `http://${getIpAddress()}:${flags.port}`
 
         compiler.hooks.done.tap('fbi-serve-compiler', async (stats: Stats) => {
-          console.log(stats?.toString(config.stats))
-
           if (stats.hasErrors()) {
+            console.log(stats.toString())
             return
           }
 

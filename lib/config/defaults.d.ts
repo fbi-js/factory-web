@@ -7,6 +7,8 @@ export declare const WEBPACK_DEV_CONFIG: {
     writeToDisk: boolean;
     historyApiFallback: boolean;
     compress: boolean;
+    hot: boolean;
+    host: string;
     open: boolean;
     headers: {
         'Access-Control-Allow-Origin': string;
