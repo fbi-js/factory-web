@@ -41,9 +41,4 @@ function getIpAddress() {
   return ipAddress
 }
 
-export {
-  getAppConfig,
-  getRunPwd,
-  guid,
-  getIpAddress
-}
+export { getAppConfig, getRunPwd, guid, getIpAddress }

@@ -52,9 +52,25 @@ export class AssetJsonPlugin {
       stats /* stats is passed as argument when done hook is tapped.  */
     ) => {
       if (result && compiler.options.output?.path) {
+        let microAppJson = {
+          entry: '',
+          routes: []
+        }
+        if (this.options.onlyEntryFile) {
+          try {
+            const microAppJs = require(join(process.cwd(), 'micro-app'))
+            microAppJson = {
+              ...microAppJs
+            }
+          } catch (err) {
+            console.log(err)
+          }
+          microAppJson.entry = JSON.parse(result)[0]
+        }
+
         const targetFile = join(compiler.options.output.path, 'assets.json')
         try {
-          await fs.writeFile(targetFile, result, () => {})
+          await fs.writeFile(targetFile, JSON.stringify(microAppJson), () => {})
         } catch (err) {
           console.error(err)
         }
