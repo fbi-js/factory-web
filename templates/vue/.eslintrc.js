@@ -1,5 +1,15 @@
-const { vueEslint } = require('fbi-lint')
-
 module.exports = {
-  ...vueEslint
+  extends: [
+    'eslint:recommended',
+    'plugin:vue/recommended',
+  ],
+  rules: {
+    // override/add rules settings here, such as:
+    // 'vue/no-unused-vars': 'error'
+  },
+  env: {
+    "browser": true,
+    "amd": true,
+    "node": true
+  }
 }

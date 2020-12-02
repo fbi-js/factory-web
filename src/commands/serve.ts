@@ -3,10 +3,11 @@ import { Command } from 'fbi'
 
 import webpack from 'webpack'
 import webpackConfig from '../config'
-import DevServer from 'webpack-dev-server'
 import { IConfigOption } from '../types'
-import { PORT } from '../config/defaults'
-import path from 'path'
+import { WEBPACK_DEV_CONFIG, HOST, PORT } from '../config/defaults'
+import utils from '../config/helpers/utils'
+import chalk from 'chalk'
+import WebpackDevServer from 'webpack-dev-server'
 
 export default class CommandServe extends Command {
   id = 'serve'
@@ -36,7 +37,9 @@ export default class CommandServe extends Command {
       'unknown:',
       unknown
     )
+
     const template = this.context.get('config.factory.template')
+    const isProduction = process.env.NODE_ENV === 'production'
 
     this.logStart(`Starting development server:`)
     try {
@@ -47,24 +50,41 @@ export default class CommandServe extends Command {
         cosEnv: flags.env
       } as IConfigOption)
       const compiler = webpack(config)
-      const server = new DevServer(compiler, {
-        contentBase: path.join(process.cwd(), 'dist'),
-        writeToDisk: true,
-        historyApiFallback: true,
-        compress: true,
-        noInfo: true,
-        open: true,
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Headers': '*',
-          'Access-Control-Allow-Methods': '*'
-        },
-        disableHostCheck: true
+      // TODO: merge user config
+      const server = new WebpackDevServer(compiler, {
+        ...WEBPACK_DEV_CONFIG
       })
-      server.listen(flags.port, 'localhost', (err) => {
-        if (err) {
-          throw err
-        }
+
+      return new Promise((resolve, reject) => {
+        const localUrl = `http://localhost:${flags.port}`
+        const networkUrl = `http://${utils.getIpAddress()}:${flags.port}`
+
+        compiler.hooks.done.tap('fbi-serve-compiler', async (stats) => {
+          if (stats.hasErrors()) {
+            return
+          }
+          console.log()
+          console.log(`  App running at:`)
+          console.log(`  - Local:   ${chalk.cyan(localUrl)}`)
+          console.log(`  - Network: ${chalk.cyan(networkUrl)}`)
+          console.log()
+          if (!isProduction) {
+            const buildCommand = `npm run build`
+            console.log(`  Note that the development build is not optimized.`)
+            console.log(`  To create a production build, run ${chalk.cyan(buildCommand)}.`)
+          }
+        })
+
+        resolve({
+          server,
+          url: localUrl
+        })
+
+        server.listen(flags.port, HOST, (err) => {
+          if (err) {
+            reject(err)
+          }
+        })
       })
     } catch (err) {
       this.error('Failed to start development server')

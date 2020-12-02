@@ -32,7 +32,7 @@ export default class CommandBuild extends Command {
       unknown
     )
 
-    this.logStart(`Start building:`)
+    this.logStart(`Building for production...`)
     const template = this.context.get('config.factory.template')
     const config = await webpackConfig(template, {
       env: process.env.NODE_ENV
@@ -48,6 +48,7 @@ export default class CommandBuild extends Command {
   }
 
   protected build(config: Configuration) {
+    console.log('config', config)
     const compiler = webpack(config)
 
     return new Promise((resolve, reject) => {
