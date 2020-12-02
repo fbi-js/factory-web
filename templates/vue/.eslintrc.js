@@ -8,8 +8,15 @@ module.exports = {
     // 'vue/no-unused-vars': 'error'
   },
   env: {
-    "browser": true,
-    "amd": true,
-    "node": true
-  }
+    browser: true,
+    amd: true,
+    node: true
+  },
+  settings: {
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      },
+    },
+  },
 }
