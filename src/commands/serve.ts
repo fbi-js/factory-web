@@ -1,12 +1,13 @@
+import type { Stats } from 'webpack'
+
 import Factory from '..'
 import { Command } from 'fbi'
 
 import webpack from 'webpack'
 import webpackConfig from '../config'
-import DevServer from 'webpack-dev-server'
-import { IConfigOption } from '../types'
-import { PORT } from '../config/defaults'
-import path from 'path'
+import WebpackDevServer from 'webpack-dev-server'
+import { getIpAddress } from '../config/helpers/utils'
+import { WEBPACK_DEV_CONFIG, HOST, PORT } from '../config/defaults'
 
 export default class CommandServe extends Command {
   id = 'serve'
@@ -36,35 +37,59 @@ export default class CommandServe extends Command {
       'unknown:',
       unknown
     )
-    const template = this.context.get('config.factory.template')
+
+    const factory = this.context.get('config.factory')
+    const isProduction = process.env.NODE_ENV === 'production'
 
     this.logStart(`Starting development server:`)
     try {
-      const config = await webpackConfig(template, {
+      const config = await webpackConfig(factory.template, {
         port: flags.port,
         mode: flags.mode,
         startEntry: flags.entry,
-        cosEnv: flags.env
-      } as IConfigOption)
-      const compiler = webpack(config)
-      const server = new DevServer(compiler, {
-        contentBase: path.join(process.cwd(), 'dist'),
-        writeToDisk: true,
-        historyApiFallback: true,
-        compress: true,
-        noInfo: true,
-        open: true,
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Headers': '*',
-          'Access-Control-Allow-Methods': '*'
-        },
-        disableHostCheck: true
+        cosEnv: flags.env,
+        factory
       })
-      server.listen(flags.port, 'localhost', (err) => {
-        if (err) {
-          throw err
-        }
+
+      const compiler = webpack(config)
+      // TODO: merge user config
+      const server = new WebpackDevServer(compiler, {
+        ...WEBPACK_DEV_CONFIG
+      })
+
+      return new Promise((resolve, reject) => {
+        const localUrl = `http://localhost:${flags.port}`
+        const networkUrl = `http://${getIpAddress()}:${flags.port}`
+
+        compiler.hooks.done.tap('fbi-serve-compiler', async (stats: Stats) => {
+          console.log(stats?.toString(config.stats))
+
+          if (stats.hasErrors()) {
+            return
+          }
+
+          console.log()
+          console.log(`  App running at:`)
+          console.log(`  - Local:   ${this.style.cyan(localUrl)}`)
+          console.log(`  - Network: ${this.style.cyan(networkUrl)}`)
+          console.log()
+          if (!isProduction) {
+            const buildCommand = `npm run build`
+            console.log(`  Note that the development build is not optimized.`)
+            console.log(`  To create a production build, run ${this.style.cyan(buildCommand)}.`)
+          }
+        })
+
+        resolve({
+          server,
+          url: localUrl
+        })
+
+        server.listen(flags.port, HOST, (err) => {
+          if (err) {
+            reject(err)
+          }
+        })
       })
     } catch (err) {
       this.error('Failed to start development server')

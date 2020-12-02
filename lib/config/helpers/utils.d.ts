@@ -5,3 +5,5 @@ declare function getAppConfig(path: any): {
 };
 declare function getRunPwd(): string;
 declare function guid(): string;
+declare function getIpAddress(): string;
+export { getAppConfig, getRunPwd, guid, getIpAddress };

@@ -32,16 +32,18 @@ export default class CommandBuild extends Command {
       unknown
     )
 
-    this.logStart(`Start building:`)
-    const template = this.context.get('config.factory.template')
-    const config = await webpackConfig(template, {
-      env: process.env.NODE_ENV
+    this.logStart(`Building for production...`)
+
+    const factory = this.context.get('config.factory')
+    const config = await webpackConfig(factory.template, {
+      env: process.env.NODE_ENV,
+      factory
     })
+
     try {
       await this.build(config)
     } catch (err) {
       this.error('Failed to build project')
-      // this.error(err).exit()
       console.log(err)
       this.exit()
     }
@@ -60,14 +62,9 @@ export default class CommandBuild extends Command {
           reject()
         }
 
-        const formatStats = stats?.toString({
-          chunks: false, // Makes the build much quieter
-          colors: true // Shows colors in the console
-        })
+        console.log(stats?.toString(config.stats))
 
-        console.log(formatStats)
-
-        resolve(formatStats)
+        resolve('')
       })
     })
   }

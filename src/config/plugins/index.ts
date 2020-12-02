@@ -62,12 +62,12 @@ export class AssetJsonPlugin {
             microAppJson = {
               ...microAppJs
             }
-          } catch(err) {
+          } catch (err) {
             console.log(err)
           }
           microAppJson.entry = JSON.parse(result)[0]
         }
-        
+
         const targetFile = join(compiler.options.output.path, 'assets.json')
         try {
           await fs.writeFile(targetFile, JSON.stringify(microAppJson), () => {})

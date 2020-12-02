@@ -1,11 +1,8 @@
 import type { Configuration } from 'webpack'
 
-import { join } from 'path'
-import { paths } from './helpers/paths'
 import { IConfigOption } from '../types'
 import ESLintPlugin from 'eslint-webpack-plugin'
 import StyleLintPlugin from 'stylelint-webpack-plugin'
-import HtmlWebpackPlugin from 'html-webpack-plugin'
 
 export const getConfig = (options: IConfigOption) => {
   const { title } = options
@@ -25,8 +22,9 @@ export const getConfig = (options: IConfigOption) => {
       ]
     },
     plugins: [
+      // TODO: 从fbi-lint剥离eslint依赖
       new ESLintPlugin({
-        extensions: ['js', 'vue'],
+        extensions: ['js', 'ts', 'jsx', 'tsx', 'vue'],
         files: 'src',
         fix: true
       } as any),
@@ -38,7 +36,7 @@ export const getConfig = (options: IConfigOption) => {
       new VueLoaderPlugin()
     ],
     resolve: {
-      extensions: ['*', '.js', '.vue'],
+      extensions: ['.vue'],
       alias: {
         vue: 'vue/dist/vue.esm.js'
       }

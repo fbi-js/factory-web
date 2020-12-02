@@ -1,6 +1,6 @@
 import Factory from '..';
-import BaseClass from './base';
-export default class TemplateMicroVue extends BaseClass {
+import TemplateVue from './vue';
+export default class TemplateMicroVue extends TemplateVue {
     factory: Factory;
     id: string;
     path: string;

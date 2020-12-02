@@ -14,22 +14,9 @@ export default class TemplateMicroMain extends BaseClass {
   protected async gathering(flags: Record<string, any>) {
     await super.gathering(flags)
 
-    const extraData = await this.prompt([
-      {
-        type: 'MultiSelect',
-        name: 'features',
-        message: `Choose features for your project:`,
-        hint: '(Use <space> to select, <return> to submit)',
-        choices: [{ name: 'typescript', value: true }],
-        result(names: string[]) {
-          return this.map(names)
-        }
-      }
-    ] as any)
-
     this.data.project = {
       ...this.data.project,
-      ...extraData
+      features: { typescript: true }
     }
 
     const { factory, project } = this.data

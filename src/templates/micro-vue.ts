@@ -1,7 +1,7 @@
 import Factory from '..'
-import BaseClass from './base'
+import TemplateVue from './vue'
 
-export default class TemplateMicroVue extends BaseClass {
+export default class TemplateMicroVue extends TemplateVue {
   id = 'micro-vue'
   path = 'templates/vue'
   description = 'template for Micro-fontends vue application'
@@ -14,31 +14,10 @@ export default class TemplateMicroVue extends BaseClass {
   protected async gathering(flags: Record<string, any>) {
     await super.gathering(flags)
 
-    const extraData = await this.prompt([
-      {
-        type: 'MultiSelect',
-        name: 'features',
-        message: `Choose features for your project:`,
-        hint: '(Use <space> to select, <return> to submit)',
-        choices: [{ name: 'typescript', value: true }],
-        result(names: string[]) {
-          return this.map(names)
-        }
-      }
-    ] as any)
-
     this.data.project = {
       ...this.data.project,
-      ...extraData,
       isMicro: true
     }
-
-    const { factory, project } = this.data
-    this.spinner = this.createSpinner(`Creating project...`).start(
-      `Creating ${this.style.bold.green(project.name)} via ${factory.id} from ${
-        factory.template
-      }...`
-    )
   }
 
   protected async writing() {
