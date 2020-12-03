@@ -14,7 +14,7 @@
     "react-dom": "^17.0.1"
   },
   "devDependencies": {
-    "@fbi-js/factory-web": "*"
+    "@fbi-js/factory-web": "~1"
   },
   "fbi": {
     "factory": {
