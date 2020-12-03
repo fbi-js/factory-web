@@ -4,7 +4,7 @@ import WebpackDevServer from 'webpack-dev-server'
 export const PORT = 9000
 export const HOST = '0.0.0.0'
 // webpack-dev-server config
-export const WEBPACK_DEV_CONFIG:WebpackDevServer.Configuration = {
+export const WEBPACK_DEV_CONFIG: WebpackDevServer.Configuration = {
   contentBase: path.join(process.cwd(), 'dist'),
   clientLogLevel: 'silent',
   historyApiFallback: true,
