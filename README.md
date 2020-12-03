@@ -32,27 +32,10 @@ factory for web application development
 
 ## Usage
 
-**Install**
-
 ```bash
-$ fbi add factory-web
+$ npx fbi create factory-web
 ```
 
-**Run**
-
-```bash
-$ cd path/to/empty-folder
-$ fbi create
-```
-
-**Commands**
-
-```bash
-$ cd path/to/project-folder
-$ fbi s
-
-$ fbi b
-```
 
 ## License
 
