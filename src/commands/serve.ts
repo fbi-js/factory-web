@@ -56,7 +56,7 @@ export default class CommandServe extends Command {
       // TODO: merge user config
       const server = new WebpackDevServer(compiler, {
         ...WEBPACK_DEV_CONFIG,
-        writeToDisk: template === 'micro-vue' ? true : false
+        writeToDisk: template === 'micro-vue'
       })
 
       return new Promise((resolve, reject) => {
