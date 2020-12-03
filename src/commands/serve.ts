@@ -39,6 +39,7 @@ export default class CommandServe extends Command {
     )
 
     const factory = this.context.get('config.factory')
+    const template = this.context.get('config.factory.template')
     const isProduction = process.env.NODE_ENV === 'production'
 
     this.logStart(`Starting development server:`)
@@ -54,7 +55,8 @@ export default class CommandServe extends Command {
       const compiler = webpack(config)
       // TODO: merge user config
       const server = new WebpackDevServer(compiler, {
-        ...WEBPACK_DEV_CONFIG
+        ...WEBPACK_DEV_CONFIG,
+        writeToDisk: template === 'micro-vue'
       })
 
       return new Promise((resolve, reject) => {
