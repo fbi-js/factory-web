@@ -1,17 +1,16 @@
 import path from 'path'
-
+import WebpackDevServer from 'webpack-dev-server'
 // http server config
 export const PORT = 9000
 export const HOST = '0.0.0.0'
 // webpack-dev-server config
-export const WEBPACK_DEV_CONFIG = {
+export const WEBPACK_DEV_CONFIG:WebpackDevServer.Configuration = {
   contentBase: path.join(process.cwd(), 'dist'),
-  logLevel: 'silent',
-  injectClient: false,
-  writeToDisk: true,
+  clientLogLevel: 'silent',
   historyApiFallback: true,
   compress: true,
-  // hot: true,
+  injectHot: true,
+  hot: true,
   // noInfo: true,
   open: false,
   headers: {
