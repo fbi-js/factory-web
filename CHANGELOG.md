@@ -2,6 +2,35 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.7](https://github.com/fbi-js/factory-web/compare/v0.2.7-alpha.5...v0.2.7) (2020-12-03)
+
+
+### Features
+
+* **vue template:** add fbi serve log & fix eslint error ([f1dd15d](https://github.com/fbi-js/factory-web/commit/f1dd15de0681273042c2fc8d6fe8bb8debc85b38))
+
+
+### Bug Fixes
+
+* **config:** extract default config for stats and devServer ([580abe4](https://github.com/fbi-js/factory-web/commit/580abe4b30d2e89d702dd4b9f7370577758dd438))
+* add AssetJsonPlugin ([2bc6ea7](https://github.com/fbi-js/factory-web/commit/2bc6ea7f7c2cd3a25014b3b6ef592721d439d7d4))
+* dev-server hot reload ([e47e0fe](https://github.com/fbi-js/factory-web/commit/e47e0fe286eed5de8c6a1953ebcea5744108368d))
+* format code ([a5d54bb](https://github.com/fbi-js/factory-web/commit/a5d54bb9965ccf948bcaad5bdf1e7df6c15678a0))
+* merge main ([4dc4553](https://github.com/fbi-js/factory-web/commit/4dc4553e621e794daf1287ec67264e9713cd2706))
+* micro-* config file ([a3e76e5](https://github.com/fbi-js/factory-web/commit/a3e76e567ba70ba60ef808c27d86fc2f35794531))
+* micro-* config&templates ([1d6a639](https://github.com/fbi-js/factory-web/commit/1d6a6397c6ac79eb43ecab72dca7ffa52d5b1b41))
+* micro-main & vue webpack config ([35db215](https://github.com/fbi-js/factory-web/commit/35db215dafac177801290a3a05f5877beb26ebf9))
+* micro-main/vue deps ([4106550](https://github.com/fbi-js/factory-web/commit/41065505c7e537a4306cde492f1bb8128b02217d))
+* micro-vue el+name ([01a7d07](https://github.com/fbi-js/factory-web/commit/01a7d07b00e7a4c2d9a359b5e35809c4611a8c66))
+* opt code ([7224784](https://github.com/fbi-js/factory-web/commit/72247842d3568e8cddc71438e20f71f253f81255))
+* **commands:** support ts defautly ([48de02a](https://github.com/fbi-js/factory-web/commit/48de02a0fe43e7e2651ad5a30bc6e9cad70f55ce))
+* **lib:** update lib files ([197a04e](https://github.com/fbi-js/factory-web/commit/197a04e34c44bccf1f90eb9c84ddaa018d0aa19b))
+* **template:** add tsconfig.json for vue template ([b2b3e29](https://github.com/fbi-js/factory-web/commit/b2b3e29d78c0d99f9901f482896d84586f1a706d))
+* **template:** add vue-ts template ([0df5b98](https://github.com/fbi-js/factory-web/commit/0df5b989085200355d1e982b3a8593358685d718))
+* micro-* config&templates ([35ebedf](https://github.com/fbi-js/factory-web/commit/35ebedf4388c301eeae539d2b984d0ad97971ca9))
+* remove repeat deps ([3c5d5a4](https://github.com/fbi-js/factory-web/commit/3c5d5a47f725bed17fa4e5ca3b63d509423d0b6c))
+* tmp ([9aec9a9](https://github.com/fbi-js/factory-web/commit/9aec9a9335e1ab9d4ecd902e45ab1ade9b795a80))
+
 ### [0.2.7-alpha.5](https://github.com/fbi-js/factory-web/compare/v0.2.7-alpha.4...v0.2.7-alpha.5) (2020-11-27)
 
 

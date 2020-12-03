@@ -1,6 +1,6 @@
 {
   "name": "@fbi-js/factory-web",
-  "version": "0.2.7-alpha.5",
+  "version": "0.2.7",
   "description": "factory for web application development",
   "main": "lib/index.js",
   "files": [
