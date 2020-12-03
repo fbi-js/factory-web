@@ -1,5 +1,6 @@
-import Factory from '..'
 import { Command, utils } from 'fbi'
+
+import Factory from '..'
 
 const { isValidObject } = utils
 

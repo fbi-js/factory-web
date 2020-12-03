@@ -56,7 +56,7 @@ export default class TemplateWebBase extends Template {
         '.stylelintrc.js',
         'postcss.config.js'
       ],
-      render: ['package.json'],
+      render: ['package.json', 'webpack.config.js'],
       renderOptions: {
         async: true,
         debug,

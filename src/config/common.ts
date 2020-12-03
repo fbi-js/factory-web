@@ -1,8 +1,9 @@
-import type { Configuration } from 'webpack'
+import type { WebpackConfiguration } from '../types'
 
 import webpack from 'webpack'
 import { join, resolve } from 'path'
 import { paths } from './helpers/paths'
+import { WEBPACK_DEV_SERVER_CONFIG, WEBPACK_STATS } from './defaults'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import { CleanWebpackPlugin } from 'clean-webpack-plugin'
@@ -10,7 +11,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin'
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
 
-export default (data: Record<string, any>): Configuration => {
+export default (data: Record<string, any>): WebpackConfiguration => {
   const buildMode = process.env.NODE_ENV || 'development'
   const isDev = buildMode === 'development'
   const isTs = data.factory?.features?.typescript
@@ -164,40 +165,10 @@ export default (data: Record<string, any>): Configuration => {
     performance: {
       hints: false
     },
-    stats: {
-      assets: true,
-      // `webpack --colors` equivalent
-      colors: true,
-      children: false,
-      chunks: false,
-      chunkModules: false,
-      chunkOrigins: false,
-      // Add errors
-      errors: true,
-      // Add details to errors (like resolving log)
-      errorDetails: true,
-      hash: false,
-      modules: false,
-      timings: true,
-      // Add webpack version information
-      version: true
-    },
+    stats: WEBPACK_STATS,
     ...(isDev
       ? {
-          devServer: {
-            historyApiFallback: true,
-            contentBase: paths.dist,
-            open: true,
-            compress: true,
-            hot: true,
-            port: data.port,
-            overlay: true,
-            stats: 'errors-only',
-            headers: {
-              'Access-Control-Allow-Origin': '*'
-            },
-            disableHostCheck: true
-          }
+          devServer: WEBPACK_DEV_SERVER_CONFIG
         }
       : {
           optimization: {
@@ -222,5 +193,5 @@ export default (data: Record<string, any>): Configuration => {
     config.plugins.push(new ForkTsCheckerWebpackPlugin())
   }
 
-  return config as Configuration
+  return config as WebpackConfiguration
 }

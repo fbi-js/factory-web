@@ -1,13 +1,13 @@
 import type { Stats } from 'webpack'
 
-import Factory from '..'
 import { Command } from 'fbi'
-
 import webpack from 'webpack'
-import webpackConfig from '../config'
 import WebpackDevServer from 'webpack-dev-server'
+
+import Factory from '..'
+import { HOST, PORT } from '../config/defaults'
+import { resolveWebpackConfig } from '../config'
 import { getIpAddress } from '../config/helpers/utils'
-import { WEBPACK_DEV_CONFIG, HOST, PORT } from '../config/defaults'
 
 export default class CommandServe extends Command {
   id = 'serve'
@@ -39,33 +39,31 @@ export default class CommandServe extends Command {
     )
 
     const factory = this.context.get('config.factory')
-    const template = this.context.get('config.factory.template')
     const isProduction = process.env.NODE_ENV === 'production'
 
     this.logStart(`Starting development server:`)
     try {
-      const config = await webpackConfig(factory.template, {
+      const config = await resolveWebpackConfig(factory?.template, {
         port: flags.port,
         mode: flags.mode,
         startEntry: flags.entry,
         cosEnv: flags.env,
         factory
       })
-
       const compiler = webpack(config)
-      // TODO: merge user config
+      const host = config.devServer?.host || HOST
+      const port = flags?.port || config.devServer?.port
       const server = new WebpackDevServer(compiler, {
-        ...WEBPACK_DEV_CONFIG,
-        writeToDisk: template === 'micro-vue'
+        ...config.devServer,
+        host,
+        port
       })
 
       return new Promise((resolve, reject) => {
-        const localUrl = `http://localhost:${flags.port}`
-        const networkUrl = `http://${getIpAddress()}:${flags.port}`
+        const localUrl = `http://${host}:${port}`
+        const networkUrl = `http://${getIpAddress()}:${port}`
 
         compiler.hooks.done.tap('fbi-serve-compiler', async (stats: Stats) => {
-          console.log(stats?.toString(config.stats))
-
           if (stats.hasErrors()) {
             return
           }
@@ -87,7 +85,7 @@ export default class CommandServe extends Command {
           url: localUrl
         })
 
-        server.listen(flags.port, HOST, (err) => {
+        server.listen(port, host, (err) => {
           if (err) {
             reject(err)
           }

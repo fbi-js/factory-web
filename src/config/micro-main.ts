@@ -7,7 +7,7 @@ import { IConfigOption } from '../types'
 
 export const getConfig = (options: IConfigOption) => {
   const userConfig = require(join(paths.cwd, 'micro-app'))
-  const { mode, port, startEntry, title, cosEnv } = options
+  const { mode, cosEnv } = options
   const isDev = mode === 'development'
   const opts = {
     orgName: userConfig.orgName,
@@ -24,8 +24,6 @@ export const getConfig = (options: IConfigOption) => {
   }
 
   const CopyWebpackPlugin = require('copy-webpack-plugin')
-  // const HtmlWebpackPlugin = require('html-webpack-plugin')
-  // const StandaloneSingleSpaPlugin = require('standalone-single-spa-webpack-plugin')
 
   let apps = []
   try {
@@ -67,13 +65,6 @@ export const getConfig = (options: IConfigOption) => {
           }
         ]
       })
-      // isDev &&
-      //   new StandaloneSingleSpaPlugin({
-      //     appOrParcelName: `@${opts.orgName}/${opts.projectName}`,
-      //     disabled: !webpackConfigEnv.standalone,
-      //     HtmlWebpackPlugin,
-      //     ...opts.standaloneOptions
-      //   })
     ].filter(Boolean)
   }
 
@@ -81,6 +72,5 @@ export const getConfig = (options: IConfigOption) => {
 }
 
 export const deps = {
-  // 'standalone-single-spa-webpack-plugin': '^1.1.0',
   '@types/systemjs': '^6.1.0'
 }

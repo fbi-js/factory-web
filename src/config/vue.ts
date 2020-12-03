@@ -5,7 +5,6 @@ import ESLintPlugin from 'eslint-webpack-plugin'
 import StyleLintPlugin from 'stylelint-webpack-plugin'
 
 export const getConfig = (options: IConfigOption) => {
-  const { title } = options
   const VueLoaderPlugin = require('vue-loader').VueLoaderPlugin
 
   const config: Configuration = {

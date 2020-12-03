@@ -1,10 +1,13 @@
 import type { Configuration } from 'webpack'
 
+import { join } from 'path'
 import common from './common'
 import { merge } from 'webpack-merge'
-import { join } from 'path'
 
-export default async (type: string, data: Record<string, any>): Promise<Configuration> => {
+export const resolveWebpackConfig = async (
+  type: string,
+  data: Record<string, any>
+): Promise<Configuration> => {
   const commonConfigs = common(data)
   const { getConfig } = require(`./${type}`)
   const typeConfigs = getConfig({

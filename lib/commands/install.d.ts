@@ -1,5 +1,5 @@
-import Factory from '..';
 import { Command } from 'fbi';
+import Factory from '..';
 export default class CommandInstall extends Command {
     factory: Factory;
     id: string;

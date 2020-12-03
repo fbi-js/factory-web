@@ -1,9 +1,10 @@
 import type { Configuration } from 'webpack'
 
-import Factory from '..'
-import { Command } from 'fbi'
 import webpack from 'webpack'
-import webpackConfig from '../config'
+import { Command } from 'fbi'
+
+import Factory from '..'
+import { resolveWebpackConfig } from '../config'
 
 export default class CommandBuild extends Command {
   id = 'build'
@@ -35,7 +36,7 @@ export default class CommandBuild extends Command {
     this.logStart(`Building for production...`)
 
     const factory = this.context.get('config.factory')
-    const config = await webpackConfig(factory.template, {
+    const config = await resolveWebpackConfig(factory.template, {
       env: process.env.NODE_ENV,
       factory
     })

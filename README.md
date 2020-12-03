@@ -1,9 +1,7 @@
 # factory-web
 factory for web application development
 
-> This is a factory for [fbi v4](https://github.com/fbi-js/fbi). If you haven't installed fbi yet, use the following command to install.
->
-> `$ npm i -g fbi`
+> This is a factory for [fbi v4](https://github.com/fbi-js/fbi)
 
 
 ## Requirements
@@ -13,8 +11,10 @@ factory for web application development
 
 ## Templates
 
-- `react`: template for react web application
 - `vue`: template for vue web application
+- `react`: template for react web application
+- `micro-main`: template for Micro-fontends base application
+- `micro-vue`: template for Micro-fontends vue application
 
 ## Commands
 
