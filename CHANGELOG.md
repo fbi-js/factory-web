@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.3](https://github.com/fbi-js/factory-web/compare/v1.0.2...v1.0.3) (2020-12-04)
+
+
+### Bug Fixes
+
+* **command:** remove 'install' command ([a729897](https://github.com/fbi-js/factory-web/commit/a729897cfc02f11492f692f753a3979df3bcd7e1))
+* **config:** only exclude project root node_modules ([fe66aa6](https://github.com/fbi-js/factory-web/commit/fe66aa66807cf03b6b7294656e014eb046d3e8a4))
+* **micro-vue:** files copy array ([7ee7ce9](https://github.com/fbi-js/factory-web/commit/7ee7ce9965525913ac28413a827f8afdcb463bce))
+* **template:** add react ts template ([a23b088](https://github.com/fbi-js/factory-web/commit/a23b0883d08a72481916445e3a6de58196f2765d))
+* **template-vue:** typescript error ([33bda3b](https://github.com/fbi-js/factory-web/commit/33bda3bae24db207114f028a9614269b41174f0d))
+* **webpack:** disable ProgressPlugin when is micro app ([f056c06](https://github.com/fbi-js/factory-web/commit/f056c066f05ac5f75e3dc5b1cc42c6e7ba9993fd))
+
 ### [1.0.2](https://github.com/fbi-js/factory-web/compare/v1.0.1...v1.0.2) (2020-12-03)
 
 ### [1.0.1](https://github.com/fbi-js/factory-web/compare/v1.0.0...v1.0.1) (2020-12-03)
