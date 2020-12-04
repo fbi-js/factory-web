@@ -15,6 +15,7 @@ export default (data: Record<string, any>): WebpackConfiguration => {
   const buildMode = process.env.NODE_ENV || 'development'
   const isDev = buildMode === 'development'
   const isTs = data.factory?.features?.typescript
+  const isMicro = data.factory?.template?.startsWith('micro-')
 
   const config = {
     mode: buildMode,
@@ -106,7 +107,7 @@ export default (data: Record<string, any>): WebpackConfiguration => {
       ]
     },
     plugins: [
-      new webpack.ProgressPlugin(),
+      !isMicro && new webpack.ProgressPlugin(),
       // Make appName & appVersion available as a constant
       new webpack.DefinePlugin(data.DefinePluginData || {}),
       // Removes/cleans build folders and unused assets when rebuilding
