@@ -1,6 +1,7 @@
 import { Command, utils } from 'fbi'
 
 import Factory from '..'
+import { resolveDeps } from '../config'
 
 const { isValidObject } = utils
 
@@ -16,28 +17,21 @@ export default class CommandInstall extends Command {
   }
 
   public async run(flags: any, unknown: any) {
-    const template = this.context.get('config.factory.template')
-    if (!template) {
+    const factory = this.context.get('config.factory')
+
+    if (!factory?.template) {
       return
     }
 
-    let deps
+    const deps = resolveDeps(factory.template, {
+      factory
+    })
 
-    try {
-      const config = require(`../config/${template}`)
-      deps = config.deps
-    } catch (err) {}
-
-    if (!deps) {
+    if (!deps || !isValidObject(deps)) {
       return
     }
 
     const depsArr = Object.entries(deps).map(([name, version]) => `${name}@${version}`)
-
-    if (!isValidObject(deps)) {
-      return
-    }
-
     const pm = this.context.get('config').packageManager
     const cmds = [pm, pm === 'yarn' ? 'add' : 'install', '-D', ...depsArr]
 

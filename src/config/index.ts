@@ -9,14 +9,12 @@ export const resolveWebpackConfig = async (
   data: Record<string, any>
 ): Promise<Configuration> => {
   const commonConfigs = common(data)
-  const { getConfig } = require(`./${type}`)
-  const typeConfigs = getConfig({
-    title: data.title,
-    port: data.port,
-    mode: data.mode,
-    startEntry: data.startEntry,
-    cosEnv: data.cosEnv
-  })
+
+  let typeConfigs = {}
+  try {
+    const { getConfig } = require(`./${type}`)
+    typeConfigs = getConfig(data)
+  } catch {}
 
   // user config
   let userConfig = {}
@@ -27,4 +25,14 @@ export const resolveWebpackConfig = async (
   } catch {}
 
   return merge(commonConfigs, typeConfigs, userConfig)
+}
+
+export const resolveDeps = (type: string, data: Record<string, any>) => {
+  let deps = {}
+  try {
+    const { getDeps } = require(`./${type}`)
+    deps = getDeps(data)
+  } catch {}
+
+  return deps
 }

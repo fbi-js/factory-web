@@ -5,7 +5,7 @@ import { IConfigOption } from '../types'
 import ESLintPlugin from 'eslint-webpack-plugin'
 import StyleLintPlugin from 'stylelint-webpack-plugin'
 
-export const getConfig = (options: IConfigOption) => {
+export const getConfig = (data: IConfigOption) => {
   const VueLoaderPlugin = require('vue-loader').VueLoaderPlugin
 
   const config: Configuration = {
@@ -46,8 +46,19 @@ export const getConfig = (options: IConfigOption) => {
   return config
 }
 
-export const deps = {
-  'vue-loader': '^15.9.5',
-  'vue-template-compiler': '^2.6.12',
-  '@babel/plugin-proposal-class-properties': '^7.12.1'
+export const getDeps = ({ factory }: IConfigOption) => {
+  const isTs = factory?.features?.typescript
+
+  return {
+    'vue-loader': '^15.9.5',
+    'vue-template-compiler': '^2.6.12',
+    '@babel/plugin-proposal-class-properties': '^7.12.1',
+    'eslint-plugin-vue': '^7.2.0',
+    ...(isTs
+      ? {
+          'vue-eslint-parser': '^7.2.0',
+          '@typescript-eslint/parser': '^4.9.0'
+        }
+      : {})
+  }
 }

@@ -22,7 +22,7 @@ const vueLifecycles = singleSpaVue({
     el: '#app-container',
     name: appName,
     router,
-    render(h) {
+    render(h: any) {
       return h(App, {
         props: {
           // single-spa props are available on the "this" object. Forward them to your component as needed.

@@ -46,17 +46,15 @@ export default class TemplateWebBase extends Template {
     this.files = {
       copy: [
         'README.md',
-        '.babelrc',
         '.gitignore',
         '.editorconfig',
         '.eslintignore',
-        '.eslintrc.js',
         '.prettierignore',
         '.prettierrc.js',
         '.stylelintrc.js',
         'postcss.config.js'
       ],
-      render: ['package.json', 'webpack.config.js'],
+      render: ['package.json', 'webpack.config.js', '.babelrc', '.eslintrc.js'],
       renderOptions: {
         async: true,
         debug,
