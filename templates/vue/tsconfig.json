@@ -1,12 +1,12 @@
 {
   "compilerOptions": {
-    "target": "esnext",
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
     "module": "esnext",
     "moduleResolution": "node",
     "strict": true,
     "jsx": "preserve",
     "sourceMap": true,
-    "lib": ["esnext", "dom"],
     "experimentalDecorators": true,
     "skipLibCheck": true,
     "esModuleInterop": true,

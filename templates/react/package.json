@@ -15,6 +15,10 @@
   "devDependencies": {
     "@babel/preset-react": "^7.12.7",
     "@fbi-js/factory-web": "~1",
+    <%_ if (project.features.typescript) { _%>
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    <%_ } _%>
     "react-hot-loader": "^4.13.0"
   },
   "fbi": {
