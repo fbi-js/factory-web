@@ -44,5 +44,6 @@ export const WEBPACK_DEV_SERVER_CONFIG: DevServerConfiguration = {
   },
   disableHostCheck: true,
   host: HOST,
-  port: PORT
+  port: PORT,
+  noInfo: true
 }

@@ -7,15 +7,15 @@
     "dev": "fbi serve",
     "build": "fbi build",
     "lint": "npx eslint --ext .vue,.js --fix",
-    "format": "npx prettier -c --write \"**/*.{js,md,html,css,less}\"",
-    "postinstall": "fbi install"
+    "format": "npx prettier -c --write \"**/*.{js,md,html,css,less}\""
   },
   "dependencies": {
     "single-spa": "^5.8.2",
     "axios": "^0.21.0"
   },
   "devDependencies": {
-    "@fbi-js/factory-web": "~1"
+    "@fbi-js/factory-web": "~1",
+    "@types/systemjs": "^6.1.0"
   },
   "fbi": {
     "factory": {

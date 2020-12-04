@@ -4,7 +4,7 @@ import type { IConfigOption } from '../types'
 import StyleLintPlugin from 'stylelint-webpack-plugin'
 import ESLintPlugin from 'eslint-webpack-plugin'
 
-export const getConfig = (env: string) => {
+export const getConfig = (data: IConfigOption) => {
   const config: Configuration = {
     plugins: [
       new ESLintPlugin({
@@ -19,12 +19,4 @@ export const getConfig = (env: string) => {
   }
 
   return config
-}
-
-export const getDeps = ({ factory }: IConfigOption) => {
-  return {
-    '@babel/preset-react': '^7.12.7',
-    '@babel/plugin-proposal-class-properties': '^7.12.1',
-    'react-hot-loader': '^4.13.0'
-  }
 }

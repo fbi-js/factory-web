@@ -3,7 +3,6 @@ import { Factory } from 'fbi'
 
 import CommandBuild from './commands/build'
 import CommandServe from './commands/serve'
-import CommandInstall from './commands/install'
 
 import TemplateVue from './templates/vue'
 import TemplateReact from './templates/react'
@@ -13,7 +12,7 @@ import TemplateMicroVue from './templates/micro-vue'
 export default class FactoryWeb extends Factory {
   id = require('../package.json').name
   description = 'factory for web application development'
-  commands = [new CommandBuild(this), new CommandServe(this), new CommandInstall(this)]
+  commands = [new CommandBuild(this), new CommandServe(this)]
   templates = [
     new TemplateVue(this),
     new TemplateReact(this),

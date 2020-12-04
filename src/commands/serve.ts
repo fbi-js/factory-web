@@ -41,7 +41,7 @@ export default class CommandServe extends Command {
     const factory = this.context.get('config.factory')
     const isProduction = process.env.NODE_ENV === 'production'
 
-    this.logStart(`Starting development server:`)
+    this.logStart(`Starting development server...`)
     try {
       const config = await resolveWebpackConfig(factory?.template, {
         port: flags.port,

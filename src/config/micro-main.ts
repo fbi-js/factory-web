@@ -70,10 +70,3 @@ export const getConfig = (options: IConfigOption) => {
 
   return config
 }
-
-
-export const getDeps = ({ factory }: IConfigOption) => {
-  return {
-    '@types/systemjs': '^6.1.0'
-  }
-}

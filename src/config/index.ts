@@ -26,13 +26,3 @@ export const resolveWebpackConfig = async (
 
   return merge(commonConfigs, typeConfigs, userConfig)
 }
-
-export const resolveDeps = (type: string, data: Record<string, any>) => {
-  let deps = {}
-  try {
-    const { getDeps } = require(`./${type}`)
-    deps = getDeps(data)
-  } catch {}
-
-  return deps
-}

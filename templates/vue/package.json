@@ -6,8 +6,7 @@
   "scripts": {
     "dev": "fbi serve  <%_ if (project.isMicro) { _%> <%=  %> -p 9001 <%_ } _%>",
     "build": "fbi build",
-    "lint": "npx eslint --ext .vue,.js --fix",
-    "postinstall": "fbi install"
+    "lint": "npx eslint --ext .vue,.js --fix"
   },
   "dependencies": {
     <%_ if (project.isMicro) { _%>
@@ -18,7 +17,16 @@
     "vue-router": "^3.4.9"
   },
   "devDependencies": {
-    "@fbi-js/factory-web": "~1"
+    "@fbi-js/factory-web": "~1",
+    <%_ if (project.features.typescript) { _%>
+    "@typescript-eslint/parser": "^4.9.0",
+    <%_ } _%>
+    "eslint-plugin-vue": "^7.2.0",
+    <%_ if (project.features.typescript) { _%>
+    "vue-eslint-parser": "^7.2.0",
+    <%_ } _%>
+    "vue-loader": "^15.9.5",
+    "vue-template-compiler": "^2.6.12"
   },
   "fbi": {
     "factory": {
