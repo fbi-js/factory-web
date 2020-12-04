@@ -1,5 +1,6 @@
 import type { Configuration } from 'webpack'
 
+import { resolve } from 'path'
 import { IConfigOption } from '../types'
 import ESLintPlugin from 'eslint-webpack-plugin'
 import StyleLintPlugin from 'stylelint-webpack-plugin'
@@ -12,7 +13,7 @@ export const getConfig = (options: IConfigOption) => {
       rules: [
         {
           test: /\.vue$/,
-          exclude: /node_modules/,
+          exclude: resolve('node_modules'),
           loader: 'vue-loader',
           options: {
             shadowMode: true

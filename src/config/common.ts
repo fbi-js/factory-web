@@ -3,13 +3,13 @@ import type { WebpackConfiguration } from '../types'
 import webpack from 'webpack'
 import { join, resolve } from 'path'
 import { paths } from './helpers/paths'
-import { WEBPACK_DEV_SERVER_CONFIG, WEBPACK_STATS } from './defaults'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin'
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
+import { WEBPACK_DEV_SERVER_CONFIG, WEBPACK_STATS } from './defaults'
 
 export default (data: Record<string, any>): WebpackConfiguration => {
   const buildMode = process.env.NODE_ENV || 'development'
@@ -33,7 +33,7 @@ export default (data: Record<string, any>): WebpackConfiguration => {
         {
           test: /\.(js|ts)x?$/,
           use: ['babel-loader'],
-          exclude: /node_modules/
+          exclude: resolve('node_modules')
         },
         {
           test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
