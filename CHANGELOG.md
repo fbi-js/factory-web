@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/fbi-js/factory-web/compare/v1.0.3...v1.1.0) (2020-12-07)
+
+
+### Features
+
+* **examples:** add micro-frontends examples ([91e702b](https://github.com/fbi-js/factory-web/commit/91e702bd380584418cbb5bb19edbfda1fa4ea81e))
+
+
+### Bug Fixes
+
+* **template:** micro-main & micro-vue ([5c3476c](https://github.com/fbi-js/factory-web/commit/5c3476c027b32ae80ee5aa224aabaa177a10e8ec))
+
 ### [1.0.3](https://github.com/fbi-js/factory-web/compare/v1.0.2...v1.0.3) (2020-12-04)
 
 
