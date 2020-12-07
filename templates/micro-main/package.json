@@ -1,8 +1,9 @@
 {
-  "name": "<%= project.name %>",
+  "name": "<%_ if (project.orgName) { _%>@<%= project.orgName %>/<%_ } _%><%= project.name %>",
   "version": "0.0.0",
   "description": "<%= project.description %>",
   "private": true,
+  "main": "dist/main.js",
   "scripts": {
     "dev": "fbi serve",
     "build": "fbi build",

@@ -12,15 +12,14 @@ Vue.config.productionTip = false
 
 <%_ if (project.isMicro) { _%>
 // eslint-disable-next-line no-undef
-const microApp = require('../micro-app.js')
-const appName = `@${microApp.orgName}/${microApp.projectName}`
-setPublicPath(appName)
+const microApp = require('../micro.config')
+setPublicPath(microApp.name)
 
 const vueLifecycles = singleSpaVue({
   Vue,
   appOptions: {
-    el: '#app-container',
-    name: appName,
+    el: microApp.containerId,
+    name: microApp.name,
     router,
     render(h) {
       return h(App, {

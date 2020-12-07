@@ -8,6 +8,6 @@ export default class FactoryWeb extends Factory {
     id: any;
     description: string;
     commands: (CommandServe | CommandBuild)[];
-    templates: (TemplateReact | TemplateVue | TemplateMicroMain)[];
+    templates: (TemplateVue | TemplateReact | TemplateMicroMain)[];
     execOpts: any;
 }

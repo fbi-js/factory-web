@@ -20,7 +20,7 @@ export default class TemplateWebBase extends Template {
       {
         type: 'input',
         name: 'name',
-        message: 'Input the project name',
+        message: 'Project name',
         initial({ enquirer }: any) {
           return defaultName
         },
@@ -32,7 +32,7 @@ export default class TemplateWebBase extends Template {
       {
         type: 'input',
         name: 'description',
-        message: 'Input project description',
+        message: 'Project description',
         initial({ state }: any) {
           return `${state.answers.name} description`
         }

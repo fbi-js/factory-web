@@ -1,9 +1,8 @@
 module.exports = {
-  orgName: 'mf',
-  projectName: 'base',
+  name: '@<%= project.orgName %>/<%= project.name %>',
   apps: [
     {
-      name: '@mf/app-vue',
+      name: '@mf/layout',
       activeWhen: ['/'],
       port: 9001,
     },

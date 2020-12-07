@@ -11,7 +11,7 @@
     This is needed by babel to share largeish helper code for compiling async/await in older
     browsers. More information at https://github.com/single-spa/create-single-spa/issues/112
   -->
-    <!-- <script src="/common-deps/regenerator-runtime@0.13.5.min.js"></script> -->
+    <script src="/common-deps/regenerator-runtime@0.13.5.min.js"></script>
     <meta name="importmap-type" content="systemjs-importmap" />
     <!-- If you wish to turn off import-map-overrides for specific environments (prod), uncomment the line below -->
     <!-- More info at https://github.com/joeldenning/import-map-overrides/blob/master/docs/configuration.md#domain-list -->
@@ -25,52 +25,23 @@
 
     More information about shared dependencies can be found at https://single-spa.js.org/docs/recommended-setup#sharing-with-import-maps.
   -->
-    <% if (isLocal) { %>
     <script type="systemjs-importmap">
       {
         "imports": {
-          "single-spa": "/common-deps/singleSpa@5.5.5.min.js",
-          "axios": "/common-deps/axios.min.js"
+          "single-spa": "https://cdn.jsdelivr.net/npm/single-spa@5.8.2/lib/system/single-spa.min.js"
         }
       }
     </script>
-    <% } else { %>
-    <script type="systemjs-importmap">
-      {
-        "imports": {
-          "single-spa": "/common-deps/singleSpa@5.5.5.min.js",
-          "axios": "/common-deps/axios.min.js"
-        }
-      }
-    </script>
-    <% } %>
     <link
       rel="preload"
-      href="/common-deps/singleSpa@5.5.5.min.js"
+      href="https://cdn.jsdelivr.net/npm/single-spa@5.8.2/lib/system/single-spa.min.js"
       as="script"
     />
-
-    <% if (isLocal) { %>
-    <script src="/common-deps/import-map-overrides.js"></script>
-    <script src="/common-deps/systemjs@6.7.1/system.js"></script>
-    <script src="/common-deps/systemjs@6.7.1/extra/use-default.js"></script>
-    <script src="/common-deps/systemjs@6.7.1/named-exports.js"></script>
-    <script src="/common-deps/systemjs@6.7.1/amd.js"></script>
-    <% } else { %>
-    <script src="/common-deps/import-map-overrides.js"></script>
     <script src="/common-deps/systemjs@6.7.1/system.min.js"></script>
+    <script src="/common-deps/import-map-overrides.js"></script>
     <script src="/common-deps/systemjs@6.7.1/extra/use-default.js"></script>
     <script src="/common-deps/systemjs@6.7.1/named-exports.min.js"></script>
     <script src="/common-deps/systemjs@6.7.1/amd.min.js"></script>
-    <% } %>
-
-    <script type="systemjs-importmap">
-      {
-        "imports": {
-          "@mf/base": "<%= serverUrl %>/mf-base.js"
-        }
-      }
-    </script>
 
     <script type="text/javascript">
       ;(function() {
@@ -99,14 +70,11 @@
   </head>
 
   <body>
-    <div id="app-container"></div>
-    <div id="full-loader">
+    <div id="mf-layout"></div>
+    <div class="full-loading" id="full-loading">
       <div class="ball-clip-rotate">
         <div></div>
       </div>
     </div>
-    <!-- <script>
-      System.import('@mf/base')
-    </script> -->
   </body>
 </html>

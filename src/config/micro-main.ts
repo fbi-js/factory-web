@@ -1,44 +1,23 @@
 import type { Configuration } from 'webpack'
 
 import { join } from 'path'
-import webpack from 'webpack'
 import { paths } from './helpers/paths'
 import { IConfigOption } from '../types'
 
 export const getConfig = (options: IConfigOption) => {
-  const userConfig = require(join(paths.cwd, 'micro-app'))
-  const { mode, cosEnv } = options
-  const isDev = mode === 'development'
-  const opts = {
-    orgName: userConfig.orgName,
-    projectName: userConfig.projectName,
-    orgPackagesAsExternal: true,
-    webpackConfigEnv: null,
-    standalone: false,
-    standaloneOptions: {}
-  }
-  const webpackConfigEnv = opts.webpackConfigEnv || {
-    isLocal: isDev,
-    COS_ENV: cosEnv,
-    standalone: false
-  }
+  const prijectInfo = require(join(paths.cwd, 'package.json'))
+  const appNameArr: string[] = prijectInfo.name.split('/')
+  const orgName = appNameArr.length > 1 ? appNameArr[0].replace('@', '') : ''
+  const projectName = appNameArr.length > 1 ? appNameArr[1] : appNameArr[0]
 
   const CopyWebpackPlugin = require('copy-webpack-plugin')
 
-  let apps = []
-  try {
-    apps = userConfig.apps
-  } catch {}
   const config: Configuration = {
-    entry: join(paths.src, 'index.ts'),
     output: {
-      filename: isDev
-        ? `${opts.orgName}-${opts.projectName}.js?v=[hash]`
-        : `${opts.orgName}-${opts.projectName}.[hash].js`,
       libraryTarget: 'system',
       path: paths.dist,
-      jsonpFunction: `webpackJsonp_${opts.projectName}`,
-      devtoolNamespace: `${opts.projectName}`
+      jsonpFunction: `webpackJsonp_${orgName}_${projectName}`,
+      devtoolNamespace: `${orgName}_${projectName}`
     },
     module: {
       rules: [
@@ -49,14 +28,8 @@ export const getConfig = (options: IConfigOption) => {
         }
       ]
     },
-    externals: opts.orgPackagesAsExternal
-      ? ['single-spa', new RegExp(`^@${opts.orgName}/`)]
-      : ['single-spa'],
+    externals: ['single-spa'],
     plugins: [
-      new webpack.DefinePlugin({
-        COS_ENV: JSON.stringify(webpackConfigEnv.COS_ENV),
-        APPS: JSON.stringify(apps)
-      }),
       new CopyWebpackPlugin({
         patterns: [
           {

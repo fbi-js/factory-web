@@ -12,7 +12,9 @@ export const getConfig = (options: IConfigOption) => {
     },
     plugins: [
       new AssetJsonPlugin({
-        onlyEntryFile: true
+        onlyEntryFile: true,
+        input: 'micro.config.js',
+        output: 'micro.config.json'
       })
     ]
   })

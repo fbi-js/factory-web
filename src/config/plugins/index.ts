@@ -6,7 +6,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 
 // output assets list in HtmlWebpackPlugin
 export class AssetJsonPlugin {
-  constructor(public options: { onlyEntryFile: boolean }) {}
+  constructor(public options: { onlyEntryFile: boolean; input: string; output: string }) {}
 
   apply(compiler: Compiler) {
     let result: string
@@ -51,14 +51,15 @@ export class AssetJsonPlugin {
     compiler.hooks.done.tap('AssetJsonPlugin output', async (
       stats /* stats is passed as argument when done hook is tapped.  */
     ) => {
-      if (result && compiler.options.output?.path) {
+      const outputDir = compiler.options.output?.path
+      if (result && outputDir) {
         let microAppJson = {
           entry: '',
           routes: []
         }
         if (this.options.onlyEntryFile) {
           try {
-            const microAppJs = require(join(process.cwd(), 'micro-app'))
+            const microAppJs = require(join(process.cwd(), this.options.input))
             microAppJson = {
               ...microAppJs
             }
@@ -66,9 +67,11 @@ export class AssetJsonPlugin {
             console.log(err)
           }
           microAppJson.entry = JSON.parse(result)[0]
+        } else {
+          microAppJson = JSON.parse(result)
         }
 
-        const targetFile = join(compiler.options.output.path, 'assets.json')
+        const targetFile = join(outputDir, this.options.output)
         try {
           await fs.writeFile(targetFile, JSON.stringify(microAppJson), () => {})
         } catch (err) {

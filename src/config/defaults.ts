@@ -29,7 +29,7 @@ export const WEBPACK_STATS: Options.Stats = {
 
 // webpack-dev-server config
 export const WEBPACK_DEV_SERVER_CONFIG: DevServerConfiguration = {
-  contentBase: join(paths.cwd, paths.dist),
+  contentBase: paths.dist,
   clientLogLevel: 'silent',
   historyApiFallback: true,
   compress: true,
