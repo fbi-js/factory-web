@@ -1,0 +1,31 @@
+{
+  "name": "@mf/portal",
+  "version": "0.0.0",
+  "description": "portal description",
+  "private": true,
+  "main": "dist/main.js",
+  "scripts": {
+    "dev": "fbi serve",
+    "build": "fbi build",
+    "lint": "npx eslint --ext .vue,.js --fix",
+    "format": "npx prettier -c --write \"**/*.{js,md,html,css,less}\""
+  },
+  "dependencies": {
+    "axios": "^0.21.0",
+    "single-spa": "^5.8.2"
+  },
+  "devDependencies": {
+    "@fbi-js/factory-web": "file:../../",
+    "@types/systemjs": "^6.1.0"
+  },
+  "fbi": {
+    "factory": {
+      "id": "@fbi-js/factory-web",
+      "version": "",
+      "template": "micro-main",
+      "features": {
+        "typescript": true
+      }
+    }
+  }
+}

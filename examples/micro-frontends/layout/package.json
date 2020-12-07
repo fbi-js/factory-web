@@ -1,0 +1,35 @@
+{
+  "name": "@mf/layout",
+  "version": "0.0.0",
+  "description": "layout description",
+  "private": true,
+  "scripts": {
+    "dev": "fbi serve -p 9001",
+    "build": "fbi build",
+    "lint": "npx eslint --ext .vue,.js --fix"
+  },
+  "dependencies": {
+    "single-spa-vue": "^2.1.0",
+    "systemjs-webpack-interop": "^2.3.0",
+    "vue": "^2.6.12",
+    "vue-router": "^3.4.9"
+  },
+  "devDependencies": {
+    "@fbi-js/factory-web": "file:../../",
+    "@typescript-eslint/parser": "^4.9.0",
+    "eslint-plugin-vue": "^7.2.0",
+    "vue-eslint-parser": "^7.2.0",
+    "vue-loader": "^15.9.5",
+    "vue-template-compiler": "^2.6.12"
+  },
+  "fbi": {
+    "factory": {
+      "id": "@fbi-js/factory-web",
+      "version": "",
+      "template": "micro-vue",
+      "features": {
+        "typescript": true
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+$font-size: 1rem;
+$font-color: lch(53 105 40);
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  color: $font-color;
+  font-size: $font-size;
+}
+
+body {
+  font-family: 'PingFang SC', 'Helvetica Neue', Helvetica, 'microsoft yahei', arial, STHeiTi,
+    sans-serif;
+}
+
+a {
+  text-decoration: none;
+}

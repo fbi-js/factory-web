@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="google" content="notranslate" />
+    <title>base</title>
+    <meta name="importmap-type" content="systemjs-importmap" />
+    <script type="systemjs-importmap">
+      {
+        "imports": {
+          "single-spa": "https://cdn.jsdelivr.net/npm/single-spa@5.8.2/lib/system/single-spa.min.js"
+        }
+      }
+    </script>
+    <link
+      rel="preload"
+      href="https://cdn.jsdelivr.net/npm/single-spa@5.8.2/lib/system/single-spa.min.js"
+      as="script"
+    />
+    <script src="/common-deps/systemjs@6.7.1/system.min.js"></script>
+    <script src="/common-deps/import-map-overrides.js"></script>
+    <script src="/common-deps/systemjs@6.7.1/extra/use-default.js"></script>
+    <script src="/common-deps/systemjs@6.7.1/named-exports.min.js"></script>
+    <script src="/common-deps/systemjs@6.7.1/amd.min.js"></script>
+    <script>
+      ;(function () {
+        /*
+         * Support for live DOM updating import maps
+         */
+        new MutationObserver(function (mutations) {
+          for (var i = 0; i < mutations.length; i++) {
+            var mutation = mutations[i]
+            if (mutation.type === 'childList')
+              for (var j = 0; j < mutation.addedNodes.length; j++) {
+                var addedNode = mutation.addedNodes[j]
+                if (
+                  addedNode.tagName === 'SCRIPT' &&
+                  addedNode.type === 'systemjs-importmap' &&
+                  !addedNode.sp
+                ) {
+                  System.prepareImport(true)
+                  break
+                }
+              }
+          }
+        }).observe(document, { childList: true, subtree: true })
+      })()
+    </script>
+    <link href="/css/main-0.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="mf-layout"></div>
+    <div class="full-loading" id="full-loading">
+      <div class="ball-clip-rotate"><div></div></div>
+    </div>
+    <script src="/js/runtime.8047d989f6cc593aabb8.js"></script>
+    <script src="/js/main.8047d989f6cc593aabb8.js"></script>
+  </body>
+</html>
