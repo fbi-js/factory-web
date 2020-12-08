@@ -3,7 +3,13 @@
 ## Start
 
 ```bash
-cd app-demo
+cd app-vue
+npm i
+npm run dev
+```
+
+```bash
+cd app-react
 npm i
 npm run dev
 ```

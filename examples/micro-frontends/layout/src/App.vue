@@ -4,7 +4,8 @@
     <div class="layout-main">
       <Navbar />
       <div class="layout-content">
-        <div id="app-demo" />
+        <div id="mf-app-vue" />
+        <div id="mf-app-react" />
       </div>
     </div>
   </div>

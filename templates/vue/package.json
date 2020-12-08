@@ -4,14 +4,14 @@
   "description": "<%= project.description %>",
   "private": true,
   "scripts": {
-    "dev": "fbi serve  <%_ if (project.isMicro) { _%> <%=  %> -p 9001 <%_ } _%>",
+    "dev": "fbi serve <% if (project.isMicro) { %> -p 9001 <% } %>",
     "build": "fbi build",
-    "lint": "npx eslint --ext .vue,.js --fix"
+    "lint": "eslint src --ext .vue,<% if (project.features.typescript) { %>.ts<% } else { %>.js<% } %> --fix"
   },
   "dependencies": {
     <%_ if (project.isMicro) { _%>
     "single-spa-vue": "^2.1.0",
-    "systemjs-webpack-interop": "^2.3.0",
+    "systemjs-webpack-interop": "^2.3.1",
     <%_ } _%>
     "vue": "^2.6.12",
     "vue-router": "^3.4.9"
@@ -19,12 +19,10 @@
   "devDependencies": {
     "@fbi-js/factory-web": "~1",
     <%_ if (project.features.typescript) { _%>
-    "@typescript-eslint/parser": "^4.9.0",
+    "@typescript-eslint/parser": "^4.9.1",
+    "@vue/eslint-config-typescript": "^7.0.0",
     <%_ } _%>
     "eslint-plugin-vue": "^7.2.0",
-    <%_ if (project.features.typescript) { _%>
-    "vue-eslint-parser": "^7.2.0",
-    <%_ } _%>
     "vue-loader": "^15.9.5",
     "vue-template-compiler": "^2.6.12"
   },
@@ -35,5 +33,42 @@
       "template": "<%= factory.template %>",
       "features": <%- JSON.stringify(project.features) %>
     }
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"<%_ if (project.features.typescript) { _%>,
+      "@vue/typescript"
+      <%_ } _%>
+    ],
+    "parserOptions": {
+      <%_ if (project.features.typescript) { _%>
+      "ecmaVersion": 2020
+      <%_ } else { _%>
+      "parser": "babel-eslint"
+      <%_ } _%>
+    },
+    "rules": {
+      "semi": [
+        "error",
+        "never"
+      ]
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "prettier": {
+    "semi": false,
+    "tabWidth": 2,
+    "singleQuote": true,
+    "trailingComma": "all",
+    "endOfLine": "auto"
   }
 }

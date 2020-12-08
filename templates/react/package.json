@@ -4,11 +4,15 @@
   "description": "<%= project.description %>",
   "private": true,
   "scripts": {
-    "dev": "fbi serve",
+    "dev": "fbi serve <% if (project.isMicro) { %> -p 9001 <% } %>",
     "build": "fbi build",
-    "lint": "npx eslint --ext .jsx,.js --fix"
+    "lint": "eslint src --ext <% if (project.features.typescript) { %>.ts,.tsx<% } else { %>.js,.jsx<% } %> --fix"
   },
   "dependencies": {
+    <%_ if (project.isMicro) { _%>
+    "single-spa-react": "^3.2.0",
+    "systemjs-webpack-interop": "^2.3.1",
+    <%_ } _%>
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
   },
@@ -19,6 +23,7 @@
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     <%_ } _%>
+    "eslint-config-react-app": "^6.0.0",
     "react-hot-loader": "^4.13.0"
   },
   "fbi": {
@@ -28,5 +33,45 @@
       "template": "<%= factory.template %>",
       "features": <%- JSON.stringify(project.features) %>
     }
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      <%_ if (project.features.typescript) { _%>
+      "@babel/preset-typescript",
+      <%_ } _%>
+      [
+        "@babel/preset-react",
+        {
+          "runtime": "automatic"
+        }
+      ]
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-class-properties"
+    ]
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ],
+    "rules": {
+      "semi": [
+        "error",
+        "never"
+      ]
+    }
+  },
+  "prettier": {
+    "semi": false,
+    "tabWidth": 2,
+    "singleQuote": true,
+    "trailingComma": "all",
+    "endOfLine": "auto"
   }
 }

@@ -1,14 +1,34 @@
+<%_ if (project.isMicro) { _%>
+import { setPublicPath } from 'systemjs-webpack-interop'
+import singleSpaReact from 'single-spa-react'
+
+<%_ } _%>
 import React from 'react'
 import ReactDOM from 'react-dom'
 
 import './index.css'
 import App from './App'
 
-const title = 'React with Webpack and Babel'
+<%_ if (project.isMicro) { _%>
+const microApp = require('../micro.config')
+setPublicPath(microApp.name)
 
+const lifecycles = singleSpaReact({
+  React,
+  ReactDOM,
+  rootComponent: App,
+  errorBoundary(err, info, props) {
+    // Customize the root error boundary for your microfrontend here.
+    return null;
+  },
+})
+
+export const { bootstrap, mount, unmount } = lifecycles
+<%_ } else { _%>
 ReactDOM.render(
   <React.StrictMode>
-    <App title={title} />
+    <App />
   </React.StrictMode>,
   document.getElementById('app'),
 )
+<%_ } _%>

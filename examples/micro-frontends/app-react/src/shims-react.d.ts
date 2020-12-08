@@ -1,7 +1,6 @@
 /// <reference types="node" />
 /// <reference types="react" />
 /// <reference types="react-dom" />
-<%_ if (project.isMicro) { _%>
 
 import SingleSpaReact from 'single-spa-react'
 
@@ -12,7 +11,6 @@ declare module 'single-spa-react' {
   }
 }
 
-<%_ } _%>
 declare namespace NodeJS {
   interface ProcessEnv {
     readonly NODE_ENV: 'development' | 'production' | 'test';
@@ -56,14 +54,16 @@ declare module '*.webp' {
 }
 
 declare module '*.svg' {
-  import * as React from 'react';
+  const content: any;
+  export default content;
+  // import * as React from 'react';
 
-  export const ReactComponent: React.FunctionComponent<React.SVGProps<
-    SVGSVGElement
-  > & { title?: string }>;
+  // export const ReactComponent: React.FunctionComponent<React.SVGProps<
+  //   SVGSVGElement
+  // > & { title?: string }>;
 
-  const src: string;
-  export default src;
+  // const src: string;
+  // export default src;
 }
 
 declare module '*.module.css' {
@@ -80,3 +80,5 @@ declare module '*.module.sass' {
   const classes: { readonly [key: string]: string };
   export default classes;
 }
+
+

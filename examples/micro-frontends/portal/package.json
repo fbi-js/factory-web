@@ -15,7 +15,7 @@
     "single-spa": "^5.8.2"
   },
   "devDependencies": {
-    "@fbi-js/factory-web": "file:../../",
+    "@fbi-js/factory-web": "file:../../../",
     "@types/systemjs": "^6.1.0"
   },
   "fbi": {

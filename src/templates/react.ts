@@ -45,18 +45,11 @@ export default class TemplateReact extends BaseClass {
     await super.writing()
 
     this.files.copy = (this.files.copy || []).concat(
-      [
-        'public/*',
-        isTs ? 'tsconfig.json' : '',
-        {
-          from: isTs ? 'src-ts/*' : 'src/*',
-          to: `src`
-        }
-      ].filter(Boolean)
+      ['public/*', isTs ? 'tsconfig.json' : ''].filter(Boolean)
     )
     this.files.render = (this.files.render || []).concat({
-      from: isTs ? 'src-ts/main.ts' : 'src/main.js',
-      to: `src/main.${isTs ? 'ts' : 'js'}`
+      from: isTs ? 'src-ts/*' : 'src/*',
+      to: 'src'
     })
   }
 }

@@ -8,6 +8,7 @@ import TemplateVue from './templates/vue'
 import TemplateReact from './templates/react'
 import TemplateMicroMain from './templates/micro-main'
 import TemplateMicroVue from './templates/micro-vue'
+import TemplateMicroReact from './templates/micro-react'
 
 export default class FactoryWeb extends Factory {
   id = require('../package.json').name
@@ -17,7 +18,8 @@ export default class FactoryWeb extends Factory {
     new TemplateVue(this),
     new TemplateReact(this),
     new TemplateMicroMain(this),
-    new TemplateMicroVue(this)
+    new TemplateMicroVue(this),
+    new TemplateMicroReact(this),
   ]
 
   execOpts: any = {

@@ -9,8 +9,14 @@
     <li>
       <a
         href="javascript:;"
-        @click.prevent="navigateTo('/app-demo')"
-      >App Demo</a>
+        @click.prevent="navigateTo('/app-vue')"
+      >App Vue</a>
+    </li>
+    <li>
+      <a
+        href="javascript:;"
+        @click.prevent="navigateTo('/app-react')"
+      >App React</a>
     </li>
   </ul>
 </template>

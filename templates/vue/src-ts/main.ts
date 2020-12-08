@@ -15,7 +15,7 @@ Vue.config.productionTip = false
 const microApp = require('../micro.config')
 setPublicPath(microApp.name)
 
-const vueLifecycles = singleSpaVue({
+const lifecycles = singleSpaVue({
   Vue,
   appOptions: {
     el: microApp.containerId,
@@ -34,9 +34,8 @@ const vueLifecycles = singleSpaVue({
     },
   },
 })
-export const bootstrap = vueLifecycles.bootstrap
-export const mount = vueLifecycles.mount
-export const unmount = vueLifecycles.unmount
+
+export const { bootstrap, mount, unmount } = lifecycles
 <%_ } else { _%>
 new Vue({
   name: 'MyApp',

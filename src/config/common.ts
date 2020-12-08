@@ -117,9 +117,9 @@ export default (data: Record<string, any>): WebpackConfiguration => {
         patterns: [
           {
             from: paths.public,
-            to: 'assets',
             globOptions: {
-              ignore: ['*.DS_Store', 'index.html']
+              dot: true,
+              ignore: ['./*.html']
             }
           }
         ]

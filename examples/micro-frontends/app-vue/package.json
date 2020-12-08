@@ -1,5 +1,5 @@
 {
-  "name": "app-demo",
+  "name": "@mf/app-vue",
   "version": "0.0.0",
   "description": "app-demo description",
   "private": true,
@@ -10,13 +10,13 @@
   },
   "dependencies": {
     "single-spa-vue": "^2.1.0",
-    "systemjs-webpack-interop": "^2.3.0",
+    "systemjs-webpack-interop": "^2.3.1",
     "vue": "^2.6.12",
     "vue-router": "^3.4.9"
   },
   "devDependencies": {
-    "@fbi-js/factory-web": "file:../../",
-    "@typescript-eslint/parser": "^4.9.0",
+    "@fbi-js/factory-web": "file:../../../",
+    "@typescript-eslint/parser": "^4.9.1",
     "eslint-plugin-vue": "^7.2.0",
     "vue-eslint-parser": "^7.2.0",
     "vue-loader": "^15.9.5",

@@ -1,0 +1,35 @@
+{
+  "name": "app-react",
+  "version": "0.0.0",
+  "description": "app-react description",
+  "private": true,
+  "scripts": {
+    "dev": "fbi serve -p 9003",
+    "build": "fbi build",
+    "lint": "npx eslint --ext .jsx,.js --fix"
+  },
+  "dependencies": {
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "single-spa-react": "^3.2.0",
+    "systemjs-webpack-interop": "^2.3.1"
+  },
+  "devDependencies": {
+    "@babel/preset-react": "^7.12.7",
+    "@fbi-js/factory-web": "file:../../../",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@types/single-spa-react": "^2.12.0",
+    "react-hot-loader": "^4.13.0"
+  },
+  "fbi": {
+    "factory": {
+      "id": "@fbi-js/factory-web",
+      "version": "",
+      "template": "micro-react",
+      "features": {
+        "typescript": true
+      }
+    }
+  }
+}
