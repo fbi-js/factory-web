@@ -10,6 +10,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin'
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
 import { WEBPACK_DEV_SERVER_CONFIG, WEBPACK_STATS } from './defaults'
+import { resolveCssOptions } from '../config/helpers/css-options'
 
 export default (data: Record<string, any>): WebpackConfiguration => {
   const buildMode = process.env.NODE_ENV || 'development'
@@ -103,7 +104,11 @@ export default (data: Record<string, any>): WebpackConfiguration => {
                   }
                 }
               ]
-        }
+        },
+        // {
+        //   test: /\.(scss|css)$/,
+        //   use: resolveCssOptions()
+        // }
       ]
     },
     plugins: [
