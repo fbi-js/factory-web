@@ -15,7 +15,6 @@ async function loadConfigs(configs) {
       const response = await axios.get(item, {
         headers: { 'Cache-Control': 'no-cache' },
       })
-      console.log({ response })
       const data = response?.data
       if (data) {
         reault.push({
@@ -50,7 +49,6 @@ function setImportMap(config) {
 
 async function loadApps(apps) {
   const configs = await loadConfigs(apps)
-  console.log({ apps, configs })
   if (!configs || configs.length < 1) {
     return
   }

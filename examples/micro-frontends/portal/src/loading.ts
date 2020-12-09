@@ -1,4 +1,3 @@
-import { once } from 'lodash'
 import './styles/index.css'
 
 const loadingDom = document.getElementById('full-loading')
@@ -16,7 +15,7 @@ export const fullScreenLoadingHandle = () => {
   timer = setTimeout(loadingEnd, 10000)
 }
 
-const loadingEnd = once(() => {
+const loadingEnd = () => {
   window.clearTimeout(timer)
   loadingDom.style.display = 'none'
-})
+}
