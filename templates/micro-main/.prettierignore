@@ -1,8 +1,6 @@
 build/
 dist/
-**/*.md
 **/*.svg
 **/*.ejs
 **/*.html
-package.json
 src/common-deps/**/*

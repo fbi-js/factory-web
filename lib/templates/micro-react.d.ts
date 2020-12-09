@@ -8,5 +8,4 @@ export default class TemplateMicroVue extends TemplateReact {
     templates: never[];
     constructor(factory: Factory);
     protected gathering(flags: Record<string, any>): Promise<void>;
-    protected writing(): Promise<void>;
 }

@@ -6,7 +6,10 @@ export default class TemplateReact extends BaseClass {
     path: string;
     description: string;
     templates: never[];
+    features: {
+        name: string;
+        value: boolean;
+    }[];
     constructor(factory: Factory);
     protected gathering(flags: Record<string, any>): Promise<void>;
-    protected writing(): Promise<void>;
 }

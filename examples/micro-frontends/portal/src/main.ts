@@ -1,36 +1,37 @@
 import axios from 'axios'
 import { registerApplication, start } from 'single-spa'
-
-import apps from './configs'
 import { fullScreenLoadingHandle } from './loading'
 
-function getConfigs() {
-  const requests = apps.map((item) => {
+async function loadConfigs(configs) {
+  const reault = []
+  for (const item of configs) {
     const urlInstance = new URL(item)
     const prefix = `${urlInstance.host}${urlInstance.pathname.slice(
       0,
       urlInstance.pathname.lastIndexOf('/') + 1,
     )}`
 
-    return new Promise((resolve, reject) => {
-      axios
-        .get(item, {
-          headers: { 'Cache-Control': 'no-cache' },
+    try {
+      const response = await axios.get(item, {
+        headers: { 'Cache-Control': 'no-cache' },
+      })
+      console.log({ response })
+      const data = response?.data
+      if (data) {
+        reault.push({
+          ...data,
+          url: `//${(prefix + data.entry).replace('//', '/')}`,
         })
-        .then((r) => {
-          const data = r?.data || {}
-          resolve({
-            ...data,
-            url: `//${(prefix + data.entry).replace('//', '/')}`,
-          })
-        })
-        .catch((e) => reject)
-    })
-  })
-  return Promise.all(requests)
+      }
+    } catch (err) {
+      continue
+    }
+  }
+  return reault
 }
 
-function setImportMap(configs) {
+function setImportMap(config) {
+  const configs = Array.isArray(config) ? config : [config]
   const script = document.createElement('script')
   script.type = 'systemjs-importmap'
   const content = `{
@@ -47,28 +48,52 @@ function setImportMap(configs) {
   head.appendChild(script)
 }
 
-function registerApps(configs) {
-  for (const config of configs) {
+async function loadApps(apps) {
+  const configs = await loadConfigs(apps)
+  console.log({ apps, configs })
+  if (!configs || configs.length < 1) {
+    return
+  }
+  setImportMap(configs)
+
+  for (const app of configs) {
     registerApplication({
-      name: config.name,
-      app: () => System.import(config.name),
-      activeWhen: config.activeWhen,
+      name: app.name,
+      app: () => System.import(app.name),
+      activeWhen: app.activeWhen,
     })
   }
 }
 
-fullScreenLoadingHandle()
+function run(configs) {
+  fullScreenLoadingHandle()
 
-getConfigs().then((configs) => {
-  console.log({ configs })
+  const baseConfigs = configs.base
+  const appsConfigs = configs.apps
 
-  setImportMap(configs)
+  if (baseConfigs && baseConfigs.length > 0) {
+    window.addEventListener('single-spa:first-mount', () => {
+      loadApps(appsConfigs)
+    })
 
-  registerApps(configs)
+    return loadApps(baseConfigs).finally(() => {
+      start({
+        urlRerouteOnly: true,
+      })
+    })
+  } else {
+    return loadApps(appsConfigs).finally(() => {
+      start({
+        urlRerouteOnly: true,
+      })
+    })
+  }
+}
 
-  start({
-    urlRerouteOnly: true,
-  })
-})
+if (!process.env.MICRO_MODE || process.env.MICRO_MODE === '') {
+  run(require('./configs').default)
+}
+
+export { run }
 
 export * from './helpers'

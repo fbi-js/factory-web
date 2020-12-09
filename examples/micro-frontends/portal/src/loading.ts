@@ -1,7 +1,7 @@
 import { once } from 'lodash'
 import './styles/index.css'
 
-const elLoading = document.getElementById('full-loading')
+const loadingDom = document.getElementById('full-loading')
 let timer
 
 /**
@@ -10,7 +10,7 @@ let timer
  * - 结束：`single-spa:first-mount`事件触发结束
  */
 export const fullScreenLoadingHandle = () => {
-  elLoading.style.display = 'flex'
+  loadingDom.style.display = 'flex'
   window.addEventListener('single-spa:first-mount', loadingEnd)
   // 超时取消loading
   timer = setTimeout(loadingEnd, 10000)
@@ -18,5 +18,5 @@ export const fullScreenLoadingHandle = () => {
 
 const loadingEnd = once(() => {
   window.clearTimeout(timer)
-  elLoading.style.display = 'none'
+  loadingDom.style.display = 'none'
 })

@@ -16,6 +16,7 @@ export default (data: Record<string, any>): WebpackConfiguration => {
   const isDev = buildMode === 'development'
   const isTs = data.factory?.features?.typescript
   const isMicro = data.factory?.template?.startsWith('micro-')
+  const htmlWebpackPluginTemplatePath = join(paths.public, 'index.html')
 
   const config = {
     mode: buildMode,
@@ -109,7 +110,7 @@ export default (data: Record<string, any>): WebpackConfiguration => {
     plugins: [
       !isMicro && new webpack.ProgressPlugin(),
       // Make appName & appVersion available as a constant
-      new webpack.DefinePlugin(data.DefinePluginData || {}),
+      new webpack.DefinePlugin(data.definePluginData || {}),
       // Removes/cleans build folders and unused assets when rebuilding
       new CleanWebpackPlugin(),
       // Copies files from target to destination folder
@@ -126,7 +127,7 @@ export default (data: Record<string, any>): WebpackConfiguration => {
       }),
       new HtmlWebpackPlugin({
         title: data.title || 'My App',
-        template: join(paths.public, 'index.html'),
+        template: htmlWebpackPluginTemplatePath,
         filename: 'index.html', // output file
         // https://github.com/jantimon/html-webpack-plugin/blob/657bc605a5dbdbbdb4f8154bd5360492c5687fc9/examples/template-parameters/webpack.config.js#L20
         templateParameters: (

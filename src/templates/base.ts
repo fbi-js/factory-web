@@ -8,15 +8,33 @@ const { formatName, isValidObject } = utils
 export default class TemplateWebBase extends Template {
   id = 'web-base'
   renderer = ejs.render
+  features: any[] = []
 
   constructor(public factory: Factory) {
     super()
   }
 
   protected async gathering(flags: Record<string, any>) {
-    const defaultName = (this.data.project && this.data.project.name) || 'project-demo'
+    const defaultName = this.data.project?.name ?? 'project-demo'
+    const isMicro = this.id.startsWith('micro-')
 
     this.data.project = await this.prompt([
+      ...(isMicro
+        ? [
+            {
+              type: 'input',
+              name: 'orgName',
+              message: 'Organization name',
+              initial({ enquirer }: any) {
+                return ''
+              },
+              validate(value: any) {
+                const name = formatName(value)
+                return (name && true) || 'please input a valid organization name'
+              }
+            }
+          ]
+        : []),
       {
         type: 'input',
         name: 'name',
@@ -36,24 +54,51 @@ export default class TemplateWebBase extends Template {
         initial({ state }: any) {
           return `${state.answers.name} description`
         }
-      }
+      },
+      ...(this.features.length > 0
+        ? [
+            {
+              type: 'MultiSelect',
+              name: 'features',
+              message: `Choose features for your project:`,
+              hint: '(Use <space> to select, <return> to submit)',
+              choices: this.features,
+              result(names: string[]) {
+                return this.map(names)
+              }
+            }
+          ]
+        : [])
     ] as any)
   }
 
   protected async writing() {
     const debug = !!this.context.get('debug')
+    const isMicro = this.id.startsWith('micro-')
+    const isTs = this.data.project?.features?.typescript
 
     this.files = {
       copy: [
         '.gitignore',
         '.editorconfig',
-        '.eslintignore',
         '.prettierignore',
-        '.prettierrc.js',
-        '.stylelintrc.js',
-        'postcss.config.js'
-      ],
-      render: ['package.json', 'webpack.config.js', '.babelrc', '.eslintrc.js', 'README.md'],
+        'public/*',
+        isTs ? 'tsconfig.json' : '',
+        {
+          from: `src${isTs ? '-ts' : ''}/**/*.{jpg,png,gif,svg,mp4,mp3,webm,ogg,wav,flac,aac}`,
+          to: 'src'
+        }
+      ].filter(Boolean),
+      render: [
+        'package.json',
+        'webpack.config.js',
+        'README.md',
+        isMicro ? 'micro.config.js' : '',
+        {
+          from: `src${isTs ? '-ts' : ''}/**/*.{js,jsx,ts,tsx,css,scss,sass,less,md,vue}`,
+          to: 'src'
+        }
+      ].filter(Boolean),
       renderOptions: {
         async: true,
         debug,

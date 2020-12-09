@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "fbi serve -p 9003",
     "build": "fbi build",
-    "lint": "npx eslint --ext .jsx,.js --fix"
+    "lint": "eslint src --ext js,jsx,ts,tsx --fix",
+    "format": "prettier -c --write \"./**/*.{js,jsx,ts,tsx,md,html,css}\""
   },
   "dependencies": {
     "react": "^17.0.1",
@@ -19,7 +20,8 @@
     "@fbi-js/factory-web": "file:../../../",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
-    "@types/single-spa-react": "^2.12.0",
+    "@types/single-spa-react": "^3.0.0",
+    "eslint-config-react-app": "^6.0.0",
     "react-hot-loader": "^4.13.0"
   },
   "fbi": {
@@ -31,5 +33,57 @@
         "typescript": true
       }
     }
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-typescript",
+      [
+        "@babel/preset-react",
+        {
+          "runtime": "automatic"
+        }
+      ]
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-class-properties"
+    ]
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ],
+    "rules": {
+      "semi": [
+        "error",
+        "never"
+      ]
+    }
+  },
+  "postcss": {
+    "plugins": [
+      "postcss-preset-env"
+    ]
+  },
+  "prettier": {
+    "semi": false,
+    "tabWidth": 2,
+    "singleQuote": true,
+    "trailingComma": "all",
+    "endOfLine": "auto"
+  },
+  "stylelint": {
+    "extends": [
+      "stylelint-config-standard",
+      "stylelint-config-prettier"
+    ],
+    "plugins": [],
+    "ignoreFiles": [],
+    "rules": {}
   }
 }

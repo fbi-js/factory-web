@@ -13,7 +13,7 @@ export default class CommandBuild extends Command {
   args = ''
   flags = [
     ['-m, --mode <mode>', 'specify env mode(development|production|testing)', 'production'],
-    ['-d, --dev-dependencies', 'with devDependencies', false]
+    ['--micro-mode <mode>', '""|fuse', '']
   ]
 
   constructor(public factory: Factory) {
@@ -22,6 +22,7 @@ export default class CommandBuild extends Command {
 
   public async run(flags: any, unknown: any) {
     process.env.NODE_ENV = flags.mode ?? 'production'
+    process.env.MICRO_MODE = flags.microMode ?? ''
 
     this.debug(
       `Factory: (${this.factory.id})`,
@@ -37,7 +38,7 @@ export default class CommandBuild extends Command {
 
     const factory = this.context.get('config.factory')
     const config = await resolveWebpackConfig(factory.template, {
-      env: process.env.NODE_ENV,
+      ...flags,
       factory
     })
 

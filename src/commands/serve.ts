@@ -16,9 +16,8 @@ export default class CommandServe extends Command {
   args = ''
   flags = [
     ['-m, --mode <mode>', 'specify env mode(development|production|testing)', 'development'],
-    ['-e, --env <env>', 'customer env mode(development|production)', 'development'],
     ['-p, --port <port>', 'webapck dev-serve port', PORT],
-    ['-entry, --entry <entry>', 'entry type(self|app-entry)', 'self']
+    ['--micro-mode <mode>', '""|fuse', '']
   ]
 
   constructor(public factory: Factory) {
@@ -27,6 +26,7 @@ export default class CommandServe extends Command {
 
   public async run(flags: any, unknown: any) {
     process.env.NODE_ENV = flags.mode ?? 'development'
+    process.env.MICRO_MODE = flags.microMode ?? ''
 
     this.debug(
       `Factory: (${this.factory.id})`,
@@ -44,10 +44,7 @@ export default class CommandServe extends Command {
     this.logStart(`Starting development server...`)
     try {
       const config = await resolveWebpackConfig(factory?.template, {
-        port: flags.port,
-        mode: flags.mode,
-        startEntry: flags.entry,
-        cosEnv: flags.env,
+        ...flags,
         factory
       })
       const compiler = webpack(config)

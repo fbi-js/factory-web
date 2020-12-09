@@ -4,9 +4,10 @@
   "description": "<%= project.description %>",
   "private": true,
   "scripts": {
-    "dev": "fbi serve <% if (project.isMicro) { %> -p 9001 <% } %>",
+    "dev": "fbi serve <% if (project.isMicro) { %>-p 9001<% } %>",
     "build": "fbi build",
-    "lint": "eslint src --ext .vue,<% if (project.features.typescript) { %>.ts<% } else { %>.js<% } %> --fix"
+    "lint": "eslint src --ext js,<% if (project.features.typescript) { %>ts,<% } %>vue --fix",
+    "format": "prettier -c --write \"./**/*.{js,<% if (project.features.typescript) { %>ts,<% } %>md,html,css,vue}\""
   },
   "dependencies": {
     <%_ if (project.isMicro) { _%>
@@ -21,6 +22,8 @@
     <%_ if (project.features.typescript) { _%>
     "@typescript-eslint/parser": "^4.9.1",
     "@vue/eslint-config-typescript": "^7.0.0",
+    <%_ } else { _%>
+    "babel-eslint": "^10.1.0",
     <%_ } _%>
     "eslint-plugin-vue": "^7.2.0",
     "vue-loader": "^15.9.5",
@@ -34,6 +37,20 @@
       "features": <%- JSON.stringify(project.features) %>
     }
   },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"<% if (project.features.typescript) { %>,
+      "@babel/preset-typescript"<% } %>
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-class-properties"
+    ]
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
   "eslintConfig": {
     "root": true,
     "env": {
@@ -41,9 +58,8 @@
     },
     "extends": [
       "plugin:vue/essential",
-      "eslint:recommended"<%_ if (project.features.typescript) { _%>,
-      "@vue/typescript"
-      <%_ } _%>
+      "eslint:recommended"<% if (project.features.typescript) { %>,
+      "@vue/typescript"<% } %>
     ],
     "parserOptions": {
       <%_ if (project.features.typescript) { _%>
@@ -52,6 +68,7 @@
       "parser": "babel-eslint"
       <%_ } _%>
     },
+    "ignorePatterns": [],
     "rules": {
       "semi": [
         "error",
@@ -59,16 +76,25 @@
       ]
     }
   },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead"
-  ],
+  "postcss":{
+    "plugins": [
+      "postcss-preset-env"
+    ]
+  },
   "prettier": {
     "semi": false,
     "tabWidth": 2,
     "singleQuote": true,
     "trailingComma": "all",
     "endOfLine": "auto"
+  },
+  "stylelint": {
+    "extends": [
+      "stylelint-config-standard",
+      "stylelint-config-prettier"
+    ],
+    "plugins": [],
+    "ignoreFiles": [],
+    "rules": {}
   }
 }
