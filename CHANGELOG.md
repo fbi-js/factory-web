@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/fbi-js/factory-web/compare/v1.1.0...v1.2.0) (2020-12-09)
+
+
+### Features
+
+* **template:** add micro-react ([8befe58](https://github.com/fbi-js/factory-web/commit/8befe588825613dddb26af04b036cd885f0faeeb))
+* **templates:** move build config to package.json ([bfb3776](https://github.com/fbi-js/factory-web/commit/bfb3776b8e44deb79abb3f8b143b2e7ca5f42761))
+
 ## [1.1.0](https://github.com/fbi-js/factory-web/compare/v1.0.3...v1.1.0) (2020-12-07)
 
 
