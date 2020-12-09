@@ -1,8 +1,8 @@
-# app-vue
+# app-react
 
-app-vue description
+app-react description
 
-> This project is generated via&nbsp;[fbi](https://github.com/fbi-js/fbi)&nbsp;@fbi-js/factory-web&nbsp; template micro-vue
+> This project is generated via&nbsp;[fbi](https://github.com/fbi-js/fbi)&nbsp;@fbi-js/factory-web&nbsp; template micro-react
 
 ## Dev
 

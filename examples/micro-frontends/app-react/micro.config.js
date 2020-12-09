@@ -3,9 +3,9 @@ module.exports = {
   containerId: '#mf-app-react',
   routes: [
     {
-      path: '/',
+      path: '/app-react',
     },
   ],
-  activeWhen: ['/'],
+  activeWhen: ['/app-react'],
   entry: ''
 }

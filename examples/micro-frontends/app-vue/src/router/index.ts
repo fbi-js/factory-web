@@ -5,11 +5,12 @@ Vue.use(Router)
 
 export default new Router({
   mode: 'history',
-  base: '/app-demo',
+  base: '/app-vue',
   routes: [
     {
       path: '/',
-      component: () => import('@/pages/Home.vue'),
+      component: () =>
+        import(/* webpackChunkName: "home" */ '@/pages/Home.vue'),
       meta: { title: 'Home' },
     },
   ],

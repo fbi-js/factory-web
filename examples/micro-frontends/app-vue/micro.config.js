@@ -3,8 +3,9 @@ module.exports = {
   containerId: '#mf-app-vue',
   routes: [
     {
-      path: '/',
+      path: '/app-vue',
     },
   ],
   activeWhen: ['/app-vue'],
+  entry: ''
 }

@@ -8,5 +8,4 @@ export default class TemplateMicroMain extends BaseClass {
     templates: never[];
     constructor(factory: Factory);
     protected gathering(flags: Record<string, any>): Promise<void>;
-    protected writing(): Promise<void>;
 }

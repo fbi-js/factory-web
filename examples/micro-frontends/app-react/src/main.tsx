@@ -14,6 +14,8 @@ const lifecycles = singleSpaReact({
   React,
   ReactDOM,
   rootComponent: App,
+  domElementGetter: () =>
+    document.querySelector(microApp.containerId) as Element,
   errorBoundary(_err: any, _info: any, _props: any) {
     // Customize the root error boundary for your microfrontend here.
     return null

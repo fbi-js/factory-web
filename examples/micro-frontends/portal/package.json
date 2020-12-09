@@ -3,12 +3,13 @@
   "version": "0.0.0",
   "description": "portal description",
   "private": true,
-  "main": "dist/main.js",
+  "main": "./dist/js/main.5d730e5d6f5eca786386.js",
   "scripts": {
     "dev": "fbi serve",
+    "dev2": "fbi serve --micro-mode fuse",
     "build": "fbi build",
-    "lint": "npx eslint --ext .vue,.js --fix",
-    "format": "npx prettier -c --write \"**/*.{js,md,html,css,less}\""
+    "lint": "eslint --ext js,ts --fix",
+    "format": "prettier -c --write \"**/*.{js,ts,md,html,css}\""
   },
   "dependencies": {
     "axios": "^0.21.0",
@@ -27,5 +28,59 @@
         "typescript": true
       }
     }
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-typescript"
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-class-properties"
+    ]
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "ecmaVersion": 2020
+    },
+    "ignorePatterns": [],
+    "rules": {
+      "semi": [
+        "error",
+        "never"
+      ]
+    }
+  },
+  "postcss": {
+    "plugins": [
+      "postcss-preset-env"
+    ]
+  },
+  "prettier": {
+    "semi": false,
+    "tabWidth": 2,
+    "singleQuote": true,
+    "trailingComma": "all",
+    "endOfLine": "auto"
+  },
+  "stylelint": {
+    "extends": [
+      "stylelint-config-standard",
+      "stylelint-config-prettier"
+    ],
+    "plugins": [],
+    "ignoreFiles": [],
+    "rules": {}
   }
 }
