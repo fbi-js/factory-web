@@ -37,6 +37,13 @@
       "version": "<%= factory.version %>",
       "template": "<%= factory.template %>",
       "features": <%- JSON.stringify(project.features) %>
+    },
+    "paths": {
+      "js": "js",
+      "css": "css",
+      "cssExtractPublicPath": "../",
+      "img": "img",
+      "assets": "assets"
     }
   },
   "babel": {
