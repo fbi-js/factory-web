@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.1](https://github.com/fbi-js/factory-web/compare/v1.2.0...v1.2.1) (2020-12-09)
+
+
+### Bug Fixes
+
+* **example:** mv common-deps to public ([ada2bbc](https://github.com/fbi-js/factory-web/commit/ada2bbc1029ffabdbefdc58a680b38a94cd67a98))
+* **template:** factoryVersion;add typescript dep ([34a7786](https://github.com/fbi-js/factory-web/commit/34a7786b6103ae9a86b71043631a6d95eed56112))
+
 ## [1.2.0](https://github.com/fbi-js/factory-web/compare/v1.1.0...v1.2.0) (2020-12-09)
 
 

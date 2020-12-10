@@ -4,6 +4,7 @@ import { join } from 'path'
 import { Template, utils } from 'fbi'
 
 const { formatName, isValidObject } = utils
+const { version } = require('../../package.json')
 
 export default class TemplateWebBase extends Template {
   id = 'web-base'
@@ -17,6 +18,8 @@ export default class TemplateWebBase extends Template {
   protected async gathering(flags: Record<string, any>) {
     const defaultName = this.data.project?.name ?? 'project-demo'
     const isMicro = this.id.startsWith('micro-')
+
+    this.data.factoryVersion = version
 
     this.data.project = await this.prompt([
       ...(isMicro
