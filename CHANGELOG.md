@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/fbi-js/factory-web/compare/v1.2.1...v1.3.0) (2020-12-10)
+
+
+### Features
+
+* 抽离css配置 ([176af7a](https://github.com/fbi-js/factory-web/commit/176af7a0e96d4ca077fd1e11f3827afcc46bfb85))
+
+
+### Bug Fixes
+
+* remove root package.json paths config ([f1fed9a](https://github.com/fbi-js/factory-web/commit/f1fed9a6d62934c6dfe06cbe7ad4b4b1b06d5bab))
+* template add paths config ([a75dd8a](https://github.com/fbi-js/factory-web/commit/a75dd8a0d115ca6f5d76960c6eda077ea489309a))
+
 ### [1.2.1](https://github.com/fbi-js/factory-web/compare/v1.2.0...v1.2.1) (2020-12-09)
 
 
