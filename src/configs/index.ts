@@ -6,7 +6,7 @@ import {
   resolveUserConfig,
   getTemplateWebpackConfig,
   getWebpackBaseConfig
-} from '../template-webpack'
+} from './webpack'
 import { merge } from 'webpack-merge'
 
 export const resolveWebpackConfig = async (

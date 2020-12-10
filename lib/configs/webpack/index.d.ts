@@ -1,4 +1,4 @@
-import { TemplateTypes } from '../types';
+import { TemplateTypes } from '../../types';
 import type { Configuration } from 'webpack';
 export * from './base';
 /**

@@ -4,11 +4,11 @@ import { Factory } from 'fbi'
 import CommandBuild from './commands/build'
 import CommandServe from './commands/serve'
 
-import TemplateVue from './template-renders/vue'
-import TemplateReact from './template-renders/react'
-import TemplateMicroMain from './template-renders/micro-main'
-import TemplateMicroVue from './template-renders/micro-vue'
-import TemplateMicroReact from './template-renders/micro-react'
+import TemplateVue from './templates/vue'
+import TemplateReact from './templates/react'
+import TemplateMicroMain from './templates/micro-main'
+import TemplateMicroVue from './templates/micro-vue'
+import TemplateMicroReact from './templates/micro-react'
 
 export default class FactoryWeb extends Factory {
   id = require('../package.json').name

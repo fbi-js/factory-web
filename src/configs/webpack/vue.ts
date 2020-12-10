@@ -1,7 +1,7 @@
 import type { Configuration } from 'webpack'
 
 import { resolve } from 'path'
-import { IConfigOption } from '../types'
+import { IConfigOption } from '../../types'
 import ESLintPlugin from 'eslint-webpack-plugin'
 import StyleLintPlugin from 'stylelint-webpack-plugin'
 

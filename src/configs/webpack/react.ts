@@ -1,8 +1,8 @@
 import type { Configuration } from 'webpack'
-import type { IConfigOption } from '../types'
+import type { IConfigOption } from '../../types'
 
 import { join } from 'path'
-import { paths } from '../config/constant/paths'
+import { paths } from '../constant/paths'
 import StyleLintPlugin from 'stylelint-webpack-plugin'
 import ESLintPlugin from 'eslint-webpack-plugin'
 

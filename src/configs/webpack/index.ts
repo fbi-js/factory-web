@@ -1,7 +1,7 @@
-import { TemplateTypes } from '../types'
+import { TemplateTypes } from '../../types'
 import type { Configuration } from 'webpack'
 import { join } from 'path'
-import { paths, factoryConfigs } from '../config/constant/paths'
+import { paths, factoryConfigs } from '../constant/paths'
 
 export * from './base'
 
@@ -59,5 +59,3 @@ export const getDefinePluginData = (data: Record<string, any>) => {
     definePluginData
   }
 }
-
-// export const get

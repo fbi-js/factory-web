@@ -1,7 +1,7 @@
 import type { Configuration } from 'webpack'
 
 import { join } from 'path'
-import { paths } from '../config/constant/paths'
+import { paths } from '../constant/paths'
 
 export const getConfig = (data: Record<string, any>) => {
   const prijectInfo = require(join(paths.cwd, 'package.json'))

@@ -1,4 +1,4 @@
-import type { WebpackConfiguration } from '../types'
+import type { WebpackConfiguration } from '../../types'
 import webpack from 'webpack'
 import { join, resolve } from 'path'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
@@ -8,8 +8,8 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin'
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
 
-import { getMergePaths, isProd, getEnvMode } from '../helpers/utils'
-import { WEBPACK_DEV_SERVER_CONFIG, WEBPACK_STATS } from '../config/constant/defaults'
+import { getMergePaths, isProd, getEnvMode } from '../../helpers/utils'
+import { WEBPACK_DEV_SERVER_CONFIG, WEBPACK_STATS } from '../constant/defaults'
 
 
 export const getWebpackBaseConfig = (data: Record<string, any>): WebpackConfiguration => {

@@ -4,7 +4,7 @@ import webpack from 'webpack'
 import { Command } from 'fbi'
 import { IFactoryConfig, IFactoryPaths } from '../types'
 import Factory from '..'
-import { resolveWebpackConfig } from '../config'
+import { resolveWebpackConfig } from '../configs'
 
 export default class CommandBuild extends Command {
   id = 'build'
