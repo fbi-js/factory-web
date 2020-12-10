@@ -2,9 +2,9 @@ import type { Configuration } from 'webpack'
 
 import webpack from 'webpack'
 import { Command } from 'fbi'
-
+import { IFactoryConfig, IFactoryPaths } from '../types'
 import Factory from '..'
-import { resolveWebpackConfig } from '../config'
+import { resolveWebpackConfig } from '../configs'
 
 export default class CommandBuild extends Command {
   id = 'build'
@@ -36,10 +36,13 @@ export default class CommandBuild extends Command {
 
     this.logStart(`Building for production...`)
 
-    const factory = this.context.get('config.factory')
+    const factory: IFactoryConfig = this.context.get('config.factory')
+    const paths: IFactoryPaths = this.context.get('config.paths')
+
     const config = await resolveWebpackConfig(factory.template, {
       ...flags,
-      factory
+      factory,
+      paths
     })
 
     try {
