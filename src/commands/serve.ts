@@ -1,13 +1,13 @@
 import type { Stats } from 'webpack'
-
+import { IFactoryConfig, IFactoryPaths } from '../types'
 import { Command } from 'fbi'
 import webpack from 'webpack'
 import WebpackDevServer from 'webpack-dev-server'
-
 import Factory from '..'
-import { HOST, PORT } from '../config/defaults'
+import { HOST, PORT } from '../config/constant/defaults'
 import { resolveWebpackConfig } from '../config'
-import { getIpAddress } from '../config/helpers/utils'
+import { getIpAddress, isProd } from '../helpers/utils'
+import { assertFactoryTemplate } from '../helpers/assert'
 
 export default class CommandServe extends Command {
   id = 'serve'
@@ -38,14 +38,16 @@ export default class CommandServe extends Command {
       unknown
     )
 
-    const factory = this.context.get('config.factory')
-    const isProduction = process.env.NODE_ENV === 'production'
+    const factory: IFactoryConfig = this.context.get('config.factory')
+    const paths: IFactoryPaths = this.context.get('config.paths')
 
     this.logStart(`Starting development server...`)
     try {
-      const config = await resolveWebpackConfig(factory?.template, {
+      assertFactoryTemplate(factory)
+      const config = await resolveWebpackConfig(factory.template, {
         ...flags,
-        factory
+        factory,
+        paths
       })
       const compiler = webpack(config)
       const host = config.devServer?.host || HOST
@@ -70,7 +72,7 @@ export default class CommandServe extends Command {
           console.log(`  - Local:   ${this.style.cyan(localUrl)}`)
           console.log(`  - Network: ${this.style.cyan(networkUrl)}`)
           console.log()
-          if (!isProduction) {
+          if (!isProd()) {
             const buildCommand = `npm run build`
             console.log(`  Note that the development build is not optimized.`)
             console.log(`  To create a production build, run ${this.style.cyan(buildCommand)}.`)

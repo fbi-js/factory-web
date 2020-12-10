@@ -1,47 +1,29 @@
 import type { Configuration } from 'webpack'
-
-import { join } from 'path'
-import common from './common'
+import { TemplateTypes } from '../types'
+import {
+  getDefinePluginData,
+  getUserConfig,
+  resolveUserConfig,
+  getTemplateWebpackConfig,
+  getWebpackBaseConfig
+} from '../template-webpack'
 import { merge } from 'webpack-merge'
-import { paths } from './helpers/paths'
 
 export const resolveWebpackConfig = async (
-  type: string,
+  type: TemplateTypes,
   data: Record<string, any>
 ): Promise<Configuration> => {
-  const definePluginData = {
-    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-    'process.env.MICRO_MODE': JSON.stringify(process.env.MICRO_MODE)
-  }
-  const envData = {
-    ...data,
-    definePluginData
-  }
+  // console.log('resolveWebpackConfig', data)
+  // get base webpack config
+  const definePluginData = getDefinePluginData(data)
+  const webpackBaseConfig = getWebpackBaseConfig(definePluginData)
+  const typeConfig = getTemplateWebpackConfig(type, webpackBaseConfig)
+  const baseConfig = merge(webpackBaseConfig, typeConfig)
 
-  const commonConfigs = common(envData)
+  // get user webpack config
+  let userConfig = getUserConfig()
+  userConfig = resolveUserConfig(userConfig, baseConfig)
 
-  let typeConfigs = {}
-  try {
-    const { getConfig } = require(`./${type}`)
-    typeConfigs = getConfig(envData)
-  } catch {}
-
-  const baseConfig = merge(commonConfigs, typeConfigs)
-
-  // user config
-  let userConfig = {}
-  const userConfigPath = join(process.cwd(), 'webpack.config')
-  try {
-    const tmp = require(userConfigPath)
-    const tmpConfig = tmp.default || tmp
-    userConfig =
-      typeof tmpConfig === 'function'
-        ? tmpConfig({
-            config: baseConfig,
-            paths
-          })
-        : tmpConfig
-  } catch {}
-
+  // merge config
   return merge(baseConfig, userConfig)
 }

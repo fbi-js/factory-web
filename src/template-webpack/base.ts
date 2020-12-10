@@ -1,26 +1,27 @@
 import type { WebpackConfiguration } from '../types'
-
 import webpack from 'webpack'
 import { join, resolve } from 'path'
-import { paths } from './helpers/paths'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin'
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
-import { WEBPACK_DEV_SERVER_CONFIG, WEBPACK_STATS } from './defaults'
-import { resolveCssOptions } from '../config/helpers/css-options'
 
-export default (data: Record<string, any>): WebpackConfiguration => {
-  const buildMode = process.env.NODE_ENV || 'development'
-  const isDev = buildMode === 'development'
+import { getMergePaths, isProd, getEnvMode } from '../helpers/utils'
+import { WEBPACK_DEV_SERVER_CONFIG, WEBPACK_STATS } from '../config/constant/defaults'
+
+
+export const getWebpackBaseConfig = (data: Record<string, any>): WebpackConfiguration => {
+  const paths = getMergePaths(data.paths)
+  // console.log('getMergePaths', data.paths, paths)
+  const isDev = !isProd()
   const isTs = data.factory?.features?.typescript
   const isMicro = data.factory?.template?.startsWith('micro-')
   const htmlWebpackPluginTemplatePath = join(paths.public, 'index.html')
 
   const config = {
-    mode: buildMode,
+    mode: getEnvMode(),
     devtool: isDev ? 'inline-source-map' : false,
     entry: {
       main: join(paths.src, `main.${isTs ? 'ts' : 'js'}`)
@@ -86,7 +87,7 @@ export default (data: Record<string, any>): WebpackConfiguration => {
                 {
                   loader: MiniCssExtractPlugin.loader,
                   options: {
-                    publicPath: paths.css
+                    publicPath: paths.cssExtractPublicPath
                   }
                 },
                 {
@@ -105,11 +106,7 @@ export default (data: Record<string, any>): WebpackConfiguration => {
                   }
                 }
               ]
-        },
-        // {
-        //   test: /\.(scss|css)$/,
-        //   use: resolveCssOptions()
-        // }
+        }
       ]
     },
     plugins: [

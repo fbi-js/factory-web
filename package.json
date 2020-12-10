@@ -72,6 +72,9 @@
       "features": {
         "typescript": true
       }
+    },
+    "paths": {
+      "cssAssetPublicPath": "../"
     }
   }
 }

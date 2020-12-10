@@ -1,6 +1,6 @@
 import { merge } from 'webpack-merge'
 import { IConfigOption } from '../types'
-import { AssetJsonPlugin } from './plugins'
+import { AssetJsonPlugin } from '../config/plugins'
 import { getConfig as getBaseConfig } from './vue'
 
 export const getConfig = (options: IConfigOption) => {

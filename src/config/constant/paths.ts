@@ -1,7 +1,9 @@
 import { resolve } from 'path'
+import { IFactoryPaths } from '../../types'
 
 const cwd = process.cwd()
-export const paths = {
+
+export const paths:IFactoryPaths = {
   cwd,
   // Source files
   src: resolve(cwd, 'src'),
@@ -14,6 +16,12 @@ export const paths = {
 
   js: 'js',
   css: 'css',
+  cssExtractPublicPath: '../',
   img: 'img',
   assets: 'assets'
+}
+
+export const factoryConfigs = {
+  // custom webpack name
+  webpackFileName: 'webpack.config'
 }
