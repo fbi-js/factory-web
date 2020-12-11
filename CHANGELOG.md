@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.2](https://github.com/fbi-js/factory-web/compare/v1.2.1...v1.3.2) (2020-12-11)
+
+
+### Features
+
+* 抽离css配置 ([176af7a](https://github.com/fbi-js/factory-web/commit/176af7a0e96d4ca077fd1e11f3827afcc46bfb85))
+
+
+### Bug Fixes
+
+* add fork-ts-checker-webpack-plugin dep ([f5b7b3d](https://github.com/fbi-js/factory-web/commit/f5b7b3d34121f57e102bd48f3e31c9ba105ecf1e))
+* move eslint dep devDependencies to dependencies ([f673a15](https://github.com/fbi-js/factory-web/commit/f673a153ee289e991ccdf55b2bcf019eaa6964f3))
+* remove root package.json paths config ([f1fed9a](https://github.com/fbi-js/factory-web/commit/f1fed9a6d62934c6dfe06cbe7ad4b4b1b06d5bab))
+* remove ts dep ([48da884](https://github.com/fbi-js/factory-web/commit/48da88420c765a640719dcc6a91c223328f99aa3))
+* template add paths config ([a75dd8a](https://github.com/fbi-js/factory-web/commit/a75dd8a0d115ca6f5d76960c6eda077ea489309a))
+
 ## [1.3.0](https://github.com/fbi-js/factory-web/compare/v1.2.1...v1.3.0) (2020-12-10)
 
 
