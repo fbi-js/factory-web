@@ -11,7 +11,6 @@ import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
 import { getMergePaths, isProd, getEnvMode } from '../../helpers/utils'
 import { WEBPACK_DEV_SERVER_CONFIG, WEBPACK_STATS } from '../constant/defaults'
 
-
 export const getWebpackBaseConfig = (data: Record<string, any>): WebpackConfiguration => {
   const paths = getMergePaths(data.paths)
   // console.log('getMergePaths', data.paths, paths)

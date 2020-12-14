@@ -19,7 +19,7 @@ export default class FactoryWeb extends Factory {
     new TemplateReact(this),
     new TemplateMicroMain(this),
     new TemplateMicroVue(this),
-    new TemplateMicroReact(this),
+    new TemplateMicroReact(this)
   ]
 
   execOpts: any = {

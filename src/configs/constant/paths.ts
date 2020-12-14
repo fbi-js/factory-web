@@ -3,7 +3,7 @@ import { IFactoryPaths } from '../../types'
 
 const cwd = process.cwd()
 
-export const paths:IFactoryPaths = {
+export const paths: IFactoryPaths = {
   cwd,
   // Source files
   src: resolve(cwd, 'src'),

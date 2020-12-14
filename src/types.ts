@@ -42,10 +42,8 @@ export interface IFactoryConfig {
 }
 
 export interface IFbiConfig {
-  factory: IFactoryConfig,
+  factory: IFactoryConfig
   paths: IFactoryPaths
 }
 
-export interface IFbiFlagsConfig {
-
-}
+export interface IFbiFlagsConfig {}
