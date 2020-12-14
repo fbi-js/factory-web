@@ -16,7 +16,7 @@ export declare const getUserConfig: () => {};
  * @param userConfig user webpack config
  * @param baseConfig base webpack config
  */
-export declare const resolveUserConfig: (userConfig: Configuration | any, baseConfig: Configuration) => any;
+export declare const resolveUserConfig: (userConfig: Configuration | Function, baseConfig: Configuration) => any;
 /**
  * add global variable by use process.env.xxx
  * @param data

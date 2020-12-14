@@ -37,9 +37,8 @@ export const getUserConfig = () => {
  * @param userConfig user webpack config
  * @param baseConfig base webpack config
  */
-export const resolveUserConfig = (userConfig: Configuration | any, baseConfig: Configuration) => {
-  const isResolver = userConfig && userConfig === 'function'
-  return isResolver ? userConfig({
+export const resolveUserConfig = (userConfig: Configuration | Function, baseConfig: Configuration) => {
+  return typeof userConfig === 'function' ? userConfig({
     config: baseConfig,
     paths
   }) : userConfig
