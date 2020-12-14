@@ -10,6 +10,7 @@ import TemplateMicroMain from './templates/micro-main'
 import TemplateMicroVue from './templates/micro-vue'
 import TemplateMicroReact from './templates/micro-react'
 
+
 export default class FactoryWeb extends Factory {
   id = require('../package.json').name
   description = 'factory for web application development'
