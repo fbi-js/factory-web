@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.4](https://github.com/fbi-js/factory-web/compare/v1.3.3...v1.3.4) (2020-12-14)
+
+
+### Bug Fixes
+
+* **templates:** update templates dependencies ([d8b8688](https://github.com/fbi-js/factory-web/commit/d8b86881b521ba50c67d70a2a5184140956f255e))
+* **webpack:** data passed to getTemplateWebpackConfig is wrong ([4e1f602](https://github.com/fbi-js/factory-web/commit/4e1f602d07760129a3544de0b2d2aec72acfd111))
+* update dependencies ([cf7d92e](https://github.com/fbi-js/factory-web/commit/cf7d92e54ac261391b5d70fae5a8b819c90d7143))
+
 ### [1.3.3](https://github.com/fbi-js/factory-web/compare/v1.3.0...v1.3.3) (2020-12-14)
 
 
