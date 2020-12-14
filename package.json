@@ -10,7 +10,7 @@
   "scripts": {
     "build": "rm -rf ./lib && fbi b",
     "watch": "fbi w",
-    "format": "prettier -c --write \"src/**/*.ts\" "
+    "format": "prettier --write \"src/**/*.{ts,js,json}\""
   },
   "keywords": [],
   "author": "fbi",
