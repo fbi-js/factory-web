@@ -1,7 +1,7 @@
 import type { Configuration } from 'webpack'
 import { TemplateTypes } from '../types'
 import {
-  getDefinePluginData,
+  resolveWebpackData,
   getUserConfig,
   resolveUserConfig,
   getTemplateWebpackConfig,
@@ -13,11 +13,10 @@ export const resolveWebpackConfig = async (
   type: TemplateTypes,
   data: Record<string, any>
 ): Promise<Configuration> => {
-  // console.log('resolveWebpackConfig', data)
   // get base webpack config
-  const definePluginData = getDefinePluginData(data)
-  const webpackBaseConfig = getWebpackBaseConfig(definePluginData)
-  const typeConfig = getTemplateWebpackConfig(type, webpackBaseConfig)
+  const webpackData = resolveWebpackData(data)
+  const webpackBaseConfig = getWebpackBaseConfig(webpackData)
+  const typeConfig = getTemplateWebpackConfig(type, webpackData)
   const baseConfig = merge(webpackBaseConfig, typeConfig)
 
   // get user webpack config

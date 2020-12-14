@@ -13,7 +13,6 @@ import { WEBPACK_DEV_SERVER_CONFIG, WEBPACK_STATS } from '../constant/defaults'
 
 export const getWebpackBaseConfig = (data: Record<string, any>): WebpackConfiguration => {
   const paths = getMergePaths(data.paths)
-  // console.log('getMergePaths', data.paths, paths)
   const isDev = !isProd()
   const isTs = data.factory?.features?.typescript
   const isMicro = data.factory?.template?.startsWith('micro-')

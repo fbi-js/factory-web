@@ -53,7 +53,7 @@ export const resolveUserConfig = (
  * add global variable by use process.env.xxx
  * @param data
  */
-export const getDefinePluginData = (data: Record<string, any>) => {
+export const resolveWebpackData = (data: Record<string, any>) => {
   const definePluginData = {
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
     'process.env.MICRO_MODE': JSON.stringify(process.env.MICRO_MODE)
