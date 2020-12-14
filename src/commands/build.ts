@@ -9,7 +9,7 @@ import { resolveWebpackConfig } from '../configs'
 export default class CommandBuild extends Command {
   id = 'build'
   alias = 'b'
-  description = 'command build description'
+  description = 'build project for specified environment (default: production)'
   args = ''
   flags = [
     ['-m, --mode <mode>', 'specify env mode(development|production|testing)', 'production'],

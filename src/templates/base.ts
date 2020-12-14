@@ -136,13 +136,18 @@ export default class TemplateWebBase extends Template {
     }
 
     console.log(`
-Next steps:
+Next steps:`)
+
+    if (this.data.subDirectory) {
+      console.log(`
   $ ${this.style.cyan('cd ' + project.name)}`)
+    }
 
     console.log(`
-  $ ${this.style.cyan('npm run dev')} ${this.style.dim('launch the serve')}`)
+  $ ${this.style.cyan('npm run dev')} ${this.style.dim('launch the development server')}`)
 
     console.log(`
-  $ ${this.style.cyan('npm run build')} ${this.style.dim('build project')}`)
+  $ ${this.style.cyan('npm run build')} ${this.style.dim('build project')}
+  `)
   }
 }
