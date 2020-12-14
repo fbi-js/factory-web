@@ -22,7 +22,6 @@ export const getConfig = (data: IConfigOption) => {
       ]
     },
     plugins: [
-      // TODO: 从fbi-lint剥离eslint依赖
       new ESLintPlugin({
         extensions: ['js', 'ts', 'jsx', 'tsx', 'vue'],
         files: 'src'
