@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/fbi-js/factory-web/compare/v1.3.5...v1.4.0) (2020-12-16)
+
+
+### Features
+
+* expose templates & commands ([ce689aa](https://github.com/fbi-js/factory-web/commit/ce689aabea209ef69351347cb743bade547a137f))
+
+
+### Bug Fixes
+
+* expose TemplateBase class ([daaaa98](https://github.com/fbi-js/factory-web/commit/daaaa98b9c6cfe6ba57c4656128d0079667d0b1c))
+
 ### [1.3.5](https://github.com/fbi-js/factory-web/compare/v1.3.4...v1.3.5) (2020-12-14)
 
 ### [1.3.4](https://github.com/fbi-js/factory-web/compare/v1.3.3...v1.3.4) (2020-12-14)
