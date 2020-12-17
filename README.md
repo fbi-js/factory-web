@@ -35,7 +35,63 @@ $ npx fbi create @fbi-js/factory-web
   fbi b
   ```
 
+## Development
 
+Build your own `factory-web` based on `@fbi-js/factory-web`,
+
+Create a project
+
+```bash
+npx fbi create @fbi-js/factory-factory
+
+npm i @fbi-js/factory-web
+```
+
+Create and modify files
+
+```ts
+// src/index.ts
+
+import FactoryWebBase from '@fbi-js/factory-web'
+
+import CommandX from './commands/my-command'
+import TemplateX from './templates/my-template'
+
+const { name, description } = require('../package.json')
+
+export default class FactoryWeb extends FactoryWebBase {
+  id = name
+  description = description
+
+  // 1. replace default commands
+  commands = [new CommandX(this)]
+  templates = [new TemplateX(this)]
+
+  constructor() {
+    super()
+
+    // 2. OR: extends default commands
+    // this.commands.push(new CommandX(this))
+    // this.templates.push(new TemplateX(this))
+  }
+}
+```
+
+Compile ts files
+
+```bash
+yarn build
+```
+
+Test
+
+```bash
+fbi link
+```
+
+```bash
+fbi create
+```
 
 ## [Changelog](./CHANGELOG.md)
 
