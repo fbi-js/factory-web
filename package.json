@@ -14,7 +14,6 @@
   },
   "keywords": [],
   "author": "fbi",
-  "license": "MIT",
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
@@ -38,7 +37,7 @@
     "ejs": "^3.1.5",
     "eslint": "^7.15.0",
     "eslint-webpack-plugin": "^2.4.1",
-    "fbi": "~4",
+    "fbi": "~4.3.2",
     "fibers": "^5.0.0",
     "file-loader": "^6.2.0",
     "fork-ts-checker-webpack-plugin": "^6.0.6",
@@ -61,7 +60,7 @@
     "webpack-merge": "^5.7.0"
   },
   "devDependencies": {
-    "@fbi-js/factory-factory": "^1.0.1",
+    "@fbi-js/factory-factory": "^1.1.0",
     "@types/copy-webpack-plugin": "^6.3.0",
     "@types/css-minimizer-webpack-plugin": "^1.1.1",
     "@types/ejs": "^3.0.5",
@@ -75,6 +74,15 @@
     "vue-loader": "^15.9.5",
     "vue-template-compiler": "^2.6.12",
     "webpack-config-single-spa-ts": "^1.18.0"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fbi-js/factory-web.git"
+  },
+  "homepage": "https://github.com/fbi-js/factory-web",
+  "bugs": {
+    "url": "https://github.com/fbi-js/factory-web/issues"
   },
   "fbi": {
     "factory": {

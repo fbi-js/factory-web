@@ -1,9 +1,10 @@
+import { join } from 'path'
 import Factory from '..'
 import TemplateReact from './react'
 
 export default class TemplateMicroVue extends TemplateReact {
   id = 'micro-react'
-  path = 'templates/react'
+  path = join(__dirname, '../../templates/react')
   description = 'template for Micro-fontends react application'
   templates = []
 

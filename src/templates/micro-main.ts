@@ -1,9 +1,10 @@
+import { join } from 'path'
 import Factory from '..'
 import BaseClass from './base'
 
 export default class TemplateMicroMain extends BaseClass {
   id = 'micro-main'
-  path = 'templates/micro-main'
+  path = join(__dirname, '../../templates/micro-main')
   description = 'template for Micro-fontends base application'
   templates = []
 

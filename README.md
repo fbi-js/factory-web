@@ -1,13 +1,18 @@
 # factory-web
+
 factory for web application development
 
 > This is a factory for [fbi v4](https://github.com/fbi-js/fbi)
 
-
 ## Requirements
 
-- `fbi v4+`
 - `node v10+`
+
+## Usage
+
+```bash
+$ npx fbi create @fbi-js/factory-web
+```
 
 ## Templates
 
@@ -30,12 +35,15 @@ factory for web application development
   fbi b
   ```
 
-## Usage
 
-```bash
-$ npx fbi create factory-web
-```
 
+## [Changelog](./CHANGELOG.md)
+
+## Contribution
+
+Please make sure to read the [Contributing Guide](./CONTRIBUTING.md) before making a pull request.
+
+Thank you to all the people who already contributed to fbi factory!
 
 ## License
 

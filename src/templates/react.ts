@@ -1,9 +1,10 @@
+import { join } from 'path'
 import Factory from '..'
 import BaseClass from './base'
 
 export default class TemplateReact extends BaseClass {
   id = 'react'
-  path = 'templates/react'
+  path = join(__dirname, '../../templates/react')
   description = 'template for React.js application'
   templates = []
   features = [{ name: 'typescript', value: true }]

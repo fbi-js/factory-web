@@ -1,9 +1,10 @@
+import { join } from 'path'
 import Factory from '..'
 import BaseClass from './base'
 
 export default class TemplateVue extends BaseClass {
   id = 'vue'
-  path = 'templates/vue'
+  path = join(__dirname, '../../templates/vue')
   description = 'template for Vue.js application'
   templates = []
   features = [{ name: 'typescript', value: true }]
