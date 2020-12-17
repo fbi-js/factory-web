@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.1](https://github.com/fbi-js/factory-web/compare/v1.4.0...v1.4.1) (2020-12-17)
+
+
+### Bug Fixes
+
+* update deps ([ab41745](https://github.com/fbi-js/factory-web/commit/ab41745263fd35f440b0e51046c175d15e3e6000))
+
 ## [1.4.0](https://github.com/fbi-js/factory-web/compare/v1.3.5...v1.4.0) (2020-12-16)
 
 
