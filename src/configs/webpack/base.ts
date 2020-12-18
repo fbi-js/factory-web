@@ -26,8 +26,8 @@ export const getWebpackBaseConfig = (data: Record<string, any>): WebpackConfigur
     },
     output: {
       path: paths.dist,
-      publicPath: isDev ? '/' : '/',
-      filename: isDev ? '[name].js?v=[hash]' : `${paths.js}/[name].[hash].js`
+      publicPath: process.env.ASSET_PATH || '/',
+      filename: isDev ? '[name].js?v=[fullhash]' : `${paths.js}/[name].[fullhash].js`
     },
     module: {
       rules: [
@@ -39,30 +39,23 @@ export const getWebpackBaseConfig = (data: Record<string, any>): WebpackConfigur
         },
         {
           test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-          loader: 'url-loader',
-          options: {
-            limit: 5000,
-            name: isDev ? '[name].[ext]?[hash:8]' : `${paths.img}/[name].[hash:8].[ext]`,
-            esModule: false
+          type: 'asset',
+          parser: {
+            dataUrlCondition: {
+              maxSize: 4 * 1024 // 4kb
+            }
+          },
+          generator: {
+            filename: `${paths.img}/[name].[hash][ext][query]`
           }
         },
         {
           test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
-          loader: 'url-loader',
-          options: {
-            limit: 5000,
-            name: isDev ? '[name].[ext]?[hash:8]' : `${paths.assets}/[name].[hash:8].[ext]`,
-            esModule: false
-          }
+          type: 'asset/resource'
         },
         {
           test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-          loader: 'url-loader',
-          options: {
-            limit: 5000,
-            name: isDev ? '[name].[ext]?[hash:8]' : `${paths.assets}/[name].[hash:8].[ext]`,
-            esModule: false
-          }
+          type: 'asset/resource'
         },
         // Styles: Inject CSS into the head with source maps
         {
@@ -108,7 +101,7 @@ export const getWebpackBaseConfig = (data: Record<string, any>): WebpackConfigur
       ]
     },
     plugins: [
-      !isMicro && new webpack.ProgressPlugin(),
+      !isMicro && new webpack.ProgressPlugin({}),
       // Make appName & appVersion available as a constant
       new webpack.DefinePlugin(data.definePluginData || {}),
       // Removes/cleans build folders and unused assets when rebuilding
@@ -160,9 +153,13 @@ export const getWebpackBaseConfig = (data: Record<string, any>): WebpackConfigur
     ].filter(Boolean),
     resolve: {
       extensions: ['.js', '.ts', '.jsx', '.tsx', '.mjs', '.wasm', '.json'],
+      modules: ['node_modules', join(__dirname, '../../../node_modules')],
       alias: {
         '@': resolve('src/')
       }
+    },
+    resolveLoader: {
+      modules: ['node_modules', join(__dirname, '../../../node_modules')]
     },
     performance: {
       hints: false

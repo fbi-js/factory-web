@@ -12,7 +12,7 @@ export default class TemplateWebBase extends Template {
   features: any[] = []
 
   constructor(public factory: Factory) {
-    super()
+    super(factory)
   }
 
   protected async gathering(flags: Record<string, any>) {

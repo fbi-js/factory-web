@@ -1,12 +1,11 @@
-import type { Stats } from 'webpack'
 import { IFactoryConfig, IFactoryPaths } from '../types'
 import { Command } from 'fbi'
 import webpack from 'webpack'
 import WebpackDevServer from 'webpack-dev-server'
+
 import Factory from '..'
 import { HOST, PORT } from '../configs/constant/defaults'
 import { resolveWebpackConfig } from '../configs'
-import { getIpAddress, isProd } from '../helpers/utils'
 import { assertFactoryTemplate } from '../helpers/assert'
 
 export default class CommandServe extends Command {
@@ -60,24 +59,6 @@ export default class CommandServe extends Command {
 
       return new Promise((resolve, reject) => {
         const localUrl = `http://${host}:${port}`
-        const networkUrl = `http://${getIpAddress()}:${port}`
-
-        compiler.hooks.done.tap('fbi-serve-compiler', async (stats: Stats) => {
-          if (stats.hasErrors()) {
-            return
-          }
-
-          console.log()
-          console.log(`  App running at:`)
-          console.log(`  - Local:   ${this.style.cyan(localUrl)}`)
-          console.log(`  - Network: ${this.style.cyan(networkUrl)}`)
-          console.log()
-          if (!isProd()) {
-            const buildCommand = `npm run build`
-            console.log(`  Note that the development build is not optimized.`)
-            console.log(`  To create a production build, run ${this.style.cyan(buildCommand)}.`)
-          }
-        })
 
         resolve({
           server,

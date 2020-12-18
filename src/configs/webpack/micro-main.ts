@@ -4,16 +4,19 @@ import { join } from 'path'
 import { paths } from '../constant/paths'
 
 export const getConfig = (data: Record<string, any>) => {
-  const prijectInfo = require(join(paths.cwd, 'package.json'))
-  const appNameArr: string[] = prijectInfo.name.split('/')
-  const orgName = appNameArr.length > 1 ? appNameArr[0].replace('@', '') : ''
-  const projectName = appNameArr.length > 1 ? appNameArr[1] : appNameArr[0]
+  const pkgName = require(join(paths.cwd, 'package.json'))
+  const fullName = pkgName.replace('@', '')
+  const nameArr: string[] = fullName.split('/')
+  if (nameArr.length < 2) {
+    throw Error(`package name should follow '@orgName/projectName' format`)
+  }
+  const orgName = nameArr[0]
+  const projectName = nameArr[1]
 
   const config: Configuration = {
     output: {
       libraryTarget: 'system',
       path: paths.dist,
-      jsonpFunction: `webpackJsonp_${orgName}_${projectName}`,
       devtoolNamespace: `${orgName}_${projectName}`
     },
     module: {
@@ -25,7 +28,7 @@ export const getConfig = (data: Record<string, any>) => {
         }
       ]
     },
-    externals: ['single-spa']
+    externals: ['single-spa', new RegExp(`^@${orgName}/`)]
   }
 
   return config

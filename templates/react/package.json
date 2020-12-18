@@ -1,5 +1,5 @@
 {
-  "name": "<%= project.name %>",
+  "name": "<%_ if (project.orgName) { _%>@<%= project.orgName %>/<%_ } _%><%= project.name %>",
   "version": "0.0.0",
   "description": "<%= project.description %>",
   "private": true,
@@ -12,7 +12,7 @@
   "dependencies": {
     <%_ if (project.isMicro) { _%>
     "single-spa-react": "^3.2.0",
-    "systemjs-webpack-interop": "^2.3.1",
+    "systemjs-webpack-interop": "^2.3.4",
     <%_ } _%>
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
@@ -23,11 +23,21 @@
     <%_ if (project.features.typescript) { _%>
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "@typescript-eslint/eslint-plugin": "^4.10.0",
+    "@typescript-eslint/parser": "^4.10.0",
     <%_ } _%>
     <%_ if (project.isMicro) { _%>
     "@types/single-spa-react": "^3.0.0",
     <%_ } _%>
+    "babel-eslint": "^10.1.0",
     "eslint-config-react-app": "^6.0.0",
+    "eslint-plugin-flowtype": "^5.2.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jest": "^24.1.3",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-plugin-testing-library": "^3.10.1",
     "react-hot-loader": "^4.13.0"<% if (project.features.typescript) { %>,
     "typescript": "^4.1.3"<% } %>
   },
