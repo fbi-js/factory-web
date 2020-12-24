@@ -1,6 +1,8 @@
 module.exports = {
   devServer: {
     open: false,
-    writeToDisk: true,
+    dev: {
+      writeToDisk: true,
+    },
   },
 }

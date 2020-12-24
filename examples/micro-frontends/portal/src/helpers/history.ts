@@ -1,4 +1,4 @@
-import singleSpa from 'single-spa'
+import { navigateToUrl } from 'single-spa'
 
 interface IOption {
   pathname: string
@@ -14,17 +14,17 @@ export const history = {
   push(opt: IOpt) {
     if (!opt) return
     if (typeof opt === 'string') {
-      singleSpa.navigateToUrl('/#' + opt)
+      navigateToUrl('/#' + opt)
       return
     }
     const isHash = history.isHash()
     const pathname =
       opt.pathname || (isHash ? history.getHashUrl() : window.location.pathname)
     if (opt.search) {
-      singleSpa.navigateToUrl(`/#${pathname}?${opt.search || ''}`)
+      navigateToUrl(`/#${pathname}?${opt.search || ''}`)
     } else if (opt.query) {
       const keys = Object.keys(opt.query)
-      singleSpa.navigateToUrl(
+      navigateToUrl(
         `/#${pathname}?${keys
           .map((key) => `${key}=${opt.query[key] || ''}`)
           .join('&')}`,

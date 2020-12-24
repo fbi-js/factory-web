@@ -20,7 +20,8 @@
   "devDependencies": {
     "@fbi-js/factory-web": "^<%= factoryVersion %>",
     <%_ if (project.features.typescript) { _%>
-    "@typescript-eslint/parser": "^4.10.0",
+    "@typescript-eslint/eslint-plugin": "^4.11.0",
+    "@typescript-eslint/parser": "^4.11.0",
     "@vue/eslint-config-typescript": "^7.0.0",
     <%_ } else { _%>
     "babel-eslint": "^10.1.0",

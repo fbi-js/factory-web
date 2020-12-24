@@ -22,6 +22,7 @@ export declare const resolveUserConfig: (userConfig: Configuration | Function, b
  * @param data
  */
 export declare const resolveWebpackData: (data: Record<string, any>) => {
+    pkg: {};
     definePluginData: {
         'process.env.NODE_ENV': string;
         'process.env.MICRO_MODE': string;

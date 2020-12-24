@@ -5,31 +5,25 @@ import { paths } from './paths'
 export const PORT = 9000
 export const HOST = '0.0.0.0'
 
-export const WEBPACK_STATS: WebpackConfiguration['stats'] = {
-  assets: true,
-  // `webpack --colors` equivalent
+export const WEBPACK_DEV_STATS: WebpackConfiguration['stats'] = {
+  all: false,
   colors: true,
-  children: false,
-  chunks: false,
-  chunkModules: false,
-  chunkOrigins: false,
-  // Add errors
-  errors: true,
-  // Add details to errors (like resolving log)
-  errorDetails: true,
-  hash: false,
-  modules: false,
+  errors: true
+}
+
+export const WEBPACK_BUILD_STATS: WebpackConfiguration['stats'] = {
+  ...WEBPACK_DEV_STATS,
   timings: true,
-  // Add webpack version information
-  version: true,
-  moduleAssets: false
+  errors: true,
+  assetsSort: '!size',
+  assets: true,
+  excludeAssets: [/\.*\.map/]
 }
 
 // webpack-dev-server config
 export const WEBPACK_DEV_SERVER_CONFIG: Record<string, any> = {
   historyApiFallback: true,
   compress: true,
-  // hot: true,
   open: false,
   overlay: true,
   headers: {
@@ -40,7 +34,7 @@ export const WEBPACK_DEV_SERVER_CONFIG: Record<string, any> = {
   // host: HOST,
   port: PORT,
   // https://github.com/webpack/webpack-dev-server/releases/tag/v4.0.0-beta.0
-  static: [paths.dist],
+  static: [paths.public],
   firewall: false,
   client: {
     host: HOST

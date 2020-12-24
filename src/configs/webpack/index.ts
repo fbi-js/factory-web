@@ -58,8 +58,14 @@ export const resolveWebpackData = (data: Record<string, any>) => {
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
     'process.env.MICRO_MODE': JSON.stringify(process.env.MICRO_MODE)
   }
+  let pkg = {}
+  try {
+    pkg = require(join(process.cwd(), 'package.json'))
+  } catch {}
+
   return {
     ...data,
+    pkg,
     definePluginData
   }
 }

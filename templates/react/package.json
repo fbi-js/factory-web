@@ -23,8 +23,8 @@
     <%_ if (project.features.typescript) { _%>
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
-    "@typescript-eslint/eslint-plugin": "^4.10.0",
-    "@typescript-eslint/parser": "^4.10.0",
+    "@typescript-eslint/eslint-plugin": "^4.11.0",
+    "@typescript-eslint/parser": "^4.11.0",
     <%_ } _%>
     <%_ if (project.isMicro) { _%>
     "@types/single-spa-react": "^3.0.0",

@@ -1,6 +1,8 @@
 import type { WebpackConfiguration } from '../../types'
+
 import webpack from 'webpack'
 import { join, resolve } from 'path'
+import WebpackBar from 'webpackbar'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import { CleanWebpackPlugin } from 'clean-webpack-plugin'
@@ -9,13 +11,16 @@ import CssMinimizerPlugin from 'css-minimizer-webpack-plugin'
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
 
 import { getMergePaths, isProd, getEnvMode } from '../../helpers/utils'
-import { WEBPACK_DEV_SERVER_CONFIG, WEBPACK_STATS } from '../constant/defaults'
+import {
+  WEBPACK_DEV_SERVER_CONFIG,
+  WEBPACK_DEV_STATS,
+  WEBPACK_BUILD_STATS
+} from '../constant/defaults'
 
 export const getWebpackBaseConfig = (data: Record<string, any>): WebpackConfiguration => {
   const paths = getMergePaths(data.paths)
   const isDev = !isProd()
   const isTs = data.factory?.features?.typescript
-  const isMicro = data.factory?.template?.startsWith('micro-')
   const htmlWebpackPluginTemplatePath = join(paths.public, 'index.html')
 
   const config = {
@@ -27,13 +32,19 @@ export const getWebpackBaseConfig = (data: Record<string, any>): WebpackConfigur
     output: {
       path: paths.dist,
       publicPath: process.env.ASSET_PATH || '/',
-      filename: isDev ? '[name].js?v=[fullhash]' : `${paths.js}/[name].[fullhash].js`
+      filename: isDev ? '[name].js?v=[fullhash]' : `${paths.js}/[name].[fullhash].js`,
+      assetModuleFilename: isDev
+        ? '[name][ext][query]'
+        : `${paths.assets}/[name].[hash][ext][query]`
+    },
+    cache: {
+      type: 'filesystem'
     },
     module: {
       rules: [
         // JavaScript: Use Babel to transpile JavaScript files
         {
-          test: /\.(js|ts)x?$/,
+          test: /\.(j|t)sx?$/,
           use: ['babel-loader'],
           exclude: resolve('node_modules')
         },
@@ -46,7 +57,7 @@ export const getWebpackBaseConfig = (data: Record<string, any>): WebpackConfigur
             }
           },
           generator: {
-            filename: `${paths.img}/[name].[hash][ext][query]`
+            filename: isDev ? '[name][ext][query]' : `${paths.img}/[name].[hash][ext][query]`
           }
         },
         {
@@ -59,7 +70,7 @@ export const getWebpackBaseConfig = (data: Record<string, any>): WebpackConfigur
         },
         // Styles: Inject CSS into the head with source maps
         {
-          test: /\.(scss|css)$/,
+          test: /\.(sc|sa|c)ss$/,
           use: isDev
             ? [
                 'style-loader',
@@ -101,7 +112,10 @@ export const getWebpackBaseConfig = (data: Record<string, any>): WebpackConfigur
       ]
     },
     plugins: [
-      !isMicro && new webpack.ProgressPlugin({}),
+      new WebpackBar({
+        name: data.pkg.name || '',
+        color: '#0052D9'
+      }),
       // Make appName & appVersion available as a constant
       new webpack.DefinePlugin(data.definePluginData || {}),
       // Removes/cleans build folders and unused assets when rebuilding
@@ -112,9 +126,9 @@ export const getWebpackBaseConfig = (data: Record<string, any>): WebpackConfigur
           {
             from: paths.public,
             globOptions: {
-              dot: true,
-              ignore: ['./*.html']
-            }
+              dot: true
+            },
+            filter: (resourcePath) => !resourcePath.endsWith('index.html')
           }
         ]
       }),
@@ -147,8 +161,7 @@ export const getWebpackBaseConfig = (data: Record<string, any>): WebpackConfigur
         : // Extracts CSS into separate files
           // Note: style-loader is for development, MiniCssExtractPlugin is for production
           new MiniCssExtractPlugin({
-            filename: `${paths.css}/[name].[contenthash].css`,
-            chunkFilename: `${paths.css}/[name]-[id].css`
+            filename: `${paths.css}/[name].[contenthash].css`
           })
     ].filter(Boolean),
     resolve: {
@@ -164,7 +177,7 @@ export const getWebpackBaseConfig = (data: Record<string, any>): WebpackConfigur
     performance: {
       hints: false
     },
-    stats: WEBPACK_STATS,
+    stats: isDev ? WEBPACK_DEV_STATS : WEBPACK_BUILD_STATS,
     ...(isDev
       ? {
           devServer: WEBPACK_DEV_SERVER_CONFIG
@@ -172,13 +185,14 @@ export const getWebpackBaseConfig = (data: Record<string, any>): WebpackConfigur
       : {
           optimization: {
             minimize: true,
-            minimizer: [new CssMinimizerPlugin()],
+            minimizer: [`...`, new CssMinimizerPlugin()],
             // Once your build outputs multiple chunks, this option will ensure they share the webpack runtime
             // instead of having their own. This also helps with long-term caching, since the chunks will only
             // change when actual code changes, not the webpack runtime.
             runtimeChunk: {
               name: 'runtime'
-            }
+            },
+            chunkIds: 'named'
           },
           performance: {
             hints: false,
@@ -189,7 +203,17 @@ export const getWebpackBaseConfig = (data: Record<string, any>): WebpackConfigur
   }
 
   if (isTs) {
-    config.plugins.push(new ForkTsCheckerWebpackPlugin())
+    config.plugins.push(
+      new ForkTsCheckerWebpackPlugin({
+        typescript: {
+          diagnosticOptions: {
+            semantic: true,
+            syntactic: true
+          },
+          mode: 'write-references'
+        }
+      })
+    )
   }
 
   return config as WebpackConfiguration

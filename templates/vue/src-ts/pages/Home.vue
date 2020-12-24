@@ -18,8 +18,14 @@
   }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+  @import '@/assets/css/_vars.scss';
+
   .page-home {
     text-align: center;
+
+    h2 {
+      font-size: $font-size;
+    }
   }
 </style>
