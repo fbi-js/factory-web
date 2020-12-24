@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/fbi-js/factory-web/compare/v1.4.1...v1.5.0) (2020-12-24)
+
+
+### Features
+
+* upgrade webpack to v5 ([bb56485](https://github.com/fbi-js/factory-web/commit/bb564851f8cc4380cbc824a07cb946ba377a5238))
+
+
+### Bug Fixes
+
+* add lib files ([86181d1](https://github.com/fbi-js/factory-web/commit/86181d10588fd57732dd40cef4bee433a5060abd))
+* assets build ([5bebc6d](https://github.com/fbi-js/factory-web/commit/5bebc6db79125336ea501e6a32cf39c17dd159d2))
+
 ### [1.4.1](https://github.com/fbi-js/factory-web/compare/v1.4.0...v1.4.1) (2020-12-17)
 
 
