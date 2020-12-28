@@ -11,7 +11,7 @@ export default class FactoryWeb extends Factory {
     id: any;
     description: string;
     commands: (CommandServe | CommandBuild)[];
-    templates: (TemplateVue | TemplateReact | TemplateMicroMain)[];
+    templates: (TemplateReact | TemplateVue | TemplateMicroMain)[];
     execOpts: any;
 }
 export { CommandBuild, CommandServe, TemplateBase, TemplateVue, TemplateReact, TemplateMicroMain, TemplateMicroVue, TemplateMicroReact };

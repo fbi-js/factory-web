@@ -9,6 +9,10 @@ import ReactDOM from 'react-dom'
 import './index.css'
 import App from './App'
 
+<%_ if (project.features.admin) { _%>
+import { BrowserRouter as Router } from 'react-router-dom'
+<%_ } _%>
+
 <%_ if (project.isMicro) { _%>
 const microApp = require('../micro.config')
 setPublicPath(microApp.name)
@@ -29,7 +33,13 @@ export const { bootstrap, mount, unmount } = lifecycles
 <%_ } else { _%>
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <%_ if (project.features.admin) { _%>
+    <Router>
+    <%_ } _%>
+      <App />
+    <%_ if (project.features.admin) { _%>
+    </Router>
+    <%_ } _%>
   </React.StrictMode>,
   document.getElementById('app'),
 )
