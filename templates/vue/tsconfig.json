@@ -15,7 +15,9 @@
     "rootDir": "src",
     "paths": {
       "@/*": ["src/*"]
-    }
+    },
+    "strictNullChecks": false,
+    "noImplicitAny": false
   },
   "include": [
     "src/**/*.ts",

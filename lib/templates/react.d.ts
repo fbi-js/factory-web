@@ -12,4 +12,5 @@ export default class TemplateReact extends BaseClass {
     }[];
     constructor(factory: Factory);
     protected gathering(flags: Record<string, any>): Promise<void>;
+    protected writing(): Promise<void>;
 }
