@@ -2,17 +2,6 @@
 /// <reference types="react" />
 /// <reference types="react-dom" />
 
-<%_ if (project.isMicro) { _%>
-import SingleSpaReact from 'single-spa-react'
-
-declare module 'single-spa-react' {
-  interface Options extends SingleSpaReact.Options {
-    domElements?: Record<string, any>
-    errorBoundary?: Function
-  }
-}
-
-<%_ } _%>
 declare namespace NodeJS {
   interface ProcessEnv {
     readonly NODE_ENV: 'development' | 'production' | 'test'

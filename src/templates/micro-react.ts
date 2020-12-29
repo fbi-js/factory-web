@@ -2,11 +2,12 @@ import { join } from 'path'
 import Factory from '..'
 import TemplateReact from './react'
 
-export default class TemplateMicroVue extends TemplateReact {
+export default class TemplateMicroReact extends TemplateReact {
   id = 'micro-react'
   path = join(__dirname, '../../templates/react')
   description = 'template for Micro-fontends react application'
   templates = []
+  features = [{ name: 'typescript', value: true }]
 
   constructor(public factory: Factory) {
     super(factory)
