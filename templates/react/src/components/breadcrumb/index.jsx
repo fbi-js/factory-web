@@ -1,17 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Breadcrumb } from 'antd'
 import { getPathFromTree } from '@/components/helpers/tree-helper'
-import { IBaseMenuRouteAccessBreadcrumb } from '@/typings/menu'
 import { useHistory, useLocation } from 'react-router-dom'
 import { LeftOutlined } from '@ant-design/icons'
 import style from './breadcrumb.module.scss'
-interface BreadcrumbAdminProps {
-  routes: IBaseMenuRouteAccessBreadcrumb[]
-  style: React.CSSProperties
-  className: string
-  children: JSX.Element | JSX.Element[] | string
-  showBack: boolean
-}
 
 const defaultProps = {
   routes: [],
@@ -20,14 +12,14 @@ const defaultProps = {
   showBack: false,
 }
 
-export default function BreadcrumbAdmin(props: Partial<BreadcrumbAdminProps>) {
+export default function BreadcrumbAdmin(props) {
   const history = useHistory()
   const location = useLocation()
   const [path, setPath] = useState('')
   useEffect(() => {
     urlChange(location.pathname)
   }, [location.pathname])
-  function urlChange(pathname: string) {
+  function urlChange(pathname) {
     setPath(pathname)
   }
   const routePath = getPathFromTree(props.routes, path, {

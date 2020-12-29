@@ -9,7 +9,7 @@ export default class TemplateReact extends BaseClass {
   templates = []
   features = [
     { name: 'typescript', value: true },
-    { name: 'admin', value: true }
+    { name: 'admin', hint: 'antd, axios, basic components(layout, menu, breadcrumb, topbar)' }
   ]
 
   constructor(public factory: Factory) {
@@ -27,29 +27,21 @@ export default class TemplateReact extends BaseClass {
     )
   }
 
-  // rewrite render files
   protected async writing() {
     await super.writing()
-    this.data.project = {
-      ...this.data.project,
-      features: {
-        ...this.data.project.features
-      }
-    }
     const isMicro = this.id.startsWith('micro-')
     let isTs = this.data.project?.features?.typescript
 
-    const isReact = this.id === 'react'
+    const isReact = this.id === 'react' || this.id === 'micro-react'
     const isReactAdmin = isReact && this.data.project?.features?.admin
     const defaultFromToFileMap = {
       from: `src${isTs ? '-ts' : ''}/**/*.{js,jsx,css,scss,sass,less,md,vue}`,
       to: 'src'
     }
     let fromToFileMaps: any[] = [defaultFromToFileMap]
-    console.log(isReact, isTs, isReactAdmin, '=-=')
-    // react template files
-    if (isReact && isTs) {
-      const prefix = `src${isTs ? '-ts' : ''}`
+
+    const prefix = `src${isTs ? '-ts' : ''}`
+    if (isReact) {
       const genTsOrJsFromStr = (isTs: boolean, folderName: string) => {
         return `${prefix}/${folderName}/index.${isTs ? 'ts' : 'js'}`
       }
@@ -69,8 +61,6 @@ export default class TemplateReact extends BaseClass {
           to: 'src'
         }
       })
-      console.log(tsOrJsfileMaps, readmeFileMaps, '-----')
-
       fromToFileMaps = [
         ...readmeFileMaps,
         ...tsOrJsfileMaps,
@@ -103,18 +93,15 @@ export default class TemplateReact extends BaseClass {
           to: 'src'
         }
       ]
-      // react-admin template files
     }
-    if (isReactAdmin) {
-      isTs = true
+    if (isReactAdmin && !isMicro) {
       fromToFileMaps = [
         {
-          from: `src-ts/**/*.{ts,tsx,md,scss,svg,css}`,
+          from: `${prefix}/**/*.{ts,tsx,js,jsx,md,scss,svg,css}`,
           to: 'src'
         }
       ]
     }
-    console.log(fromToFileMaps, '-----dddd')
     this.files.render = [
       'package.json',
       'webpack.config.js',

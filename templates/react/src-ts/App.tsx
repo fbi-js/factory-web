@@ -36,7 +36,7 @@ import Users from '@/pages/users'
     return (
       <Layout>
         <Header>
-          <AdminHeader title={<div>腾讯文旅开放平台</div>}>
+          <AdminHeader title={<div>左侧名称</div>}>
             <div>右侧功能容器</div>
           </AdminHeader>
         </Header>
