@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.1](https://github.com/fbi-js/factory-web/compare/v1.4.1...v1.6.1) (2021-01-05)
+
+
+### Features
+
+* use @fbi-js/configs ([be6eb83](https://github.com/fbi-js/factory-web/commit/be6eb8324cfe96c12129a2f680dfbc9a34219f4d))
+* **template:** add webpack5 examples ([21a37e7](https://github.com/fbi-js/factory-web/commit/21a37e713acf5250953c5679e7b85174911a896b))
+* 添加react-admin模版 ([7df91d7](https://github.com/fbi-js/factory-web/commit/7df91d7313e306390dca7a055ffb4e3b58953203))
+* 完善react模版 ([c476d67](https://github.com/fbi-js/factory-web/commit/c476d6723b516459c62ad8bfb27136a40d2128c9))
+* upgrade webpack to v5 ([bb56485](https://github.com/fbi-js/factory-web/commit/bb564851f8cc4380cbc824a07cb946ba377a5238))
+
+
+### Bug Fixes
+
+* 修复@types/mini-css-extract-plugin版本异常问题 ([d7b15ac](https://github.com/fbi-js/factory-web/commit/d7b15ac468906e1a63f797c1400de276f20bb012))
+* add lib files ([86181d1](https://github.com/fbi-js/factory-web/commit/86181d10588fd57732dd40cef4bee433a5060abd))
+* assets build ([5bebc6d](https://github.com/fbi-js/factory-web/commit/5bebc6db79125336ea501e6a32cf39c17dd159d2))
+* conflicts ([36da4c8](https://github.com/fbi-js/factory-web/commit/36da4c858ac2630d8f2850d5427b6c665bc3a685))
+* fix ejs dependencies ([2d1fa10](https://github.com/fbi-js/factory-web/commit/2d1fa10e5b9dcebb1811175e3322248a2dd6da40))
+
 ## [1.6.0](https://github.com/fbi-js/factory-web/compare/v1.5.0...v1.6.0) (2021-01-05)
 
 
