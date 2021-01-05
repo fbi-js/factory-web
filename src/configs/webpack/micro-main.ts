@@ -1,11 +1,10 @@
-import type { Configuration } from 'webpack'
-
 import { join } from 'path'
-import { paths } from '../constant/paths'
+import { merge } from '@fbi-js/webpack-config-base'
+import config from '@fbi-js/webpack-config-base'
 
-export const getConfig = (data: Record<string, any>) => {
-  const pkgName = require(join(paths.cwd, 'package.json'))
-  const fullName = pkgName.replace('@', '')
+export const getConfig = (options: Record<string, any>) => {
+  const pkg = require(join(process.cwd(), 'package.json'))
+  const fullName = pkg?.name?.replace('@', '') ?? ''
   const nameArr: string[] = fullName.split('/')
   if (nameArr.length < 2) {
     throw Error(`package name should follow '@orgName/projectName' format`)
@@ -13,23 +12,25 @@ export const getConfig = (data: Record<string, any>) => {
   const orgName = nameArr[0]
   const projectName = nameArr[1]
 
-  const config: Configuration = {
-    output: {
-      libraryTarget: 'system',
-      path: paths.dist,
-      devtoolNamespace: `${orgName}_${projectName}`
-    },
-    module: {
-      rules: [
-        {
-          parser: {
-            system: false
+  return merge(
+    config({
+      options
+    }),
+    {
+      output: {
+        libraryTarget: 'system',
+        devtoolNamespace: `${orgName}_${projectName}`
+      },
+      module: {
+        rules: [
+          {
+            parser: {
+              system: false
+            }
           }
-        }
-      ]
-    },
-    externals: ['single-spa', new RegExp(`^@${orgName}/`)]
-  }
-
-  return config
+        ]
+      },
+      externals: ['single-spa', new RegExp(`^@${orgName}/`)]
+    }
+  )
 }

@@ -1,15 +1,13 @@
 <template>
-  <header class="header">
-    Header
-  </header>
+  <header class="header">Header</header>
 </template>
 
 <script lang="ts">
   export default {
     name: 'Header',
 
-    data() {
+    data () {
       return {}
-    },
+    }
   }
 </script>

@@ -1,10 +1,10 @@
 module.exports = {
   devServer: {
-    open: <%= Boolean(!project.isMicro) %>,
     <%_ if (project.isMicro) { _%>
     dev: {
-      writeToDisk: true,
+      writeToDisk: true
     },
     <%_ } _%>
-  },
+    open: <%= Boolean(!project.isMicro) %>
+  }
 }

@@ -7,7 +7,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      component: () => import(/* webpackChunkName: "home" */ '@/pages/Home.vue'),
+      component: () =>
+        import(/* webpackChunkName: "home" */ '@/pages/Home.vue'),
       meta: { title: 'Home' }
     }
   ]

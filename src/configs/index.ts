@@ -1,13 +1,13 @@
-import type { Configuration } from 'webpack'
+import { Configuration } from 'webpack'
+import { merge } from '@fbi-js/webpack-config-base'
+
 import { TemplateTypes } from '../types'
 import {
   resolveWebpackData,
   getUserConfig,
   resolveUserConfig,
-  getTemplateWebpackConfig,
-  getWebpackBaseConfig
+  getTemplateWebpackConfig
 } from './webpack'
-import { merge } from 'webpack-merge'
 
 export const resolveWebpackConfig = async (
   type: TemplateTypes,
@@ -15,14 +15,11 @@ export const resolveWebpackConfig = async (
 ): Promise<Configuration> => {
   // get base webpack config
   const webpackData = resolveWebpackData(data)
-  const webpackBaseConfig = getWebpackBaseConfig(webpackData)
   const typeConfig = getTemplateWebpackConfig(type, webpackData)
-  const baseConfig = merge(webpackBaseConfig, typeConfig)
-
   // get user webpack config
   let userConfig = getUserConfig()
-  userConfig = resolveUserConfig(userConfig, baseConfig)
+  userConfig = resolveUserConfig(userConfig, typeConfig)
 
   // merge config
-  return merge(baseConfig, userConfig)
+  return merge(typeConfig, userConfig)
 }

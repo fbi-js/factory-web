@@ -1,6 +1,5 @@
+import { Configuration } from 'webpack';
 import { TemplateTypes } from '../../types';
-import type { Configuration } from 'webpack';
-export * from './base';
 /**
  * get template webpack config
  * @param type template file name, can be get "micro-main" | "micro-react" | "micro-vue" | "react" | "vue"
@@ -22,6 +21,7 @@ export declare const resolveUserConfig: (userConfig: Configuration | Function, b
  * @param data
  */
 export declare const resolveWebpackData: (data: Record<string, any>) => {
+    isTs: any;
     pkg: {};
     definePluginData: {
         'process.env.NODE_ENV': string;

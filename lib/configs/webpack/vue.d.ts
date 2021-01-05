@@ -1,3 +1,1 @@
-import type { Configuration } from 'webpack';
-import { IConfigOption } from '../../types';
-export declare const getConfig: (data: IConfigOption) => Configuration;
+export declare const getConfig: (options: Record<string, any>) => import("webpack").Configuration;

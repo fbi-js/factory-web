@@ -3,11 +3,11 @@
 </template>
 
 <script>
-export default {
-  name: 'Header',
+  export default {
+    name: 'Header',
 
-  data() {
-    return {}
-  },
-}
+    data () {
+      return {}
+    }
+  }
 </script>

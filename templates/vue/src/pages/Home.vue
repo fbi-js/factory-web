@@ -13,8 +13,8 @@
     name: 'Home',
 
     components: {
-      Header,
-    },
+      Header
+    }
   }
 </script>
 

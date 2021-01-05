@@ -1,7 +1,7 @@
+import React from 'react'
 import { Layout } from 'antd'
 import { LayoutProps, SiderProps } from 'antd/lib/layout'
 import { BasicProps } from 'antd/lib/layout/layout'
-import React from 'react'
 import style from './index.module.scss'
 
 const { Header, Footer, Sider, Content } = Layout

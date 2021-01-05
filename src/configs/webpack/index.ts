@@ -1,9 +1,8 @@
-import { TemplateTypes } from '../../types'
-import type { Configuration } from 'webpack'
 import { join } from 'path'
-import { paths, factoryConfigs } from '../constant/paths'
+import { Configuration } from 'webpack'
 
-export * from './base'
+import { TemplateTypes } from '../../types'
+import { paths, factoryConfigs } from '../constant/paths'
 
 /**
  * get template webpack config
@@ -15,7 +14,9 @@ export const getTemplateWebpackConfig = (type: TemplateTypes, data: Record<strin
   try {
     const { getConfig } = require(`./${type}`)
     typeWebpackConfig = getConfig(data)
-  } catch {}
+  } catch (err) {
+    throw err
+  }
   return typeWebpackConfig
 }
 
@@ -37,6 +38,7 @@ export const getUserConfig = () => {
  * @param userConfig user webpack config
  * @param baseConfig base webpack config
  */
+// TODO: remove `paths`
 export const resolveUserConfig = (
   userConfig: Configuration | Function,
   baseConfig: Configuration
@@ -65,6 +67,7 @@ export const resolveWebpackData = (data: Record<string, any>) => {
 
   return {
     ...data,
+    isTs: data.factory?.features?.typescript,
     pkg,
     definePluginData
   }

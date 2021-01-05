@@ -18,20 +18,10 @@
     "vue-router": "^3.4.9"
   },
   "devDependencies": {
-    "@fbi-js/factory-web": "^<%= factoryVersion %>",
     <%_ if (project.features.typescript) { _%>
-    "@typescript-eslint/eslint-plugin": "^4.11.0",
-    "@typescript-eslint/parser": "^4.11.0",
-    "@vue/eslint-config-typescript": "^7.0.0",
-    <%_ } else { _%>
-    "babel-eslint": "^10.1.0",
+    "@fbi-js/tsconfig": "^0.0.1",
     <%_ } _%>
-    "eslint-plugin-vue": "^7.3.0",
-    <%_ if (project.features.typescript) { _%>
-    "typescript": "^4.1.3",
-    <%_ } _%>
-    "vue-loader": "^15.9.6",
-    "vue-template-compiler": "^2.6.12"
+    "@fbi-js/factory-web": "^<%= factoryVersion %>"
   },
   "fbi": {
     "factory": {
@@ -39,73 +29,18 @@
       "version": "<%= factory.version %>",
       "template": "<%= factory.template %>",
       "features": <%- JSON.stringify(project.features) %>
-    },
-    "paths": {
-      "js": "js",
-      "css": "css",
-      "cssExtractPublicPath": "../",
-      "img": "img",
-      "assets": "assets"
     }
-  },
-  "babel": {
-    "presets": [
-      "@babel/preset-env"<% if (project.features.typescript) { %>,
-      "@babel/preset-typescript"<% } %>
-    ],
-    "plugins": [
-      "@babel/plugin-proposal-class-properties"
-    ]
   },
   "browserslist": [
     "> 1%",
     "last 2 versions",
     "not dead"
   ],
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"<% if (project.features.typescript) { %>,
-      "@vue/typescript"<% } %>
-    ],
-    "parserOptions": {
-      <%_ if (project.features.typescript) { _%>
-      "ecmaVersion": 2020
-      <%_ } else { _%>
-      "parser": "babel-eslint"
-      <%_ } _%>
-    },
-    "ignorePatterns": [],
-    "rules": {
-      "semi": [
-        "error",
-        "never"
-      ]
-    }
-  },
-  "postcss":{
-    "plugins": [
-      "postcss-preset-env"
-    ]
-  },
   "prettier": {
     "semi": false,
     "tabWidth": 2,
     "singleQuote": true,
-    "trailingComma": "all",
+    "trailingComma": "none",
     "endOfLine": "auto"
-  },
-  "stylelint": {
-    "extends": [
-      "stylelint-config-standard",
-      "stylelint-config-prettier"
-    ],
-    "plugins": [],
-    "ignoreFiles": [],
-    "rules": {}
   }
 }

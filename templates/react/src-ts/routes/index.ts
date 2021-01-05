@@ -1,4 +1,3 @@
-
 <%_ if (project.features.admin) { _%>
 import { IBaseMenuRouteAccessBreadcrumb } from '../typings/menu'
 

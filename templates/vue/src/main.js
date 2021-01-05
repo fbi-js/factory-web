@@ -28,11 +28,11 @@ const lifecycles = singleSpaVue({
           // https://single-spa.js.org/docs/building-applications#lifecyle-props
           name: this.name,
           mountParcel: this.mountParcel,
-          singleSpa: this.singleSpa,
-        },
+          singleSpa: this.singleSpa
+        }
       })
-    },
-  },
+    }
+  }
 })
 
 export const { bootstrap, mount, unmount } = lifecycles
@@ -40,6 +40,6 @@ export const { bootstrap, mount, unmount } = lifecycles
 new Vue({
   name: 'MyApp',
   router,
-  render: (h) => h(App),
+  render: (h) => h(App)
 }).$mount('#app')
 <%_ } _%>

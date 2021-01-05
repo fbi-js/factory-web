@@ -2,7 +2,7 @@
   <div class="page-home">
     <Header />
     <h2>Home</h2>
-    <img src="@/assets/img/logo.png">
+    <img src="@/assets/img/logo.png" />
   </div>
 </template>
 
@@ -13,8 +13,8 @@
     name: 'Home',
 
     components: {
-      Header,
-    },
+      Header
+    }
   }
 </script>
 

@@ -86,6 +86,7 @@ export default class TemplateWebBase extends Template {
         '.editorconfig',
         '.prettierignore',
         'public/*',
+        '.vscode/*',
         isTs ? 'tsconfig.json' : '',
         {
           from: `src${isTs ? '-ts' : ''}/**/*.{jpg,png,gif,svg,mp4,mp3,webm,ogg,wav,flac,aac}`,
