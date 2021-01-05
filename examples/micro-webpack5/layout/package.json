@@ -1,0 +1,110 @@
+{
+  "name": "layout",
+  "version": "0.0.0",
+  "description": "layout description",
+  "private": true,
+  "scripts": {
+    "dev": "fbi serve -p 9090",
+    "build": "fbi build",
+    "lint": "eslint src --ext js,jsx,ts,tsx --fix",
+    "format": "prettier -c --write \"./**/*.{js,jsx,ts,tsx,md,html,css}\""
+  },
+  "dependencies": {
+    "@ant-design/icons": "^4.3.0",
+    "antd": "^4.9.4",
+    "axios": "^0.21.1",
+    "react-router-dom": "^5.2.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  },
+  "devDependencies": {
+    "@babel/preset-react": "^7.12.10",
+    "@fbi-js/factory-web": "^1.5.0",
+    "@types/react-router-dom": "^5.1.6",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@typescript-eslint/eslint-plugin": "^4.11.0",
+    "@typescript-eslint/parser": "^4.11.0",
+    "babel-eslint": "^10.1.0",
+    "eslint-config-react-app": "^6.0.0",
+    "eslint-plugin-flowtype": "^5.2.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jest": "^24.1.3",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-plugin-testing-library": "^3.10.1",
+    "react-hot-loader": "^4.13.0",
+    "typescript": "^4.1.3"
+  },
+  "fbi": {
+    "factory": {
+      "id": "@fbi-js/factory-web",
+      "version": "",
+      "template": "react",
+      "features": {
+        "typescript": true,
+        "admin": "admin"
+      }
+    },
+    "paths": {
+      "js": "js",
+      "css": "css",
+      "cssExtractPublicPath": "../",
+      "img": "img",
+      "assets": "assets"
+    }
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-typescript",
+      [
+        "@babel/preset-react",
+        {
+          "runtime": "automatic"
+        }
+      ]
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-class-properties"
+    ]
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ],
+    "rules": {
+      "semi": [
+        "error",
+        "never"
+      ]
+    }
+  },
+  "postcss": {
+    "plugins": [
+      "postcss-preset-env"
+    ]
+  },
+  "prettier": {
+    "semi": false,
+    "tabWidth": 2,
+    "singleQuote": true,
+    "trailingComma": "all",
+    "endOfLine": "auto"
+  },
+  "stylelint": {
+    "extends": [
+      "stylelint-config-standard",
+      "stylelint-config-prettier"
+    ],
+    "plugins": [],
+    "ignoreFiles": [],
+    "rules": {}
+  }
+}

@@ -1,0 +1,25 @@
+.breadcrumb {
+  padding: 10px 20px;
+  background-color: #f4f7fa;
+  border-bottom: 1px solid #eee;
+}
+
+.breadcrumb__title {
+  margin-right: 12px;
+  margin-bottom: 0;
+  color: rgba(0, 0, 0, 0.85);
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 32px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumb__backbut {
+  margin-right: 10px;
+  cursor: pointer;
+  font-size: 15px;
+}
