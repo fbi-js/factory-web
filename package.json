@@ -63,7 +63,7 @@
     "@types/copy-webpack-plugin": "^6.3.0",
     "@types/css-minimizer-webpack-plugin": "^1.1.1",
     "@types/ejs": "^3.0.5",
-    "@types/mini-css-extract-plugin": "^1.2.2",
+    "@types/mini-css-extract-plugin": "^1.2.1",
     "@types/node": "*",
     "@types/npm-install-webpack-plugin": "^4.0.0",
     "@types/webpack-dev-server": "^3.11.1",
