@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.2](https://github.com/fbi-js/factory-web/compare/v1.6.0...v1.6.2) (2021-01-05)
+
+
+### Features
+
+* **template:** add webpack5 examples ([21a37e7](https://github.com/fbi-js/factory-web/commit/21a37e713acf5250953c5679e7b85174911a896b))
+
+
+### Bug Fixes
+
+* 修复@types/mini-css-extract-plugin版本异常问题 ([d7b15ac](https://github.com/fbi-js/factory-web/commit/d7b15ac468906e1a63f797c1400de276f20bb012))
+* conflicts ([36da4c8](https://github.com/fbi-js/factory-web/commit/36da4c858ac2630d8f2850d5427b6c665bc3a685))
+* ejs dep ([e7be09a](https://github.com/fbi-js/factory-web/commit/e7be09a4ac75e450fd7d3d709fb927df059550b2))
+* fix ejs dependencies ([2d1fa10](https://github.com/fbi-js/factory-web/commit/2d1fa10e5b9dcebb1811175e3322248a2dd6da40))
+
 ### [1.6.1](https://github.com/fbi-js/factory-web/compare/v1.4.1...v1.6.1) (2021-01-05)
 
 
