@@ -1,4 +1,5 @@
 const { ModuleFederationPlugin } = require('webpack').container
+const { remotes } = require('./federation.config')
 module.exports = {
   devServer: {
     open: false,
@@ -14,9 +15,7 @@ module.exports = {
       exposes: {
         './Entry': './src/Entry',
       },
-      remotes: {
-        layout: 'layout@http://localhost:9090/remoteEntry.js',
-      },
+      remotes,
       shared: ['react', 'react-dom', 'react-router-dom'],
     }),
   ],

@@ -1,6 +1,6 @@
-# layout 
+# main
 
-layout description
+main description
 
 > This project is generated via&nbsp;[fbi](https://github.com/fbi-js/fbi)&nbsp;@fbi-js/factory-web&nbsp; template react
 
