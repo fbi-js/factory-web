@@ -10,6 +10,16 @@ export default class TemplateWebBase extends Template {
   id = 'web-base'
   renderer = ejs.render
   features: any[] = []
+  copyFileTypes = 'jpg,png,gif,svg,mp4,mp3,webm,ogg,wav,flac,aac'
+  copyFiles = [
+    '.gitignore',
+    '.editorconfig',
+    '.prettierignore',
+    'public/*',
+    '.vscode/*'
+  ]
+  renderFileTypes = 'js,jsx,ts,tsx,css,scss,sass,less,md,vue'
+  renderFiles = ['package.json', 'webpack.config.js', 'README.md']
 
   constructor(public factory: Factory) {
     super(factory)
@@ -75,34 +85,39 @@ export default class TemplateWebBase extends Template {
     ] as any)
   }
 
-  protected async writing() {
-    const debug = !!this.context.get('debug')
+  private getCopyFiles() {
+    const isTs = this.data.project?.features?.typescript
+    const srcFolder = `src${isTs ? '-ts' : ''}`
+    return [
+      ...this.copyFiles,
+      isTs ? 'tsconfig.json' : '',
+      {
+        from: `${srcFolder}/**/*.{${this.copyFileTypes}}`,
+        to: 'src'
+      }
+    ].filter(Boolean)
+  }
+
+  private getRenderFiles() {
     const isMicro = this.id.startsWith('micro-')
     const isTs = this.data.project?.features?.typescript
+    const srcFolder = `src${isTs ? '-ts' : ''}`
+    return [
+      ...this.renderFiles,
+      isMicro ? 'micro.config.js' : '',
+      {
+        from: `${srcFolder}/**/*.{${this.renderFileTypes}}`,
+        to: 'src'
+      }
+    ].filter(Boolean)
+  }
 
+  protected async writing() {
+    const debug = !!this.context.get('debug')
+    console.log('===id===', this.id)
     this.files = {
-      copy: [
-        '.gitignore',
-        '.editorconfig',
-        '.prettierignore',
-        'public/*',
-        '.vscode/*',
-        isTs ? 'tsconfig.json' : '',
-        {
-          from: `src${isTs ? '-ts' : ''}/**/*.{jpg,png,gif,svg,mp4,mp3,webm,ogg,wav,flac,aac}`,
-          to: 'src'
-        }
-      ].filter(Boolean),
-      render: [
-        'package.json',
-        'webpack.config.js',
-        'README.md',
-        isMicro ? 'micro.config.js' : '',
-        {
-          from: `src${isTs ? '-ts' : ''}/**/*.{js,jsx,ts,tsx,css,scss,sass,less,md,vue}`,
-          to: 'src'
-        }
-      ].filter(Boolean),
+      copy: this.getCopyFiles(),
+      render: this.getRenderFiles(),
       renderOptions: {
         async: true,
         debug,
