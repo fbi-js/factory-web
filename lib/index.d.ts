@@ -1,6 +1,8 @@
 import { Factory } from 'fbi';
 import CommandBuild from './commands/build';
 import CommandServe from './commands/serve';
+import CommandMakeTypes from './commands/types-create';
+import CommandSyncTypes from './commands/types-sync';
 import TemplateBase from './templates/base';
 import TemplateVue from './templates/vue';
 import TemplateReact from './templates/react';
@@ -10,7 +12,7 @@ import TemplateMicroReact from './templates/micro-react';
 export default class FactoryWeb extends Factory {
     id: any;
     description: string;
-    commands: (CommandServe | CommandBuild)[];
+    commands: (CommandSyncTypes | CommandServe | CommandMakeTypes | CommandBuild)[];
     templates: (TemplateVue | TemplateReact | TemplateMicroMain | TemplateMicroReact)[];
     execOpts: any;
 }
