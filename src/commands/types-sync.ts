@@ -28,14 +28,12 @@ export default class CommandSyncTypes extends Command {
     try {
       await this.generate()
     } catch (err) {
-      this.error('Failed to build project')
-      console.log(err)
-      this.exit()
+      this.error('Failed to Sync typings')
+      this.error(err).exit()
     }
   }
 
   protected generate() {
-    const https = require('https')
     const fs = require('fs-extra')
     const path = require('path')
     const appDirectory = fs.realpathSync(process.cwd())
@@ -46,34 +44,29 @@ export default class CommandSyncTypes extends Command {
       const text = await (await fetch(remoteUrl)).text()
       return text
     }
-    try {
-      remotesConfigArr.forEach(
-        async (item: {
-          remoteTypesPath: string
-          remoteUrl: string
-          remoteModuleName: string
-          aliasModuleName: string
-        }) => {
-          const folderPath = `src/${item.remoteTypesPath}`
-          const savePath = `${folderPath}/${item.remoteModuleName}.d.ts`
-          const resolveSavePath = resolveApp(path.join(savePath))
-          console.log(resolveSavePath)
-          if (!fs.existsSync(resolveSavePath)) {
-            fs.mkdirSync(resolveApp(folderPath))
-            fs.createFileSync(resolveSavePath)
-          }
-          const text = await fetchText(
-            `${item.remoteUrl}${item.remoteTypesPath}/${item.remoteModuleName}.d.ts`
-          )
-          const reg = new RegExp(`${item.remoteModuleName}/`, 'g')
-          const replacedText = text.replace(reg, `${item.aliasModuleName}/`)
-          fs.writeFileSync(resolveSavePath, replacedText)
-          console.log('\x1b[36m%s\x1b[0m', '==== Success! ====')
+    remotesConfigArr.forEach(
+      async (item: {
+        remoteTypesPath: string
+        remoteUrl: string
+        remoteModuleName: string
+        aliasModuleName: string
+      }) => {
+        const folderPath = `src/${item.remoteTypesPath}`
+        const savePath = `${folderPath}/${item.remoteModuleName}.d.ts`
+        const resolveSavePath = resolveApp(path.join(savePath))
+        console.log(resolveSavePath)
+        if (!fs.existsSync(resolveSavePath)) {
+          fs.mkdirSync(resolveApp(folderPath))
+          fs.createFileSync(resolveSavePath)
         }
-      )
-    } catch (e) {
-      console.log('Error:', e)
-      process.exit(1)
-    }
+        const text = await fetchText(
+          `${item.remoteUrl}${item.remoteTypesPath}/${item.remoteModuleName}.d.ts`
+        )
+        const reg = new RegExp(`${item.remoteModuleName}/`, 'g')
+        const replacedText = text.replace(reg, `${item.aliasModuleName}/`)
+        fs.writeFileSync(resolveSavePath, replacedText)
+        console.log('\x1b[36m%s\x1b[0m', '==== Success! ====')
+      }
+    )
   }
 }

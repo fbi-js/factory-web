@@ -27,9 +27,8 @@ export default class CommandMakeTypes extends Command {
     try {
       await this.create()
     } catch (err) {
-      this.error('Failed to build project')
-      console.log(err)
-      this.exit()
+      this.error('Failed to Create typings')
+      this.error(err).exit()
     }
   }
 
@@ -39,60 +38,55 @@ export default class CommandMakeTypes extends Command {
     const path = require('path')
     const appDirectory = fs.realpathSync(process.cwd())
     const resolveApp = (relativePath: string) => path.resolve(appDirectory, relativePath)
-    try {
-      const { typingsConfigs, federationConfigs } = require(resolveApp('federation.config'))
-      const { exposes, name: federationName } = federationConfigs
-      const compileFiles: string[] = Object.values(exposes)
-      const outFile = resolveApp(
-        path.resolve(typingsConfigs.typingsOutputDir, `${federationName}.d.ts`)
-      )
-      if (!fs.existsSync(outFile)) {
-        fs.createFileSync(outFile)
-      }
-
-      // write the typings file
-      const program = ts.createProgram(
-        compileFiles.map(item => resolveApp(item)),
-        {
-          outFile,
-          declaration: true,
-          emitDeclarationOnly: true,
-          skipLibCheck: true,
-          jsx: 'react',
-          esModuleInterop: true
-        }
-      )
-
-      program.emit()
-
-      let typing = fs.readFileSync(outFile, { encoding: 'utf8', flag: 'r' })
-      const moduleRegex = RegExp(/declare module "(.*)"/, 'g')
-      const moduleNames = []
-      // @ts-ignore
-      let execResults
-      while ((execResults = moduleRegex.exec(typing) !== null)) {
-        // @ts-ignore
-        moduleNames.push(execResults[1])
-      }
-      moduleNames.forEach(moduleName => {
-        const regex = RegExp(`"${moduleName}`, 'g')
-        typing = typing.replace(regex, `"${federationName}/${moduleName}`)
-      })
-
-      typing = Object.keys(exposes).reduce((pre, current) => {
-        const item = exposes[current]
-        const regStr = /\.\//g
-        const exposesModule = current.replace(regStr, '')
-        const regStrB = /\.\/src\//g
-        const exposesSrc = item.replace(regStrB, '')
-        return pre.replace(exposesSrc, `${federationName}/${exposesModule}`)
-      }, typing)
-      console.log('writing typing to file:', outFile)
-      fs.writeFileSync(outFile, typing)
-      console.log('\x1b[36m%s\x1b[0m', '==== Success! ====')
-    } catch (e) {
-      console.error(`ERROR:`, e)
-      process.exit(1)
+    const { typingsConfigs, federationConfigs } = require(resolveApp('federation.config'))
+    const { exposes, name: federationName } = federationConfigs
+    const compileFiles: string[] = Object.values(exposes)
+    const outFile = resolveApp(
+      path.resolve(typingsConfigs.typingsOutputDir, `${federationName}.d.ts`)
+    )
+    if (!fs.existsSync(outFile)) {
+      fs.createFileSync(outFile)
     }
+
+    // write the typings file
+    const program = ts.createProgram(
+      compileFiles.map(item => resolveApp(item)),
+      {
+        outFile,
+        declaration: true,
+        emitDeclarationOnly: true,
+        skipLibCheck: true,
+        jsx: 'react',
+        esModuleInterop: true
+      }
+    )
+
+    program.emit()
+
+    let typing = fs.readFileSync(outFile, { encoding: 'utf8', flag: 'r' })
+    const moduleRegex = RegExp(/declare module "(.*)"/, 'g')
+    const moduleNames = []
+    // @ts-ignore
+    let execResults
+    while ((execResults = moduleRegex.exec(typing) !== null)) {
+      // @ts-ignore
+      moduleNames.push(execResults[1])
+    }
+    moduleNames.forEach(moduleName => {
+      const regex = RegExp(`"${moduleName}`, 'g')
+      typing = typing.replace(regex, `"${federationName}/${moduleName}`)
+    })
+
+    typing = Object.keys(exposes).reduce((pre, current) => {
+      const item = exposes[current]
+      const regStr = /\.\//g
+      const exposesModule = current.replace(regStr, '')
+      const regStrB = /\.\/src\//g
+      const exposesSrc = item.replace(regStrB, '')
+      return pre.replace(exposesSrc, `${federationName}/${exposesModule}`)
+    }, typing)
+    console.log('writing typing to file:', outFile)
+    fs.writeFileSync(outFile, typing)
+    console.log('\x1b[36m%s\x1b[0m', '==== Success! ====')
   }
 }
