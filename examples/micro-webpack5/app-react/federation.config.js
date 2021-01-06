@@ -4,15 +4,12 @@ const remotesConfigArr = [
     remoteModuleName: 'layout',
     remoteUrl: 'http://localhost:9090',
     remoteFile: '/remoteEntry.js',
-    remoteTypesPath: `/federation-typings/layout.d.ts`,
+    remoteTypesPath: `/federation-typings`,
   },
 ]
 
 const remotes = remotesConfigArr.reduce((pre, current) => {
   let map = {}
-  // {
-  //   mainApp: 'layout@http://localhost:9090/remoteEntry.js',
-  // }
   map[
     current.aliasModuleName
   ] = `${current.remoteModuleName}@${current.remoteUrl}${current.remoteFile}`
@@ -22,7 +19,16 @@ const remotes = remotesConfigArr.reduce((pre, current) => {
   }
 }, {})
 
-module.exports = {
+const federationConfigs = {
+  name: 'appReact',
+  exposes: {
+    './Entry': './src/Entry',
+  },
   remotes,
-  remotesConfigArr,
 }
+
+const typingsConfigs = {
+  typingsOutputDir: 'federation-typings',
+}
+
+module.exports = { federationConfigs, remotesConfigArr, typingsConfigs }

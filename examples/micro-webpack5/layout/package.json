@@ -8,7 +8,8 @@
     "build": "fbi build",
     "lint": "eslint src --ext js,jsx,ts,tsx --fix",
     "format": "prettier -c --write \"./**/*.{js,jsx,ts,tsx,md,html,css}\"",
-    "make-types": "node ./make-federated-types.js --outputDir federation-typings"
+    "make-types": "node ./make-federated-types.js --outputDir federation-typings",
+    "sync-types": "node ./sync-federated-types"
   },
   "dependencies": {
     "@ant-design/icons": "^4.3.0",

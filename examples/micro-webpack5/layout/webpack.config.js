@@ -17,9 +17,6 @@ module.exports = {
   plugins: [
     new ModuleFederationPlugin({
       ...federationConfigs,
-      remotes: {
-        appReact: 'appReact@http://localhost:9091/remoteEntry.js',
-      },
       filename: 'remoteEntry.js',
       shared: ['react', 'react-dom', 'react-router-dom'],
     }),
