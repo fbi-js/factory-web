@@ -1,7 +1,14 @@
 const { ModuleFederationPlugin } = require('webpack').container
+const { federationConfigs, typingsConfigs } = require('./federation.config')
 module.exports = {
   devServer: {
     open: false,
+    static: [
+      {
+        directory: `./${typingsConfigs.typingsOutputDir}`,
+        publicPath: `/${typingsConfigs.typingsOutputDir}`,
+      },
+    ],
   },
   entry: './src/main',
   output: {
@@ -9,14 +16,8 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: 'layout',
+      ...federationConfigs,
       filename: 'remoteEntry.js',
-      exposes: {
-        './Layout': './src/App',
-      },
-      remotes: {
-        appReact: 'appReact@http://localhost:9091/remoteEntry.js',
-      },
       shared: ['react', 'react-dom', 'react-router-dom'],
     }),
   ],

@@ -19,7 +19,6 @@ import Users from '@/pages/users'
  */
 const { Header, Footer, Sider, Content } = Layout
 
-//@ts-ignore
 const AppReact = React.lazy(() => import('appReact/Entry'))
 /**
  * END

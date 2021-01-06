@@ -3,4 +3,3 @@ node_modules
 dist
 *.local
 yarn.lock
-package-lock.json
