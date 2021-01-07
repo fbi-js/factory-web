@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.3](https://github.com/fbi-js/factory-web/compare/v1.6.2...v1.6.3) (2021-01-06)
+
+
+### Features
+
+* add miniprogram template ([533a29f](https://github.com/fbi-js/factory-web/commit/533a29f90630095196bf0edc25e0b8cab9070e6a))
+
 ### [1.6.2](https://github.com/fbi-js/factory-web/compare/v1.6.0...v1.6.2) (2021-01-05)
 
 
