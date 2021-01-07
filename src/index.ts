@@ -3,8 +3,8 @@ import { Factory } from 'fbi'
 
 import CommandBuild from './commands/build'
 import CommandServe from './commands/serve'
-import CommandMakeTypes from './commands/types-create'
-import CommandSyncTypes from './commands/types-sync'
+import CommandTypesCreate from './commands/types-create'
+import CommandTypesSync from './commands/types-sync'
 
 import TemplateBase from './templates/base'
 import TemplateVue from './templates/vue'
@@ -19,8 +19,8 @@ export default class FactoryWeb extends Factory {
   commands = [
     new CommandBuild(this),
     new CommandServe(this),
-    new CommandMakeTypes(this),
-    new CommandSyncTypes(this)
+    new CommandTypesCreate(this),
+    new CommandTypesSync(this)
   ]
   templates = [
     new TemplateVue(this),

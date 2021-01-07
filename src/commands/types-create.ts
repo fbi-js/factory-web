@@ -1,6 +1,6 @@
 import { Command } from 'fbi'
 import Factory from '..'
-export default class CommandMakeTypes extends Command {
+export default class CommandTypesCreate extends Command {
   id = 'ts-create'
   alias = 'tsc'
   description = 'create typing files for webpack5 module-faderation exposes modules'

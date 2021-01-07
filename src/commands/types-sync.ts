@@ -1,7 +1,7 @@
 import { Command } from 'fbi'
 import Factory from '..'
 import fetch from 'node-fetch'
-export default class CommandSyncTypes extends Command {
+export default class CommandTypesSync extends Command {
   id = 'ts-sync'
   alias = 'tss'
   description = 'sync typing files from webpack5 module-faderation remotes modules'

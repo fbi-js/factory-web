@@ -1,6 +1,6 @@
 import { Command } from 'fbi';
 import Factory from '..';
-export default class CommandSyncTypes extends Command {
+export default class CommandTypesSync extends Command {
     factory: Factory;
     id: string;
     alias: string;
