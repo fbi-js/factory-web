@@ -12,7 +12,7 @@ import TemplateMicroReact from './templates/micro-react';
 export default class FactoryWeb extends Factory {
     id: any;
     description: string;
-    commands: (CommandSyncTypes | CommandServe | CommandMakeTypes | CommandBuild)[];
+    commands: (CommandMakeTypes | CommandServe | CommandSyncTypes | CommandBuild)[];
     templates: (TemplateVue | TemplateReact | TemplateMicroMain | TemplateMicroReact)[];
     execOpts: any;
 }

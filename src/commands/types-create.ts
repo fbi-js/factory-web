@@ -45,6 +45,7 @@ export default class CommandMakeTypes extends Command {
       path.resolve(typingsConfigs.typingsOutputDir, `${federationName}.d.ts`)
     )
     if (!fs.existsSync(outFile)) {
+      fs.mkdirSync(resolveApp(typingsConfigs.typingsOutputDir))
       fs.createFileSync(outFile)
     }
 
