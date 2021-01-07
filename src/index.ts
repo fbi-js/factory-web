@@ -47,5 +47,7 @@ export {
   TemplateReact,
   TemplateMicroMain,
   TemplateMicroVue,
-  TemplateMicroReact
+  TemplateMicroReact,
+  CommandTypesCreate,
+  CommandTypesSync
 }

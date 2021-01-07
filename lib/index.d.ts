@@ -17,4 +17,4 @@ export default class FactoryWeb extends Factory {
     templates: (TemplateVue | TemplateReact | TemplateMicroMain | TemplateMicroReact | TemplateMiniProgram)[];
     execOpts: any;
 }
-export { CommandBuild, CommandServe, TemplateBase, TemplateVue, TemplateReact, TemplateMicroMain, TemplateMicroVue, TemplateMicroReact };
+export { CommandBuild, CommandServe, TemplateBase, TemplateVue, TemplateReact, TemplateMicroMain, TemplateMicroVue, TemplateMicroReact, CommandTypesCreate, CommandTypesSync };
