@@ -24,7 +24,11 @@
     "react-dom": "^17.0.1"
   },
   "devDependencies": {
+    <%_ if (project.features.typescript) { _%>
     "@fbi-js/factory-web": "^<%= factoryVersion %>",
+    <%_ } else { _%>
+    "@fbi-js/factory-web": "^<%= factoryVersion %>"
+    <%_ } _%>
     <%_ if (project.features.typescript) { _%>
     "@fbi-js/tsconfig": "^0.0.1",
     "@types/react": "^17.0.0",

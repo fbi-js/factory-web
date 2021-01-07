@@ -1,5 +1,10 @@
 import React from 'react'
+import { PageContainer } from '../../components/wau/container/PageContainer'
 
 export default function Index() {
-  return <h1>home</h1>
+  return (
+    <PageContainer>
+      <h1>home</h1>
+    </PageContainer>
+  )
 }

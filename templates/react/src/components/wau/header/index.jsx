@@ -1,5 +1,5 @@
 import React from 'react'
-import style from './header.module.scss'
+import style from './header.module.less'
 
 const defaultProps = {
   style: {},

@@ -1,10 +1,12 @@
 import { Layout } from 'antd'
+import { LayoutProps, SiderProps } from 'antd/lib/layout'
+import { BasicProps } from 'antd/lib/layout/layout'
 import React from 'react'
-import style from './index.module.scss'
+import style from './index.module.less'
 
 const { Header, Footer, Sider, Content } = Layout
 
-function AdminHeader(props) {
+function WauHeader(props) {
   return (
     <Header {...props} className={[style.header, props.className].join(' ')}>
       {props.children}
@@ -12,11 +14,11 @@ function AdminHeader(props) {
   )
 }
 
-function AdminFooter(props) {
+function WauFooter(props) {
   return <Footer {...props}>{props.children}</Footer>
 }
 
-function AdminSider(props) {
+function WauSider(props) {
   return (
     <Sider {...props} className={[style.sider, props.className].join(' ')}>
       {props.children}
@@ -24,11 +26,15 @@ function AdminSider(props) {
   )
 }
 
-function AdminContent(props) {
-  return <Content {...props}>{props.children}</Content>
+function WauContent(props) {
+  return (
+    <Content {...props} className={[style.content, props.className].join(' ')}>
+      {props.children}
+    </Content>
+  )
 }
 
-function AdminLayout(props) {
+function WauLayout(props) {
   return (
     <Layout {...props} className={[style.layout, props.className].join(' ')}>
       {props.children}
@@ -36,9 +42,9 @@ function AdminLayout(props) {
   )
 }
 
-AdminLayout.Header = AdminHeader
-AdminLayout.Footer = AdminFooter
-AdminLayout.Sider = AdminSider
-AdminLayout.Content = AdminContent
+WauLayout.Header = WauHeader
+WauLayout.Footer = WauFooter
+WauLayout.Sider = WauSider
+WauLayout.Content = WauContent
 
-export default AdminLayout
+export default WauLayout

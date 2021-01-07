@@ -2,7 +2,6 @@ import { Menu } from 'antd'
 import React, { useCallback, useEffect, useState } from 'react'
 import { subMenuRender } from './Sub'
 import { useHistory, useLocation } from 'react-router-dom'
-import './adminMenu.scss'
 import { getPathFromTree } from '../helpers/tree-helper'
 
 export default function MenuRender(props) {
