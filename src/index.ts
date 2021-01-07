@@ -42,12 +42,12 @@ export default class FactoryWeb extends Factory {
 export {
   CommandBuild,
   CommandServe,
+  CommandTypesCreate,
+  CommandTypesSync,
   TemplateBase,
   TemplateVue,
   TemplateReact,
   TemplateMicroMain,
   TemplateMicroVue,
-  TemplateMicroReact,
-  CommandTypesCreate,
-  CommandTypesSync
+  TemplateMicroReact
 }

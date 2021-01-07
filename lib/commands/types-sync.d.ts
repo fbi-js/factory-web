@@ -9,5 +9,5 @@ export default class CommandTypesSync extends Command {
     flags: never[];
     constructor(factory: Factory);
     run(flags: any, unknown: any): Promise<void>;
-    protected generate(): void;
+    protected sync(): void;
 }

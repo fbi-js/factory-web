@@ -26,14 +26,14 @@ export default class CommandTypesSync extends Command {
     this.logStart(`Sync typings...`)
 
     try {
-      await this.generate()
+      await this.sync()
     } catch (err) {
       this.error('Failed to Sync typings')
       this.error(err).exit()
     }
   }
 
-  protected generate() {
+  protected sync() {
     const fs = require('fs-extra')
     const path = require('path')
     const appDirectory = fs.realpathSync(process.cwd())
