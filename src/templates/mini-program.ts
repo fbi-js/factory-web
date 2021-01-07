@@ -23,6 +23,7 @@ export default class TemplateMiniProgram extends BaseClass {
     'README.md',
     'tsconfig.json'
   ]
+  renderFileTypes = 'js,jsx,ts,tsx,css,scss,sass,less,md,vue,html'
 
   constructor(public factory: Factory) {
     super(factory)
