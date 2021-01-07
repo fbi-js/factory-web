@@ -1,26 +1,32 @@
 import React, { useEffect, useState } from 'react'
-import { Breadcrumb } from 'antd'
-import { getPathFromTree } from '@/components/helpers/tree-helper'
-import { IBaseMenuRouteAccessBreadcrumb } from '@/typings/menu'
+import { Breadcrumb, PageHeader } from 'antd'
+import { getPathFromTree } from '@/components/wau/helpers/tree-helper'
 import { useHistory, useLocation } from 'react-router-dom'
-import { LeftOutlined } from '@ant-design/icons'
-import style from './breadcrumb.module.scss'
-interface BreadcrumbAdminProps {
+import style from './breadcrumb.module.less'
+import { PageHeaderProps } from 'antd/lib/page-header'
+import { IBaseMenuRouteAccessBreadcrumb } from '../container/routeContext'
+
+export type WauPageHeaderProps = {
+  children?: JSX.Element | JSX.Element[] | string
+} & PageHeaderProps
+
+interface WauBreadcrumbProps {
   routes: IBaseMenuRouteAccessBreadcrumb[]
   style: React.CSSProperties
   className: string
   children: JSX.Element | JSX.Element[] | string
   showBack: boolean
+  pageHeaderProps: WauPageHeaderProps
 }
 
 const defaultProps = {
   routes: [],
   style: {},
   className: '',
-  showBack: false,
+  pageHeaderProps: {},
 }
 
-export default function BreadcrumbAdmin(props: Partial<BreadcrumbAdminProps>) {
+export default function WauBreadcrumb(props: Partial<WauBreadcrumbProps>) {
   const history = useHistory()
   const location = useLocation()
   const [path, setPath] = useState('')
@@ -35,19 +41,19 @@ export default function BreadcrumbAdmin(props: Partial<BreadcrumbAdminProps>) {
     value: 'path',
     label: 'name',
   })
-  let lastItem, breadcrumb, title, breabcrumnLength
+  let lastItem, title, breadcrumb, breabcrumblength
   if (routePath?.length) {
     lastItem = routePath.pop()
     breadcrumb = lastItem.breadcrumb || routePath
     title = lastItem.name
-    breabcrumnLength = breadcrumb.length + 1
+    breabcrumblength = breadcrumb.length + 1
   }
   return (
     <div
-      style={props.style}
       className={`${style.breadcrumb} ${props.className}`}
+      style={props.style}
     >
-      {breabcrumnLength > 1 && (
+      {breabcrumblength > 1 && (
         <Breadcrumb>
           {breadcrumb.map((item, index) => (
             <Breadcrumb.Item key={index}>
@@ -70,20 +76,18 @@ export default function BreadcrumbAdmin(props: Partial<BreadcrumbAdminProps>) {
           <Breadcrumb.Item>{lastItem.name}</Breadcrumb.Item>
         </Breadcrumb>
       )}
-      {routePath?.length >= 0 && (
-        <div className={style.breadcrumb__title}>
-          {props.showBack && (
-            <LeftOutlined
-              className={style.breadcrumb__backbut}
-              onClick={() => history.goBack()}
-            />
-          )}
-          {title}
-        </div>
-      )}
-      <div>{props.children}</div>
+      <PageHeader
+        title={title}
+        style={{
+          padding: 0,
+          marginTop: breabcrumblength > 1 ? 8 : 0,
+        }}
+        {...props.pageHeaderProps}
+      >
+        {props.pageHeaderProps?.children}
+      </PageHeader>
     </div>
   )
 }
 
-BreadcrumbAdmin.defaultProps = defaultProps
+WauBreadcrumb.defaultProps = defaultProps

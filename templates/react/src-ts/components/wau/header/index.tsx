@@ -1,12 +1,12 @@
 import React from 'react'
-import style from './header.module.scss'
+import style from './header.module.less'
 
 interface HeaderProps {
   height: number | string
   style: React.CSSProperties
   className: string
   children: JSX.Element | JSX.Element[] | string
-  title: string | JSX.Element
+  title: string | JSX.Element | JSX.Element[]
   leftStyle: React.CSSProperties
   leftClassName: string
   rightStyle: React.CSSProperties

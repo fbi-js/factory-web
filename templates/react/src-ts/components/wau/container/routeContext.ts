@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { createContext } from 'react'
+
 export interface IBreadcrumb {
   /** 名称 */
   name: string
@@ -13,7 +14,7 @@ export interface IBaseMenuRouteAccessBreadcrumb {
    @说明 无
    */
   name: string
-  component?: React.ReactNode
+  // component?: React.ReactNode
   /**
    * 菜单是否隐藏子模块
    @作用 可以显示的控制路由和菜单的关联
@@ -21,7 +22,7 @@ export interface IBaseMenuRouteAccessBreadcrumb {
    - 有些子模块是非菜单，只是路由页面，不需要菜单显示
    - 如需一个页面的新增/编辑页面，不需要在菜单显示，则配置为true
    * */
-  hideChildrenInMenu?: boolean
+  // hideChildrenInMenu?: boolean
   /**
    * 路由地址
    @作用 菜单和路由的一个关联，点击菜单就会跳转到对应路由
@@ -35,7 +36,7 @@ export interface IBaseMenuRouteAccessBreadcrumb {
    @作用 用来控制菜单是否显示
    @说明 默认为true，不显示需要配置为false
    * */
-  menu?: boolean
+  // menu?: boolean
   /** 菜单icon名称
    @作用 控制菜单左侧的图标
    @说明 目前只支持antd组件库的icon
@@ -70,3 +71,7 @@ export interface IBaseMenuRouteAccessBreadcrumb {
    */
   children?: IBaseMenuRouteAccessBreadcrumb[]
 }
+
+const RouteContext = createContext<IBaseMenuRouteAccessBreadcrumb[]>([])
+
+export default RouteContext

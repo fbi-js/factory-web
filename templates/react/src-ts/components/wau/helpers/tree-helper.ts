@@ -29,7 +29,7 @@ export function getPathFromTree<T>(
     const children = data[i][keyDic.children]
     if (children && children.length) {
       const result = getPathFromTree(children, id, keyDic, checkFn, arr)
-      if (result) return result
+      if (result && result.length) return result
     }
     arr.pop()
   }

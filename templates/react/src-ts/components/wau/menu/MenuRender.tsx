@@ -1,10 +1,9 @@
 import { Menu } from 'antd'
 import React, { useCallback, useEffect, useState } from 'react'
 import { subMenuRender } from './Sub'
-import { IBaseMenuRouteAccessBreadcrumb } from '@/typings/menu'
 import { useHistory, useLocation } from 'react-router-dom'
-import './adminMenu.scss'
 import { getPathFromTree } from '../helpers/tree-helper'
+import { IBaseMenuRouteAccessBreadcrumb } from '../container/routeContext'
 
 export default function MenuRender(
   props: Partial<{

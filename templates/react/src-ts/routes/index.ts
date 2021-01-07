@@ -1,5 +1,5 @@
 <%_ if (project.features.admin) { _%>
-import { IBaseMenuRouteAccessBreadcrumb } from '../typings/menu'
+import { IBaseMenuRouteAccessBreadcrumb } from '@/components/wau/container/routeContext'
 
 export const routes: IBaseMenuRouteAccessBreadcrumb[] = [
   {
