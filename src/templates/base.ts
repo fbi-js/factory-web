@@ -11,13 +11,7 @@ export default class TemplateWebBase extends Template {
   renderer = ejs.render
   features: any[] = []
   copyFileTypes = 'jpg,png,gif,svg,mp4,mp3,webm,ogg,wav,flac,aac'
-  copyFiles = [
-    '.gitignore',
-    '.editorconfig',
-    '.prettierignore',
-    'public/*',
-    '.vscode/*'
-  ]
+  copyFiles = ['.gitignore', '.editorconfig', '.prettierignore', 'public/*', '.vscode/*']
   renderFileTypes = 'js,jsx,ts,tsx,css,scss,sass,less,md,vue'
   renderFiles = ['package.json', 'webpack.config.js', 'README.md']
 

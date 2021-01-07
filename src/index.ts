@@ -3,6 +3,8 @@ import { Factory } from 'fbi'
 
 import CommandBuild from './commands/build'
 import CommandServe from './commands/serve'
+import CommandTypesCreate from './commands/types-create'
+import CommandTypesSync from './commands/types-sync'
 
 import TemplateBase from './templates/base'
 import TemplateVue from './templates/vue'
@@ -15,7 +17,12 @@ import TemplateMiniProgram from './templates/mini-program'
 export default class FactoryWeb extends Factory {
   id = require('../package.json').name
   description = 'factory for web application development'
-  commands = [new CommandBuild(this), new CommandServe(this)]
+  commands = [
+    new CommandBuild(this),
+    new CommandServe(this),
+    new CommandTypesCreate(this),
+    new CommandTypesSync(this)
+  ]
   templates = [
     new TemplateVue(this),
     new TemplateReact(this),
@@ -35,6 +42,8 @@ export default class FactoryWeb extends Factory {
 export {
   CommandBuild,
   CommandServe,
+  CommandTypesCreate,
+  CommandTypesSync,
   TemplateBase,
   TemplateVue,
   TemplateReact,

@@ -13,7 +13,6 @@
   },
   "dependencies": {
     "@ant-design/icons": "^4.3.0",
-    "@efox/emp-tune-dts-plugin": "^1.1.4",
     "antd": "^4.9.4",
     "axios": "^0.21.1",
     "react": "^17.0.1",
