@@ -108,7 +108,6 @@ export default class TemplateWebBase extends Template {
 
   protected async writing() {
     const debug = !!this.context.get('debug')
-    console.log('===id===', this.id)
     this.files = {
       copy: this.getCopyFiles(),
       render: this.getRenderFiles(),

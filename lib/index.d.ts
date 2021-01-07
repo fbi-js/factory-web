@@ -13,7 +13,7 @@ import TemplateMiniProgram from './templates/mini-program';
 export default class FactoryWeb extends Factory {
     id: any;
     description: string;
-    commands: (CommandServe | CommandTypesCreate | CommandTypesSync | CommandBuild)[];
+    commands: (CommandBuild | CommandServe | CommandTypesCreate | CommandTypesSync)[];
     templates: (TemplateVue | TemplateReact | TemplateMicroMain | TemplateMicroReact | TemplateMiniProgram)[];
     execOpts: any;
 }
