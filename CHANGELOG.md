@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.0](https://github.com/fbi-js/factory-web/compare/v1.6.3...v1.7.0) (2021-01-08)
+
+
+### Features
+
+* add types create/sync commands ([34b8930](https://github.com/fbi-js/factory-web/commit/34b8930be8b3e9423c72fd136df3cbb3a9e4cd51))
+* add webpack5-federated-types make&sync demo ([71dca1f](https://github.com/fbi-js/factory-web/commit/71dca1fb406a2857f50ef9d69992e137df37242e))
+
+
+### Bug Fixes
+
+* create types outputDir mkdir ([e08c7b4](https://github.com/fbi-js/factory-web/commit/e08c7b439096629fb119483429456799655d5183))
+* remove useless log ([b3c2fdf](https://github.com/fbi-js/factory-web/commit/b3c2fdf312ed7a1a444bfcef1ec1c8e19b8e100b))
+* rename cls name ([e7d2a04](https://github.com/fbi-js/factory-web/commit/e7d2a04b85b002457bea34373b3dffc41592ce04))
+* rename method name ([eccd124](https://github.com/fbi-js/factory-web/commit/eccd124f4b457355809f9c4aafd4e4aedca9afec))
+* text error ([c744b52](https://github.com/fbi-js/factory-web/commit/c744b5293f6515050d5c3bf3e26979a9b73d04ab))
+* unified federation interface ([b668b66](https://github.com/fbi-js/factory-web/commit/b668b669919e11a5155ee2b9c09fe4561497def9))
+* update dependencies & code format ([9007893](https://github.com/fbi-js/factory-web/commit/90078936638fab7a2b6e42ce6ada8c5c0cde9d02))
+
 ### [1.6.3](https://github.com/fbi-js/factory-web/compare/v1.6.2...v1.6.3) (2021-01-06)
 
 
