@@ -33,9 +33,6 @@ export declare const getMergePaths: (userPaths: IFactoryPaths) => {
     dist: string;
     public: string;
     js: string;
-    /**
-     * get node_env
-     */
     css: string;
     cssExtractPublicPath: string;
     img: string;

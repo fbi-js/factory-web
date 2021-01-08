@@ -1,4 +1,4 @@
-import type { Configuration } from 'webpack';
+import { Configuration } from 'webpack';
 import { Command } from 'fbi';
 import Factory from '..';
 export default class CommandBuild extends Command {

@@ -1,10 +1,6 @@
 import { Compiler } from 'webpack';
 export declare class AssetJsonPlugin {
-    options: {
-        onlyEntryFile: boolean;
-        input: string;
-        output: string;
-    };
+    options: Record<string, any>;
     constructor(options: {
         onlyEntryFile: boolean;
         input: string;

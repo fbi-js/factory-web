@@ -50,22 +50,6 @@
       "features": <%- JSON.stringify(project.features) %>
     }
   },
-  <%_ if (project.features.typescript) { _%>
-  "eslintConfig": {
-    "extends": [
-      "@fbi-js/react-typescript"
-    ],
-    "rules": {
-      "@typescript-eslint/explicit-function-return-type": "off",
-      "multiline-ternary": "off",
-      "@typescript-eslint/no-floating-promises": "off",
-      "@typescript-eslint/restrict-template-expressions": "off"
-    },
-    "ignorePatterns": [
-      "**/*.d.ts"
-    ]
-  },
-  <%_ } _%>
   "browserslist": [
     "> 1%",
     "last 2 versions",

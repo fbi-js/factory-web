@@ -1,4 +1,4 @@
-import type { Configuration as WebpackConfiguration } from 'webpack';
+import { Configuration as WebpackConfiguration } from 'webpack';
 export declare const PORT = 9000;
 export declare const HOST = "0.0.0.0";
 export declare const WEBPACK_DEV_STATS: WebpackConfiguration['stats'];

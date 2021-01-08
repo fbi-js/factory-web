@@ -6,7 +6,11 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 
 // output assets list in HtmlWebpackPlugin
 export class AssetJsonPlugin {
-  constructor(public options: { onlyEntryFile: boolean; input: string; output: string }) {}
+  options: Record<string, any>
+
+  constructor(options: { onlyEntryFile: boolean; input: string; output: string }) {
+    this.options = options
+  }
 
   apply(compiler: Compiler) {
     let result: string
