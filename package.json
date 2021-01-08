@@ -25,12 +25,12 @@
     ]
   },
   "dependencies": {
-    "@fbi-js/eslint-config-react-typescript": "^0.0.2",
-    "@fbi-js/eslint-config-vue-typescript": "^0.0.2",
-    "@fbi-js/stylelint-config": "^0.0.1",
-    "@fbi-js/tsconfig": "^0.0.1",
-    "@fbi-js/webpack-config-react": "^0.0.2",
-    "@fbi-js/webpack-config-vue": "^0.0.2",
+    "@fbi-js/eslint-config-react-typescript": "^1.0.1",
+    "@fbi-js/eslint-config-vue-typescript": "^1.0.1",
+    "@fbi-js/stylelint-config": "^1.0.1",
+    "@fbi-js/tsconfig": "^1.0.3",
+    "@fbi-js/webpack-config-react": "^1.0.1",
+    "@fbi-js/webpack-config-vue": "^1.0.1",
     "ejs": "^3.1.5",
     "fbi": "^4.3.2",
     "node-fetch": "^2.6.1"

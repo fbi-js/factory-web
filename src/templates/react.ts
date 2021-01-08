@@ -49,13 +49,13 @@ export default class TemplateReact extends BaseClass {
       const genReadmeFromStr = (folderName: string) => {
         return `${prefix}/${folderName}/README.md`
       }
-      const tsOrJsfileMaps = folders.map((folder) => {
+      const tsOrJsfileMaps = folders.map(folder => {
         return {
           from: genTsOrJsFromStr(isTs, folder),
           to: 'src'
         }
       })
-      const readmeFileMaps = folders.map((folder) => {
+      const readmeFileMaps = folders.map(folder => {
         return {
           from: genReadmeFromStr(folder),
           to: 'src'
@@ -85,7 +85,11 @@ export default class TemplateReact extends BaseClass {
           to: 'src'
         },
         {
-          from: `${prefix}/main.${isTs ? 'tsx' : 'js'}`,
+          from: `${prefix}/bootstrap.${isTs ? 'tsx' : 'js'}`,
+          to: 'src'
+        },
+        {
+          from: `${prefix}/main.${isTs ? 'ts' : 'js'}`,
           to: 'src'
         },
         isTs && {
@@ -97,7 +101,7 @@ export default class TemplateReact extends BaseClass {
     if (isReactAdmin && !isMicro) {
       fromToFileMaps = [
         {
-          from: `${prefix}/**/*.{ts,tsx,js,jsx,md,scss,svg,css}`,
+          from: `${prefix}/**/*.{ts,tsx,js,jsx,md,scss,less,svg,css}`,
           to: 'src'
         }
       ]

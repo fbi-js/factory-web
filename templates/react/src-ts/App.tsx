@@ -3,18 +3,18 @@ import './app.css'
 <%_ if (project.features.admin) { _%>
 import { Switch, Route, useLocation } from 'react-router-dom'
 import { routes } from './routes'
-import Layout from '@/components/admin-layout'
-import AdminHeader from '@/components/header'
-import AdminBreadcrumb from '@/components/breadcrumb'
-import AdminMenu from '@/components/menu'
-import { Card } from 'antd'
+import {
+  LazyLoad,
+  MainContainer,
+  Options,
+  Copyright,
+  Title,
+} from '@/components'
 import 'antd/dist/antd.min.css'
 
-import About from '@/pages/about'
-import Home from '@/pages/home'
-import Users from '@/pages/users'
-
-const { Header, Footer, Sider, Content } = Layout
+const About = LazyLoad(() => import('@/pages/about'))
+const Home = LazyLoad(() => import('@/pages/home'))
+const Users = LazyLoad(() => import('@/pages/users'))
 
 function App() {
   /**
@@ -26,35 +26,20 @@ function App() {
     console.log(location.pathname)
   }, [location.pathname])
   return (
-    <Layout>
-      <Header>
-        <AdminHeader title={<div>左侧名称</div>}>
-          <div>右侧功能容器</div>
-        </AdminHeader>
-      </Header>
-      <Layout>
-        <Sider width={256}>
-          <AdminMenu routes={routes} />
-        </Sider>
-        <Content>
-          <AdminBreadcrumb showBack routes={routes}>
-            面包屑额外展示信息
-          </AdminBreadcrumb>
-          <Card style={{ margin: 20 }}>
-            <Switch>
-              <Route exact path="/">
-                {Home}
-              </Route>
-              <Route path="/about">{About}</Route>
-              <Route exact path="/users">
-                {Users}
-              </Route>
-            </Switch>
-          </Card>
-          <Footer>页尾</Footer>
-        </Content>
-      </Layout>
-    </Layout>
+    <MainContainer
+      routes={routes}
+      headerLeft={<Title />}
+      headerRight={<Options />}
+      footer={<Copyright />}
+    >
+      <Switch>
+        <Route exact path="/">
+          {Home}
+        </Route>
+        <Route path="/about">{About}</Route>
+        <Route path="/users">{Users}</Route>
+      </Switch>
+    </MainContainer>
   )
 }
 <%_ } else { _%>
