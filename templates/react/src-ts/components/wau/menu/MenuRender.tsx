@@ -5,11 +5,11 @@ import { useHistory, useLocation } from 'react-router-dom'
 import { getPathFromTree } from '../helpers/tree-helper'
 import { IBaseMenuRouteAccessBreadcrumb } from '../container/routeContext'
 
-export default function MenuRender(
+export default function MenuRender (
   props: Partial<{
     routes: IBaseMenuRouteAccessBreadcrumb[]
     children: JSX.Element | JSX.Element[] | string
-  }>,
+  }>
 ) {
   const location = useLocation()
   const history = useHistory()
@@ -19,15 +19,15 @@ export default function MenuRender(
   const [openKey, setOpenKey] = useState([])
   const [rootSubmenuKeys, setRootSubmenuKeys] = useState([])
   const onOpenChange = useCallback(
-    (openKeys) => {
-      const latestOpenKey = openKeys.find((key) => openKey.indexOf(key) === -1)
-      if (rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
+    openKeys => {
+      const latestOpenKey = openKeys.find(key => !openKey.includes(key))
+      if (!rootSubmenuKeys.includes(latestOpenKey)) {
         setOpenKey(openKeys)
       } else {
         setOpenKey(latestOpenKey ? [latestOpenKey] : [])
       }
     },
-    [openKey, rootSubmenuKeys],
+    [openKey, rootSubmenuKeys]
   )
   useEffect(() => {
     const path = location.pathname
@@ -37,14 +37,14 @@ export default function MenuRender(
       const routePath = getPathFromTree(props.routes, path, {
         children: 'children',
         value: 'path',
-        label: 'name',
+        label: 'name'
       })
-      onOpenChange(routePath.map((item) => item.path))
+      onOpenChange(routePath.map(item => item.path))
     }
   }, [lastPath, location.pathname, props.routes, onOpenChange])
   useEffect(() => {
     setRootSubmenuKeys(
-      baseRoutes.filter((item) => item.path).map((item) => item.path),
+      baseRoutes.filter(item => item.path).map(item => item.path)
     )
   }, [baseRoutes])
   return (
@@ -52,12 +52,12 @@ export default function MenuRender(
       selectedKeys={selectKey}
       onOpenChange={onOpenChange}
       openKeys={openKey}
-      mode="inline"
-      onClick={(info) => {
+      mode='inline'
+      onClick={info => {
         history.push(String(info.key))
         setSelectKey([info.key.toString()])
       }}
-      className="admin-menu"
+      className='admin-menu'
     >
       {baseRoutes.map((item, index) => (
         <React.Fragment key={index}>{subMenuRender(item)}</React.Fragment>

@@ -2,7 +2,7 @@ import { Card } from 'antd'
 import React, { useContext } from 'react'
 import RouteContext from './routeContext'
 import AdminBreadcrumb, {
-  WauPageHeaderProps,
+  WauPageHeaderProps
 } from '@/components/wau/breadcrumb'
 import style from './pageContainer.module.less'
 
@@ -11,7 +11,7 @@ interface PageContainerProps {
   pageHeaderProps: WauPageHeaderProps
 }
 
-export function PageContainer(props: Partial<PageContainerProps>) {
+export function PageContainer (props: Partial<PageContainerProps>) {
   const routes = useContext(RouteContext)
   return (
     <div>

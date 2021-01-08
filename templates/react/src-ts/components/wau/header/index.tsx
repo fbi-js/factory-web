@@ -16,10 +16,10 @@ interface HeaderProps {
 const defaultProps = {
   style: {},
   leftClassName: '',
-  rightClassName: '',
+  rightClassName: ''
 }
 
-export default function Header(props: Partial<HeaderProps>) {
+export default function Header (props: Partial<HeaderProps>) {
   return (
     <div className={`${style.header} ${props.className}`} style={props.style}>
       <div style={props.leftStyle} className={style.leftClassName}>

@@ -4,48 +4,48 @@ import { message } from 'antd'
 const Message = message
 
 // 创建一个错误
-function errorCreate(msg) {
+function errorCreate (msg) {
   const err = new Error(msg)
   errorLog(err)
   // throw err
 }
 
 // 记录和显示错误
-function errorLog(err) {
+function errorLog (err) {
   // 打印到控制台
   if (process.env.NODE_ENV === 'development') {
     console.error('>>>>>> Error >>>>>>')
     console.log(err)
   }
   Message.error({
-    content: err.message,
+    content: err.message
   })
 }
 
 // 创建一个 axios 实例
 const service = axios.create({
   baseURL: config.baseUrl,
-  timeout: 5000, // 请求超时时间
+  timeout: 5000 // 请求超时时间
 })
 
 // 请求拦截器
 service.interceptors.request.use(
-  (config) => {
+  config => {
     // 在请求发送之前做一些处理
     const token = localStorage.getItem('accessToken')
-    config.headers['accessToken'] = token
+    config.headers.accessToken = token
     return config
   },
-  (error) => {
+  error => {
     // 发送失败
     console.log(error, '发送失败')
     Promise.reject(error)
-  },
+  }
 )
 
 // 响应拦截器
 service.interceptors.response.use(
-  (response) => {
+  response => {
     console.log('%c response ', 'background: #222; color: #0ff')
     console.log(response, 'response---接口返回数据')
     // dataAxios 是 axios 返回数据中的 data
@@ -72,20 +72,20 @@ service.interceptors.response.use(
         // wii.user.loging(WauConfig.oauth2Config)
         break
       default:
-        errorCreate(`${dataAxios.msg}`)
+        errorCreate(dataAxios.msg)
         return Promise.reject(dataAxios)
       // 不是正确的 code
       // break
     }
     // }
   },
-  (error) => {
+  error => {
     // console.log('%c error---接口错误返回 ', 'background: #222; color: #0ff')
     console.log(error.response, 'error---接口错误返回')
     if (error.response.status === 403) {
       // 403 处理
     }
-    if (error && error.response) {
+    if (error?.response) {
       error.msg = error.response.data?.msg || ''
       console.log('error.response', error.response)
       if (!error.msg) {
@@ -130,7 +130,7 @@ service.interceptors.response.use(
     }
     errorLog(error)
     return Promise.reject(error)
-  },
+  }
 )
 
 export default service

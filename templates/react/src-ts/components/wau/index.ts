@@ -18,5 +18,5 @@ export {
   Exception500,
   WauHeader,
   WauMenu,
-  LazyLoad,
+  LazyLoad
 }
