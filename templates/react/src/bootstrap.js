@@ -13,7 +13,7 @@ export default () => {
       <%_ if (project.features.admin) { _%>
       <Router>
       <%_ } _%>
-        <App />
+      <App />
       <%_ if (project.features.admin) { _%>
       </Router>
       <%_ } _%>

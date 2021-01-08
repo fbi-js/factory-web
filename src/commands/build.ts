@@ -1,4 +1,4 @@
-import type { Configuration } from 'webpack'
+import { Configuration } from 'webpack'
 
 import webpack from 'webpack'
 import { Command } from 'fbi'
@@ -34,7 +34,7 @@ export default class CommandBuild extends Command {
       unknown
     )
 
-    this.logStart(`Building for production...`)
+    this.logStart('Building for production...')
 
     const factory: IFactoryConfig = this.context.get('config.factory')
     const paths: IFactoryPaths = this.context.get('config.paths')
@@ -64,7 +64,7 @@ export default class CommandBuild extends Command {
           if ((err as any).details) {
             console.error((err as any).details)
           }
-          reject()
+          reject(err)
         }
 
         console.log(stats?.toString(config.stats))

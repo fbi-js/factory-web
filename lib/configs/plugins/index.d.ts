@@ -1,4 +1,4 @@
-import type { Compiler } from 'webpack';
+import { Compiler } from 'webpack';
 export declare class AssetJsonPlugin {
     options: {
         onlyEntryFile: boolean;

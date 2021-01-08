@@ -1,4 +1,4 @@
-import type { Configuration as WebpackConfiguration } from 'webpack'
+import { Configuration as WebpackConfiguration } from 'webpack'
 import { paths } from './paths'
 
 // http server config

@@ -20,7 +20,7 @@ export default class TemplateReact extends BaseClass {
     await super.gathering(flags)
 
     const { factory, project } = this.data
-    this.spinner = this.createSpinner(`Creating project...`).start(
+    this.spinner = this.createSpinner('Creating project...').start(
       `Creating ${this.style.bold.green(project.name)} via ${factory.id} from ${
         factory.template
       }...`
@@ -30,7 +30,7 @@ export default class TemplateReact extends BaseClass {
   protected async writing() {
     await super.writing()
     const isMicro = this.id.startsWith('micro-')
-    let isTs = this.data.project?.features?.typescript
+    const isTs = this.data.project?.features?.typescript
 
     const isReact = this.id === 'react' || this.id === 'micro-react'
     const isReactAdmin = isReact && this.data.project?.features?.admin

@@ -1,5 +1,5 @@
-import type { Configuration } from 'webpack'
-import type { Configuration as DevServerConfiguration } from 'webpack-dev-server'
+import { Configuration } from 'webpack'
+import { Configuration as DevServerConfiguration } from 'webpack-dev-server'
 
 export type TemplateTypes = 'micro-main' | 'micro-react' | 'micro-vue' | 'react' | 'vue'
 export interface IConfigOption {

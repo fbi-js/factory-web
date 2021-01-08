@@ -16,7 +16,6 @@
   },
   "devDependencies": {
     "@fbi-js/factory-web": "^<%= factoryVersion %>",
-    "@fbi-js/tsconfig": "^0.0.1",
     "@types/systemjs": "^6.1.0",
     "typescript": "^4.1.3"
   },

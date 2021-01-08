@@ -10,14 +10,8 @@ import { paths, factoryConfigs } from '../constant/paths'
  * @param data
  */
 export const getTemplateWebpackConfig = (type: TemplateTypes, data: Record<string, any>) => {
-  let typeWebpackConfig = {}
-  try {
-    const { getConfig } = require(`./${type}`)
-    typeWebpackConfig = getConfig(data)
-  } catch (err) {
-    throw err
-  }
-  return typeWebpackConfig
+  const { getConfig } = require(`./${type}`)
+  return getConfig(data)
 }
 
 /**

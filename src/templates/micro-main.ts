@@ -25,7 +25,7 @@ export default class TemplateMicroMain extends BaseClass {
     }
 
     const { factory, project } = this.data
-    this.spinner = this.createSpinner(`Creating project...`).start(
+    this.spinner = this.createSpinner('Creating project...').start(
       `Creating ${this.style.bold.green(project.name)} via ${factory.id} from ${
         factory.template
       }...`

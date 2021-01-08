@@ -5,7 +5,7 @@ import { TemplateTypes } from '../../types';
  * @param type template file name, can be get "micro-main" | "micro-react" | "micro-vue" | "react" | "vue"
  * @param data
  */
-export declare const getTemplateWebpackConfig: (type: TemplateTypes, data: Record<string, any>) => {};
+export declare const getTemplateWebpackConfig: (type: TemplateTypes, data: Record<string, any>) => any;
 /**
  * get user webpack config data, config file is 'webpack.config.js' in project root directory
  */

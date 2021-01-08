@@ -22,7 +22,7 @@ export default class CommandTypesCreate extends Command {
       unknown
     )
 
-    this.logStart(`Create typings...`)
+    this.logStart('Create typings...')
 
     try {
       await this.create()
@@ -65,7 +65,7 @@ export default class CommandTypesCreate extends Command {
     program.emit()
 
     let typing = fs.readFileSync(outFile, { encoding: 'utf8', flag: 'r' })
-    const moduleRegex = RegExp(/declare module "(.*)"/, 'g')
+    const moduleRegex = /declare module "(.*)"/g // RegExp(/declare module "(.*)"/, 'g')
     const moduleNames = []
     // @ts-ignore
     let execResults

@@ -18,7 +18,7 @@
   },
   "devDependencies": {
     "@fbi-js/factory-web": "file:../../../",
-    "@fbi-js/tsconfig": "^0.0.1"
+    "@fbi-js/tsconfig": "^1.1.1"
   },
   "fbi": {
     "factory": {

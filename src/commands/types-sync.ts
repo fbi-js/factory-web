@@ -23,7 +23,7 @@ export default class CommandTypesSync extends Command {
       unknown
     )
 
-    this.logStart(`Sync typings...`)
+    this.logStart('Sync typings...')
 
     try {
       await this.sync()

@@ -1,6 +1,6 @@
-const { networkInterfaces } = require('os')
 import { IFactoryPaths } from '../types'
 import { paths } from '../configs/constant/paths'
+const { networkInterfaces } = require('os')
 
 /**
  * get ip address with IPv4, default ip address is 0.0.0.0

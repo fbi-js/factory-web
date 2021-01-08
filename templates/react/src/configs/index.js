@@ -4,13 +4,13 @@ import production from './prod.config'
 
 const baseConfig = {
   apiHost: '',
-  baseUrl: '/api',
+  baseUrl: '/api'
 }
 
 const configs = {
   test,
   development,
-  production,
+  production
 }
 
 const envConfig = configs[process.env.NODE_ENV] || baseConfig

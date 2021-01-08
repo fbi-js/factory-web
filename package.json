@@ -8,8 +8,9 @@
     "templates"
   ],
   "scripts": {
-    "build": "rm -rf ./lib && fbi b",
+    "build": "fbi b",
     "watch": "fbi w",
+    "lint": "eslint src",
     "format": "prettier --write \"src/**/*.{ts,js,json}\""
   },
   "keywords": [],
@@ -25,22 +26,22 @@
     ]
   },
   "dependencies": {
-    "@fbi-js/eslint-config-react-typescript": "^1.0.1",
-    "@fbi-js/eslint-config-vue-typescript": "^1.0.1",
-    "@fbi-js/stylelint-config": "^1.0.1",
-    "@fbi-js/tsconfig": "^1.0.3",
-    "@fbi-js/webpack-config-react": "^1.0.1",
-    "@fbi-js/webpack-config-vue": "^1.0.1",
+    "@fbi-js/eslint-config-react-typescript": "^1.1.0",
+    "@fbi-js/eslint-config-vue-typescript": "^1.1.0",
+    "@fbi-js/stylelint-config": "^1.1.0",
+    "@fbi-js/tsconfig": "^1.1.1",
+    "@fbi-js/webpack-config-react": "^1.1.1",
+    "@fbi-js/webpack-config-vue": "^1.1.1",
     "ejs": "^3.1.5",
     "fbi": "^4.3.2",
     "node-fetch": "^2.6.1"
   },
   "devDependencies": {
-    "@fbi-js/factory-factory": "^1.1.0",
+    "@fbi-js/factory-factory": "^1.2.2",
     "@types/ejs": "^3.0.5",
     "@types/node-fetch": "^2.5.7",
     "@types/webpack-dev-server": "^3.11.1",
-    "husky": "^4.3.6",
+    "husky": "^4.3.7",
     "lint-staged": "^10.5.3"
   },
   "license": "MIT",
@@ -51,6 +52,11 @@
   "homepage": "https://github.com/fbi-js/factory-web",
   "bugs": {
     "url": "https://github.com/fbi-js/factory-web/issues"
+  },
+  "eslintConfig": {
+    "extends": [
+      "@fbi-js/typescript"
+    ]
   },
   "fbi": {
     "factory": {

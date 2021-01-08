@@ -40,7 +40,7 @@ export default class CommandServe extends Command {
     const factory: IFactoryConfig = this.context.get('config.factory')
     const paths: IFactoryPaths = this.context.get('config.paths')
 
-    this.logStart(`Starting development server...`)
+    this.logStart('Starting development server...')
     try {
       assertFactoryTemplate(factory)
       const config = await resolveWebpackConfig(factory.template, {
@@ -65,7 +65,7 @@ export default class CommandServe extends Command {
           url: localUrl
         })
 
-        server.listen(port, host, (err) => {
+        server.listen(port, host, err => {
           if (err) {
             reject(err)
           }

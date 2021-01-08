@@ -1,4 +1,4 @@
-import type { Compiler } from 'webpack'
+import { Compiler } from 'webpack'
 
 import fs from 'fs'
 import { join, basename, extname } from 'path'
@@ -35,7 +35,7 @@ export class AssetJsonPlugin {
             if (this.options.onlyEntryFile && typeof filename === 'string') {
               const hash = data.plugin.childCompilerHash
               const tmp = entryNames.map(
-                (n) => `${publicPath}${filename.replace('[name]', n).replace('[fullhash]', hash)}`
+                n => `${publicPath}${filename.replace('[name]', n).replace('[fullhash]', hash)}`
               )
               result = JSON.stringify(tmp)
             } else {
@@ -48,9 +48,7 @@ export class AssetJsonPlugin {
       )
     })
 
-    compiler.hooks.done.tap('AssetJsonPlugin output', async (
-      stats /* stats is passed as argument when done hook is tapped.  */
-    ) => {
+    compiler.hooks.done.tap('AssetJsonPlugin output', async () => {
       const outputDir = compiler.options.output?.path
       if (result && outputDir) {
         let microAppJson = {

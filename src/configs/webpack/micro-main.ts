@@ -7,7 +7,7 @@ export const getConfig = (options: Record<string, any>) => {
   const fullName = pkg?.name?.replace('@', '') ?? ''
   const nameArr: string[] = fullName.split('/')
   if (nameArr.length < 2) {
-    throw Error(`package name should follow '@orgName/projectName' format`)
+    throw Error("package name should follow '@orgName/projectName' format")
   }
   const orgName = nameArr[0]
   const projectName = nameArr[1]

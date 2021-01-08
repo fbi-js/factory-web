@@ -23,6 +23,7 @@ export default class FactoryWeb extends Factory {
     new CommandTypesCreate(this),
     new CommandTypesSync(this)
   ]
+
   templates = [
     new TemplateVue(this),
     new TemplateReact(this),

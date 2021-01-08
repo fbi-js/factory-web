@@ -19,7 +19,7 @@ export default class TemplateWebBase extends Template {
     super(factory)
   }
 
-  protected async gathering(flags: Record<string, any>) {
+  protected async gathering(_flags: Record<string, any>) {
     const defaultName = this.data.project?.name ?? 'project-demo'
     const isMicro = this.id.startsWith('micro-')
 
@@ -32,7 +32,7 @@ export default class TemplateWebBase extends Template {
               type: 'input',
               name: 'orgName',
               message: 'Organization name',
-              initial({ enquirer }: any) {
+              initial() {
                 return ''
               },
               validate(value: any) {
@@ -46,7 +46,7 @@ export default class TemplateWebBase extends Template {
         type: 'input',
         name: 'name',
         message: 'Project name',
-        initial({ enquirer }: any) {
+        initial() {
           return defaultName
         },
         validate(value: any) {
@@ -67,11 +67,11 @@ export default class TemplateWebBase extends Template {
             {
               type: 'MultiSelect',
               name: 'features',
-              message: `Choose features for your project:`,
+              message: 'Choose features for your project:',
               hint: '(Use <space> to select, <return> to submit)',
               choices: this.features,
-              result(names: string[]) {
-                return this.map(names)
+              result(names: string[]): any {
+                return (this as any).map(names)
               }
             }
           ]
@@ -125,10 +125,10 @@ export default class TemplateWebBase extends Template {
 
     const { dependencies, devDependencies } = require(join(this.targetDir, 'package.json'))
     if (isValidObject(dependencies) || isValidObject(devDependencies)) {
-      const installSpinner = this.createSpinner(`Installing dependencies...`).start()
+      const installSpinner = this.createSpinner('Installing dependencies...').start()
       try {
         await this.installDeps(this.targetDir, flags.packageManager, false)
-        installSpinner.succeed(`Installed dependencies`)
+        installSpinner.succeed('Installed dependencies')
       } catch (err) {
         installSpinner.fail('Failed to install dependencies. You can install them manually.')
         this.error(err)
