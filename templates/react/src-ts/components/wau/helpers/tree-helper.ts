@@ -5,19 +5,19 @@ const defaultKeyDic: {
 } = {
   value: 'value',
   label: 'label',
-  children: 'children',
+  children: 'children'
 }
 
 const defaultCheckFn = (item, value, keyDic = defaultKeyDic) => {
   return String(item[keyDic.value]) === String(value)
 }
 
-export function getPathFromTree<T>(
+export function getPathFromTree<T> (
   data: T[],
   id: string,
   keyDic = defaultKeyDic,
   checkFn = defaultCheckFn,
-  indexArray: T[] = [],
+  indexArray: T[] = []
 ): T[] {
   if (!data) return []
   const arr = Array.from(indexArray)
@@ -27,24 +27,24 @@ export function getPathFromTree<T>(
       return arr
     }
     const children = data[i][keyDic.children]
-    if (children && children.length) {
+    if (children?.length) {
       const result = getPathFromTree(children, id, keyDic, checkFn, arr)
-      if (result && result.length) return result
+      if (result?.length) return result
     }
     arr.pop()
   }
   return []
 }
 
-export function getItemFromTree<T>(
+export function getItemFromTree<T> (
   treeData: T[],
   value: string,
   keyDic = defaultKeyDic,
-  checkFn = defaultCheckFn,
+  checkFn = defaultCheckFn
 ): T {
   keyDic = {
     ...defaultKeyDic,
-    ...keyDic,
+    ...keyDic
   }
   if (value === '' || !treeData?.length) return null
   let result = null

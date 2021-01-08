@@ -3,7 +3,7 @@ import { Avatar, Dropdown, Menu, Row, Col } from 'antd'
 import {
   LogoutOutlined,
   SettingOutlined,
-  UserOutlined,
+  UserOutlined
 } from '@ant-design/icons'
 import style from './options.module.less'
 
@@ -16,7 +16,7 @@ const menu = (
   </Menu>
 )
 
-export default function Options(prop) {
+export default function Options () {
   return (
     <Row gutter={12}>
       <Col>
@@ -24,7 +24,7 @@ export default function Options(prop) {
           <div>
             <Avatar
               size={30}
-              src="https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png"
+              src='https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png'
             />
             <span className={style.username}>admin</span>
           </div>

@@ -23,30 +23,30 @@ const defaultProps = {
   routes: [],
   style: {},
   className: '',
-  pageHeaderProps: {},
+  pageHeaderProps: {}
 }
 
-export default function WauBreadcrumb(props: Partial<WauBreadcrumbProps>) {
+export default function WauBreadcrumb (props: Partial<WauBreadcrumbProps>) {
   const history = useHistory()
   const location = useLocation()
   const [path, setPath] = useState('')
   useEffect(() => {
     urlChange(location.pathname)
   }, [location.pathname])
-  function urlChange(pathname: string) {
+  function urlChange (pathname: string) {
     setPath(pathname)
   }
   const routePath = getPathFromTree(props.routes, path, {
     children: 'children',
     value: 'path',
-    label: 'name',
+    label: 'name'
   })
   let lastItem, title, breadcrumb, breabcrumblength
   if (routePath?.length) {
     lastItem = routePath.pop()
     breadcrumb = lastItem.breadcrumb || routePath
     title = lastItem.name
-    breabcrumblength = breadcrumb.length + 1
+    breabcrumblength = Number(breadcrumb.length) + 1
   }
   return (
     <div
@@ -80,7 +80,7 @@ export default function WauBreadcrumb(props: Partial<WauBreadcrumbProps>) {
         title={title}
         style={{
           padding: 0,
-          marginTop: breabcrumblength > 1 ? 8 : 0,
+          marginTop: breabcrumblength > 1 ? 8 : 0
         }}
         {...props.pageHeaderProps}
       >

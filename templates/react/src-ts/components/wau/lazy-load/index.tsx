@@ -6,9 +6,9 @@ interface LazyLoadProps {
   spinContentStyle: React.CSSProperties
 }
 
-export default function LazyLoad<T extends React.ComponentType<any>>(
-  loader: () => Promise<{ default:T }>,
-  lazyProps?: LazyLoadProps,
+export default function LazyLoad<T extends React.ComponentType<any>> (
+  loader: () => Promise<{ default: T }>,
+  lazyProps?: LazyLoadProps
 ) {
   const LazyComponent = React.lazy(loader)
 
@@ -22,7 +22,7 @@ export default function LazyLoad<T extends React.ComponentType<any>>(
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
-              ...lazyProps?.spinContentStyle,
+              ...lazyProps?.spinContentStyle
             }}
           >
             <Spin

@@ -6,7 +6,7 @@ import style from './index.module.less'
 
 const { Header, Footer, Sider, Content } = Layout
 
-function WauHeader(props: BasicProps) {
+function WauHeader (props: BasicProps) {
   return (
     <Header {...props} className={[style.header, props.className].join(' ')}>
       {props.children}
@@ -14,11 +14,11 @@ function WauHeader(props: BasicProps) {
   )
 }
 
-function WauFooter(props: BasicProps) {
+function WauFooter (props: BasicProps) {
   return <Footer {...props}>{props.children}</Footer>
 }
 
-function WauSider(props: SiderProps) {
+function WauSider (props: SiderProps) {
   return (
     <Sider {...props} className={[style.sider, props.className].join(' ')}>
       {props.children}
@@ -26,7 +26,7 @@ function WauSider(props: SiderProps) {
   )
 }
 
-function WauContent(props: BasicProps) {
+function WauContent (props: BasicProps) {
   return (
     <Content {...props} className={[style.content, props.className].join(' ')}>
       {props.children}
@@ -34,7 +34,7 @@ function WauContent(props: BasicProps) {
   )
 }
 
-function WauLayout(props: LayoutProps) {
+function WauLayout (props: LayoutProps) {
   return (
     <Layout {...props} className={[style.layout, props.className].join(' ')}>
       {props.children}

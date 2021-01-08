@@ -4,7 +4,7 @@ import { IBaseMenuRouteAccessBreadcrumb } from '@/components/wau/container/route
 export const routes: IBaseMenuRouteAccessBreadcrumb[] = [
   {
     name: '首页',
-    path: '/',
+    path: '/'
   },
   {
     name: '用户管理',
@@ -12,9 +12,9 @@ export const routes: IBaseMenuRouteAccessBreadcrumb[] = [
     breadcrumb: [
       {
         name: '手动配置面包屑,跳转到首页',
-        path: '/',
-      },
-    ],
+        path: '/'
+      }
+    ]
   },
   {
     name: '关于我们',
@@ -22,10 +22,10 @@ export const routes: IBaseMenuRouteAccessBreadcrumb[] = [
     children: [
       {
         name: '关于我们的子菜单',
-        path: '/about/child',
-      },
-    ],
-  },
+        path: '/about/child'
+      }
+    ]
+  }
 ]
 <%_ } else { _%>
 export {}

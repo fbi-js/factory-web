@@ -15,7 +15,7 @@ interface MainContainerProps {
   children: JSX.Element | JSX.Element[] | string
 }
 
-export function MainContainer(props: Partial<MainContainerProps>) {
+export function MainContainer (props: Partial<MainContainerProps>) {
   return (
     <RouteContext.Provider value={props.routes}>
       <Layout>

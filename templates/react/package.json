@@ -7,7 +7,7 @@
     "dev": "fbi serve <% if (project.isMicro) { %>-p 9001<% } %>",
     "build": "fbi build",
     "lint": "eslint src --ext js,jsx,<% if (project.features.typescript) { %>ts,tsx<% } %> --fix",
-    "format": "prettier -c --write \"./**/*.{js,jsx,<% if (project.features.typescript) { %>ts,tsx,<% } %>md,html,css}\""
+    "format": "prettier-standard --format"
   },
   "dependencies": {
     <%_ if (project.features.admin) { _%>
@@ -32,6 +32,7 @@
     <%_ if (project.features.typescript) { _%>
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "prettier-standard": "^16.4.1",
     <%_ if (project.features.admin) { _%>
     "@types/react-router-dom": "^5.1.7",
     <%_ } _%>
@@ -49,6 +50,22 @@
       "features": <%- JSON.stringify(project.features) %>
     }
   },
+  <%_ if (project.features.typescript) { _%>
+  "eslintConfig": {
+    "extends": [
+      "@fbi-js/react-typescript"
+    ],
+    "rules": {
+      "@typescript-eslint/explicit-function-return-type": "off",
+      "multiline-ternary": "off",
+      "@typescript-eslint/no-floating-promises": "off",
+      "@typescript-eslint/restrict-template-expressions": "off"
+    },
+    "ignorePatterns": [
+      "**/*.d.ts"
+    ]
+  },
+  <%_ } _%>
   "browserslist": [
     "> 1%",
     "last 2 versions",

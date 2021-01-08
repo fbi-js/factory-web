@@ -2,6 +2,8 @@
   "extends": "@fbi-js/tsconfig/react",
   "compilerOptions": {
     "baseUrl": "./",
-    "outDir": "dist"
+    "outDir": "dist",
+    "strictNullChecks": false,
+    "noImplicitAny": false
   }
 }

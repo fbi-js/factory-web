@@ -8,7 +8,7 @@ import {
   MainContainer,
   Options,
   Copyright,
-  Title,
+  Title
 } from '@/components'
 import 'antd/dist/antd.min.css'
 
@@ -16,7 +16,7 @@ const About = LazyLoad(() => import('@/pages/about'))
 const Home = LazyLoad(() => import('@/pages/home'))
 const Users = LazyLoad(() => import('@/pages/users'))
 
-function App() {
+function App () {
   /**
    * 监听路由变化
    * 可以进行鉴权等
@@ -33,11 +33,11 @@ function App() {
       footer={<Copyright />}
     >
       <Switch>
-        <Route exact path="/">
+        <Route exact path='/'>
           {Home}
         </Route>
-        <Route path="/about">{About}</Route>
-        <Route path="/users">{Users}</Route>
+        <Route path='/about'>{About}</Route>
+        <Route path='/users'>{Users}</Route>
       </Switch>
     </MainContainer>
   )
