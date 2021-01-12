@@ -1,26 +1,26 @@
 {
-  "editor.tabSize": 2,
-  "editor.formatOnSave": true,
-  "editor.wordSeparators": "`~!@#$%^&*()=+[{]}\\|;:'\",.<>/?",
   "files.autoSave": "onFocusChange",
+  "editor.tabSize": 2,
+  "editor.wordSeparators": "`~!@#$%^&*()=+[{]}\\|;:'\",.<>/?",
+
+  // code style
+  "editor.defaultFormatter": "numso.prettier-standard-vscode",
   "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
   "typescript.format.insertSpaceBeforeFunctionParenthesis": true,
-  "[javascript]": {
-    "editor.defaultFormatter": "numso.prettier-standard-vscode"
+
+  // prettier
+  "prettier.semi": false,
+  "prettier.singleQuote": true,
+  "prettier.requireConfig": true,
+  "prettier.trailingComma": "none",
+  "prettier.vueIndentScriptAndStyle": true,
+
+  // Vue
+  "[vue]": {
+    "editor.defaultFormatter": "octref.vetur"
   },
-  "[typescript]": {
-    "editor.defaultFormatter": "numso.prettier-standard-vscode"
-  },
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "numso.prettier-standard-vscode"
-  },
-  "[javascriptreact]": {
-    "editor.defaultFormatter": "numso.prettier-standard-vscode"
-  },
-  // vetur
-  "vetur.format.enable": true,
-  "vetur.format.defaultFormatter.js": "vscode-typescript",
-  "vetur.format.defaultFormatter.ts": "vscode-typescript",
   "vetur.format.styleInitialIndent": true,
-  "vetur.format.scriptInitialIndent": true
+  "vetur.format.scriptInitialIndent": true,
+  "vetur.format.defaultFormatter.js": "vscode-typescript",
+  "vetur.format.defaultFormatter.ts": "vscode-typescript"
 }

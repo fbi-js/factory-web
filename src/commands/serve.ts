@@ -65,7 +65,7 @@ export default class CommandServe extends Command {
           url: localUrl
         })
 
-        server.listen(port, host, err => {
+        server.listen(port, host, (err) => {
           if (err) {
             reject(err)
           }

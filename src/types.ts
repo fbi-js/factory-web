@@ -30,8 +30,9 @@ export interface IFactoryPaths {
   assets: string
 }
 
-interface IFactoryFeatures {
-  typescript: string
+export interface IFactoryFeatures {
+  typescript: boolean
+  admin: boolean
 }
 
 export interface IFactoryConfig {

@@ -6,8 +6,7 @@
   "scripts": {
     "dev": "fbi serve <% if (project.isMicro) { %>-p 9001<% } %>",
     "build": "fbi build",
-    "lint": "eslint src --ext js,<% if (project.features.typescript) { %>ts,<% } %>vue --fix",
-    "format": "prettier -c --write \"./**/*.{js,<% if (project.features.typescript) { %>ts,<% } %>md,html,css,vue}\""
+    "format": "fbi format"
   },
   "dependencies": {
     <%_ if (project.isMicro) { _%>
@@ -44,8 +43,11 @@
   "prettier": {
     "semi": false,
     "tabWidth": 2,
+    "endOfLine": "lf",
+    "printWidth": 80,
     "singleQuote": true,
     "trailingComma": "none",
-    "endOfLine": "auto"
+    "arrowParens": "always",
+    "vueIndentScriptAndStyle": true
   }
 }

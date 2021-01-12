@@ -51,7 +51,7 @@ export default class CommandTypesCreate extends Command {
 
     // write the typings file
     const program = ts.createProgram(
-      compileFiles.map(item => resolveApp(item)),
+      compileFiles.map((item) => resolveApp(item)),
       {
         outFile,
         declaration: true,
@@ -73,7 +73,7 @@ export default class CommandTypesCreate extends Command {
       // @ts-ignore
       moduleNames.push(execResults[1])
     }
-    moduleNames.forEach(moduleName => {
+    moduleNames.forEach((moduleName) => {
       const regex = RegExp(`"${moduleName}`, 'g')
       typing = typing.replace(regex, `"${federationName}/${moduleName}`)
     })

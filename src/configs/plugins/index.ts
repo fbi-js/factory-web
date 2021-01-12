@@ -39,7 +39,7 @@ export class AssetJsonPlugin {
             if (this.options.onlyEntryFile && typeof filename === 'string') {
               const hash = data.plugin.childCompilerHash
               const tmp = entryNames.map(
-                n => `${publicPath}${filename.replace('[name]', n).replace('[fullhash]', hash)}`
+                (n) => `${publicPath}${filename.replace('[name]', n).replace('[fullhash]', hash)}`
               )
               result = JSON.stringify(tmp)
             } else {

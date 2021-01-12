@@ -26,8 +26,9 @@ export interface IFactoryPaths {
     img: string;
     assets: string;
 }
-interface IFactoryFeatures {
-    typescript: string;
+export interface IFactoryFeatures {
+    typescript: boolean;
+    admin: boolean;
 }
 export interface IFactoryConfig {
     id: string;
@@ -41,4 +42,3 @@ export interface IFbiConfig {
 }
 export interface IFbiFlagsConfig {
 }
-export {};

@@ -12,8 +12,8 @@ export default class TemplateReact extends BaseClass {
         hint?: undefined;
     } | {
         name: string;
+        value: boolean;
         hint: string;
-        value?: undefined;
     })[];
     constructor(factory: Factory);
     protected gathering(flags: Record<string, any>): Promise<void>;

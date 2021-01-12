@@ -3,6 +3,8 @@ import { Factory } from 'fbi'
 
 import CommandBuild from './commands/build'
 import CommandServe from './commands/serve'
+import CommandLint from './commands/lint'
+import CommandFormat from './commands/format'
 import CommandTypesCreate from './commands/types-create'
 import CommandTypesSync from './commands/types-sync'
 
@@ -21,7 +23,9 @@ export default class FactoryWeb extends Factory {
     new CommandBuild(this),
     new CommandServe(this),
     new CommandTypesCreate(this),
-    new CommandTypesSync(this)
+    new CommandTypesSync(this),
+    new CommandLint(this),
+    new CommandFormat(this)
   ]
 
   templates = [

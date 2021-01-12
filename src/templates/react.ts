@@ -9,7 +9,11 @@ export default class TemplateReact extends BaseClass {
   templates = []
   features = [
     { name: 'typescript', value: true },
-    { name: 'admin', hint: 'antd, axios, basic components(layout, menu, breadcrumb, topbar)' }
+    {
+      name: 'admin',
+      value: true,
+      hint: 'antd, axios, basic components(layout, menu, breadcrumb, topbar)'
+    }
   ]
 
   constructor(public factory: Factory) {
@@ -49,13 +53,13 @@ export default class TemplateReact extends BaseClass {
       const genReadmeFromStr = (folderName: string) => {
         return `${prefix}/${folderName}/README.md`
       }
-      const tsOrJsfileMaps = folders.map(folder => {
+      const tsOrJsfileMaps = folders.map((folder) => {
         return {
           from: genTsOrJsFromStr(isTs, folder),
           to: 'src'
         }
       })
-      const readmeFileMaps = folders.map(folder => {
+      const readmeFileMaps = folders.map((folder) => {
         return {
           from: genReadmeFromStr(folder),
           to: 'src'
