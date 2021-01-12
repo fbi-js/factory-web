@@ -45,7 +45,7 @@ export default class CommandFormat extends Command {
   protected formatWithPrettier(factory: IFactoryConfig) {
     const exts = this.getFileExts(factory)
 
-    return this.exec.command(`npx prettier --write "src/**/*.{${exts.join(',')}}"`, {
+    return this.exec.command(`npx prettier --write src/**/*.{${exts.join(',')}}`, {
       stdio: 'inherit'
     })
   }
