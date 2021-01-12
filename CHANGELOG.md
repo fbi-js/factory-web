@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.8.1](https://github.com/fbi-js/factory-web/compare/v1.8.0...v1.8.1) (2021-01-12)
+
+
+### Bug Fixes
+
+* remove format.ts prettier cmd quote ([aa006e2](https://github.com/fbi-js/factory-web/commit/aa006e241e95003b3546d9290b516be750c4c433))
+
 ## [1.8.0](https://github.com/fbi-js/factory-web/compare/v1.7.1...v1.8.0) (2021-01-12)
 
 
