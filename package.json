@@ -8,7 +8,7 @@
     "templates"
   ],
   "scripts": {
-    "build": "fbi b",
+    "build": "yarn format && fbi b",
     "watch": "fbi w",
     "lint": "eslint src",
     "format": "prettier --write \"src/**/*.{ts,js,json}\" && eslint --ext ts src --fix"
@@ -22,7 +22,7 @@
   },
   "lint-staged": {
     "src/**/*.{ts,js,json}": [
-      "prettier --write"
+      "yarn format"
     ]
   },
   "dependencies": {

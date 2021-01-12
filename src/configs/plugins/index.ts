@@ -8,11 +8,11 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 export class AssetJsonPlugin {
   options: Record<string, any>
 
-  constructor(options: { onlyEntryFile: boolean; input: string; output: string }) {
+  constructor (options: { onlyEntryFile: boolean; input: string; output: string }) {
     this.options = options
   }
 
-  apply(compiler: Compiler) {
+  apply (compiler: Compiler) {
     let result: string
 
     compiler.hooks.compilation.tap('AssetJsonPlugin', (compilation: any) => {

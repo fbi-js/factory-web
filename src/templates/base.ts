@@ -15,11 +15,11 @@ export default class TemplateWebBase extends Template {
   renderFileTypes = 'js,jsx,ts,tsx,css,scss,sass,less,md,vue'
   renderFiles = ['package.json', 'webpack.config.js', 'README.md']
 
-  constructor(public factory: Factory) {
+  constructor (public factory: Factory) {
     super(factory)
   }
 
-  protected async gathering(_flags: Record<string, any>) {
+  protected async gathering (_flags: Record<string, any>) {
     const defaultName = this.data.project?.name ?? 'project-demo'
     const isMicro = this.id.startsWith('micro-')
 
@@ -32,10 +32,10 @@ export default class TemplateWebBase extends Template {
               type: 'input',
               name: 'orgName',
               message: 'Organization name',
-              initial() {
+              initial () {
                 return ''
               },
-              validate(value: any) {
+              validate (value: any) {
                 const name = formatName(value)
                 return (name && true) || 'please input a valid organization name'
               }
@@ -46,10 +46,10 @@ export default class TemplateWebBase extends Template {
         type: 'input',
         name: 'name',
         message: 'Project name',
-        initial() {
+        initial () {
           return defaultName
         },
-        validate(value: any) {
+        validate (value: any) {
           const name = formatName(value)
           return (name && true) || 'please input a valid project name'
         }
@@ -58,7 +58,7 @@ export default class TemplateWebBase extends Template {
         type: 'input',
         name: 'description',
         message: 'Project description',
-        initial({ state }: any) {
+        initial ({ state }: any) {
           return `${state.answers.name} description`
         }
       },
@@ -70,7 +70,7 @@ export default class TemplateWebBase extends Template {
               message: 'Choose features for your project:',
               hint: '(Use <space> to select, <return> to submit)',
               choices: this.features,
-              result(names: string[]): any {
+              result (names: string[]): any {
                 return (this as any).map(names)
               }
             }
@@ -79,7 +79,7 @@ export default class TemplateWebBase extends Template {
     ] as any)
   }
 
-  private getCopyFiles() {
+  private getCopyFiles () {
     const isTs = this.data.project?.features?.typescript
     const srcFolder = `src${isTs ? '-ts' : ''}`
     return [
@@ -92,7 +92,7 @@ export default class TemplateWebBase extends Template {
     ].filter(Boolean)
   }
 
-  private getRenderFiles() {
+  private getRenderFiles () {
     const isMicro = this.id.startsWith('micro-')
     const isTs = this.data.project?.features?.typescript
     const srcFolder = `src${isTs ? '-ts' : ''}`
@@ -106,7 +106,7 @@ export default class TemplateWebBase extends Template {
     ].filter(Boolean)
   }
 
-  protected async writing() {
+  protected async writing () {
     const debug = !!this.context.get('debug')
     this.files = {
       copy: this.getCopyFiles(),
@@ -119,7 +119,7 @@ export default class TemplateWebBase extends Template {
     }
   }
 
-  protected async installing(flags: Record<string, any>) {
+  protected async installing (flags: Record<string, any>) {
     const { project } = this.data
     this.spinner.succeed(`Created project ${this.style.cyan.bold(project.name)}`)
 
@@ -136,7 +136,7 @@ export default class TemplateWebBase extends Template {
     }
   }
 
-  protected async ending() {
+  protected async ending () {
     const { project } = this.data
     const projectName = this.style.cyan.bold(project.name)
     if (this.errors) {

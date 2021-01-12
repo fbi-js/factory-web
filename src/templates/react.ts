@@ -16,11 +16,11 @@ export default class TemplateReact extends BaseClass {
     }
   ]
 
-  constructor(public factory: Factory) {
+  constructor (public factory: Factory) {
     super(factory)
   }
 
-  protected async gathering(flags: Record<string, any>) {
+  protected async gathering (flags: Record<string, any>) {
     await super.gathering(flags)
 
     const { factory, project } = this.data
@@ -31,7 +31,7 @@ export default class TemplateReact extends BaseClass {
     )
   }
 
-  protected async writing() {
+  protected async writing () {
     await super.writing()
     const isMicro = this.id.startsWith('micro-')
     const isTs = this.data.project?.features?.typescript

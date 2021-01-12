@@ -18,11 +18,11 @@ export default class TemplateMiniProgram extends BaseClass {
     'tsconfig.json'
   ]
 
-  constructor(public factory: Factory) {
+  constructor (public factory: Factory) {
     super(factory)
   }
 
-  protected async gathering(flags: Record<string, any>) {
+  protected async gathering (flags: Record<string, any>) {
     await super.gathering(flags)
 
     const { factory, project } = this.data
@@ -33,7 +33,7 @@ export default class TemplateMiniProgram extends BaseClass {
     )
   }
 
-  protected async writing() {
+  protected async writing () {
     await super.writing()
   }
 }

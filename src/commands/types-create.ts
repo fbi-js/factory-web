@@ -7,11 +7,11 @@ export default class CommandTypesCreate extends Command {
   args = ''
   flags = []
 
-  constructor(public factory: Factory) {
+  constructor (public factory: Factory) {
     super()
   }
 
-  public async run(flags: any, unknown: any) {
+  public async run (flags: any, unknown: any) {
     this.debug(
       `Factory: (${this.factory.id})`,
       'from command',
@@ -32,7 +32,7 @@ export default class CommandTypesCreate extends Command {
     }
   }
 
-  protected create() {
+  protected create () {
     const ts = require('typescript')
     const fs = require('fs-extra')
     const path = require('path')

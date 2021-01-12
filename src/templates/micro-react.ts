@@ -9,11 +9,11 @@ export default class TemplateMicroReact extends TemplateReact {
   templates = []
   features = [{ name: 'typescript', value: true }]
 
-  constructor(public factory: Factory) {
+  constructor (public factory: Factory) {
     super(factory)
   }
 
-  protected async gathering(flags: Record<string, any>) {
+  protected async gathering (flags: Record<string, any>) {
     await super.gathering(flags)
 
     this.data.project = {
