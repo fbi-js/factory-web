@@ -1,4 +1,4 @@
-import React<% if (project.features.admin) { %>, { useEffect } <% }%>from 'react'
+import React<% if (project.features.admin) { %>, { useEffect }<% }%> from 'react'
 import './app.css'
 <%_ if (project.features.admin) { _%>
 import { Switch, Route, useLocation } from 'react-router-dom'
