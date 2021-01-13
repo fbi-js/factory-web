@@ -24,9 +24,9 @@
   },
   "devDependencies": {
     <%_ if (project.features.typescript) { _%>
-    "@fbi-js/factory-web": "^<%= factoryVersion %>",
+    "<%= factory.id %>": "^<%= factoryVersion %>",
     <%_ } else { _%>
-    "@fbi-js/factory-web": "^<%= factoryVersion %>"
+    "<%= factory.id %>": "^<%= factoryVersion %>"
     <%_ } _%>
     <%_ if (project.features.typescript) { _%>
     "@types/react": "^17.0.0",
