@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.8.3](https://github.com/fbi-js/factory-web/compare/v1.8.2...v1.8.3) (2021-01-13)
+
+
+### Bug Fixes
+
+* **template:** use dynamic factory id in devDependencies ([1d5a902](https://github.com/fbi-js/factory-web/commit/1d5a902db58f702736dc109f401254ea00211873))
+
 ### [1.8.2](https://github.com/fbi-js/factory-web/compare/v1.8.1...v1.8.2) (2021-01-12)
 
 
