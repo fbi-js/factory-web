@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.8.4](https://github.com/fbi-js/factory-web/compare/v1.8.3...v1.8.4) (2021-01-13)
+
+
+### Bug Fixes
+
+* **template:** missing white space at templates/react/src-ts/App.tsx L1 ([fc97644](https://github.com/fbi-js/factory-web/commit/fc9764400f515d8ab769fc73c79a116fe74c0a96))
+
 ### [1.8.3](https://github.com/fbi-js/factory-web/compare/v1.8.2...v1.8.3) (2021-01-13)
 
 
