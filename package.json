@@ -11,7 +11,7 @@
     "build": "yarn format && fbi b",
     "watch": "fbi w",
     "lint": "eslint src",
-    "format": "prettier --write \"src/**/*.{ts,js,json}\" && eslint --ext ts src --fix"
+    "format": "npx prettier \"src\" --write --ignore-unknown --loglevel warn && eslint --ext ts src --fix"
   },
   "keywords": [],
   "author": "fbi",

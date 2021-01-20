@@ -7,7 +7,7 @@ export function subMenuRender (item: IBaseMenuRouteAccessBreadcrumb) {
     if (item.children) {
       return (
         <Menu.SubMenu key={item.path} title={item.name} icon={item.icon}>
-          {item?.children?.map(it => subMenuRender(it))}
+          {item?.children?.map((it) => subMenuRender(it))}
         </Menu.SubMenu>
       )
     } else {

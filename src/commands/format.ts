@@ -32,8 +32,9 @@ export default class CommandFormat extends Command {
     const factory: IFactoryConfig = this.context.get('config.factory')
 
     try {
-      await this.formatWithPrettier(factory)
+      await this.formatWithPrettier()
       await this.formatWithEslint(factory)
+      this.logEnd('Formatted successfully')
     } catch (err) {
       const msg = this.catchFatalErrors(err)
       if (msg) {
@@ -42,10 +43,10 @@ export default class CommandFormat extends Command {
     }
   }
 
-  protected formatWithPrettier (factory: IFactoryConfig) {
-    const exts = this.getFileExts(factory)
-
-    return this.exec.command(`npx prettier --write "src/**/*.{${exts.join(',')}}"`, {
+  protected formatWithPrettier () {
+    const cmd = 'npx prettier "src" --write --ignore-unknown --loglevel warn'
+    this.logItem(cmd)
+    return this.exec.command(cmd, {
       stdio: 'inherit',
       shell: true
     })
@@ -53,15 +54,16 @@ export default class CommandFormat extends Command {
 
   protected formatWithEslint (config: IFactoryConfig) {
     const exts = this.getFileExts(config)
-
-    return this.exec.command(`npx eslint --ext ${exts.join(',')} src --fix`, {
+    const cmd = `npx eslint --ext ${exts.join(',')} src --fix`
+    this.logItem(cmd)
+    return this.exec.command(cmd, {
       stdio: 'inherit'
     })
   }
 
   protected getFileExts (factory: IFactoryConfig) {
     return ['js', 'jsx']
-      .concat(factory.features?.typescript ? ['ts,tsx'] : [])
+      .concat(factory.features?.typescript ? ['ts', 'tsx'] : [])
       .concat(factory.template === 'vue' ? ['vue'] : [])
   }
 

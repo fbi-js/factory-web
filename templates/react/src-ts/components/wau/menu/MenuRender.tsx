@@ -19,8 +19,8 @@ export default function MenuRender (
   const [openKey, setOpenKey] = useState([])
   const [rootSubmenuKeys, setRootSubmenuKeys] = useState([])
   const onOpenChange = useCallback(
-    openKeys => {
-      const latestOpenKey = openKeys.find(key => !openKey.includes(key))
+    (openKeys) => {
+      const latestOpenKey = openKeys.find((key) => !openKey.includes(key))
       if (!rootSubmenuKeys.includes(latestOpenKey)) {
         setOpenKey(openKeys)
       } else {
@@ -39,12 +39,12 @@ export default function MenuRender (
         value: 'path',
         label: 'name'
       })
-      onOpenChange(routePath.map(item => item.path))
+      onOpenChange(routePath.map((item) => item.path))
     }
   }, [lastPath, location.pathname, props.routes, onOpenChange])
   useEffect(() => {
     setRootSubmenuKeys(
-      baseRoutes.filter(item => item.path).map(item => item.path)
+      baseRoutes.filter((item) => item.path).map((item) => item.path)
     )
   }, [baseRoutes])
   return (
@@ -53,7 +53,7 @@ export default function MenuRender (
       onOpenChange={onOpenChange}
       openKeys={openKey}
       mode='inline'
-      onClick={info => {
+      onClick={(info) => {
         history.push(String(info.key))
         setSelectKey([info.key.toString()])
       }}
