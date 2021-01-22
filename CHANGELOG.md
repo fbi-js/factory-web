@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.9.0](https://github.com/fbi-js/factory-web/compare/v1.8.6...v1.9.0) (2021-01-22)
+
+
+### Features
+
+* **webpack:** update config deps ([2b94fc0](https://github.com/fbi-js/factory-web/commit/2b94fc067e020d0d966485a8246bb3235f77e563))
+
 ### [1.8.6](https://github.com/fbi-js/factory-web/compare/v1.8.5...v1.8.6) (2021-01-20)
 
 
