@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.9.2](https://github.com/fbi-js/factory-web/compare/v1.9.1...v1.9.2) (2021-01-27)
+
+
+### Bug Fixes
+
+* **react:** remove fast-refresh polyfill ([a5bfed0](https://github.com/fbi-js/factory-web/commit/a5bfed0b5c485bcb0721b9f3b46f2ded931cf764))
+
 ### [1.9.1](https://github.com/fbi-js/factory-web/compare/v1.9.0...v1.9.1) (2021-01-27)
 
 
