@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.9.1](https://github.com/fbi-js/factory-web/compare/v1.9.0...v1.9.1) (2021-01-27)
+
+
+### Bug Fixes
+
+* remove stylelint option 'configFile';failed to add plugins ([60bf382](https://github.com/fbi-js/factory-web/commit/60bf38237ac4659cf003f0d96241c3a6d0b33b25))
+
 ## [1.9.0](https://github.com/fbi-js/factory-web/compare/v1.8.6...v1.9.0) (2021-01-22)
 
 

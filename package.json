@@ -1,9 +1,12 @@
 {
   "name": "@fbi-js/factory-web",
-  "version": "1.9.0",
+  "version": "1.9.1",
   "description": "factory for web application development",
   "main": "lib/index.js",
-  "files": ["lib", "templates"],
+  "files": [
+    "lib",
+    "templates"
+  ],
   "scripts": {
     "build": "yarn format && fbi b",
     "watch": "fbi w",
@@ -18,7 +21,9 @@
     }
   },
   "lint-staged": {
-    "src/**/*.{ts,js,json}": ["yarn format"]
+    "src/**/*.{ts,js,json}": [
+      "yarn format"
+    ]
   },
   "dependencies": {
     "@fbi-js/eslint-config-react-typescript": "^1.2.1",
@@ -61,7 +66,9 @@
     "url": "https://github.com/fbi-js/factory-web/issues"
   },
   "eslintConfig": {
-    "extends": ["@fbi-js/typescript"]
+    "extends": [
+      "@fbi-js/typescript"
+    ]
   },
   "fbi": {
     "factory": {
