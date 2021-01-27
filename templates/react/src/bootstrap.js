@@ -1,3 +1,4 @@
+import './fast-refresh-fix'
 import React from 'react'
 import ReactDOM from 'react-dom'
 <%_ if (project.features.admin) { _%>

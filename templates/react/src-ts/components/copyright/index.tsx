@@ -4,7 +4,7 @@ import style from './index.module.less'
 
 export default function CopyRightBox () {
   return (
-    <div className={style.copyright_box}>
+    <div className={style.copyrightBox}>
       <div>
         Copyright
         <CopyrightOutlined style={{ margin: '0 5px' }} />

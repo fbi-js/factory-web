@@ -19,7 +19,7 @@ export function PageContainer (props: Partial<PageContainerProps>) {
         routes={routes}
         pageHeaderProps={props.pageHeaderProps}
       />
-      <Card className={style.page_content}>{props.children}</Card>
+      <Card className={style.pageContent}>{props.children}</Card>
     </div>
   )
 }
