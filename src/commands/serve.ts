@@ -14,7 +14,11 @@ export default class CommandServe extends Command {
   description = 'launch the development server'
   args = ''
   flags = [
-    ['-m, --mode <mode>', 'specify env mode(development|production|testing)', 'development'],
+    [
+      '-m, --mode <mode>',
+      'specify env mode(development|production|testing)',
+      'development'
+    ],
     ['-p, --port <port>', 'webapck dev-serve port', PORT],
     ['--micro-mode <mode>', '""|fuse', '']
   ]

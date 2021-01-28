@@ -9,7 +9,10 @@ import { paths, factoryConfigs } from '../constant/paths'
  * @param type template file name, can be get "micro-main" | "micro-react" | "micro-vue" | "react" | "vue"
  * @param data
  */
-export const getTemplateWebpackConfig = (type: TemplateTypes, data: Record<string, any>) => {
+export const getTemplateWebpackConfig = (
+  type: TemplateTypes,
+  data: Record<string, any>
+) => {
   const { getConfig } = require(`./${type}`)
   return getConfig(data)
 }

@@ -11,7 +11,14 @@ export default class TemplateWebBase extends Template {
   renderer = ejs.render
   features: any[] = []
   copyFileTypes = 'jpg,png,gif,svg,mp4,mp3,webm,ogg,wav,flac,aac'
-  copyFiles = ['.gitignore', '.editorconfig', '.prettierignore', 'public/*', '.vscode/*']
+  copyFiles = [
+    '.gitignore',
+    '.editorconfig',
+    '.prettierignore',
+    'public/*',
+    '.vscode/*'
+  ]
+
   renderFileTypes = 'js,jsx,ts,tsx,css,scss,sass,less,md,vue'
   renderFiles = ['package.json', 'webpack.config.js', 'README.md']
 
@@ -19,64 +26,77 @@ export default class TemplateWebBase extends Template {
     super(factory)
   }
 
-  protected async gathering (_flags: Record<string, any>) {
-    const defaultName = this.data.project?.name ?? 'project-demo'
+  private get enterOrgName () {
     const isMicro = this.id.startsWith('micro-')
+    const orgName = {
+      type: 'input',
+      name: 'orgName',
+      message: 'Organization name',
+      initial () {
+        return ''
+      },
+      validate (value: any) {
+        const name = formatName(value)
+        return (name && true) || 'please input a valid organization name'
+      }
+    }
+    return isMicro ? [orgName] : []
+  }
 
+  private get enterProjectName () {
+    const defaultName = this.data.project?.name ?? 'project-demo'
+    return {
+      type: 'input',
+      name: 'name',
+      message: 'Project name',
+      initial () {
+        return defaultName
+      },
+      validate (value: any) {
+        const name = formatName(value)
+        return (name && true) || 'please input a valid project name'
+      }
+    }
+  }
+
+  private get enterProjectDescription () {
+    return {
+      type: 'input',
+      name: 'description',
+      message: 'Project description',
+      initial ({ state }: any) {
+        return `${state.answers.name} description`
+      }
+    }
+  }
+
+  private get selectFeatures () {
+    const hasFeatures = this.features.length > 0
+    const selectFeatures = {
+      type: 'MultiSelect',
+      name: 'features',
+      message: 'Choose features for your project:',
+      hint: '(Use <space> to select, <return> to submit)',
+      choices: this.features,
+      result (names: string[]): any {
+        return (this as any).map(names)
+      }
+    }
+    return hasFeatures ? [selectFeatures] : []
+  }
+
+  private getPromptOptions () {
+    return [
+      this.enterOrgName,
+      this.enterProjectName,
+      this.enterProjectDescription,
+      this.selectFeatures
+    ]
+  }
+
+  protected async gathering (_flags: Record<string, any>) {
     this.data.factoryVersion = version
-
-    this.data.project = await this.prompt([
-      ...(isMicro
-        ? [
-            {
-              type: 'input',
-              name: 'orgName',
-              message: 'Organization name',
-              initial () {
-                return ''
-              },
-              validate (value: any) {
-                const name = formatName(value)
-                return (name && true) || 'please input a valid organization name'
-              }
-            }
-          ]
-        : []),
-      {
-        type: 'input',
-        name: 'name',
-        message: 'Project name',
-        initial () {
-          return defaultName
-        },
-        validate (value: any) {
-          const name = formatName(value)
-          return (name && true) || 'please input a valid project name'
-        }
-      },
-      {
-        type: 'input',
-        name: 'description',
-        message: 'Project description',
-        initial ({ state }: any) {
-          return `${state.answers.name} description`
-        }
-      },
-      ...(this.features.length > 0
-        ? [
-            {
-              type: 'MultiSelect',
-              name: 'features',
-              message: 'Choose features for your project:',
-              hint: '(Use <space> to select, <return> to submit)',
-              choices: this.features,
-              result (names: string[]): any {
-                return (this as any).map(names)
-              }
-            }
-          ]
-        : [])
-    ] as any)
+    this.data.project = await this.prompt(this.getPromptOptions() as any)
   }
 
   private getCopyFiles () {
@@ -121,16 +141,25 @@ export default class TemplateWebBase extends Template {
 
   protected async installing (flags: Record<string, any>) {
     const { project } = this.data
-    this.spinner.succeed(`Created project ${this.style.cyan.bold(project.name)}`)
+    this.spinner.succeed(
+      `Created project ${this.style.cyan.bold(project.name)}`
+    )
 
-    const { dependencies, devDependencies } = require(join(this.targetDir, 'package.json'))
+    const { dependencies, devDependencies } = require(join(
+      this.targetDir,
+      'package.json'
+    ))
     if (isValidObject(dependencies) || isValidObject(devDependencies)) {
-      const installSpinner = this.createSpinner('Installing dependencies...').start()
+      const installSpinner = this.createSpinner(
+        'Installing dependencies...'
+      ).start()
       try {
         await this.installDeps(this.targetDir, flags.packageManager, false)
         installSpinner.succeed('Installed dependencies')
       } catch (err) {
-        installSpinner.fail('Failed to install dependencies. You can install them manually.')
+        installSpinner.fail(
+          'Failed to install dependencies. You can install them manually.'
+        )
         this.error(err)
       }
     }
@@ -153,7 +182,9 @@ Next steps:`)
     }
 
     console.log(`
-  $ ${this.style.cyan('npm run dev')} ${this.style.dim('launch the development server')}`)
+  $ ${this.style.cyan('npm run dev')} ${this.style.dim(
+      'launch the development server'
+    )}`)
 
     console.log(`
   $ ${this.style.cyan('npm run build')} ${this.style.dim('build project')}

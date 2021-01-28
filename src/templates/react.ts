@@ -49,7 +49,14 @@ export default class TemplateReact extends BaseClass {
       const genTsOrJsFromStr = (isTs: boolean, folderName: string) => {
         return `${prefix}/${folderName}/index.${isTs ? 'ts' : 'js'}`
       }
-      const folders = ['apis', 'components', 'helpers', 'pages', 'routes', 'typings']
+      const folders = [
+        'apis',
+        'components',
+        'helpers',
+        'pages',
+        'routes',
+        'typings'
+      ]
       const genReadmeFromStr = (folderName: string) => {
         return `${prefix}/${folderName}/README.md`
       }

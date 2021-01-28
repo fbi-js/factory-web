@@ -11,6 +11,11 @@ export default class TemplateWebBase extends Template {
     renderFileTypes: string;
     renderFiles: string[];
     constructor(factory: Factory);
+    private get enterOrgName();
+    private get enterProjectName();
+    private get enterProjectDescription();
+    private get selectFeatures();
+    private getPromptOptions;
     protected gathering(_flags: Record<string, any>): Promise<void>;
     private getCopyFiles;
     private getRenderFiles;

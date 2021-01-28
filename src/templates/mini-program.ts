@@ -8,7 +8,14 @@ export default class TemplateMiniProgram extends BaseClass {
   description = 'template for mini-program application by use taro'
   templates = []
   features = []
-  copyFiles = ['.gitignore', '.editorconfig', '.prettierignore', 'babel.config.js', 'config/*']
+  copyFiles = [
+    '.gitignore',
+    '.editorconfig',
+    '.prettierignore',
+    'babel.config.js',
+    'config/*'
+  ]
+
   renderFiles = [
     'babel.config.js',
     'global.d.ts',
@@ -17,6 +24,7 @@ export default class TemplateMiniProgram extends BaseClass {
     'README.md',
     'tsconfig.json'
   ]
+
   renderFileTypes = 'js,jsx,ts,tsx,css,scss,sass,less,md,vue,html'
 
   constructor (public factory: Factory) {

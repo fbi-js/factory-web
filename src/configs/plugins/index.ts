@@ -8,7 +8,11 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 export class AssetJsonPlugin {
   options: Record<string, any>
 
-  constructor (options: { onlyEntryFile: boolean; input: string; output: string }) {
+  constructor (options: {
+    onlyEntryFile: boolean
+    input: string
+    output: string
+  }) {
     this.options = options
   }
 
@@ -24,7 +28,10 @@ export class AssetJsonPlugin {
           switch (typeof compiler.options.entry) {
             case 'string':
               entryNames.push(
-                basename(compiler.options.entry).replace(extname(compiler.options.entry), '')
+                basename(compiler.options.entry).replace(
+                  extname(compiler.options.entry),
+                  ''
+                )
               )
               break
             case 'object':
@@ -39,7 +46,10 @@ export class AssetJsonPlugin {
             if (this.options.onlyEntryFile && typeof filename === 'string') {
               const hash = data.plugin.childCompilerHash
               const tmp = entryNames.map(
-                (n) => `${publicPath}${filename.replace('[name]', n).replace('[fullhash]', hash)}`
+                (n) =>
+                  `${publicPath}${filename
+                    .replace('[name]', n)
+                    .replace('[fullhash]', hash)}`
               )
               result = JSON.stringify(tmp)
             } else {

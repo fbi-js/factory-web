@@ -21,5 +21,8 @@ export const resolveWebpackConfig = async (
   userConfig = resolveUserConfig(userConfig, typeConfig)
 
   // merge config
-  return webpackMerge.mergeWithRules(defaultOptions.mergeRules)(typeConfig, userConfig)
+  return webpackMerge.mergeWithRules(defaultOptions.mergeRules)(
+    typeConfig,
+    userConfig
+  )
 }

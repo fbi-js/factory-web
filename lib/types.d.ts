@@ -1,6 +1,5 @@
 import { Configuration } from 'webpack';
 import { Configuration as DevServerConfiguration } from 'webpack-dev-server';
-export declare type TemplateTypes = 'micro-main' | 'micro-react' | 'micro-vue' | 'react' | 'vue';
 export interface IConfigOption {
     title: string;
     port?: number;
@@ -33,7 +32,7 @@ export interface IFactoryFeatures {
 export interface IFactoryConfig {
     id: string;
     version: string;
-    template: TemplateTypes;
+    template: string;
     features: IFactoryFeatures;
 }
 export interface IFbiConfig {

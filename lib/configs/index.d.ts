@@ -1,3 +1,2 @@
 import { Configuration } from 'webpack';
-import { TemplateTypes } from '../types';
-export declare const resolveWebpackConfig: (type: TemplateTypes, data: Record<string, any>) => Promise<Configuration>;
+export declare const resolveWebpackConfig: (type: any, data: Record<string, any>) => Promise<Configuration>;
