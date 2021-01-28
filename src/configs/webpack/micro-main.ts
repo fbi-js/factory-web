@@ -1,5 +1,4 @@
 import { join } from 'path'
-import { merge } from '@fbi-js/webpack-config-base'
 import config from '@fbi-js/webpack-config-base'
 
 export const getConfig = (options: Record<string, any>) => {
@@ -12,11 +11,9 @@ export const getConfig = (options: Record<string, any>) => {
   const orgName = nameArr[0]
   const projectName = nameArr[1]
 
-  return merge(
-    config({
-      options
-    }),
-    {
+  return config({
+    options,
+    webpackConfig: {
       output: {
         libraryTarget: 'system',
         devtoolNamespace: `${orgName}_${projectName}`
@@ -32,5 +29,5 @@ export const getConfig = (options: Record<string, any>) => {
       },
       externals: ['single-spa', new RegExp(`^@${orgName}/`)]
     }
-  )
+  })
 }

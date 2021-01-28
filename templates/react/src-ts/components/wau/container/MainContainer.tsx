@@ -28,7 +28,7 @@ export function MainContainer (props: Partial<MainContainerProps>) {
           <Sider width={256}>
             <AdminMenu routes={props.routes} />
           </Sider>
-          <Content className={style.app_container}>
+          <Content className={style.appContainer}>
             {props.children}
             <Footer>{props.footer}</Footer>
           </Content>

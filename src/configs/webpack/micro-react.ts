@@ -1,13 +1,10 @@
-import { merge } from '@fbi-js/webpack-config-base'
 import config from '@fbi-js/webpack-config-react'
 import { AssetJsonPlugin } from '../plugins'
 
 export const getConfig = (options: Record<string, any>) => {
-  return merge(
-    config({
-      options
-    }),
-    {
+  return config({
+    options,
+    webpackConfig: {
       output: {
         libraryTarget: 'umd'
       },
@@ -19,5 +16,5 @@ export const getConfig = (options: Record<string, any>) => {
         })
       ]
     }
-  )
+  })
 }

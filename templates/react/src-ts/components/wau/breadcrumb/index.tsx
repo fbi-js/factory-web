@@ -57,20 +57,22 @@ export default function WauBreadcrumb (props: Partial<WauBreadcrumbProps>) {
         <Breadcrumb>
           {breadcrumb.map((item, index) => (
             <Breadcrumb.Item key={index}>
-              {!item.children?.length && item.path ? (
-                <span
-                  style={{ cursor: 'pointer' }}
-                  onClick={() => {
-                    const redirectPath =
+              {!item.children?.length && item.path
+                ? (
+                  <span
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => {
+                      const redirectPath =
                       typeof item.path === 'string' ? item.path : item.path()
-                    history.push(String(redirectPath))
-                  }}
-                >
-                  {item.name}
-                </span>
-              ) : (
-                item.name
-              )}
+                      history.push(String(redirectPath))
+                    }}
+                  >
+                    {item.name}
+                  </span>
+                  )
+                : (
+                    item.name
+                  )}
             </Breadcrumb.Item>
           ))}
           <Breadcrumb.Item>{lastItem.name}</Breadcrumb.Item>

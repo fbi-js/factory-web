@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.9.2](https://github.com/fbi-js/factory-web/compare/v1.9.1...v1.9.2) (2021-01-27)
+
+
+### Bug Fixes
+
+* **react:** remove fast-refresh polyfill ([a5bfed0](https://github.com/fbi-js/factory-web/commit/a5bfed0b5c485bcb0721b9f3b46f2ded931cf764))
+
+### [1.9.1](https://github.com/fbi-js/factory-web/compare/v1.9.0...v1.9.1) (2021-01-27)
+
+
+### Bug Fixes
+
+* remove stylelint option 'configFile';failed to add plugins ([60bf382](https://github.com/fbi-js/factory-web/commit/60bf38237ac4659cf003f0d96241c3a6d0b33b25))
+
+## [1.9.0](https://github.com/fbi-js/factory-web/compare/v1.8.6...v1.9.0) (2021-01-22)
+
+
+### Features
+
+* **webpack:** update config deps ([2b94fc0](https://github.com/fbi-js/factory-web/commit/2b94fc067e020d0d966485a8246bb3235f77e563))
+
+### [1.8.6](https://github.com/fbi-js/factory-web/compare/v1.8.5...v1.8.6) (2021-01-20)
+
+
+### Bug Fixes
+
+* **format:** prettier errors ([291b358](https://github.com/fbi-js/factory-web/commit/291b3585f6f579133b02caf50167de26491230f5))
+
+### [1.8.5](https://github.com/fbi-js/factory-web/compare/v1.8.4...v1.8.5) (2021-01-20)
+
 ### [1.8.4](https://github.com/fbi-js/factory-web/compare/v1.8.3...v1.8.4) (2021-01-13)
 
 

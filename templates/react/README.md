@@ -9,7 +9,7 @@
 - Install Dependencies
 
   ```bash
-  yarn # or npm install
+  yarn
   ```
 
 - Start Dev Server
@@ -22,4 +22,10 @@
 
   ```bash
   yarn build
+  ```
+
+- Format code
+
+  ```bash
+  yarn format
   ```

@@ -1,5 +1,5 @@
 import { Configuration } from 'webpack'
-import { merge } from '@fbi-js/webpack-config-base'
+import { webpackMerge, defaultOptions } from '@fbi-js/webpack-config-base'
 
 import { TemplateTypes } from '../types'
 import {
@@ -21,5 +21,5 @@ export const resolveWebpackConfig = async (
   userConfig = resolveUserConfig(userConfig, typeConfig)
 
   // merge config
-  return merge(typeConfig, userConfig)
+  return webpackMerge.mergeWithRules(defaultOptions.mergeRules)(typeConfig, userConfig)
 }

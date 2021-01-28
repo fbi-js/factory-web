@@ -4,14 +4,14 @@
   "description": "<%= project.description %>",
   "private": true,
   "scripts": {
-    "dev": "fbi serve <% if (project.isMicro) { %>-p 9001<% } %>",
+    "dev": "fbi serve<% if (project.isMicro) { %> -p 9001<% } %>",
     "build": "fbi build",
     "format": "fbi format"
   },
   "dependencies": {
     <%_ if (project.features.admin) { _%>
-    "@ant-design/icons": "^4.3.0",
-    "antd": "^4.9.4",
+    "@ant-design/icons": "^4.4.0",
+    "antd": "^4.11.2",
     "axios": "^0.21.1",
     "react-router-dom": "^5.2.0",
     <%_ } _%>
@@ -57,6 +57,9 @@
     "extends": [
       "@fbi-js/react<%_ if (project.features.typescript) { _%>-typescript<%_ } _%>"
     ]
+  },
+  "stylelint": {
+    "extends": "@fbi-js/stylelint-config"
   },
   "prettier": {
     "semi": false,
