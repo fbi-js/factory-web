@@ -20,11 +20,11 @@ export default class CommandBuild extends Command {
     ['--micro-mode <mode>', '""|fuse', '']
   ]
 
-  constructor (public factory: Factory) {
+  constructor(public factory: Factory) {
     super()
   }
 
-  public async run (flags: any, unknown: any) {
+  public async run(flags: any, unknown: any) {
     process.env.NODE_ENV = flags.mode ?? 'production'
     process.env.MICRO_MODE = flags.microMode ?? ''
 
@@ -58,7 +58,7 @@ export default class CommandBuild extends Command {
     }
   }
 
-  protected build (config: Configuration) {
+  protected build(config: Configuration) {
     const compiler = webpack(config)
 
     return new Promise((resolve, reject) => {

@@ -26,6 +26,7 @@
     ]
   },
   "dependencies": {
+    "@babel/core": "^7.12.10",
     "@fbi-js/eslint-config-react-typescript": "^1.2.1",
     "@fbi-js/eslint-config-vue-typescript": "^1.2.1",
     "@fbi-js/stylelint-config": "^1.2.1",
@@ -33,14 +34,13 @@
     "@fbi-js/webpack-config-react": "^1.3.3",
     "@fbi-js/webpack-config-vue": "^1.3.3",
     "ejs": "^3.1.5",
-    "fbi": "^4.3.4",
+    "eslint": "^7.18.0",
+    "fbi": "file:../../fbi",
     "node-fetch": "^2.6.1",
     "prettier": "^2.2.1",
+    "stylelint": "^13.9.0",
     "webpack": "^5.18.0",
-    "webpack-dev-server": "4.0.0-beta.0",
-    "@babel/core": "^7.12.10",
-    "eslint": "^7.18.0",
-    "stylelint": "^13.9.0"
+    "webpack-dev-server": "4.0.0-beta.0"
   },
   "devDependencies": {
     "@fbi-js/factory-factory": "^1.2.2",
@@ -68,7 +68,10 @@
   "eslintConfig": {
     "extends": [
       "@fbi-js/typescript"
-    ]
+    ],
+    "rules": {
+      "space-before-function-paren": 0
+    }
   },
   "fbi": {
     "factory": {

@@ -8,11 +8,11 @@ export default class TemplateMicroVue extends TemplateVue {
   description = 'template for Micro-fontends vue application'
   templates = []
 
-  constructor (public factory: Factory) {
+  constructor(public factory: Factory) {
     super(factory)
   }
 
-  protected async gathering (flags: Record<string, any>) {
+  protected async gathering(flags: Record<string, any>) {
     await super.gathering(flags)
 
     this.data.project = {

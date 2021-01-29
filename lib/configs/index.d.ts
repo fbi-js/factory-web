@@ -1,2 +1,2 @@
 import { Configuration } from 'webpack';
-export declare const resolveWebpackConfig: (type: any, data: Record<string, any>) => Promise<Configuration>;
+export declare const resolveWebpackConfig: (type: string, data: Record<string, any>) => Promise<Configuration>;

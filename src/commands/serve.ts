@@ -23,11 +23,11 @@ export default class CommandServe extends Command {
     ['--micro-mode <mode>', '""|fuse', '']
   ]
 
-  constructor (public factory: Factory) {
+  constructor(public factory: Factory) {
     super()
   }
 
-  public async run (flags: any, unknown: any) {
+  public async run(flags: any, unknown: any) {
     process.env.NODE_ENV = flags.mode ?? 'development'
     process.env.MICRO_MODE = flags.microMode ?? ''
 

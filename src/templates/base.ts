@@ -22,55 +22,57 @@ export default class TemplateWebBase extends Template {
   renderFileTypes = 'js,jsx,ts,tsx,css,scss,sass,less,md,vue'
   renderFiles = ['package.json', 'webpack.config.js', 'README.md']
 
-  constructor (public factory: Factory) {
+  constructor(public factory: Factory) {
     super(factory)
   }
 
-  private get enterOrgName () {
+  private get enterOrgName() {
+    const validateMsg = 'please input a valid organization name'
     const isMicro = this.id.startsWith('micro-')
     const orgName = {
       type: 'input',
       name: 'orgName',
       message: 'Organization name',
-      initial () {
+      initial() {
         return ''
       },
-      validate (value: any) {
+      validate(value: any) {
         const name = formatName(value)
-        return (name && true) || 'please input a valid organization name'
+        return (name && true) || validateMsg
       }
     }
     return isMicro ? [orgName] : []
   }
 
-  private get enterProjectName () {
+  private get enterProjectName() {
+    const validateMsg = 'please input a valid project name'
     const defaultName = this.data.project?.name ?? 'project-demo'
     return {
       type: 'input',
       name: 'name',
       message: 'Project name',
-      initial () {
+      initial() {
         return defaultName
       },
-      validate (value: any) {
+      validate(value: any) {
         const name = formatName(value)
-        return (name && true) || 'please input a valid project name'
+        return (name && true) || validateMsg
       }
     }
   }
 
-  private get enterProjectDescription () {
+  private get enterProjectDescription() {
     return {
       type: 'input',
       name: 'description',
       message: 'Project description',
-      initial ({ state }: any) {
+      initial({ state }: any) {
         return `${state.answers.name} description`
       }
     }
   }
 
-  private get selectFeatures () {
+  private get selectFeatures() {
     const hasFeatures = this.features.length > 0
     const selectFeatures = {
       type: 'MultiSelect',
@@ -78,28 +80,28 @@ export default class TemplateWebBase extends Template {
       message: 'Choose features for your project:',
       hint: '(Use <space> to select, <return> to submit)',
       choices: this.features,
-      result (names: string[]): any {
+      result(names: string[]): any {
         return (this as any).map(names)
       }
     }
     return hasFeatures ? [selectFeatures] : []
   }
 
-  private getPromptOptions () {
+  private getPromptOptions() {
     return [
-      this.enterOrgName,
+      ...this.enterOrgName,
       this.enterProjectName,
       this.enterProjectDescription,
-      this.selectFeatures
+      ...this.selectFeatures
     ]
   }
 
-  protected async gathering (_flags: Record<string, any>) {
+  protected async gathering(_flags: Record<string, any>) {
     this.data.factoryVersion = version
     this.data.project = await this.prompt(this.getPromptOptions() as any)
   }
 
-  private getCopyFiles () {
+  private getCopyFiles() {
     const isTs = this.data.project?.features?.typescript
     const srcFolder = `src${isTs ? '-ts' : ''}`
     return [
@@ -112,7 +114,7 @@ export default class TemplateWebBase extends Template {
     ].filter(Boolean)
   }
 
-  private getRenderFiles () {
+  private getRenderFiles() {
     const isMicro = this.id.startsWith('micro-')
     const isTs = this.data.project?.features?.typescript
     const srcFolder = `src${isTs ? '-ts' : ''}`
@@ -126,7 +128,7 @@ export default class TemplateWebBase extends Template {
     ].filter(Boolean)
   }
 
-  protected async writing () {
+  protected async writing() {
     const debug = !!this.context.get('debug')
     this.files = {
       copy: this.getCopyFiles(),
@@ -137,9 +139,32 @@ export default class TemplateWebBase extends Template {
         compileDebug: debug
       }
     }
+
+    console.log('writing file', this.files)
   }
 
-  protected async installing (flags: Record<string, any>) {
+  // protected async afterWriting() {
+  //   console.log('afterWriting--------->', this.files)
+  //   // if (this.files.copy && isValidArray(this.files.copy)) {
+  //   //   this.debug(`${this._debugPrefix} start copy`, this.files.copy)
+  //   //   // await this.copy(this.files.copy)
+  //   // }
+
+  //   // if (
+  //   //   isFunction(this.renderer) &&
+  //   //   this.files.render &&
+  //   //   isValidArray(this.files.render)
+  //   // ) {
+  //   //   this.debug(
+  //   //     `${this._debugPrefix} start render`,
+  //   //     this.files.render,
+  //   //     this.files?.renderOptions
+  //   //   )
+  //   //   // await this.render(this.files.render, this.data, this.files?.renderOptions)
+  //   // }
+  // }
+
+  protected async installing(flags: Record<string, any>) {
     const { project } = this.data
     this.spinner.succeed(
       `Created project ${this.style.cyan.bold(project.name)}`
@@ -154,7 +179,7 @@ export default class TemplateWebBase extends Template {
         'Installing dependencies...'
       ).start()
       try {
-        await this.installDeps(this.targetDir, flags.packageManager, false)
+        // await this.installDeps(this.targetDir, flags.packageManager, false)
         installSpinner.succeed('Installed dependencies')
       } catch (err) {
         installSpinner.fail(
@@ -165,7 +190,7 @@ export default class TemplateWebBase extends Template {
     }
   }
 
-  protected async ending () {
+  protected async ending() {
     const { project } = this.data
     const projectName = this.style.cyan.bold(project.name)
     if (this.errors) {

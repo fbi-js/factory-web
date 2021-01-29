@@ -11,12 +11,11 @@ import TemplateReact from './templates/react';
 import TemplateMicroMain from './templates/micro-main';
 import TemplateMicroVue from './templates/micro-vue';
 import TemplateMicroReact from './templates/micro-react';
-import TemplateMiniProgram from './templates/mini-program';
 export default class FactoryWeb extends Factory {
     id: any;
     description: string;
-    commands: (CommandServe | CommandLint | CommandFormat | CommandTypesCreate | CommandTypesSync | CommandBuild)[];
-    templates: (TemplateVue | TemplateReact | TemplateMicroMain | TemplateMicroReact | TemplateMiniProgram)[];
+    commands: (CommandBuild | CommandServe | CommandTypesCreate | CommandTypesSync | CommandLint | CommandFormat)[];
+    templates: any;
     execOpts: any;
 }
 export { CommandBuild, CommandServe, CommandTypesCreate, CommandTypesSync, TemplateBase, TemplateVue, TemplateReact, TemplateMicroMain, TemplateMicroVue, TemplateMicroReact };

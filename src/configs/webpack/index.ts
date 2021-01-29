@@ -1,7 +1,5 @@
 import { join } from 'path'
 import { Configuration } from 'webpack'
-
-import { TemplateTypes } from '../../types'
 import { paths, factoryConfigs } from '../constant/paths'
 
 /**
@@ -10,7 +8,7 @@ import { paths, factoryConfigs } from '../constant/paths'
  * @param data
  */
 export const getTemplateWebpackConfig = (
-  type: TemplateTypes,
+  type: string,
   data: Record<string, any>
 ) => {
   const { getConfig } = require(`./${type}`)

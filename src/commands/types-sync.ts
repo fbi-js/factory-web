@@ -10,11 +10,11 @@ export default class CommandTypesSync extends Command {
   args = ''
   flags = []
 
-  constructor (public factory: Factory) {
+  constructor(public factory: Factory) {
     super()
   }
 
-  public async run (flags: any, unknown: any) {
+  public async run(flags: any, unknown: any) {
     this.debug(
       `Factory: (${this.factory.id})`,
       'from command',
@@ -35,7 +35,7 @@ export default class CommandTypesSync extends Command {
     }
   }
 
-  protected sync () {
+  protected sync() {
     const fs = require('fs-extra')
     const path = require('path')
     const appDirectory = fs.realpathSync(process.cwd())
@@ -43,7 +43,7 @@ export default class CommandTypesSync extends Command {
       path.resolve(appDirectory, relativePath)
     const { remotesConfigArr } = require(resolveApp('federation.config'))
 
-    async function fetchText (remoteUrl: string) {
+    async function fetchText(remoteUrl: string) {
       const text = await (await fetch(remoteUrl)).text()
       return text
     }

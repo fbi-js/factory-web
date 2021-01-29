@@ -8,11 +8,11 @@ export default class TemplateMicroMain extends BaseClass {
   description = 'template for Micro-fontends base application'
   templates = []
 
-  constructor (public factory: Factory) {
+  constructor(public factory: Factory) {
     super(factory)
   }
 
-  protected async gathering (flags: Record<string, any>) {
+  protected async gathering(flags: Record<string, any>) {
     await super.gathering(flags)
 
     this.data.project = {
