@@ -7,7 +7,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-* **webpack:** update webpack config ([cc53d57](https://github.com/fbi-js/factory-web/commit/cc53d57bad54ca771b2785ab56baafaa05621ede)), closes [/github.com/fbi-js/config/blob/main/packages/webpack-config-base/CHANGELOG.md#154](https://github.com/fbi-js//github.com/fbi-js/config/blob/main/packages/webpack-config-base/CHANGELOG.md/issues/154)
+* **webpack:** update webpack config ([cc53d57](https://github.com/fbi-js/factory-web/commit/cc53d57bad54ca771b2785ab56baafaa05621ede)), reference: [fbi-js/config/webpack-config-base/CHANGELOG.md#154](https://github.com/fbi-js/config/blob/main/packages/webpack-config-base/CHANGELOG.md#154)
 
 ### [1.9.2](https://github.com/fbi-js/factory-web/compare/v1.9.1...v1.9.2) (2021-01-27)
 
