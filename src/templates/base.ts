@@ -2,6 +2,7 @@ import Factory from '..'
 import * as ejs from 'ejs'
 import { join } from 'path'
 import { Template, utils } from 'fbi'
+import glob = require('tiny-glob')
 
 const { formatName, isValidObject } = utils
 const { version } = require('../../package.json')
@@ -101,7 +102,7 @@ export default class TemplateWebBase extends Template {
     this.data.project = await this.prompt(this.getPromptOptions() as any)
   }
 
-  private getCopyFiles() {
+  protected getCopyFiles() {
     const isTs = this.data.project?.features?.typescript
     const srcFolder = `src${isTs ? '-ts' : ''}`
     return [
@@ -114,7 +115,7 @@ export default class TemplateWebBase extends Template {
     ].filter(Boolean)
   }
 
-  private getRenderFiles() {
+  protected getRenderFiles() {
     const isMicro = this.id.startsWith('micro-')
     const isTs = this.data.project?.features?.typescript
     const srcFolder = `src${isTs ? '-ts' : ''}`
@@ -128,19 +129,23 @@ export default class TemplateWebBase extends Template {
     ].filter(Boolean)
   }
 
-  protected async writing() {
-    const debug = !!this.context.get('debug')
-    this.files = {
-      copy: this.getCopyFiles(),
-      render: this.getRenderFiles(),
-      renderOptions: {
-        async: true,
-        debug,
-        compileDebug: debug
+  private async copyFile(files: string[]) {
+    for (const filePath of files) {
+      const isExist = await this.fs.pathExists(filePath)
+      const [fileName] = filePath.split('/').slice(-1)
+      if (isExist) {
+        this.fs.copy(filePath, `${this.targetDir}/${fileName}`, {})
       }
     }
+  }
 
-    console.log('writing file', this.files)
+  protected async writing() {
+    const { path, template } = this.data.factory
+    const templatePath = join(path, 'templates', template)
+    const files = await glob(`${templatePath}/*`, {
+      cwd: process.cwd()
+    })
+    this.copyFile(files)
   }
 
   // protected async afterWriting() {

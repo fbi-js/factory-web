@@ -10,7 +10,7 @@ export default class CommandLint extends Command {
     flags: never[];
     constructor(factory: Factory);
     run(flags: any, unknown: any): Promise<void>;
-    protected lintWithEslint(config: IFactoryConfig): import("execa").ExecaChildProcess<string>;
+    protected lintWithEslint(config: IFactoryConfig): any;
     protected getFileExts(factory: IFactoryConfig): string[];
     protected catchFatalErrors(err: any): any;
 }

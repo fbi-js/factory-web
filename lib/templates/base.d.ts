@@ -17,8 +17,15 @@ export default class TemplateWebBase extends Template {
     private get selectFeatures();
     private getPromptOptions;
     protected gathering(_flags: Record<string, any>): Promise<void>;
-    private getCopyFiles;
-    private getRenderFiles;
+    protected getCopyFiles(): (string | {
+        from: string;
+        to: string;
+    })[];
+    protected getRenderFiles(): (string | {
+        from: string;
+        to: string;
+    })[];
+    private copyFile;
     protected writing(): Promise<void>;
     protected installing(flags: Record<string, any>): Promise<void>;
     protected ending(): Promise<void>;

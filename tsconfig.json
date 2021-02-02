@@ -1,9 +1,11 @@
 {
   "extends": "@fbi-js/tsconfig/base",
   "compilerOptions": {
+    "baseUrl": ".",
     "outDir": "./lib",
     "sourceMap": false,
     "composite": true,
-    "incremental": true
+    "incremental": true,
+    "noUnusedParameters": false
   }
 }
