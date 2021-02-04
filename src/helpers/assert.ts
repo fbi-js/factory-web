@@ -7,7 +7,9 @@ export const assertFactoryTemplate = (factory: IFactoryConfig) => {
   const assertIsOk =
     factory &&
     factory.template &&
-    ['micro-main', 'micro-react', 'micro-vue', 'react', 'vue'].includes(factory.template)
+    ['micro-main', 'micro-react', 'micro-vue', 'react', 'vue'].includes(
+      factory.template
+    )
   assert(assertIsOk, assertFailLog)
 }
 

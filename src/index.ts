@@ -35,7 +35,7 @@ export default class FactoryWeb extends Factory {
     new TemplateMicroVue(this),
     new TemplateMicroReact(this),
     new TemplateMiniProgram(this)
-  ]
+  ] as any
 
   execOpts: any = {
     cwd: process.cwd(),

@@ -12,10 +12,10 @@ export default (): void => {
     <React.StrictMode>
       <%_ if (project.features.admin) { _%>
       <Router>
-      <%_ } _%>
         <App />
-      <%_ if (project.features.admin) { _%>
       </Router>
+      <%_ } else {_%>
+      <App />
       <%_ } _%>
     </React.StrictMode>,
     document.getElementById('app')

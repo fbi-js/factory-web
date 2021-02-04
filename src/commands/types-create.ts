@@ -3,15 +3,17 @@ import Factory from '..'
 export default class CommandTypesCreate extends Command {
   id = 'ts-create'
   alias = 'tsc'
-  description = 'create typing files for webpack5 module-faderation exposes modules'
+  description =
+    'create typing files for webpack5 module-faderation exposes modules'
+
   args = ''
   flags = []
 
-  constructor (public factory: Factory) {
+  constructor(public factory: Factory) {
     super()
   }
 
-  public async run (flags: any, unknown: any) {
+  public async run(flags: any, unknown: any) {
     this.debug(
       `Factory: (${this.factory.id})`,
       'from command',
@@ -32,13 +34,16 @@ export default class CommandTypesCreate extends Command {
     }
   }
 
-  protected create () {
+  protected create() {
     const ts = require('typescript')
     const fs = require('fs-extra')
     const path = require('path')
     const appDirectory = fs.realpathSync(process.cwd())
-    const resolveApp = (relativePath: string) => path.resolve(appDirectory, relativePath)
-    const { typingsConfigs, federationConfigs } = require(resolveApp('federation.config'))
+    const resolveApp = (relativePath: string) =>
+      path.resolve(appDirectory, relativePath)
+    const { typingsConfigs, federationConfigs } = require(resolveApp(
+      'federation.config'
+    ))
     const { exposes, name: federationName } = federationConfigs
     const compileFiles: string[] = Object.values(exposes)
     const outFile = resolveApp(

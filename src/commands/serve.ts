@@ -14,16 +14,20 @@ export default class CommandServe extends Command {
   description = 'launch the development server'
   args = ''
   flags = [
-    ['-m, --mode <mode>', 'specify env mode(development|production|testing)', 'development'],
+    [
+      '-m, --mode <mode>',
+      'specify env mode(development|production|testing)',
+      'development'
+    ],
     ['-p, --port <port>', 'webapck dev-serve port', PORT],
     ['--micro-mode <mode>', '""|fuse', '']
   ]
 
-  constructor (public factory: Factory) {
+  constructor(public factory: Factory) {
     super()
   }
 
-  public async run (flags: any, unknown: any) {
+  public async run(flags: any, unknown: any) {
     process.env.NODE_ENV = flags.mode ?? 'development'
     process.env.MICRO_MODE = flags.microMode ?? ''
 

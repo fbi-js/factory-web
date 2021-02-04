@@ -8,7 +8,14 @@ export default class TemplateMiniProgram extends BaseClass {
   description = 'template for mini-program application by use taro'
   templates = []
   features = []
-  copyFiles = ['.gitignore', '.editorconfig', '.prettierignore', 'babel.config.js', 'config/*']
+  copyFiles = [
+    '.gitignore',
+    '.editorconfig',
+    '.prettierignore',
+    'babel.config.js',
+    'config/*'
+  ]
+
   renderFiles = [
     'babel.config.js',
     'global.d.ts',
@@ -18,11 +25,13 @@ export default class TemplateMiniProgram extends BaseClass {
     'tsconfig.json'
   ]
 
-  constructor (public factory: Factory) {
+  renderFileTypes = 'js,jsx,ts,tsx,css,scss,sass,less,md,vue,html'
+
+  constructor(public factory: Factory) {
     super(factory)
   }
 
-  protected async gathering (flags: Record<string, any>) {
+  protected async gathering(flags: Record<string, any>) {
     await super.gathering(flags)
 
     const { factory, project } = this.data
@@ -33,7 +42,7 @@ export default class TemplateMiniProgram extends BaseClass {
     )
   }
 
-  protected async writing () {
+  protected async writing() {
     await super.writing()
   }
 }

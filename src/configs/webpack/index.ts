@@ -1,7 +1,5 @@
 import { join } from 'path'
 import { Configuration } from 'webpack'
-
-import { TemplateTypes } from '../../types'
 import { paths, factoryConfigs } from '../constant/paths'
 
 /**
@@ -9,7 +7,10 @@ import { paths, factoryConfigs } from '../constant/paths'
  * @param type template file name, can be get "micro-main" | "micro-react" | "micro-vue" | "react" | "vue"
  * @param data
  */
-export const getTemplateWebpackConfig = (type: TemplateTypes, data: Record<string, any>) => {
+export const getTemplateWebpackConfig = (
+  type: string,
+  data: Record<string, any>
+) => {
   const { getConfig } = require(`./${type}`)
   return getConfig(data)
 }
@@ -39,9 +40,9 @@ export const resolveUserConfig = (
 ) => {
   return typeof userConfig === 'function'
     ? userConfig({
-        config: baseConfig,
-        paths
-      })
+      config: baseConfig,
+      paths
+    })
     : userConfig
 }
 

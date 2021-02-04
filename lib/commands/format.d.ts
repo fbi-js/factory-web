@@ -10,8 +10,8 @@ export default class CommandFormat extends Command {
     flags: never[];
     constructor(factory: Factory);
     run(flags: any, unknown: any): Promise<void>;
-    protected formatWithPrettier(): import("execa").ExecaChildProcess<string>;
-    protected formatWithEslint(config: IFactoryConfig): import("execa").ExecaChildProcess<string>;
+    protected formatWithPrettier(): any;
+    protected formatWithEslint(config: IFactoryConfig): any;
     protected getFileExts(factory: IFactoryConfig): string[];
     protected catchFatalErrors(err: any): any;
 }

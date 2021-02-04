@@ -9,11 +9,11 @@ export default class CommandFormat extends Command {
   args = ''
   flags = []
 
-  constructor (public factory: Factory) {
+  constructor(public factory: Factory) {
     super()
   }
 
-  public async run (flags: any, unknown: any) {
+  public async run(flags: any, unknown: any) {
     process.env.NODE_ENV = flags.mode ?? 'production'
     process.env.MICRO_MODE = flags.microMode ?? ''
 
@@ -43,7 +43,7 @@ export default class CommandFormat extends Command {
     }
   }
 
-  protected formatWithPrettier () {
+  protected formatWithPrettier() {
     const cmd = 'npx prettier "src" --write --ignore-unknown --loglevel warn'
     this.logItem(cmd)
     return this.exec.command(cmd, {
@@ -52,7 +52,7 @@ export default class CommandFormat extends Command {
     })
   }
 
-  protected formatWithEslint (config: IFactoryConfig) {
+  protected formatWithEslint(config: IFactoryConfig) {
     const exts = this.getFileExts(config)
     const cmd = `npx eslint --ext ${exts.join(',')} src --fix`
     this.logItem(cmd)
@@ -61,13 +61,13 @@ export default class CommandFormat extends Command {
     })
   }
 
-  protected getFileExts (factory: IFactoryConfig) {
+  protected getFileExts(factory: IFactoryConfig) {
     return ['js', 'jsx']
       .concat(factory.features?.typescript ? ['ts', 'tsx'] : [])
       .concat(factory.template === 'vue' ? ['vue'] : [])
   }
 
-  protected catchFatalErrors (err: any) {
+  protected catchFatalErrors(err: any) {
     // https://prettier.io/docs/en/cli.html#exit-codes
     // https://eslint.org/docs/user-guide/migrating-to-5.0.0#fatal-errors-now-result-in-an-exit-code-of-2
     if (err?.exitCode === 2) {
