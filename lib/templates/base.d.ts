@@ -25,7 +25,23 @@ export default class TemplateWebBase extends Template {
         from: string;
         to: string;
     })[];
-    private copyFile;
+    /**
+     * from -> /factory-web/templates/${template}/src-ts/routes/index.ts.ejs
+     * to -> ${this.targetDir}/src-ts/routes/index.ts
+     * @param srcPath file entry path
+     */
+    private getOutputPath;
+    /**
+     * copy or render file from srcPath to outputPath, .ejs file will be render by ejs
+     * @param srcPath file entry path
+     * @param outputPath file output path
+     */
+    private writeFile;
+    /**
+     *
+     * @param files 文件列表
+     */
+    private writingFiles;
     protected writing(): Promise<void>;
     protected installing(flags: Record<string, any>): Promise<void>;
     protected ending(): Promise<void>;

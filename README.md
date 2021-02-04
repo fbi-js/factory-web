@@ -71,7 +71,7 @@ You can extends or customize webpack config based on the built-in configuration.
       alias: {
         // ...
       }
-    },
+    }
     // ...
   }
   ```
@@ -83,7 +83,7 @@ You can extends or customize webpack config based on the built-in configuration.
 
   module.exports = config({
     options: {
-      isTs: true,
+      isTs: true
       // ...
     }
   })
@@ -92,12 +92,11 @@ You can extends or customize webpack config based on the built-in configuration.
 - plaint webpack config + config options.
 
   ```js
-
   const config = require('@fbi-js/webpack-config-react').default
 
   module.exports = config({
     options: {
-      isTs: true,
+      isTs: true
       // ...
     },
     webpackConfig: {
@@ -145,7 +144,7 @@ export default class FactoryWeb extends FactoryWebBase {
   commands = [new CommandX(this)]
   templates = [new TemplateX(this)]
 
-  constructor() {
+  constructor () {
     super()
 
     // 2. OR: extends default commands and templates
@@ -182,3 +181,7 @@ Thank you to all the people who already contributed to fbi factory!
 ## License
 
 Licensed under [MIT](https://opensource.org/licenses/MIT).
+
+## todo
+
+- 生成 copys 和 renders 的路径
