@@ -14,7 +14,7 @@ import TemplateMicroReact from './templates/micro-react';
 export default class FactoryWeb extends Factory {
     id: any;
     description: string;
-    commands: (CommandBuild | CommandServe | CommandTypesCreate | CommandTypesSync | CommandLint | CommandFormat)[];
+    commands: (CommandServe | CommandLint | CommandFormat | CommandTypesCreate | CommandTypesSync | CommandBuild)[];
     templates: any;
     execOpts: any;
 }
