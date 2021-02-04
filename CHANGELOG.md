@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.10.0](https://github.com/fbi-js/factory-web/compare/v1.8.4...v1.10.0) (2021-02-04)
+
+
+### Features
+
+* 修改copyFile逻辑 ([c98c16f](https://github.com/fbi-js/factory-web/commit/c98c16f5596eb705885e85e9c65947d01055978f))
+* 修改factory创建逻辑 ([9726243](https://github.com/fbi-js/factory-web/commit/9726243874ecaba929676af8452b2073b5e87a02))
+* 修改template需要ejs渲染的文件名 ([b9890e7](https://github.com/fbi-js/factory-web/commit/b9890e7eaa2c7659e4d0e9f3ff2c5564b0e241ad))
+* **webpack:** update config deps ([2b94fc0](https://github.com/fbi-js/factory-web/commit/2b94fc067e020d0d966485a8246bb3235f77e563))
+
+
+### Bug Fixes
+
+* **format:** prettier errors ([291b358](https://github.com/fbi-js/factory-web/commit/291b3585f6f579133b02caf50167de26491230f5))
+* **react:** remove fast-refresh polyfill ([a5bfed0](https://github.com/fbi-js/factory-web/commit/a5bfed0b5c485bcb0721b9f3b46f2ded931cf764))
+* **webpack:** update webpack config ([cc53d57](https://github.com/fbi-js/factory-web/commit/cc53d57bad54ca771b2785ab56baafaa05621ede)), closes [/github.com/fbi-js/config/blob/main/packages/webpack-config-base/CHANGELOG.md#154](https://github.com/fbi-js//github.com/fbi-js/config/blob/main/packages/webpack-config-base/CHANGELOG.md/issues/154)
+* mini-program新增html格式文件 ([6edbd17](https://github.com/fbi-js/factory-web/commit/6edbd17cee5733b60595bf24d8d2bfa9eda3a0db))
+* mini-program新增html格式文件 ([74d8f96](https://github.com/fbi-js/factory-web/commit/74d8f964e3fa3448dd7aa8791044e16bb47760e6))
+* remove stylelint option 'configFile';failed to add plugins ([60bf382](https://github.com/fbi-js/factory-web/commit/60bf38237ac4659cf003f0d96241c3a6d0b33b25))
+
 ### [1.9.3](https://github.com/fbi-js/factory-web/compare/v1.9.2...v1.9.3) (2021-01-29)
 
 
