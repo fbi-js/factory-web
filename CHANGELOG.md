@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.10.1](https://github.com/fbi-js/factory-web/compare/v1.10.0...v1.10.1) (2021-02-04)
+
+
+### Bug Fixes
+
+* 修改fbi的版本依赖为4.4.0 ([3fd5b74](https://github.com/fbi-js/factory-web/commit/3fd5b74624ae4b238cf5205d0392fe665e79f93e))
+
 ## [1.10.0](https://github.com/fbi-js/factory-web/compare/v1.8.4...v1.10.0) (2021-02-04)
 
 
