@@ -7,9 +7,6 @@ export default class TemplateMiniProgram extends BaseClass {
     description: string;
     templates: never[];
     features: never[];
-    copyFiles: string[];
-    renderFiles: string[];
-    renderFileTypes: string;
     constructor(factory: Factory);
     protected gathering(flags: Record<string, any>): Promise<void>;
     protected writing(): Promise<void>;
