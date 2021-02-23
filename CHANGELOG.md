@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0-alpha.3](https://github.com/fbi-js/factory-web/compare/v2.0.0-alpha.2...v2.0.0-alpha.3) (2021-02-23)
+
+
+### Bug Fixes
+
+* fix template path error ([af604d3](https://github.com/fbi-js/factory-web/commit/af604d3b7155c422e5ee841934981f93340104a1))
+
 ## [2.0.0-alpha.2](https://github.com/fbi-js/factory-web/compare/v2.0.0-alpha.1...v2.0.0-alpha.2) (2021-02-23)
 
 
