@@ -1,7 +1,10 @@
-import { Layout } from 'antd'
-import { LayoutProps, SiderProps } from 'antd/lib/layout'
-import { BasicProps } from 'antd/lib/layout/layout'
-import React from 'react'
+import { Layout } from 'templates/react-basic/src/components/header-component/node_modules/antd'
+import {
+  LayoutProps,
+  SiderProps,
+} from 'templates/react-basic/src/components/wau/wau-layout/node_modules/antd/lib/layout'
+import { BasicProps } from 'templates/react-basic/src/components/wau/wau-layout/node_modules/antd/lib/layout/layout'
+import React from 'templates/react-basic/src/node_modules/react'
 import style from './index.module.scss'
 
 const { Header, Footer, Sider, Content } = Layout

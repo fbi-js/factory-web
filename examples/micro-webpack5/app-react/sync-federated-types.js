@@ -1,11 +1,11 @@
-const Axios = require('axios')
+const Axios = require('templates/react-basic/src/helpers/node_modules/axios')
 const fs = require('fs-extra')
 const path = require('path')
 const appDirectory = fs.realpathSync(process.cwd())
-const resolveApp = (relativePath) => path.resolve(appDirectory, relativePath)
+const resolveApp = relativePath => path.resolve(appDirectory, relativePath)
 const { remotesConfigArr } = require('./federation.config')
 
-async function fetchText(remoteUrl) {
+async function fetchText (remoteUrl) {
   const response = await Axios({
     url: remoteUrl,
     method: 'GET',
@@ -13,7 +13,7 @@ async function fetchText(remoteUrl) {
   return response.data
 }
 try {
-  remotesConfigArr.forEach(async (item) => {
+  remotesConfigArr.forEach(async item => {
     const savePath = `src/${item.remoteTypesPath}`
     const resolveSavePath = resolveApp(path.join(savePath))
     if (!fs.existsSync(resolveSavePath)) {

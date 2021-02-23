@@ -3,18 +3,11 @@ import Factory from '..'
 import BaseClass from './base'
 
 export default class TemplateReact extends BaseClass {
-  id = 'react'
-  path = join(__dirname, '../../templates/react')
+  id = 'react-basic'
+  path = join(__dirname, '../../templates/react-basic')
   description = 'template for React.js application'
   templates = []
-  features = [
-    { name: 'typescript', value: true },
-    {
-      name: 'admin',
-      value: true,
-      hint: 'antd, axios, basic components(layout, menu, breadcrumb, topbar)'
-    }
-  ]
+  features = [{ name: 'typescript', value: true }]
 
   constructor(public factory: Factory) {
     super(factory)
@@ -22,12 +15,6 @@ export default class TemplateReact extends BaseClass {
 
   protected async gathering(flags: Record<string, any>) {
     await super.gathering(flags)
-    // const { factory, project } = this.data
-    // this.spinner = this.createSpinner('Creating project...').start(
-    //   `Creating ${this.style.bold.green(project.name)} via ${factory.id} from ${
-    //     factory.template
-    //   }...`
-    // )
   }
 
   protected async writing() {
