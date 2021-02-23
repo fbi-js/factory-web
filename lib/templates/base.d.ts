@@ -32,6 +32,7 @@ export default class TemplateWebBase extends Template {
      * @param files 文件列表
      */
     private writingFiles;
+    private resolveTemplatePath;
     protected writing(): Promise<void>;
     protected installing(flags: Record<string, any>): Promise<void>;
     protected ending(): Promise<void>;

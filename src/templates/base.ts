@@ -165,17 +165,26 @@ export default class TemplateWebBase extends Template {
     }
   }
 
-  protected async writing() {
-    // const debug = !!this.context.get('debug')
-    const { factory, project } = this.data
-    const { path, template } = factory
+  private resolveTemplatePath() {
+    const { factory } = this.data
+    const { id, path, template } = factory
     let templatePath
-    const isWiiFe = template && template.indexOf('wii') > -1
-    if (isWiiFe) {
+    const isWiiFactory = id && id.startsWith('@wii-fe')
+    const wiiTemplate = template && template.startsWith('wii')
+    // 是wii factory并且模板无wii，表示是公共模板
+    const isPublicTemplate = isWiiFactory && !wiiTemplate
+    if (isPublicTemplate) {
       templatePath = resolve(__dirname, `../../templates/${template}`)
     } else {
       templatePath = join(path, 'templates', template)
     }
+    return templatePath
+  }
+
+  protected async writing() {
+    // const debug = !!this.context.get('debug')
+    const { project } = this.data
+    const templatePath = this.resolveTemplatePath()
     console.log('\n')
     const writingSpinner = this.createSpinner(
       this.style.green(`开始创建项目: ${project.name}\n`)
