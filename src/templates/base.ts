@@ -180,9 +180,10 @@ export default class TemplateWebBase extends Template {
     const writingSpinner = this.createSpinner(
       this.style.green(`开始创建项目: ${project.name}\n`)
     ).start()
-    // 获取文件列表
+    // 获取指定template path下的文件列表
     const files = await glob(`${templatePath}/**/*`, {
-      cwd: process.cwd()
+      cwd: process.cwd(),
+      dot: true
     })
 
     // 创建项目
