@@ -6,10 +6,7 @@ export default class TemplateMicroReact extends TemplateReact {
     path: string;
     description: string;
     templates: never[];
-    features: {
-        name: string;
-        value: boolean;
-    }[];
+    features: never[];
     constructor(factory: Factory);
     protected gathering(flags: Record<string, any>): Promise<void>;
 }

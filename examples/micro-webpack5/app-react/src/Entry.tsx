@@ -1,5 +1,10 @@
-import * as React from 'react'
-import { Route, Switch, useRouteMatch, Redirect } from 'react-router-dom'
+import * as React from 'templates/react-basic/src/node_modules/react'
+import {
+  Route,
+  Switch,
+  useRouteMatch,
+  Redirect,
+} from 'templates/react-basic/src/components/wau/breadcrumb/node_modules/react-router-dom'
 
 export default function Entry() {
   const match = useRouteMatch()

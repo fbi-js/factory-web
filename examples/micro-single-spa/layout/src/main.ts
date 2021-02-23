@@ -1,6 +1,6 @@
 import { setPublicPath } from 'systemjs-webpack-interop'
 import singleSpaVue from 'single-spa-vue'
-import Vue from 'vue'
+import Vue from 'templates/vue-basic/src/node_modules/vue'
 
 import App from '@/App.vue'
 import '@/assets/css/main.css'
@@ -23,7 +23,7 @@ const lifecycles = singleSpaVue({
           // https://single-spa.js.org/docs/building-applications#lifecyle-props
           name: this.name,
           mountParcel: this.mountParcel,
-          singleSpa: this.singleSpa,
+          singleSpa: this.singleSpa
         }
       })
     }

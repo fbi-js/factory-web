@@ -3,8 +3,8 @@ import Factory from '..'
 import BaseClass from './base'
 
 export default class TemplateVue extends BaseClass {
-  id = 'vue'
-  path = join(__dirname, '../../templates/vue')
+  id = 'vue-basic'
+  path = join(__dirname, '../../templates/vue-basic')
   description = 'template for Vue.js application'
   templates = []
   features = [{ name: 'typescript', value: true }]

@@ -1,7 +1,7 @@
 import { setPublicPath } from 'systemjs-webpack-interop'
 import singleSpaReact from 'single-spa-react'
 
-import React from 'react'
+import React from 'templates/react-basic/src/node_modules/react'
 import ReactDOM from 'react-dom'
 
 import './index.css'
@@ -19,7 +19,7 @@ const lifecycles = singleSpaReact({
   errorBoundary(_err: any, _info: any, _props: any) {
     // Customize the root error boundary for your microfrontend here.
     return null
-  },
+  }
 })
 
 export const { bootstrap, mount, unmount } = lifecycles

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'templates/react-basic/src/node_modules/react'
 
 export interface IBreadcrumb {
   /** 名称 */
@@ -8,7 +8,7 @@ export interface IBreadcrumb {
 }
 /** 菜单+路由+权限面包屑 配置基础类型 */
 export interface IBaseMenuRouteAccessBreadcrumb {
-  /** 
+  /**
    * 名称
    @作用 显示菜单的文字
    @说明 无
@@ -31,7 +31,7 @@ export interface IBaseMenuRouteAccessBreadcrumb {
    - 如需跳转到外部，需要自己修改相关源码
    * */
   path?: string
-  /** 
+  /**
    * 是否显示菜单
    @作用 用来控制菜单是否显示
    @说明 默认为true，不显示需要配置为false
@@ -47,13 +47,13 @@ export interface IBaseMenuRouteAccessBreadcrumb {
    @说明
    - 例子1: /a/b ,就需要配置 [{name:'a'},{name:'b'}]
    - 例子2: /a/b ,a需要可以跳转的话，就需要配置path项 [{name:'a',path:'/a'},{name:'b'}]
-   - 没有配置的话，根据路由路径获取,生成对应面包屑 
+   - 没有配置的话，根据路由路径获取,生成对应面包屑
    */
   breadcrumb?: IBreadcrumb[]
-  /** 
+  /**
    * 权限/权限数组
    @作用 用来控制菜单和路由是否可以访问
-   @说明 
+   @说明
    - 例子1，如果当前菜单和路由属于a角色，access:'a'
    - 例子2，如果当前菜单和路由属于a和b角色，那么access:['a','b']
    - 没有配置的话，所有角色都有权限访问

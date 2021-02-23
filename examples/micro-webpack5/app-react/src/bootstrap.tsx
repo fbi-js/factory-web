@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'templates/react-basic/src/node_modules/react'
 import ReactDOM from 'react-dom'
 
 import './index.css'
