@@ -6,6 +6,8 @@ export default class TemplateWebBase extends Template {
     id: string;
     renderer: typeof ejs.render;
     features: any[];
+    whiteList: never[];
+    blackList: never[];
     constructor(factory: Factory);
     private get enterOrgName();
     private get enterProjectName();

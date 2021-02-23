@@ -5,12 +5,14 @@ import { Template, utils } from 'fbi'
 import glob = require('tiny-glob')
 
 const { formatName, isValidObject } = utils
-const { version } = require('../../package.json')
+const { name, version } = require('../../package.json')
 
 export default class TemplateWebBase extends Template {
   id = 'web-base'
   renderer = ejs.render
   features: any[] = []
+  whiteList = []
+  blackList = []
   constructor(public factory: Factory) {
     super(factory)
   }
@@ -87,6 +89,7 @@ export default class TemplateWebBase extends Template {
 
   protected async gathering(_flags: Record<string, any>) {
     this.data.factoryVersion = version
+    this.data.factoryId = name
     this.data.project = await this.prompt(this.getPromptOptions() as any)
   }
 
@@ -165,9 +168,9 @@ export default class TemplateWebBase extends Template {
   protected async writing() {
     // const debug = !!this.context.get('debug')
     const { factory, project } = this.data
-    const { id, path, template } = factory
+    const { path, template } = factory
     let templatePath
-    const isWiiFe = id && id.indexOf('@wii-fe') > -1
+    const isWiiFe = template && template.indexOf('wii') > -1
     if (isWiiFe) {
       templatePath = resolve(__dirname, `../../templates/${template}`)
     } else {
