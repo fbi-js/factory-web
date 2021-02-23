@@ -6,10 +6,8 @@ export default class TemplateWebBase extends Template {
     id: string;
     renderer: typeof ejs.render;
     features: any[];
-    copyFileTypes: string;
-    copyFiles: string[];
-    renderFileTypes: string;
-    renderFiles: string[];
+    whiteList: never[];
+    blackList: never[];
     constructor(factory: Factory);
     private get enterOrgName();
     private get enterProjectName();
@@ -17,14 +15,6 @@ export default class TemplateWebBase extends Template {
     private get selectFeatures();
     private getPromptOptions;
     protected gathering(_flags: Record<string, any>): Promise<void>;
-    protected getCopyFiles(): (string | {
-        from: string;
-        to: string;
-    })[];
-    protected getRenderFiles(): (string | {
-        from: string;
-        to: string;
-    })[];
     /**
      * from -> /factory-web/templates/${template}/src-ts/routes/index.ts.ejs
      * to -> ${this.targetDir}/src-ts/routes/index.ts
@@ -42,6 +32,7 @@ export default class TemplateWebBase extends Template {
      * @param files 文件列表
      */
     private writingFiles;
+    private resolveTemplatePath;
     protected writing(): Promise<void>;
     protected installing(flags: Record<string, any>): Promise<void>;
     protected ending(): Promise<void>;

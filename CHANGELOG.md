@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0-alpha.3](https://github.com/fbi-js/factory-web/compare/v2.0.0-alpha.2...v2.0.0-alpha.3) (2021-02-23)
+
+
+### Bug Fixes
+
+* fix template path error ([af604d3](https://github.com/fbi-js/factory-web/commit/af604d3b7155c422e5ee841934981f93340104a1))
+
+## [2.0.0-alpha.2](https://github.com/fbi-js/factory-web/compare/v2.0.0-alpha.1...v2.0.0-alpha.2) (2021-02-23)
+
+
+### Bug Fixes
+
+* fix .xxx file not copy bug ([2cf4fa3](https://github.com/fbi-js/factory-web/commit/2cf4fa3a5eda4b4c1d1a8efb00ae28bf6420f42e))
+* fix factory-web dependencies error ([02f17e7](https://github.com/fbi-js/factory-web/commit/02f17e75f2650ce7ea55737f3109014da73d1ef7))
+
+## [2.0.0-alpha.1](https://github.com/fbi-js/factory-web/compare/v2.0.0-alpha.0...v2.0.0-alpha.1) (2021-02-22)
+
+
+### Features
+
+* [@wii-fe](https://github.com/wii-fe) factory use another templatePath ([55a1994](https://github.com/fbi-js/factory-web/commit/55a199432c7cb2ffa0d59f52395f40d9a0f58a98))
+
 ## [2.0.0-alpha.0](https://github.com/fbi-js/factory-web/compare/v1.10.1...v2.0.0-alpha.0) (2021-02-04)
 
 ### [1.10.1](https://github.com/fbi-js/factory-web/compare/v1.10.0...v1.10.1) (2021-02-04)

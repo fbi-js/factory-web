@@ -1,28 +1,18 @@
 import Factory from '..'
 import * as ejs from 'ejs'
-import { join } from 'path'
+import { join, resolve } from 'path'
 import { Template, utils } from 'fbi'
 import glob = require('tiny-glob')
 
 const { formatName, isValidObject } = utils
-const { version } = require('../../package.json')
+const { name, version } = require('../../package.json')
 
 export default class TemplateWebBase extends Template {
   id = 'web-base'
   renderer = ejs.render
   features: any[] = []
-  copyFileTypes = 'jpg,png,gif,svg,mp4,mp3,webm,ogg,wav,flac,aac'
-  copyFiles = [
-    '.gitignore',
-    '.editorconfig',
-    '.prettierignore',
-    'public/*',
-    '.vscode/*'
-  ]
-
-  renderFileTypes = 'js,jsx,ts,tsx,css,scss,sass,less,md,vue'
-  renderFiles = ['package.json', 'webpack.config.js', 'README.md']
-
+  whiteList = []
+  blackList = []
   constructor(public factory: Factory) {
     super(factory)
   }
@@ -99,34 +89,8 @@ export default class TemplateWebBase extends Template {
 
   protected async gathering(_flags: Record<string, any>) {
     this.data.factoryVersion = version
+    this.data.factoryId = name
     this.data.project = await this.prompt(this.getPromptOptions() as any)
-  }
-
-  protected getCopyFiles() {
-    const isTs = this.data.project?.features?.typescript
-    const srcFolder = `src${isTs ? '-ts' : ''}`
-    return [
-      ...this.copyFiles,
-      isTs ? 'tsconfig.json' : '',
-      {
-        from: `${srcFolder}/**/*.{${this.copyFileTypes}}`,
-        to: 'src'
-      }
-    ].filter(Boolean)
-  }
-
-  protected getRenderFiles() {
-    const isMicro = this.id.startsWith('micro-')
-    const isTs = this.data.project?.features?.typescript
-    const srcFolder = `src${isTs ? '-ts' : ''}`
-    return [
-      ...this.renderFiles,
-      isMicro ? 'micro.config.js' : '',
-      {
-        from: `${srcFolder}/**/*.{${this.renderFileTypes}}`,
-        to: 'src'
-      }
-    ].filter(Boolean)
   }
 
   /**
@@ -201,19 +165,34 @@ export default class TemplateWebBase extends Template {
     }
   }
 
+  private resolveTemplatePath() {
+    const { factory } = this.data
+    const { id, path, template } = factory
+    let templatePath
+    const isWiiFactory = id && id.startsWith('@wii-fe')
+    const wiiTemplate = template && template.startsWith('wii')
+    // 是wii factory并且模板无wii，表示是公共模板
+    const isPublicTemplate = isWiiFactory && !wiiTemplate
+    if (isPublicTemplate) {
+      templatePath = resolve(__dirname, `../../templates/${template}`)
+    } else {
+      templatePath = join(path, 'templates', template)
+    }
+    return templatePath
+  }
+
   protected async writing() {
     // const debug = !!this.context.get('debug')
-    const { factory, project } = this.data
-    const { path, template } = factory
-    const templatePath = join(path, 'templates', template)
-
+    const { project } = this.data
+    const templatePath = this.resolveTemplatePath()
     console.log('\n')
     const writingSpinner = this.createSpinner(
       this.style.green(`开始创建项目: ${project.name}\n`)
     ).start()
-    // 获取文件列表
+    // 获取指定template path下的文件列表
     const files = await glob(`${templatePath}/**/*`, {
-      cwd: process.cwd()
+      cwd: process.cwd(),
+      dot: true
     })
 
     // 创建项目
