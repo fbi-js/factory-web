@@ -1,3 +1,4 @@
+import { existsSync } from 'fs'
 import { join } from 'path'
 import { Configuration } from 'webpack'
 import { paths, factoryConfigs } from '../constant/paths'
@@ -21,10 +22,15 @@ export const getTemplateWebpackConfig = (
 export const getUserConfig = () => {
   let userConfig = {}
   const userConfigPath = join(process.cwd(), factoryConfigs.webpackFileName)
-  try {
-    const exportConfig = require(userConfigPath)
-    userConfig = exportConfig.default || exportConfig
-  } catch {}
+  if (existsSync(userConfigPath + '.js')) {
+    try {
+      const exportConfig = require(userConfigPath)
+      userConfig = exportConfig.default || exportConfig
+    } catch (error) {
+      console.error(error)
+      process.exit(1)
+    }
+  }
   return userConfig
 }
 
