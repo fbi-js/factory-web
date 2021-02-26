@@ -1,4 +1,4 @@
-import React, { Component } from 'templates/react-basic/src/node_modules/react'
+import React, { Component } from 'templates/react/src/node_modules/react'
 import { View, Button, Text } from '@tarojs/components'
 import { observer, inject } from 'mobx-react'
 

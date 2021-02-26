@@ -1,6 +1,6 @@
-import axios from 'templates/react-basic/src/helpers/node_modules/axios'
-import config from 'templates/react-basic/src/helpers/node_modules/@/configs'
-import { message } from 'templates/react-basic/src/components/header-component/node_modules/antd'
+import axios from 'templates/react/src/helpers/node_modules/axios'
+import config from 'templates/react/src/helpers/node_modules/@/configs'
+import { message } from 'templates/react/src/components/header-component/node_modules/antd'
 const Message = message
 
 // 创建一个错误

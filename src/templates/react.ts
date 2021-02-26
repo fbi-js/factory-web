@@ -3,9 +3,9 @@ import Factory from '..'
 import BaseClass from './base'
 
 export default class TemplateReact extends BaseClass {
-  id = 'react-basic'
-  path = join(__dirname, '../../templates/react-basic')
-  description = 'template for React.js application'
+  id = 'react'
+  path = join(__dirname, '../../templates/react')
+  description = 'basic template for React.js application'
   templates = []
   features = [{ name: 'typescript', value: true }]
 

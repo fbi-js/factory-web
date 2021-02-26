@@ -1,8 +1,8 @@
-import React from 'templates/react-basic/src/node_modules/react'
+import React from 'templates/react/src/node_modules/react'
 import {
   Switch,
   Route,
-} from 'templates/react-basic/src/components/wau/breadcrumb/node_modules/react-router-dom'
+} from 'templates/react/src/components/wau/breadcrumb/node_modules/react-router-dom'
 
 export default function About() {
   const AboutChild = <div>about-child</div>

@@ -46,9 +46,9 @@ export const resolveUserConfig = (
 ) => {
   return typeof userConfig === 'function'
     ? userConfig({
-      config: baseConfig,
-      paths
-    })
+        config: baseConfig,
+        paths
+      })
     : userConfig
 }
 

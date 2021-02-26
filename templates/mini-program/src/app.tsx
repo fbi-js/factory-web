@@ -1,4 +1,4 @@
-import React, { Component } from 'templates/react-basic/src/node_modules/react'
+import React, { Component } from 'templates/react/src/node_modules/react'
 import { Provider } from 'mobx-react'
 
 import counterStore from './store/counter'

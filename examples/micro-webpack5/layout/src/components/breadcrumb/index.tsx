@@ -1,15 +1,15 @@
 import React, {
   useEffect,
   useState,
-} from 'templates/react-basic/src/node_modules/react'
-import { Breadcrumb } from 'templates/react-basic/src/components/header-component/node_modules/antd'
+} from 'templates/react/src/node_modules/react'
+import { Breadcrumb } from 'templates/react/src/components/header-component/node_modules/antd'
 import { getPathFromTree } from '@/components/helpers/tree-helper'
 import { IBaseMenuRouteAccessBreadcrumb } from '@/typings/menu'
 import {
   useHistory,
   useLocation,
-} from 'templates/react-basic/src/components/wau/breadcrumb/node_modules/react-router-dom'
-import { LeftOutlined } from 'templates/react-basic/src/components/copyright/node_modules/@ant-design/icons'
+} from 'templates/react/src/components/wau/breadcrumb/node_modules/react-router-dom'
+import { LeftOutlined } from 'templates/react/src/components/copyright/node_modules/@ant-design/icons'
 import style from './breadcrumb.module.scss'
 interface BreadcrumbAdminProps {
   routes: IBaseMenuRouteAccessBreadcrumb[]

@@ -1,4 +1,4 @@
-import React from 'templates/react-basic/src/node_modules/react'
+import React from 'templates/react/src/node_modules/react'
 const Layout = React.lazy(() => import('mainApp/Layout'))
 const Header = React.lazy(() => import('mainApp/Header'))
 function App() {

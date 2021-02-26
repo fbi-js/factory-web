@@ -9,7 +9,7 @@ declare namespace NodeJS {
 }
 
 declare module '*.vue' {
-  import Vue from 'templates/vue-basic/src/node_modules/vue'
+  import Vue from 'templates/vue/src/node_modules/vue'
   export default Vue
 }
 

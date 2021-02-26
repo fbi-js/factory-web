@@ -1,9 +1,9 @@
 import { setPublicPath } from 'systemjs-webpack-interop'
 import singleSpaVue from 'single-spa-vue'
-import Vue from 'templates/vue-basic/src/node_modules/vue'
+import Vue from 'templates/vue/src/node_modules/vue'
 
 import App from '@/App.vue'
-import router from 'templates/vue-basic/src/node_modules/@/router'
+import router from 'templates/vue/src/node_modules/@/router'
 import '@/assets/css/main.css'
 
 Vue.config.productionTip = false

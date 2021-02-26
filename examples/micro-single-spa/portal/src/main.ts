@@ -1,4 +1,4 @@
-import axios from 'templates/react-basic/src/helpers/node_modules/axios'
+import axios from 'templates/react/src/helpers/node_modules/axios'
 import { registerApplication, start } from 'single-spa'
 import { fullScreenLoadingHandle } from './loading'
 

@@ -1,8 +1,8 @@
 import { setPublicPath } from 'systemjs-webpack-interop'
 import singleSpaReact from 'single-spa-react'
 
-import React from 'templates/react-basic/src/node_modules/react'
-import ReactDOM from 'react-dom'
+import React from 'templates/react/src/node_modules/react'
+import ReactDOM from 'templates/react/src/node_modules/react-dom'
 
 import './index.css'
 import App from './App'

@@ -1,4 +1,4 @@
-const Axios = require('templates/react-basic/src/helpers/node_modules/axios')
+const Axios = require('templates/react/src/helpers/node_modules/axios')
 const fs = require('fs-extra')
 const path = require('path')
 const appDirectory = fs.realpathSync(process.cwd())
