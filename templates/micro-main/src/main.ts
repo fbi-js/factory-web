@@ -1,8 +1,8 @@
-import axios from 'axios'
+import axios from 'templates/react/src/helpers/node_modules/axios'
 import { registerApplication, start } from 'single-spa'
 import { fullScreenLoadingHandle } from './loading'
 
-async function loadConfigs (configs) {
+async function loadConfigs(configs) {
   const result: Record<string, any>[] = []
   for (const item of configs) {
     const urlInstance = new URL(item)
@@ -29,7 +29,7 @@ async function loadConfigs (configs) {
   return result
 }
 
-function setImportMap (config: any) {
+function setImportMap(config: any) {
   const configs = Array.isArray(config) ? config : [config]
   const script = document.createElement('script')
   script.type = 'systemjs-importmap'
@@ -47,7 +47,7 @@ function setImportMap (config: any) {
   head?.appendChild(script)
 }
 
-async function loadApps (apps: any[]) {
+async function loadApps(apps: any[]) {
   const configs = await loadConfigs(apps)
   if (!configs || configs.length < 1) {
     return
@@ -63,7 +63,7 @@ async function loadApps (apps: any[]) {
   }
 }
 
-function run (configs: any) {
+function run(configs: any) {
   fullScreenLoadingHandle()
 
   const baseConfigs = configs.base

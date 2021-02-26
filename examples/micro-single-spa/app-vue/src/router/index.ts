@@ -1,5 +1,5 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+import Vue from 'templates/vue/src/node_modules/vue'
+import Router from 'templates/vue/src/router/node_modules/vue-router'
 
 Vue.use(Router)
 

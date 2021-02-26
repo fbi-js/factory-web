@@ -1,51 +1,28 @@
 {
-  "name": "<%_ if (project.orgName) { _%>@<%= project.orgName %>/<%_ } _%><%= project.name %>",
+  "name": "my-app",
   "version": "0.0.0",
-  "description": "<%= project.description %>",
+  "description": "my-app description",
   "private": true,
   "scripts": {
-    "dev": "fbi serve<% if (project.isMicro) { %> -p 9001<% } %>",
+    "dev": "fbi serve",
     "build": "fbi build",
     "format": "fbi format"
   },
   "dependencies": {
-    <%_ if (project.features.admin) { _%>
-    "@ant-design/icons": "^4.4.0",
-    "antd": "^4.11.2",
-    "axios": "^0.21.1",
-    "react-router-dom": "^5.2.0",
-    <%_ } _%>
-    <%_ if (project.isMicro) { _%>
-    "single-spa-react": "^3.2.0",
-    "systemjs-webpack-interop": "^2.3.4",
-    <%_ } _%>
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
   },
   "devDependencies": {
-    <%_ if (project.features.typescript) { _%>
-    "<%= factoryId %>": "^<%= factoryVersion %>",
-    <%_ } else { _%>
-    "<%= factoryId %>": "^<%= factoryVersion %>"
-    <%_ } _%>
-    <%_ if (project.features.typescript) { _%>
+    "@fbi-js/factory-web": "^2.0.0-alpha.3",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
-    <%_ if (project.features.admin) { _%>
-    "@types/react-router-dom": "^5.1.7",
-    <%_ } _%>
-    <%_ if (project.isMicro) { _%>
-    "@types/single-spa-react": "^3.0.0",
-    <%_ } _%>
     "typescript": "^4.1.3"
-    <%_ } _%>
   },
   "fbi": {
     "factory": {
       "id": "<%= factory.id %>",
-      "version": "<%= factory.version %>",
       "template": "<%= factory.template %>",
-      "features": <%- JSON.stringify(project.features) %>
+      "features": <%= project.features %>
     }
   },
   "browserslist": [
@@ -55,8 +32,26 @@
   ],
   "eslintConfig": {
     "extends": [
-      "@fbi-js/react<%_ if (project.features.typescript) { _%>-typescript<%_ } _%>"
-    ]
+      "@fbi-js/react-typescript"
+    ],
+    "rules": {
+      "semi": [
+        2,
+        "never"
+      ],
+      "jsx-quotes": [
+        "error",
+        "prefer-double"
+      ],
+      "quotes": [
+        "error",
+        "single"
+      ],
+      "space-before-function-paren": [
+        "error",
+        "never"
+      ]
+    }
   },
   "stylelint": {
     "extends": "@fbi-js/stylelint-config"
@@ -64,11 +59,7 @@
   "prettier": {
     "semi": false,
     "tabWidth": 2,
-    "endOfLine": "lf",
-    "printWidth": 80,
     "singleQuote": true,
-    "trailingComma": "none",
-    "arrowParens": "always",
-    "vueIndentScriptAndStyle": true
+    "trailingComma": "none"
   }
 }

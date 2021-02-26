@@ -1,10 +1,5 @@
-import React from 'react'
-import { PageContainer } from '@/components'
+import Home from '@/components/home/index.tsx'
 
-export default function Index () {
-  return (
-    <PageContainer>
-      <h1>home</h1>
-    </PageContainer>
-  )
+export default function Index() {
+  return <Home />
 }

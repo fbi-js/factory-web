@@ -1,8 +1,15 @@
-import { Menu } from 'antd'
-import React, { useCallback, useEffect, useState } from 'react'
+import { Menu } from 'templates/react/src/components/header-component/node_modules/antd'
+import React, {
+  useCallback,
+  useEffect,
+  useState,
+} from 'templates/react/src/node_modules/react'
 import { subMenuRender } from './Sub'
 import { IBaseMenuRouteAccessBreadcrumb } from '@/typings/menu'
-import { useHistory, useLocation } from 'react-router-dom'
+import {
+  useHistory,
+  useLocation,
+} from 'templates/react/src/components/wau/breadcrumb/node_modules/react-router-dom'
 import { getPathFromTree } from '../helpers/tree-helper'
 
 export default function MenuRender(

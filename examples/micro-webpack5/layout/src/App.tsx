@@ -1,17 +1,21 @@
-import React from 'react'
+import React from 'templates/react/src/node_modules/react'
 import './app.css'
-import { Switch, Route, HashRouter as Router } from 'react-router-dom'
+import {
+  Switch,
+  Route,
+  HashRouter as Router,
+} from 'templates/react/src/components/wau/breadcrumb/node_modules/react-router-dom'
 import { routes } from './routes'
 import Layout from '@/components/admin-layout'
 import AdminHeader from '@/components/header'
 import AdminBreadcrumb from '@/components/breadcrumb'
 import AdminMenu from '@/components/menu'
-import { Card } from 'antd'
+import { Card } from 'templates/react/src/components/header-component/node_modules/antd'
 import 'antd/dist/antd.min.css'
 // pages
 
 import About from '@/pages/about'
-import Home from '@/pages/home'
+import Home from 'templates/react/src/node_modules/@/pages/home'
 import Users from '@/pages/users'
 
 /**

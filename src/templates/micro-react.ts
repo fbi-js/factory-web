@@ -4,10 +4,10 @@ import TemplateReact from './react'
 
 export default class TemplateMicroReact extends TemplateReact {
   id = 'micro-react'
-  path = join(__dirname, '../../templates/react')
+  path = join(__dirname, '../../templates/react-basic')
   description = 'template for Micro-fontends react application'
   templates = []
-  features = [{ name: 'typescript', value: true }]
+  features = []
 
   constructor(public factory: Factory) {
     super(factory)

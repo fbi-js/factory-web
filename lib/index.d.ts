@@ -8,9 +8,6 @@ import CommandTypesSync from './commands/types-sync';
 import TemplateBase from './templates/base';
 import TemplateVue from './templates/vue';
 import TemplateReact from './templates/react';
-import TemplateMicroMain from './templates/micro-main';
-import TemplateMicroVue from './templates/micro-vue';
-import TemplateMicroReact from './templates/micro-react';
 export default class FactoryWeb extends Factory {
     id: any;
     description: string;
@@ -18,4 +15,4 @@ export default class FactoryWeb extends Factory {
     templates: any;
     execOpts: any;
 }
-export { CommandBuild, CommandServe, CommandTypesCreate, CommandTypesSync, TemplateBase, TemplateVue, TemplateReact, TemplateMicroMain, TemplateMicroVue, TemplateMicroReact };
+export { CommandBuild, CommandServe, CommandTypesCreate, CommandTypesSync, TemplateBase, TemplateVue, TemplateReact };

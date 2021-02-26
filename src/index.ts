@@ -11,10 +11,6 @@ import CommandTypesSync from './commands/types-sync'
 import TemplateBase from './templates/base'
 import TemplateVue from './templates/vue'
 import TemplateReact from './templates/react'
-import TemplateMicroMain from './templates/micro-main'
-import TemplateMicroVue from './templates/micro-vue'
-import TemplateMicroReact from './templates/micro-react'
-import TemplateMiniProgram from './templates/mini-program'
 
 export default class FactoryWeb extends Factory {
   id = require('../package.json').name
@@ -28,14 +24,7 @@ export default class FactoryWeb extends Factory {
     new CommandFormat(this)
   ]
 
-  templates = [
-    new TemplateVue(this),
-    new TemplateReact(this),
-    new TemplateMicroMain(this),
-    new TemplateMicroVue(this),
-    new TemplateMicroReact(this),
-    new TemplateMiniProgram(this)
-  ] as any
+  templates = [new TemplateVue(this), new TemplateReact(this)] as any
 
   execOpts: any = {
     cwd: process.cwd(),
@@ -51,8 +40,5 @@ export {
   CommandTypesSync,
   TemplateBase,
   TemplateVue,
-  TemplateReact,
-  TemplateMicroMain,
-  TemplateMicroVue,
-  TemplateMicroReact
+  TemplateReact
 }

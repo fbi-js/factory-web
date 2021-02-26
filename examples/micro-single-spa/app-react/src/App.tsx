@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'templates/react/src/node_modules/react'
 
 import './app.css'
 
