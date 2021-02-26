@@ -24,7 +24,10 @@ export const getUserConfig = () => {
   try {
     const exportConfig = require(userConfigPath)
     userConfig = exportConfig.default || exportConfig
-  } catch {}
+  } catch (error) {
+    console.log(`\nwebpack config error, config path: ${userConfigPath}.js\n`)
+    throw new Error(error)
+  }
   return userConfig
 }
 

@@ -3,9 +3,9 @@ import Factory from '..'
 import BaseClass from './base'
 
 export default class TemplateVue extends BaseClass {
-  id = 'vue-basic'
-  path = join(__dirname, '../../templates/vue-basic')
-  description = 'template for Vue.js application'
+  id = 'vue'
+  path = join(__dirname, '../../templates/vue')
+  description = 'basic template for Vue.js application'
   templates = []
   features = [{ name: 'typescript', value: true }]
 
@@ -15,12 +15,5 @@ export default class TemplateVue extends BaseClass {
 
   protected async gathering(flags: Record<string, any>) {
     await super.gathering(flags)
-
-    const { factory, project } = this.data
-    this.spinner = this.createSpinner('Creating project...').start(
-      `Creating ${this.style.bold.green(project.name)} via ${factory.id} from ${
-        factory.template
-      }...`
-    )
   }
 }

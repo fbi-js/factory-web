@@ -1,4 +1,4 @@
-import React from 'templates/react-basic/src/node_modules/react'
+import React from 'templates/react/src/node_modules/react'
 import style from './header.module.scss'
 
 interface HeaderProps {

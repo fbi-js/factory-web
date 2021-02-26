@@ -1,6 +1,6 @@
 /// <reference types="react" />
 declare module 'typings/menu' {
-  import React from 'templates/react-basic/src/node_modules/react'
+  import React from 'templates/react/src/node_modules/react'
   export interface IBreadcrumb {
     /** 名称 */
     name: string
@@ -87,7 +87,7 @@ declare module 'mainApp/Layout' {
   export default App
 }
 declare module 'mainApp/Header' {
-  import React from 'templates/react-basic/src/node_modules/react'
+  import React from 'templates/react/src/node_modules/react'
   interface HeaderProps {
     height: number | string
     style: React.CSSProperties
