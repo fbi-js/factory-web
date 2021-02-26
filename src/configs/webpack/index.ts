@@ -39,17 +39,17 @@ export const getUserConfig = () => {
  * @param userConfig user webpack config
  * @param baseConfig base webpack config
  */
-// TODO: remove `paths`
 export const resolveUserConfig = (
   userConfig: Configuration | Function,
   baseConfig: Configuration
 ) => {
-  return typeof userConfig === 'function'
-    ? userConfig({
-        config: baseConfig,
-        paths
-      })
-    : userConfig
+  if (typeof userConfig === 'function') {
+    return userConfig({
+      config: baseConfig,
+      paths
+    })
+  }
+  return userConfig
 }
 
 /**

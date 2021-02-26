@@ -1,8 +1,7 @@
-import React from 'react'
 import logo from '@/assets/logo.svg'
 import './index.less'
 
-const Home: React.FunctionComponent = () => {
+const Home = () => {
   return (
     <div className="app">
       <header className="app-header">
