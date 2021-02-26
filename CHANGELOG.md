@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/fbi-js/factory-web/compare/v2.0.0-alpha.4...v2.0.0) (2021-02-26)
+
+
+### Features
+
+* remove some useless code & fix template bug ([f007842](https://github.com/fbi-js/factory-web/commit/f0078428e16ae5d60f2291da3c544a21b40342fd))
+
+
+### Bug Fixes
+
+* process should exit with error when build fail ([6ac75a2](https://github.com/fbi-js/factory-web/commit/6ac75a2d9b7565c1d58fe2f28b791cfcb002e64c))
+* throw error when load user config error ([51b2807](https://github.com/fbi-js/factory-web/commit/51b2807fdd8c16b0fbe25e3053fb8c0b514a0918))
+
 ## [2.0.0-alpha.4](https://github.com/fbi-js/factory-web/compare/v2.0.0-alpha.3...v2.0.0-alpha.4) (2021-02-26)
 
 ## [2.0.0-alpha.3](https://github.com/fbi-js/factory-web/compare/v2.0.0-alpha.2...v2.0.0-alpha.3) (2021-02-23)

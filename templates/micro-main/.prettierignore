@@ -1,6 +1,0 @@
-build/
-dist/
-**/*.svg
-**/*.ejs
-**/*.html
-src/common-deps/**/*

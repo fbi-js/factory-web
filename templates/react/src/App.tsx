@@ -1,7 +1,6 @@
-import React from 'react'
 import Home from '@/pages/home'
 
-const App: React.FunctionComponent = () => {
+const App = () => {
   return (
     <div className="app">
       <Home />
