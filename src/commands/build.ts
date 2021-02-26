@@ -54,7 +54,8 @@ export default class CommandBuild extends Command {
     } catch (err) {
       this.error('Failed to build project')
       console.log(err)
-      this.exit()
+      // process.exit(1)
+      this.exit(1)
     }
   }
 
