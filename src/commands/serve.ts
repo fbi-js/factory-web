@@ -19,7 +19,7 @@ export default class CommandServe extends Command {
       'specify env mode(development|production|testing)',
       'development'
     ],
-    ['-p, --port <port>', 'webapck dev-serve port', PORT],
+    ['-p, --port <port>', 'webapck dev-serve port', process.env.PORT || PORT],
     ['--micro-mode <mode>', '""|fuse', '']
   ]
 
