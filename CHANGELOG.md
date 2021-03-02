@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/fbi-js/factory-web/compare/v2.0.0...v2.1.0) (2021-03-02)
+
+
+### Features
+
+* add install tips ([78e26de](https://github.com/fbi-js/factory-web/commit/78e26deeecd9247051925784f2d8ce747502f494))
+
 ## [2.0.0](https://github.com/fbi-js/factory-web/compare/v2.0.0-alpha.4...v2.0.0) (2021-02-26)
 
 
