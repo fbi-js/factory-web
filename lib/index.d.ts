@@ -11,7 +11,7 @@ import TemplateReact from './templates/react';
 export default class FactoryWeb extends Factory {
     id: any;
     description: string;
-    commands: (CommandServe | CommandLint | CommandFormat | CommandTypesCreate | CommandTypesSync | CommandBuild)[];
+    commands: (CommandServe | CommandBuild | CommandTypesCreate | CommandTypesSync | CommandLint | CommandFormat)[];
     templates: any;
     execOpts: any;
 }

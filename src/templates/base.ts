@@ -114,7 +114,8 @@ export default class TemplateWebBase extends Template {
     // 获取指定template path下的文件列表
     const files = await glob(`${this.path}/**/*`, {
       cwd: process.cwd(),
-      dot: true
+      dot: true,
+      absolute: true
     })
     // 创建项目
     await this.writingFiles(files)
@@ -133,22 +134,17 @@ export default class TemplateWebBase extends Template {
       const env = this.context.get('env')
       const config = this.context.get('config')
       const packageManager = env.hasYarn ? 'yarn' : config.packageManager
-      const isYarn = packageManager === 'yarn'
 
       // if use yarn install, not need spinner
-      if (isYarn) {
+      const installSpinner = this.createSpinner(
+        `${packageManager} install`
+      ).start()
+      try {
         await this.installDeps(this.targetDir, packageManager, false)
-      } else {
-        const installSpinner = this.createSpinner(
-          `${packageManager} install`
-        ).start()
-        try {
-          await this.installDeps(this.targetDir, packageManager, false)
-          installSpinner.succeed('install dependencies success!\n')
-        } catch (err) {
-          installSpinner.fail('install dependencies fail!\n')
-          this.error(err)
-        }
+        installSpinner.succeed('install dependencies success!\n')
+      } catch (err) {
+        installSpinner.fail('install dependencies fail!\n')
+        this.error(err)
       }
     }
   }
