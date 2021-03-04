@@ -5,12 +5,15 @@ import glob = require('tiny-glob')
 
 const { formatName, isValidObject } = utils
 const { version } = require('../../package.json')
-
 export default class TemplateWebBase extends Template {
   id = 'web-base'
   features: any[] = []
   path = ''
-  ignore = []
+  rule: any = {
+    glob: '**/*',
+    ignores: [] // examples: 'src/test/test.ts', 'src/test/test.*', 'src/test*'
+  }
+
   constructor(public factory: Factory) {
     super(factory)
   }

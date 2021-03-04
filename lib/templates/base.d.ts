@@ -5,7 +5,7 @@ export default class TemplateWebBase extends Template {
     id: string;
     features: any[];
     path: string;
-    ignore: never[];
+    rule: any;
     constructor(factory: Factory);
     private get enterOrgName();
     private get enterProjectDescription();
