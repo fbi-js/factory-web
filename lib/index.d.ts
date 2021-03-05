@@ -9,7 +9,7 @@ import TemplateReact from './templates/react';
 export default class FactoryWeb extends Factory {
     id: any;
     description: string;
-    commands: (CommandServe | CommandLint | CommandFormat | CommandBuild)[];
+    commands: (CommandBuild | CommandServe | CommandLint | CommandFormat)[];
     templates: any;
     execOpts: any;
 }

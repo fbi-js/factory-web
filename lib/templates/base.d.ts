@@ -13,7 +13,12 @@ export default class TemplateWebBase extends Template {
     /**
      * get template prompt options
      */
-    private getPromptOptions;
+    protected getPromptOptions(): (string | {
+        type: string;
+        name: string;
+        message: string;
+        initial({ state }: any): string;
+    })[];
     protected gathering(_flags: Record<string, any>): Promise<void>;
     protected writing(): Promise<void>;
     protected installing(flags: Record<string, any>): Promise<void>;
