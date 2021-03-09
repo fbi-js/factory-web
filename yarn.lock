@@ -1010,10 +1010,10 @@
   resolved "https://registry.npmjs.org/@fbi-js/tsconfig/-/tsconfig-1.2.2.tgz#6e154bdb4cb345dc415f378f1cc7cdefa86ec9f0"
   integrity sha512-R4Gfhp0bZlkmuUQGB6bZWAKXsjbGZvLVf8aYzRnj+xQGdMN6ILi7A2NUb5zftyg0yk/7VCz5uVTHXcwv15vUug==
 
-"@fbi-js/webpack-config-base@^1.5.6":
-  version "1.5.6"
-  resolved "https://registry.npmjs.org/@fbi-js/webpack-config-base/-/webpack-config-base-1.5.6.tgz#8c51d4de65a765008bd4a5cae9eb4b84de601f44"
-  integrity sha512-aJFYgcqn6Cl/4ZO7bUTZ3+8IyncYiW5Gs1iNFapX9AevlrRTBa/PfsdcOQ65NcBN0fbB6x/LBSVcy/cojWCpag==
+"@fbi-js/webpack-config-base@^1.5.7":
+  version "1.5.7"
+  resolved "https://registry.npmjs.org/@fbi-js/webpack-config-base/-/webpack-config-base-1.5.7.tgz#b8b750d1efb3a4f09d507c836bd439250527a29d"
+  integrity sha512-braGGlYkxRO9EVDW0S8ONnbOE8GYxDaNuS7zmDs68yursh9yyqZ/C87ENimJMg2xRQ8xbx+MFgZ8PeI9xpIb7Q==
   dependencies:
     "@babel/plugin-proposal-class-properties" "^7.13.0"
     "@babel/preset-env" "^7.13.5"
@@ -1042,30 +1042,30 @@
     webpack-merge "^5.7.3"
     webpackbar "^5.0.0-3"
 
-"@fbi-js/webpack-config-react@^1.3.6":
-  version "1.3.6"
-  resolved "https://registry.npmjs.org/@fbi-js/webpack-config-react/-/webpack-config-react-1.3.6.tgz#c6ef4be091cb4d6a8cc6b7a15dad2334cfe56f6a"
-  integrity sha512-fABB2rH4fII/fkSlUM6vlABb5mWLcpAhCDkb8pk9MHt5NgtWyKsE2wAMk88pkLyfPtvswC1XyvQYuowuH72vEA==
+"@fbi-js/webpack-config-react@^1.3.7":
+  version "1.3.7"
+  resolved "https://registry.npmjs.org/@fbi-js/webpack-config-react/-/webpack-config-react-1.3.7.tgz#82d532c4420b937748fbc92a16054690be65d624"
+  integrity sha512-tCCuyGrbP4hObN5DW14JRu/rmebew5UHkq9W+a1VEUhP/R1vqukHGPKYYAPs5WGiEvXA2v0NoPy/Q70prpZIpQ==
   dependencies:
     "@babel/preset-react" "^7.12.13"
     "@fbi-js/eslint-config-react-typescript" "^1.2.2"
     "@fbi-js/stylelint-config" "^1.2.2"
     "@fbi-js/tsconfig" "^1.2.2"
-    "@fbi-js/webpack-config-base" "^1.5.6"
+    "@fbi-js/webpack-config-base" "^1.5.7"
     "@pmmmwh/react-refresh-webpack-plugin" "^0.4.3"
     react-refresh "^0.9.0"
 
-"@fbi-js/webpack-config-vue@^1.3.6":
-  version "1.3.6"
-  resolved "https://registry.npmjs.org/@fbi-js/webpack-config-vue/-/webpack-config-vue-1.3.6.tgz#c6dff2813098b0af3878418e39f8f9846eab4d57"
-  integrity sha512-o/Qe5IngHPkehoonv2V97tpVgrFYzXItIwO2Z9utW1sJNZxk2y59vpgxfxwbc1TWzFPpGJWF2mi7pnPnIzOGyw==
+"@fbi-js/webpack-config-vue@^1.3.7":
+  version "1.3.7"
+  resolved "https://registry.npmjs.org/@fbi-js/webpack-config-vue/-/webpack-config-vue-1.3.7.tgz#4d5b43c356288d06a3126b36f7e4996860af22e4"
+  integrity sha512-I60bL2fR1qHgFQML/dzoeNGAli0JWcyOqRQ02lahstZvXS+SzYt5h7+dcYK4RNcII8VzePB6uhJSaHAdFwHv/Q==
   dependencies:
     "@fbi-js/eslint-config-vue-typescript" "^1.2.2"
     "@fbi-js/stylelint-config" "^1.2.2"
     "@fbi-js/tsconfig" "^1.2.2"
-    "@fbi-js/webpack-config-base" "^1.5.6"
+    "@fbi-js/webpack-config-base" "^1.5.7"
     vue-loader "^15.9.6"
-    vue-svg-loader "^0.17.0-beta.2"
+    vue-svg-loader "^0.16.0"
     vue-template-compiler "^2.6.12"
 
 "@nodelib/fs.scandir@2.1.4":
@@ -4738,7 +4738,7 @@ loader-runner@^4.2.0:
   resolved "https://registry.npmjs.org/loader-runner/-/loader-runner-4.2.0.tgz#d7022380d66d14c5fb1d496b89864ebcfd478384"
   integrity sha512-92+huvxMvYlMzMt0iIOukcwYBFpkYJdpl2xsZ7LrlayO7E8SOv+JJUEK17B/dJIHAOLMfh2dZZ/Y18WgmGtYNw==
 
-loader-utils@^1.0.2, loader-utils@^1.1.0, loader-utils@^1.4.0:
+loader-utils@^1.0.2, loader-utils@^1.1.0, loader-utils@^1.2.3, loader-utils@^1.4.0:
   version "1.4.0"
   resolved "https://registry.npmjs.org/loader-utils/-/loader-utils-1.4.0.tgz#c579b5e34cb34b1a74edc6c1fb36bfa371d5a613"
   integrity sha512-qH0WSMBtn/oHuwjy/NucEgbx5dbxxnxup9s4PVXJUDHZBQY+s0NWA9rJf53RBnQZxfch7euUui7hpoAPvALZdA==
@@ -7404,6 +7404,13 @@ svg-tags@^1.0.0:
   resolved "https://registry.npmjs.org/svg-tags/-/svg-tags-1.0.0.tgz#58f71cee3bd519b59d4b2a843b6c7de64ac04764"
   integrity sha1-WPcc7jvVGbWdSyqEO2x95krAR2Q=
 
+svg-to-vue@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.npmjs.org/svg-to-vue/-/svg-to-vue-0.7.0.tgz#ec86deb1742be38319462e36703af1dfa2f9fad9"
+  integrity sha512-Tg2nMmf3BQorYCAjxbtTkYyWPVSeox5AZUFvfy4MoWK/5tuQlnA/h3LAlTjV3sEvOC5FtUNovRSj3p784l4KOA==
+  dependencies:
+    svgo "^1.3.2"
+
 svgo@^1.0.0, svgo@^1.2.2, svgo@^1.3.2:
   version "1.3.2"
   resolved "https://registry.npmjs.org/svgo/-/svgo-1.3.2.tgz#b6dc511c063346c9e415b81e43401145b96d4167"
@@ -7863,14 +7870,13 @@ vue-style-loader@^4.1.0:
     hash-sum "^1.0.2"
     loader-utils "^1.0.2"
 
-vue-svg-loader@^0.17.0-beta.2:
-  version "0.17.0-beta.2"
-  resolved "https://registry.npmjs.org/vue-svg-loader/-/vue-svg-loader-0.17.0-beta.2.tgz#954b2a08b5488998dd81ec371ab5fb5ea4182ef7"
-  integrity sha512-iMUGJTKEcuNAG8VXOchjA8443IqEmEi2Aw6EVIHWma2cC4TUQ7Oet5Yry9IFfqXQXXvyzXz5EyttVvfRGTNH4Q==
+vue-svg-loader@^0.16.0:
+  version "0.16.0"
+  resolved "https://registry.npmjs.org/vue-svg-loader/-/vue-svg-loader-0.16.0.tgz#adccbdc9aca90132bde9c9d96cd49f74efecd345"
+  integrity sha512-2RtFXlTCYWm8YAEO2qAOZ2SuIF2NvLutB5muc3KDYoZq5ZeCHf8ggzSan3ksbbca7CJ/Aw57ZnDF4B7W/AkGtw==
   dependencies:
-    loader-utils "^2.0.0"
-    semver "^7.3.2"
-    svgo "^1.3.2"
+    loader-utils "^1.2.3"
+    svg-to-vue "^0.7.0"
 
 vue-template-compiler@^2.6.12:
   version "2.6.12"
