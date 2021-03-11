@@ -5,15 +5,13 @@ export default class TemplateWebBase extends Template {
     id: string;
     features: any[];
     path: string;
-    ignore: never[];
+    rule: any;
+    prompts: any[];
     constructor(factory: Factory);
-    private get enterOrgName();
-    private get enterProjectDescription();
-    private get selectFeatures();
     /**
      * get template prompt options
      */
-    private getPromptOptions;
+    protected getPromptOptions(): any[];
     protected gathering(_flags: Record<string, any>): Promise<void>;
     protected writing(): Promise<void>;
     protected installing(flags: Record<string, any>): Promise<void>;

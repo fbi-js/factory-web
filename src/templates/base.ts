@@ -3,89 +3,49 @@ import { join } from 'path'
 import { Template, utils } from 'fbi'
 import glob = require('tiny-glob')
 
-const { formatName, isValidObject } = utils
+const { isValidObject } = utils
 const { version } = require('../../package.json')
-
 export default class TemplateWebBase extends Template {
   id = 'web-base'
   features: any[] = []
   path = ''
-  ignore = []
+  rule: any = {
+    glob: '**/*',
+    ignores: [] // examples: 'src/test/test.ts', 'src/test/test.*', 'src/test*'
+  }
+
+  prompts: any[] = []
+
   constructor(public factory: Factory) {
     super(factory)
-  }
-
-  private get enterOrgName() {
-    const validateMsg = 'please input a valid organization name'
-    const isMicro = this.id.startsWith('micro-')
-    const orgName = {
-      type: 'input',
-      name: 'orgName',
-      message: 'Organization name',
-      initial() {
-        return ''
-      },
-      validate(value: any) {
-        const name = formatName(value)
-        return (name && true) || validateMsg
-      }
-    }
-    return isMicro ? [orgName] : []
-  }
-
-  // private get enterProjectName() {
-  //   const validateMsg = 'please input a valid project name'
-  //   const defaultName = this.data.project?.name ?? 'project-demo'
-  //   return {
-  //     type: 'input',
-  //     name: 'name',
-  //     message: 'Project name',
-  //     initial() {
-  //       return defaultName
-  //     },
-  //     validate(value: any) {
-  //       const name = formatName(value)
-  //       return (name && true) || validateMsg
-  //     }
-  //   }
-  // }
-
-  private get enterProjectDescription() {
-    const defaultProjectName = this.data.project?.name ?? 'my-app'
-    return {
-      type: 'input',
-      name: 'description',
-      message: 'Project description',
-      initial({ state }: any) {
-        return `${defaultProjectName} description`
-      }
-    }
-  }
-
-  private get selectFeatures() {
-    const hasFeatures = this.features.length > 0
-    const selectFeatures = {
-      type: 'MultiSelect',
-      name: 'features',
-      message: 'Choose features for your project:',
-      hint: '(Use <space> to select, <return> to submit)',
-      choices: this.features,
-      result(names: string[]): any {
-        return (this as any).map(names)
-      }
-    }
-    return hasFeatures ? JSON.stringify([selectFeatures]) : JSON.stringify([])
   }
 
   /**
    * get template prompt options
    */
-  private getPromptOptions() {
-    return [
-      ...this.enterOrgName,
-      this.enterProjectDescription,
-      ...this.selectFeatures
+  protected getPromptOptions() {
+    const { name } = this.data.project
+    const defaultPrompts = [
+      {
+        type: 'input',
+        name: 'description',
+        message: 'Project description',
+        initial({ state }: any) {
+          return `${name} description`
+        }
+      },
+      {
+        type: 'MultiSelect',
+        name: 'features',
+        message: 'Choose features for your project:',
+        hint: '(Use <space> to select, <return> to submit)',
+        choices: this.features,
+        result(names: string[]): any {
+          return (this as any).map(names)
+        }
+      }
     ]
+    return [...defaultPrompts, ...this.prompts]
   }
 
   protected async gathering(_flags: Record<string, any>) {

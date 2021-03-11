@@ -1,18 +1,14 @@
 {
-  "name": "<%_ if (project.orgName) { _%>@<%= project.orgName %>/<%_ } _%><%= project.name %>",
+  "name": "<%= project.name %>",
   "version": "0.0.0",
   "description": "<%= project.description %>",
   "private": true,
   "scripts": {
-    "dev": "fbi serve <% if (project.isMicro) { %>-p 9001<% } %>",
+    "dev": "fbi serve",
     "build": "fbi build",
     "format": "fbi format"
   },
   "dependencies": {
-    <%_ if (project.isMicro) { _%>
-    "single-spa-vue": "^2.1.0",
-    "systemjs-webpack-interop": "^2.3.4",
-    <%_ } _%>
     "vue": "^2.6.12",
     "vue-router": "^3.4.9"
   },

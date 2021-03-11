@@ -1,11 +1,6 @@
 import Home from '@/pages/home'
+import ReactDOM from 'react-dom'
 
-const App = () => {
-  return (
-    <div className="app">
-      <Home />
-    </div>
-  )
+export default () => {
+  ReactDOM.render(<Home />, document.getElementById('app'))
 }
-
-export default App

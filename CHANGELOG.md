@@ -2,6 +2,42 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.3.4](https://github.com/fbi-js/factory-web/compare/v2.3.3...v2.3.4) (2021-03-11)
+
+
+### Features
+
+* fix template error ([e40192f](https://github.com/fbi-js/factory-web/commit/e40192f82c4d14785912d8ea61de7db4f6dc07df))
+
+### [2.3.3](https://github.com/fbi-js/factory-web/compare/v2.3.2...v2.3.3) (2021-03-11)
+
+### [2.3.2](https://github.com/fbi-js/factory-web/compare/v2.3.1...v2.3.2) (2021-03-11)
+
+### [2.3.1](https://github.com/fbi-js/factory-web/compare/v2.3.0...v2.3.1) (2021-03-11)
+
+## [2.3.0](https://github.com/fbi-js/factory-web/compare/v2.2.1...v2.3.0) (2021-03-11)
+
+### [2.2.1](https://github.com/fbi-js/factory-web/compare/v2.2.0...v2.2.1) (2021-03-09)
+
+
+### Features
+
+* update webpack config version ([493cf70](https://github.com/fbi-js/factory-web/commit/493cf70e8639ae2ec90bf69768dd2660d82584c9))
+
+## [2.2.0](https://github.com/fbi-js/factory-web/compare/v2.1.0...v2.2.0) (2021-03-04)
+
+
+### Features
+
+* add rule ignore example ([9b3d82b](https://github.com/fbi-js/factory-web/commit/9b3d82b01ada52a8ccd8e9b7d8b0e639369b95b8))
+
+### [2.0.1](https://github.com/fbi-js/factory-web/compare/v2.0.0...v2.0.1) (2021-02-26)
+
+
+### Bug Fixes
+
+* fix react template serve error ([62c8c95](https://github.com/fbi-js/factory-web/commit/62c8c956155dd421248f6be24b313327536f4b36))
+
 ## [2.1.0](https://github.com/fbi-js/factory-web/compare/v2.0.0...v2.1.0) (2021-03-02)
 
 
