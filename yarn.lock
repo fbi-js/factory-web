@@ -1010,10 +1010,10 @@
   resolved "https://registry.npmjs.org/@fbi-js/tsconfig/-/tsconfig-1.2.2.tgz#6e154bdb4cb345dc415f378f1cc7cdefa86ec9f0"
   integrity sha512-R4Gfhp0bZlkmuUQGB6bZWAKXsjbGZvLVf8aYzRnj+xQGdMN6ILi7A2NUb5zftyg0yk/7VCz5uVTHXcwv15vUug==
 
-"@fbi-js/webpack-config-base@^1.6.0":
-  version "1.6.0"
-  resolved "https://registry.npmjs.org/@fbi-js/webpack-config-base/-/webpack-config-base-1.6.0.tgz#c2a20b370160155b7310e0448151d2d6dc285e41"
-  integrity sha512-fJqfJ1V0NIBxtxH2XH6+rQSiK+4uXYsL9IHZIFABG5w47zvRhaYMbbZ3/txLU0EDUkTye+HhV4lL6GwnCLgKzw==
+"@fbi-js/webpack-config-base@^1.6.1":
+  version "1.6.1"
+  resolved "https://registry.npmjs.org/@fbi-js/webpack-config-base/-/webpack-config-base-1.6.1.tgz#711bfd8cbc4367cabc48e0d236b7c97f56d5d724"
+  integrity sha512-yzM5XQF5nsS20Y2nlwB5ge+VxlXP7dZlYu9RwvXUOcpAqCssCsZq3661ocEPS+3tcRLv7tVSnX+f1Ytx0X+ZEw==
   dependencies:
     "@babel/plugin-proposal-class-properties" "^7.13.0"
     "@babel/preset-env" "^7.13.5"
@@ -1034,6 +1034,7 @@
     less-loader "^8.0.0"
     log-update "2.3.x"
     mini-css-extract-plugin "^1.3.8"
+    mini-svg-data-uri "^1.2.3"
     postcss "^8.2.6"
     postcss-loader "^5.0.0"
     postcss-preset-env "^6.7.0"
@@ -1041,33 +1042,32 @@
     sass-loader "^11.0.1"
     style-loader "^2.0.0"
     stylelint-webpack-plugin "^2.1.1"
-    svg-inline-loader "^0.8.2"
     url-loader "^4.1.1"
     webpack-merge "^5.7.3"
     webpackbar "^5.0.0-3"
 
-"@fbi-js/webpack-config-react@^1.4.0":
-  version "1.4.0"
-  resolved "https://registry.npmjs.org/@fbi-js/webpack-config-react/-/webpack-config-react-1.4.0.tgz#d520152529c1f1be512022885b0930731b2913db"
-  integrity sha512-y1k92p4XCkrX+SiAx4PBnQ9Q1nNtvANQHEy+z+jYUE3wwUOiqgfITeOLeQER0GS4v7KumQ5sTXn4RX3oUfU7ug==
+"@fbi-js/webpack-config-react@^1.4.1":
+  version "1.4.1"
+  resolved "https://registry.npmjs.org/@fbi-js/webpack-config-react/-/webpack-config-react-1.4.1.tgz#bab178b88ed8d55e8a0c8735c6beb1b432705682"
+  integrity sha512-OTeYYRBJdnpZWz424tMV6qdkEptjp7XmtmpVXn/1ZUv32h0516Rx6OFNVpfiBeyUd5+VUDvhgE/+jDZPaQSseg==
   dependencies:
     "@babel/preset-react" "^7.12.13"
     "@fbi-js/eslint-config-react-typescript" "^1.2.2"
     "@fbi-js/stylelint-config" "^1.2.2"
     "@fbi-js/tsconfig" "^1.2.2"
-    "@fbi-js/webpack-config-base" "^1.6.0"
+    "@fbi-js/webpack-config-base" "^1.6.1"
     "@pmmmwh/react-refresh-webpack-plugin" "^0.4.3"
     react-refresh "^0.9.0"
 
-"@fbi-js/webpack-config-vue@^1.4.0":
-  version "1.4.0"
-  resolved "https://registry.npmjs.org/@fbi-js/webpack-config-vue/-/webpack-config-vue-1.4.0.tgz#43f1cb2f0a66b1c14e6553598780ba49e9d7cbfa"
-  integrity sha512-ZGH9ESPIf4HDUv6/9wY422h28X8UY/nQh4AjphOdIaiLGNrJOmsMd1GS5dQQFE/oVhxr9YpKUM2bggRNdoK11g==
+"@fbi-js/webpack-config-vue@^1.4.1":
+  version "1.4.1"
+  resolved "https://registry.npmjs.org/@fbi-js/webpack-config-vue/-/webpack-config-vue-1.4.1.tgz#9a56749d78ae87182e5952ac2d14bd71ea257708"
+  integrity sha512-Ozp5/5/e3Lmomx+V76tlbnFIfd/jxdKHukWXUyCIg2hq8Nx2DOergA5uiyV/f1feaXwDAezgMMZZDUxQEkIZTg==
   dependencies:
     "@fbi-js/eslint-config-vue-typescript" "^1.2.2"
     "@fbi-js/stylelint-config" "^1.2.2"
     "@fbi-js/tsconfig" "^1.2.2"
-    "@fbi-js/webpack-config-base" "^1.6.0"
+    "@fbi-js/webpack-config-base" "^1.6.1"
     vue-loader "^15.9.6"
     vue-svg-loader "^0.16.0"
     vue-template-compiler "^2.6.12"
@@ -5113,6 +5113,11 @@ mini-css-extract-plugin@^1.3.8:
     schema-utils "^3.0.0"
     webpack-sources "^1.1.0"
 
+mini-svg-data-uri@^1.2.3:
+  version "1.2.3"
+  resolved "https://registry.npmjs.org/mini-svg-data-uri/-/mini-svg-data-uri-1.2.3.tgz#e16baa92ad55ddaa1c2c135759129f41910bc39f"
+  integrity sha512-zd6KCAyXgmq6FV1mR10oKXYtvmA9vRoB6xPSTUJTbFApCtkefDnYueVR1gkof3KcdLZo1Y8mjF2DFmQMIxsHNQ==
+
 minimalistic-assert@^1.0.0:
   version "1.0.1"
   resolved "https://registry.npmjs.org/minimalistic-assert/-/minimalistic-assert-1.0.1.tgz#2e194de044626d4a10e7f7fbc00ce73e83e4d5c7"
@@ -7057,11 +7062,6 @@ signal-exit@^3.0.2, signal-exit@^3.0.3:
   resolved "https://registry.npmjs.org/signal-exit/-/signal-exit-3.0.3.tgz#a1410c2edd8f077b08b4e253c8eacfcaf057461c"
   integrity sha512-VUJ49FC8U1OxwZLxIbTTrDvLnf/6TDgxZcK8wxR8zs13xpx7xbG60ndBlhNrFi2EMuFRoeDoJO7wthSLq42EjA==
 
-simple-html-tokenizer@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.npmjs.org/simple-html-tokenizer/-/simple-html-tokenizer-0.1.1.tgz#05c2eec579ffffe145a030ac26cfea61b980fabe"
-  integrity sha1-BcLuxXn//+FFoDCsJs/qYbmA+r4=
-
 simple-swizzle@^0.2.2:
   version "0.2.2"
   resolved "https://registry.npmjs.org/simple-swizzle/-/simple-swizzle-0.2.2.tgz#a4da6b635ffcccca33f70d17cb92592de95e557a"
@@ -7475,15 +7475,6 @@ supports-color@^7.0.0, supports-color@^7.1.0:
   integrity sha512-qpCAvRl9stuOHveKsn7HncJRvv501qIacKzQlO/+Lwxc9+0q2wLyv4Dfvt80/DPn2pqOBsJdDiogXGR9+OvwRw==
   dependencies:
     has-flag "^4.0.0"
-
-svg-inline-loader@^0.8.2:
-  version "0.8.2"
-  resolved "https://registry.npmjs.org/svg-inline-loader/-/svg-inline-loader-0.8.2.tgz#9872414f9e4141601e04eb80cda748c9a50dae71"
-  integrity sha512-kbrcEh5n5JkypaSC152eGfGcnT4lkR0eSfvefaUJkLqgGjRQJyKDvvEE/CCv5aTSdfXuc+N98w16iAojhShI3g==
-  dependencies:
-    loader-utils "^1.1.0"
-    object-assign "^4.0.1"
-    simple-html-tokenizer "^0.1.1"
 
 svg-parser@^2.0.2:
   version "2.0.4"
