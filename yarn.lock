@@ -1010,10 +1010,10 @@
   resolved "https://registry.npmjs.org/@fbi-js/tsconfig/-/tsconfig-1.2.2.tgz#6e154bdb4cb345dc415f378f1cc7cdefa86ec9f0"
   integrity sha512-R4Gfhp0bZlkmuUQGB6bZWAKXsjbGZvLVf8aYzRnj+xQGdMN6ILi7A2NUb5zftyg0yk/7VCz5uVTHXcwv15vUug==
 
-"@fbi-js/webpack-config-base@^1.6.1":
-  version "1.6.1"
-  resolved "https://registry.npmjs.org/@fbi-js/webpack-config-base/-/webpack-config-base-1.6.1.tgz#711bfd8cbc4367cabc48e0d236b7c97f56d5d724"
-  integrity sha512-yzM5XQF5nsS20Y2nlwB5ge+VxlXP7dZlYu9RwvXUOcpAqCssCsZq3661ocEPS+3tcRLv7tVSnX+f1Ytx0X+ZEw==
+"@fbi-js/webpack-config-base@^1.6.3":
+  version "1.6.3"
+  resolved "https://registry.npmjs.org/@fbi-js/webpack-config-base/-/webpack-config-base-1.6.3.tgz#d8fd11a429818597f26850028da48415557ddba3"
+  integrity sha512-wwtk1XK0tN/W5Goc6StkvaXxzzpeN4j4ZyTrdrQILBIITJhzBjwNEt4eaM6Atn84L8jIB5x/HqF0GabCi4Usqg==
   dependencies:
     "@babel/plugin-proposal-class-properties" "^7.13.0"
     "@babel/preset-env" "^7.13.5"
@@ -1046,28 +1046,28 @@
     webpack-merge "^5.7.3"
     webpackbar "^5.0.0-3"
 
-"@fbi-js/webpack-config-react@^1.4.1":
-  version "1.4.1"
-  resolved "https://registry.npmjs.org/@fbi-js/webpack-config-react/-/webpack-config-react-1.4.1.tgz#bab178b88ed8d55e8a0c8735c6beb1b432705682"
-  integrity sha512-OTeYYRBJdnpZWz424tMV6qdkEptjp7XmtmpVXn/1ZUv32h0516Rx6OFNVpfiBeyUd5+VUDvhgE/+jDZPaQSseg==
+"@fbi-js/webpack-config-react@^1.4.3":
+  version "1.4.3"
+  resolved "https://registry.npmjs.org/@fbi-js/webpack-config-react/-/webpack-config-react-1.4.3.tgz#9cbbaf52872fe0ea2721bc849fd67ccac84801f2"
+  integrity sha512-iZcUjBdI/kjX393QtVspky/Qp465CnQt9N0LLeW2n/42LpiLFqdAtx3HgUSUPwFwIsqF1wD75fJH8dNCskhuCw==
   dependencies:
     "@babel/preset-react" "^7.12.13"
     "@fbi-js/eslint-config-react-typescript" "^1.2.2"
     "@fbi-js/stylelint-config" "^1.2.2"
     "@fbi-js/tsconfig" "^1.2.2"
-    "@fbi-js/webpack-config-base" "^1.6.1"
+    "@fbi-js/webpack-config-base" "^1.6.3"
     "@pmmmwh/react-refresh-webpack-plugin" "^0.4.3"
     react-refresh "^0.9.0"
 
-"@fbi-js/webpack-config-vue@^1.4.1":
-  version "1.4.1"
-  resolved "https://registry.npmjs.org/@fbi-js/webpack-config-vue/-/webpack-config-vue-1.4.1.tgz#9a56749d78ae87182e5952ac2d14bd71ea257708"
-  integrity sha512-Ozp5/5/e3Lmomx+V76tlbnFIfd/jxdKHukWXUyCIg2hq8Nx2DOergA5uiyV/f1feaXwDAezgMMZZDUxQEkIZTg==
+"@fbi-js/webpack-config-vue@^1.4.3":
+  version "1.4.3"
+  resolved "https://registry.npmjs.org/@fbi-js/webpack-config-vue/-/webpack-config-vue-1.4.3.tgz#d93772b8a3ae9e61c62ae422ff29765658fda6e8"
+  integrity sha512-J6uL/0zJF67vOf0EyD+CBW8f7bCNoTipz/VJH2/5ovNlNSyI0AqAi2yJTMi9FLfgqG/sEbzfrV8/IJiLoC9bmQ==
   dependencies:
     "@fbi-js/eslint-config-vue-typescript" "^1.2.2"
     "@fbi-js/stylelint-config" "^1.2.2"
     "@fbi-js/tsconfig" "^1.2.2"
-    "@fbi-js/webpack-config-base" "^1.6.1"
+    "@fbi-js/webpack-config-base" "^1.6.3"
     vue-loader "^15.9.6"
     vue-svg-loader "^0.16.0"
     vue-template-compiler "^2.6.12"
