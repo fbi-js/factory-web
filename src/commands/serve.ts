@@ -7,6 +7,7 @@ import Factory from '..'
 import { HOST, PORT } from '../configs/constant/defaults'
 import { resolveWebpackConfig } from '../configs'
 import { assertFactoryTemplate } from '../helpers/assert'
+import portfinder from 'portfinder'
 
 export default class CommandServe extends Command {
   id = 'serve'
@@ -54,7 +55,9 @@ export default class CommandServe extends Command {
       })
       const compiler = webpack(config)
       const host = config.devServer?.host || HOST
-      const port = flags?.port || config.devServer?.port
+      const port = await portfinder.getPortPromise({
+        port: flags?.port || config.devServer?.port
+      })
       const server = new WebpackDevServer(compiler, {
         ...config.devServer,
         host,

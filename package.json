@@ -37,6 +37,7 @@
     "eslint": "^7.18.0",
     "fbi": "^4.7.1",
     "node-fetch": "^2.6.1",
+    "portfinder": "^1.0.28",
     "prettier": "^2.2.1",
     "stylelint": "^13.9.0",
     "webpack": "^5.18.0",
